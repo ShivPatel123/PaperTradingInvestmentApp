@@ -19,7 +19,6 @@ public class TestController {
 	
 	@PostMapping("/postTest1")
 	public String postTest1(@RequestParam(value = "username", defaultValue = "World") String message) {
-		//TODO
 		return String.format("Hello, %s! You sent a post request with a parameter!", message);
 	}
 	
