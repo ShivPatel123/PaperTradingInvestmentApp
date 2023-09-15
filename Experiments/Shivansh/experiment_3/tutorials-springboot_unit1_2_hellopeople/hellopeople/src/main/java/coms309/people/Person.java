@@ -13,19 +13,19 @@ public class Person {
 
     private String lastName;
 
-    private String address;
+    private String username;
 
-    private String telephone;
+    private String password;
 
     public Person(){
         
     }
 
-    public Person(String firstName, String lastName, String address, String telephone){
+    public Person(String firstName, String lastName, String username, String password){
         this.firstName = firstName;
         this.lastName = lastName;
-        this.address = address;
-        this.telephone = telephone;
+        this.username = username;
+        this.password = password;
     }
 
     public String getFirstName() {
@@ -44,27 +44,27 @@ public class Person {
         this.lastName = lastName;
     }
 
-    public String getAddress() {
-        return this.address;
+    public String getusername() {
+        return this.username;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setusername(String username) {
+        this.username = username;
     }
 
-    public String getTelephone() {
-        return this.telephone;
+    public String getpassword() {
+        return this.password;
     }
 
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
+    public void setpassword(String password) {
+        this.password = password;
     }
 
     @Override
     public String toString() {
         return firstName + " " 
                + lastName + " "
-               + address + " "
-               + telephone;
+               + username + " "
+               + password;
     }
 }
