@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 
 import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Controller used to showcase Create and Read from a LIST
@@ -47,9 +48,33 @@ public class PeopleController {
     // Note: To CREATE we use POST method
     @PostMapping("/people")
     public @ResponseBody String createPerson(@RequestBody Person person) {
+        //Check if username Exists
+        for(Map.Entry<String, Person> user: peopleList.entrySet()) {
+            if (user.getValue().getusername().equals(person.getusername())) {
+                return "This Username is already Taken";
+            }
+        }
+
+        //Make New User
         System.out.println(person);
         peopleList.put(person.getFirstName(), person);
-        return "New person "+ person.getFirstName() + " Saved";
+        return "New User Created. Welcome, "+ person.getFirstName() + "!";
+    }
+
+
+    //Creates a login attempt with the username and password of the login object
+    @PostMapping("/login")
+    public @ResponseBody String login(@RequestBody LoginAttempt login){
+        for(Map.Entry<String, Person> user: peopleList.entrySet()){
+            if(user.getValue().getusername().equals(login.getUsername())){
+                if(user.getValue().getpassword().equals(login.getPassword())){
+                    return("Success!");
+                }
+                return("Wrong Password");
+            }
+
+        }
+        return("Username not Found");
     }
 
     // THIS IS THE READ OPERATION
