@@ -46,6 +46,9 @@ class Main {
             userRepository.save(user1);
             userRepository.save(user2);
             userRepository.save(user3);
+            laptopRepository.save((laptop1));
+            laptopRepository.save((laptop2));
+            laptopRepository.save((laptop3));
 
         };
     }
