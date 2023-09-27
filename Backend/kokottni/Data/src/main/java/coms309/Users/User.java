@@ -16,6 +16,7 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    private int money;
     private String name;
     private String email;
     private String dob;
@@ -24,8 +25,9 @@ public class User {
     @JoinColumn(name = "stock_id")
     private Stock stock;
 
-    public User(int id, String name, String email, String dob){
+    public User(int id, int money, String name, String email, String dob){
         this.id = id;
+        this.money = money;
         this.name = name;
         this.email = email;
         this.dob = dob;
@@ -40,6 +42,10 @@ public class User {
     public void setId(int id){
         this.id = id;
     }
+
+    public int getMoney(){return money;}
+
+    public void setMoney(int money){this.money = money;}
 
     public String getName(){
         return name;
