@@ -34,9 +34,6 @@ public class StockController {
     @GetMapping(path = "/stocks/{id}")
     Stock getStockById(@PathVariable int id){return stockRepository.findById(id);}
 
-    @GetMapping(path = "/stocks/{symbol}")
-    Stock getStockBySymbol(@PathVariable String symbol){return stockRepository.findBySymbol(symbol);}
-
     @PostMapping(path = "/stocks")
     String createStock(Stock stock){
         if(stock == null){
@@ -56,15 +53,6 @@ public class StockController {
         return stockRepository.findById(id);
     }
 
-    @PutMapping(path = "/stocks/{symbol}")
-    Stock updateStockById(@PathVariable String symbol, @RequestBody Stock request){
-        Stock stock = stockRepository.findBySymbol(symbol);
-        if(stock == null){
-            return null;
-        }
-        stockRepository.save(stock);
-        return stockRepository.findBySymbol(symbol);
-    }
 
     @DeleteMapping(path = "/stocks/{id}")
     String deleteStock(@PathVariable int id){
