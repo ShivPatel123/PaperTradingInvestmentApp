@@ -5,24 +5,24 @@
 
   <modelVersion>4.0.0</modelVersion>
   <groupId>coms309</groupId>
-  <artifactId>hellopeople</artifactId>
+  <artifactId>onetomany</artifactId>
   <version>1.0.0</version>
 
   <!-- To make it a spring boot project -->
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.4.2</version>
+    <version>2.4.0</version>
   </parent>
 
-  <name>hellopeople</name>
+  <name>one-to-many</name>
 
   <properties>
 
     <!-- Generic properties -->
-    <java.version>1.8</java.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <java.version>11</java.version>
 
   </properties>
 
@@ -33,20 +33,27 @@
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
     </dependency>
-
+    
+    <!-- The H2 database dependency -->
     <dependency>
-      <groupId>com.googlecode.json-simple</groupId>
-      <artifactId>json-simple</artifactId>
-      <version>1.1.1</version>
+        <groupId>com.h2database</groupId>
+        <artifactId>h2</artifactId>
+        <version>1.4.200</version>
+        <scope>runtime</scope>
     </dependency>
 
+    <!-- The ORM JPA specs/hibernate impl -->
     <dependency>
-      <groupId>com.h2database</groupId>
-      <artifactId>h2</artifactId>
-      <version>1.4.200</version>
-      <scope>runtime</scope>
+      <groupId>org.springframework.boot</groupId>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+    </dependency>
+    <!-- MYSQL dependencies -->
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
     </dependency>
 
+    <!-- The ORM JPA specs/hibernate impl -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-data-jpa</artifactId>
@@ -54,8 +61,6 @@
 
   </dependencies>
 
-
-  <!-- Add The SpringBoot plugin to make it work with maven -->
   <build>
     <plugins>
       <plugin>
@@ -64,5 +69,6 @@
       </plugin>
     </plugins>
   </build>
+  
 
 </project>
