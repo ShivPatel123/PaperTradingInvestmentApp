@@ -37,7 +37,7 @@ public class UserController {
     }
 
     @PostMapping(path = "/users")
-    String createUser(User user){
+    String createUser(@RequestBody User user){
         if (user == null)
             return failure;
         userRepository.save(user);

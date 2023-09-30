@@ -61,7 +61,7 @@ public class StockController {
         user.setStock(null);
         userRepository.save(user);
 
-        Stock stock = stockRepository.findById(id);
+        stockRepository.deleteById(id);
         return success;
     }
 }
