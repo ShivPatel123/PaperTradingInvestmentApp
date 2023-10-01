@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AS1">
         <activity
-            android:name=".CounterActivity"
+            android:name=".LoginPage"
             android:exported="true" />
         <activity
             android:name=".HomePage"
