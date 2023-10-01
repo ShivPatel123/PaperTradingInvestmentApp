@@ -7,34 +7,46 @@
     tools:context=".HomePage">
 
     <Button
-        android:id="@+id/toCounterBtn"
-        android:layout_width="189dp"
-        android:layout_height="114dp"
-        android:text="To Counter!"
+        android:id="@+id/toCreateAccountBtn"
+        android:layout_width="199dp"
+        android:layout_height="82dp"
+        android:text="Sign Up"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="#FFEB3B"
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.54"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.298" />
+        app:layout_constraintVertical_bias="0.866" />
+
+    <Button
+        android:id="@+id/toStockBtn"
+        android:layout_width="267dp"
+        android:layout_height="88dp"
+        android:text="Preview Stocks"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        android:textColor="#FFEB3B"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.292" />
 
     <Button
         android:id="@+id/toLoginBtn"
-        android:layout_width="189dp"
-        android:layout_height="114dp"
+        android:layout_width="185dp"
+        android:layout_height="76dp"
         android:text="Login"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="#FFEB3B"
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.54"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.554" />
+        app:layout_constraintVertical_bias="0.705" />
 
     <EditText
         android:id="@+id/HomePage_title"
