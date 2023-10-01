@@ -15,7 +15,7 @@ public class CounterActivity extends AppCompatActivity {
     TextView numberTxt;
 
     int counter = 0;
-    int dice = rand()%6;
+    //int dice = rand()%6;
 
 
     @Override
