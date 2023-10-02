@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginPage">
+    tools:context=".LoginPage"
+    android:background="@color/background">
 
     <EditText
         android:id="@+id/editTextTextPassword"
@@ -50,10 +51,10 @@
         android:layout_height="70dp"
         android:text="Sign Up"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
-        android:textColor="#FFEB3B"
+        android:textColor="@color/txtclr"
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.92"
+        app:layout_constraintHorizontal_bias="0.835"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -61,12 +62,14 @@
 
     <EditText
         android:id="@+id/editTextText"
-        android:layout_width="110dp"
-        android:layout_height="50dp"
+        android:background="@color/darkBack"
+        android:layout_width="413dp"
+        android:layout_height="122dp"
         android:ems="10"
         android:inputType="text"
-        android:text="No account?"
-        tools:layout_editor_absoluteX="41dp"
-        tools:layout_editor_absoluteY="36dp" />
+        android:text="          No account?"
+        android:textColor="@color/txtclr"
+        tools:layout_editor_absoluteX="-1dp"
+        tools:layout_editor_absoluteY="1dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
