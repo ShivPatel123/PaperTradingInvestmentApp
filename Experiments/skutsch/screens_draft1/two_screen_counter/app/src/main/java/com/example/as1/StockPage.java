@@ -9,7 +9,7 @@ import android.widget.Button;
 
 public class StockPage extends AppCompatActivity {
 
-    Button toStocks_btn;
+    Button toHome_btn;
 
 
     @Override
@@ -17,16 +17,15 @@ public class StockPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.stock_page);
 
-        //button to login page
-  /*      toLogin_btn = findViewById(R.id.toLoginBtn);
-        toLogin_btn.setOnClickListener(new View.OnClickListener() {
+        //button to home pagetoHome_btn = findViewById(R.id.toLoginBtn);
+        toHome_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(HomePage.this, LoginPage.class);
+                Intent intent = new Intent(StockPage.this, HomePage.class);
                 startActivity(intent);
             }
         });
-   */
+
     }
 }
