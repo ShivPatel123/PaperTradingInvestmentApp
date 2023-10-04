@@ -1,14 +1,10 @@
 package coms309.Users;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 import coms309.Stocks.Stock;
+
+import java.util.ArrayList;
 
 @Entity
 public class User {
@@ -21,9 +17,8 @@ public class User {
     private String email;
     private String dob;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "stock_id")
-    private Stock stock;
+    @OneToMany(mappedBy = "user")
+    private ArrayList<Stock> stocks;
 
     public User(int id, int money, String name, String email, String dob){
         this.id = id;
@@ -67,5 +62,5 @@ public class User {
 
     public void setDob(String dob){this.dob = dob;}
 
-    public void setStock(Stock stock){this.stock = stock;}
+    public void setStock(Stock stock){this.stocks.add(stock);}
 }

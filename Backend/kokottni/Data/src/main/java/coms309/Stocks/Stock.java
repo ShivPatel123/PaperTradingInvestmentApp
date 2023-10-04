@@ -1,14 +1,14 @@
 package coms309.Stocks;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import coms309.Users.User;
+
+import java.util.ArrayList;
+import java.util.Set;
+
 @Entity
 public class Stock {
 
@@ -20,9 +20,9 @@ public class Stock {
     private double currValue;
     private double prevDayChange;
 
-    @OneToOne
+    @OneToMany(mappedBy = "stock")
     @JsonIgnore
-    private User user;
+    private ArrayList<User> users;
 
     public Stock(int id, String symbol, String company, double currValue, double prevDayChange){
         this.id = id;
@@ -44,8 +44,8 @@ public class Stock {
     public void setCurrValue(double currValue){this.currValue = currValue;}
     public double getPrevDayChange(){return prevDayChange;}
     public void setPrevDayChange(double prevDayChange){this.prevDayChange = prevDayChange;}
-    public User getUser(){return user;}
-    public void setUser(User user){this.user = user;}
+    public User getUser(int id){return users.get(id);}
+    public void setUser(User user){this.users.add(user);}
 
 
 }
