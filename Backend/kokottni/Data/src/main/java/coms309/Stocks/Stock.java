@@ -7,8 +7,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import coms309.Users.User;
 
 import java.util.ArrayList;
-import java.util.Set;
-
 @Entity
 public class Stock {
 
@@ -22,7 +20,7 @@ public class Stock {
 
     @OneToMany(mappedBy = "stock")
     @JsonIgnore
-    private ArrayList<User> users;
+    private ArrayList<User> users = new ArrayList<>();
 
     public Stock(int id, String symbol, String company, double currValue, double prevDayChange){
         this.id = id;

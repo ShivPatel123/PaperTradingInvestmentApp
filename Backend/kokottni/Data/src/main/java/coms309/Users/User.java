@@ -18,7 +18,7 @@ public class User {
     private String dob;
 
     @OneToMany(mappedBy = "user")
-    private ArrayList<Stock> stocks;
+    private ArrayList<Stock> stocks = new ArrayList<>();
 
     public User(int id, int money, String name, String email, String dob){
         this.id = id;
