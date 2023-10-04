@@ -55,9 +55,15 @@ public class StringRequestActivity extends Activity {
             pDialog.hide();
     }
 
-    public static final String URL_STRING_REQ = "https://jsonplaceholder.typicode.com/users/1";
+
+    //REAL Server
+    //public static final String URL_STRING_REQ = "https://44c2a0a5-7136-4920-b126-c67539b24ec9.mock.pstmn.io/users/1";
+
+    //public static final String URL_STRING_REQ = "https://jsonplaceholder.typicode.com/users/1";
+    //public static final String URL_STRING_REQ = "https://ccc97b1b-bc01-465d-9538-fe1809f8ad5b.mock.pstmn.io/users/1";
     //   public static final String URL_STRING_REQ = "https://2aa87adf-ff7c-45c8-89bc-f3fbfaa16d15.mock.pstmn.io/users/1";
-    //   public static final String URL_STRING_REQ = "http://10.0.2.2:8080/users/1";
+       //public static final String URL_STRING_REQ = "http://10.0.2.2:8080/users/1";
+    public static final String URL_STRING_REQ = "http://10.90.75.130:8080/users";
 
     /**
      * Making json object request
