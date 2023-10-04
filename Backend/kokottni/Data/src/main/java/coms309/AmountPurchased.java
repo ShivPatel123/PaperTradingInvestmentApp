@@ -23,10 +23,12 @@ public class AmountPurchased {
     Stock stock;
 
     int numPurchased;
+    int currValue;
     Date datePurchased;
 
-    public AmountPurchased(int numStocks, Date date){
+    public AmountPurchased(int numStocks, int currValue, Date date){
         this.numPurchased = numStocks;
+        this.currValue = currValue;
         this.datePurchased = date;
     }
 
