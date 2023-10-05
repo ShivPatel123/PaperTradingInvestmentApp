@@ -24,4 +24,13 @@ public class AmountPurchasedKey implements Serializable {
     public Long getStockId(){return this.stockId;}
 
     public void setStockId(Long stockId){this.stockId = stockId;}
+
+    @Override
+    public boolean equals(Object obj) {
+        if(this == obj){return true;}
+        if(obj == null){return false;}
+        if(this.getClass() != obj.getClass()){return false;}
+        AmountPurchasedKey key = (AmountPurchasedKey) obj;
+        return userId.equals(key.userId) && stockId.equals(key.stockId);
+    }
 }
