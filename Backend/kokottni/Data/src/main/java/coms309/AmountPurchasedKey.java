@@ -33,4 +33,10 @@ public class AmountPurchasedKey implements Serializable {
         AmountPurchasedKey key = (AmountPurchasedKey) obj;
         return userId.equals(key.userId) && stockId.equals(key.stockId);
     }
+
+    @Override
+    public int hashCode(){
+        int hash = 5;
+        return (userId.hashCode() - hash) * (stockId.hashCode() + hash);
+    }
 }
