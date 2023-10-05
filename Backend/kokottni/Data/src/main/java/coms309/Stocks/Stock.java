@@ -4,16 +4,18 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import coms309.AmountPurchased;
 import coms309.Users.User;
 
-import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Map;
+import java.util.Set;
+
 @Entity
 public class Stock {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int stockId;
+    private int id;
     private String symbol;
     private String company;
     private double currValue;
@@ -21,10 +23,10 @@ public class Stock {
 
     @ManyToMany
     @JsonIgnore
-    private ArrayList<User> users = new ArrayList<>();
+    private Map<Integer, User> users;
 
     public Stock(int id, String symbol, String company, double currValue, double prevDayChange){
-        this.stockId = id;
+        this.id = id;
         this.symbol = symbol;
         this.company = company;
         this.currValue = currValue;
@@ -33,8 +35,8 @@ public class Stock {
 
     public Stock(){}
 
-    public int getStockIdId(){return stockId;}
-    public void setStockIdId(int id){this.stockId = id;}
+    public int getStockId(){return id;}
+    public void setStockId(int id){this.id = id;}
     public String getSymbol(){return  symbol;}
     public void setSymbol(String symbol){this.symbol = symbol;}
     public String getCompany(){return company;}
@@ -44,5 +46,5 @@ public class Stock {
     public double getPrevDayChange(){return prevDayChange;}
     public void setPrevDayChange(double prevDayChange){this.prevDayChange = prevDayChange;}
     public User getUser(int id){return users.get(id);}
-    public void setUser(User user){this.users.add(user);}
+    public void setUser(User user){this.users.put(user.getId(), user);}
 }

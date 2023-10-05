@@ -4,7 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9f04cb72-9a52-484f-ae88-92a06dad186c" name="Changes" comment="" />
+    <list default="true" id="9f04cb72-9a52-484f-ae88-92a06dad186c" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/coms309/AmountPurchased.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/coms309/AmountPurchasedKey.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/coms309/Stocks/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coms309/Stocks/Stock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/coms309/Stocks/StockController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coms309/Stocks/StockController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/coms309/Users/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coms309/Users/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Data-1.0.0.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/target/Data-1.0.0.jar.original" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/application.properties" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -75,16 +86,5 @@
       <updated>1696439872659</updated>
     </task>
     <servers />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/coms309/Users/User.java</url>
-          <line>10</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
