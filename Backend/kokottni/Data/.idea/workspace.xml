@@ -10,7 +10,11 @@
       <change beforePath="$PROJECT_DIR$/../../../.idea/modules.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../.idea/ms_316.iml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../../../.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/coms309/AmountPurchasedKey.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coms309/AmountPurchasedKey.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/coms309/Stocks/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coms309/Stocks/Stock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/coms309/Users/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coms309/Users/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Data-1.0.0.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/target/Data-1.0.0.jar.original" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,13 +44,14 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;34-get-many-to-many-working&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "34-get-many-to-many-working",
+    "last_opened_file_path": "C:/Users/Nick Kokott/cs309/ms_316/Experiments/kokottni/tutorials-springboot_unit2_4_swagger_ui"
   }
-}</component>
+}]]></component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="coms309.Main" />
@@ -84,7 +89,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/coms309/Users/User.java</url>
-          <line>9</line>
+          <line>10</line>
           <option name="timeStamp" value="1" />
         </line-breakpoint>
       </breakpoints>

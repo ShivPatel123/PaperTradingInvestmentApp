@@ -1,4 +1,6 @@
+coms309\AmountPurchased.class
 coms309\Stocks\Stock.class
+coms309\AmountPurchasedKey.class
 coms309\Users\UserRepository.class
 coms309\Users\User.class
 coms309\Users\UserController.class

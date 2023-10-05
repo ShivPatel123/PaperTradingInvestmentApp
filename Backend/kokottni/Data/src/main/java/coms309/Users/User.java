@@ -2,6 +2,7 @@ package coms309.Users;
 
 import javax.persistence.*;
 
+import coms309.AmountPurchased;
 import coms309.Stocks.Stock;
 
 import java.util.ArrayList;
@@ -17,8 +18,13 @@ public class User {
     private String email;
     private String dob;
 
-    @OneToMany(mappedBy = "user")
-    private ArrayList<Stock> stocks = new ArrayList<>();
+    @ManyToMany
+    @JoinTable(
+            name = "purchased_stocks",
+            joinColumns = @JoinColumn(name = "id"),
+            inverseJoinColumns = @JoinColumn(name = "stockId")
+    )
+    private ArrayList<Stock> purchasedStocks = new ArrayList<>();
 
     public User(int id, int money, String name, String email, String dob){
         this.id = id;
@@ -62,5 +68,7 @@ public class User {
 
     public void setDob(String dob){this.dob = dob;}
 
-    public void setStock(Stock stock){this.stocks.add(stock);}
+    public Stock getStock(int id){return purchasedStocks.get(id);}
+
+    public void setStock(Stock stock){this.purchasedStocks.add(stock);}
 }
