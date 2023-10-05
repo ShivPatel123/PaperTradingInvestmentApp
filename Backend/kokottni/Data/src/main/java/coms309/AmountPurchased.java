@@ -33,6 +33,18 @@ public class AmountPurchased {
     }
 
     public AmountPurchased(){}
+
+    public int getCurrValue(){return currValue;}
+
+    public int getNumPurchased(){return numPurchased;}
+
+    public Date getDatePurchased(){return datePurchased;}
+
+    public void setCurrValue(int currValue){this.currValue = currValue;}
+
+    public void setNumPurchased(int numPurchased){this.numPurchased = numPurchased;}
+
+    public void setDatePurchased(Date datePurchased){this.datePurchased = datePurchased;}
 }
 
 
