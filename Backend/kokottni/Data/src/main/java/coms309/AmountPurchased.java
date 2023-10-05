@@ -13,12 +13,12 @@ public class AmountPurchased {
     AmountPurchased id;
 
     @ManyToOne
-    @MapsId("user_id")
+    @MapsId("userId")
     @JoinColumn(name = "user_id")
     User user;
 
     @ManyToOne
-    @MapsId("stock_id")
+    @MapsId("stockId")
     @JoinColumn(name = "stock_id")
     Stock stock;
 
