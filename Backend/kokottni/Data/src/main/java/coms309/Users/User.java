@@ -17,6 +17,8 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private int money;
+
+    private int numStocks;
     private String name;
     private String email;
     private String dob;
@@ -28,6 +30,7 @@ public class User {
     public User(int id, int money, String name, String email, String dob){
         this.id = id;
         this.money = money;
+        this.numStocks = 0;
         this.name = name;
         this.email = email;
         this.dob = dob;
@@ -68,4 +71,18 @@ public class User {
     public void setDob(String dob){this.dob = dob;}
 
     public void setStock(Stock stock){this.stock = stock;}
+
+    public void purchase(int numStocks){
+        if(numStocks < 1) return;
+        this.numStocks += numStocks;
+        int change = (int) (this.stock.getCurrValue() * numStocks);
+        if(change > money) return;
+        money -= change;
+    }
+
+    public void sellStocks(int numStocks){
+        this.numStocks -= numStocks;
+        money += (int) (this.stock.getCurrValue() * numStocks);
+    }
+
 }
