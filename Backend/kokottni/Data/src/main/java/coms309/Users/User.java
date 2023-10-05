@@ -81,6 +81,7 @@ public class User {
     }
 
     public void sellStocks(int numStocks){
+        if(numStocks > this.numStocks) return;
         this.numStocks -= numStocks;
         money += (int) (this.stock.getCurrValue() * numStocks);
     }
