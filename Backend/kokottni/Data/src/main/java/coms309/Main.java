@@ -37,6 +37,7 @@ public class Main {
             userRepository.save(user1);
             userRepository.save(user2);
             userRepository.save(user3);
+            userRepository.save(user4);
             stockRepository.save(stock1);
             stockRepository.save(stock2);
             stockRepository.save(stock3);
