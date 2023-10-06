@@ -36,6 +36,18 @@ public class UserController {
         return userRepository.findById(id);
     }
 
+    @GetMapping(path = "/purchase/{id}/{numStocks}")
+    User purchaseById(@PathVariable int id, @PathVariable int numStocks){
+        userRepository.findById(id).purchase(numStocks);
+        return userRepository.findById(id);
+    }
+
+    @GetMapping(path = "/sell/{id}/{numStocks}")
+    User sellById(@PathVariable int id, @PathVariable int numStocks){
+        userRepository.findById(id).sellStocks(numStocks);
+        return userRepository.findById(id);
+    }
+
     @PostMapping(path = "/users")
     String createUser(@RequestBody User user){
         if (user == null)
