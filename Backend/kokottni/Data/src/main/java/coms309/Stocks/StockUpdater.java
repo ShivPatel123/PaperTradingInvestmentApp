@@ -33,16 +33,16 @@ public class StockUpdater{
 
     }
 
-    public String getUpdatedStockPrice(String symbol){
-        String stockInfo = updateStockData(symbol);
+    //parameter is a call to updateStockData function
+    public String getUpdatedStockPrice(String stockInfo){
+
         int priceIndex = stockInfo.indexOf("\"05. price\":");
         String t = stockInfo.substring((priceIndex+14));
         int endPriceIndex = t.indexOf("\"");
         return stockInfo.substring((priceIndex+14), (priceIndex+14) + endPriceIndex);
     }
 
-    public String getUpdatedStockChange(String symbol){
-        String stockInfo = updateStockData(symbol);
+    public String getUpdatedStockChange(String stockInfo){
         int priceIndex = stockInfo.indexOf("\"10. change percent\": ");
         String t = stockInfo.substring((priceIndex+23));
         int endPriceIndex = t.indexOf("\"");
@@ -51,8 +51,9 @@ public class StockUpdater{
 
     public String updateStockInfo(int id, StockRepository repo){
         Stock stockToUpdate = repo.findById(id);
-        stockToUpdate.setCurrValue(Double.valueOf(getUpdatedStockPrice(stockToUpdate.getSymbol())));
-        stockToUpdate.setPrevDayChange(Double.valueOf(getUpdatedStockChange(stockToUpdate.getSymbol())));
+        String stockInfo = updateStockData(stockToUpdate.getSymbol());
+        stockToUpdate.setCurrValue(Double.valueOf(getUpdatedStockPrice(stockInfo)));
+        stockToUpdate.setPrevDayChange(Double.valueOf(getUpdatedStockChange(stockInfo)));
         repo.save(stockToUpdate);
         return "Success";
     }
@@ -62,8 +63,9 @@ public class StockUpdater{
     public String updateAllStocks(StockRepository repo){
         List<Stock> allStocks = repo.findAll();
         for(Stock stock: allStocks){
-            stock.setCurrValue(Double.valueOf(getUpdatedStockPrice(stock.getSymbol())));
-            stock.setPrevDayChange(Double.valueOf(getUpdatedStockChange(stock.getSymbol())));
+            String stockInfo = updateStockData(stock.getSymbol());
+            stock.setCurrValue(Double.valueOf(getUpdatedStockPrice(stockInfo)));
+            stock.setPrevDayChange(Double.valueOf(getUpdatedStockChange(stockInfo)));
             repo.save(stock);
         }
         return "Success";
