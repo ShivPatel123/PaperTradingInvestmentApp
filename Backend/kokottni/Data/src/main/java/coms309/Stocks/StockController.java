@@ -25,11 +25,20 @@ public class StockController {
     @Autowired
     UserRepository userRepository;
 
+    StockUpdater stockAPI = new StockUpdater();
+
     private String success = "{\"message\":\"success\"}";
     private String failure = "{\"message\":\"failure\"}";
 
     @GetMapping(path = "/stocks")
     List<Stock> getAllStocks(){return stockRepository.findAll();}
+
+
+    @GetMapping(path = "/stocksUpdate/{symbol}")
+    String getStockAPIInfo(@PathVariable String symbol){
+        return stockAPI.getUpdatedStockPrice(symbol);
+    }
+
 
     @GetMapping(path = "/stocks/{id}")
     Stock getStockById(@PathVariable int id){return stockRepository.findById(id);}
