@@ -22,18 +22,22 @@ public class User {
     private String name;
     private String email;
     private String dob;
+    private String username;
+    private String password;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "stock_id")
     private Stock stock;
 
-    public User(int id, int money, String name, String email, String dob){
+    public User(int id, int money, String name, String email, String dob, String username, String password){
         this.id = id;
         this.money = money;
         this.numStocks = 0;
         this.name = name;
         this.email = email;
         this.dob = dob;
+        this.username = username;
+        this.password = password;
     }
 
     public User(){}
@@ -64,6 +68,14 @@ public class User {
 
     public void setEmail(String email){
         this.email = email;
+    }
+    public String getUsername() {return username;}
+    public void setUsername(String user){
+        this.username = user;
+    }
+    public String getPassword() {return password;}
+    public void setPassword(String pass){
+        this.password = pass;
     }
 
     public String getDob(){return dob;}
