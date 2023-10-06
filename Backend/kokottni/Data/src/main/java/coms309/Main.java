@@ -41,6 +41,7 @@ public class Main {
             stockRepository.save(stock1);
             stockRepository.save(stock2);
             stockRepository.save(stock3);
+            stockRepository.save(stock4);
         };
     }
 }
