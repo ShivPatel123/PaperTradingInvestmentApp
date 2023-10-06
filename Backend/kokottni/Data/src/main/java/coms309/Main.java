@@ -33,6 +33,7 @@ public class Main {
             user1.setStock(stock1);
             user2.setStock(stock2);
             user3.setStock(stock3);
+            user4.setStock(stock4);
             userRepository.save(user1);
             userRepository.save(user2);
             userRepository.save(user3);
