@@ -5,6 +5,8 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.util.List;
+
 
 
 public class StockUpdater{
@@ -39,7 +41,33 @@ public class StockUpdater{
         return stockInfo.substring((priceIndex+14), (priceIndex+14) + endPriceIndex);
     }
 
+    public String getUpdatedStockChange(String symbol){
+        String stockInfo = updateStockData(symbol);
+        int priceIndex = stockInfo.indexOf("\"10. change percent\": ");
+        String t = stockInfo.substring((priceIndex+23));
+        int endPriceIndex = t.indexOf("\"");
+        return stockInfo.substring((priceIndex+23), (priceIndex+22) + endPriceIndex);
+    }
 
+    public String updateStockInfo(int id, StockRepository repo){
+        Stock stockToUpdate = repo.findById(id);
+        stockToUpdate.setCurrValue(Double.valueOf(getUpdatedStockPrice(stockToUpdate.getSymbol())));
+        stockToUpdate.setPrevDayChange(Double.valueOf(getUpdatedStockChange(stockToUpdate.getSymbol())));
+        repo.save(stockToUpdate);
+        return "Success";
+    }
+
+
+    //TODO Update in batches of 5 because of api rate limit 5 per minute
+    public String updateAllStocks(StockRepository repo){
+        List<Stock> allStocks = repo.findAll();
+        for(Stock stock: allStocks){
+            stock.setCurrValue(Double.valueOf(getUpdatedStockPrice(stock.getSymbol())));
+            stock.setPrevDayChange(Double.valueOf(getUpdatedStockChange(stock.getSymbol())));
+            repo.save(stock);
+        }
+        return "Success";
+    }
 
 
 }

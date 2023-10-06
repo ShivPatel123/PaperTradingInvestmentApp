@@ -11,4 +11,5 @@ public interface StockRepository extends JpaRepository<Stock, Long>{
     void deleteById(int id);
 
 
+
 }

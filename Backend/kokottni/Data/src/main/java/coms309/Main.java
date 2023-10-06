@@ -27,7 +27,7 @@ public class Main {
             User user3 = new User(3, 6543, "Shiv", "shiv@iastate.edu", "nah", "username2", "password");
             Stock stock1 = new Stock(1, "TSLA", "Tesla", 101.23, -2.13);
             Stock stock2 = new Stock(2, "INTL", "Intel", 67.12, 1.34);
-            Stock stock3 = new Stock(3, "GGL", "Google", 213.56, 3.14);
+            Stock stock3 = new Stock(3, "GOOGL", "Google", 213.56, 3.14);
             user1.setStock(stock1);
             user2.setStock(stock2);
             user3.setStock(stock3);
