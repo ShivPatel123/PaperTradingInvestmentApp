@@ -36,7 +36,7 @@ public class StockController {
 
     @GetMapping(path = "/stocksUpdate/{symbol}")
     String getStockAPIInfo(@PathVariable String symbol){
-        return stockAPI.getUpdatedStockPrice(symbol);
+        return stockAPI.getUpdatedStockChange(symbol);
     }
 
 
@@ -52,14 +52,25 @@ public class StockController {
         return success;
     }
 
+//    @PutMapping(path = "/stocks/{id}")
+//    Stock updateStockById(@PathVariable int id, @RequestBody Stock request){
+//        Stock stock = stockRepository.findById(id);
+//        if(stock == null){
+//            return null;
+//        }
+//        stockRepository.save(stock);
+//        return stockRepository.findById(id);
+//    }
+
     @PutMapping(path = "/stocks/{id}")
-    Stock updateStockById(@PathVariable int id, @RequestBody Stock request){
-        Stock stock = stockRepository.findById(id);
-        if(stock == null){
-            return null;
-        }
-        stockRepository.save(stock);
+    Stock updateStockById(@PathVariable int id){
+        stockAPI.updateStockInfo(id, stockRepository);
         return stockRepository.findById(id);
+    }
+    @PutMapping(path = "/stocks")
+    String updateAllStocks(){
+        stockAPI.updateAllStocks(stockRepository);
+        return success;
     }
 
 
