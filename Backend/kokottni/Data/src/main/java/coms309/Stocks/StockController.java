@@ -34,6 +34,9 @@ public class StockController {
     @GetMapping(path = "/stocks/{id}")
     Stock getStockById(@PathVariable int id){return stockRepository.findById(id);}
 
+    @GetMapping(path = "/stockchange/{id}")
+    double getCurrPrice(@PathVariable int id){return stockRepository.findById(id).getCurrValue();}
+
     @PostMapping(path = "/stocks")
     String createStock(Stock stock){
         if(stock == null){
