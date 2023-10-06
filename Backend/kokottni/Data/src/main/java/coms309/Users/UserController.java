@@ -38,10 +38,26 @@ public class UserController {
 
     @PostMapping(path = "/users")
     String createUser(@RequestBody User user){
+        //if there is no body or the username already exists
         if (user == null)
-            return failure;
+            return "no user input";
+        if (userRepository.findByUsername(user.getUsername())!=null)
+            return "username already taken";
         userRepository.save(user);
         return success;
+    }
+    @PostMapping("/login")
+    String login(@RequestBody LoginAttempt login){
+        User user = userRepository.findByUsername(login.getUsername());
+        if (user != null) {
+            if (user.getPassword().equals(login.getPassword())) {
+                return "Success!";
+            } else {
+                return "Wrong Password";
+            }
+        } else {
+            return "Username not Found";
+        }
     }
 
     @PutMapping("/users/{id}")
