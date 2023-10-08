@@ -9,7 +9,7 @@ import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    private Button strBtn, jsonObjBtn, jsonArrBtn, imgBtn;
+    private Button strBtn, jsonObjBtn, jsonArrBtn, imgBtn, btnPostReq;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,12 +20,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         jsonObjBtn = findViewById(R.id.btnJsonObjRequest);
         jsonArrBtn = findViewById(R.id.btnJsonArrRequest);
         imgBtn = findViewById(R.id.btnImageRequest);
+        btnPostReq = findViewById(R.id.btnPostRequest);
 
         /* button click listeners */
         strBtn.setOnClickListener(this);
         jsonObjBtn.setOnClickListener(this);
         jsonArrBtn.setOnClickListener(this);
         imgBtn.setOnClickListener(this);
+        btnPostReq.setOnClickListener(this);
     }
 
     @Override
@@ -39,6 +41,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             startActivity(new Intent(MainActivity.this, JsonArrReqActivity.class));
         } else if (id == R.id.btnImageRequest) {
             startActivity(new Intent(MainActivity.this, ImageReqActivity.class));
+        } else if (id == R.id.btnPostRequest) {
+            startActivity(new Intent(MainActivity.this, StringPostTest.class));
         }
     }
 }

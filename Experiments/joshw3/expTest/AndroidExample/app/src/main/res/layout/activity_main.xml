@@ -45,4 +45,10 @@
         android:layout_gravity="center"
         android:text="Image Request" />
 
+    <Button
+        android:id="@+id/btnPostRequest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Post Request" />
+
 </androidx.appcompat.widget.LinearLayoutCompat>
