@@ -196,8 +196,13 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/getJsonObject"
             android:layout_width="match_parent"
-            android:layout_height="279dp"
+            android:layout_height="134dp"
             android:hint="Enter JSON object as a string here" />
     </com.google.android.material.textfield.TextInputLayout>
+
+    <TextView
+        android:id="@+id/objectDisplay"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>
