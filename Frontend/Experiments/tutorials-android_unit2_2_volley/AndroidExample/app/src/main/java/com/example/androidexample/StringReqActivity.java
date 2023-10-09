@@ -32,8 +32,6 @@ public class StringReqActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_string_req);
-        //Create request queue
-      RequestQueue queue = Volley.newRequestQueue(this);
 
         btnStringReq = (Button) findViewById(R.id.btnStringReq);
         msgResponse = (TextView) findViewById(R.id.msgResponse);
@@ -57,21 +55,15 @@ public class StringReqActivity extends AppCompatActivity {
         StringRequest stringRequest = new StringRequest(
                 Request.Method.GET, //connect to endpoint
                 URL_STRING_REQ,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        // Handle the successful response here
-                        Log.d("Volley Response", response);
-                        msgResponse.setText(response.toString());
-                    }
+                response -> {
+                    // Handle the successful response here
+                    Log.d("Volley Response", response);
+                    msgResponse.setText(response.toString());
                 },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        // Handle any errors that occur during the request
-                        Log.e("Volley Error", error.toString());
-                        msgResponse.setText("Volley Error");
-                    }
+                error -> {
+                    // Handle any errors that occur during the request
+                    Log.e("Volley Error", error.toString());
+                    msgResponse.setText("Volley Error");
                 }
         ) {
             @Override
@@ -85,13 +77,7 @@ public class StringReqActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
-                params.put("money", "0");
-                params.put("numStocks", "0");
-                params.put("numStocks", "0");
-                params.put("numStocks", "0");
-                params.put("numStocks", "0");
-                params.put("numStocks", "0");
-
+               // params.put("money", "0");
                 return params;
             }
 

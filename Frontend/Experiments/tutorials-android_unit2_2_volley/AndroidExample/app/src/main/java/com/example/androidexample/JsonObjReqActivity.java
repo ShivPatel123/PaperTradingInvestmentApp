@@ -26,11 +26,11 @@ public class JsonObjReqActivity extends AppCompatActivity {
 
     private Button btnJsonObjReq;
     private Button btnJsonObjPost;
-    private TextView userName, userEmail, userID, userMoney, userNumStocks, userDOB, userUsername, userPassword, JsonObjectInput;
+    private TextView userName, userEmail, userID, userMoney, userNumStocks, userDOB, userUsername, userPassword, JsonObjectInput, JsonObjectDisplay;
 //    private String TAG = JsonObjReqActivity.class.getSimpleName();
 //    private String tag_json_obj = "jobj_req";
 
-    private static final String URL_JSON_OBJECT = "http://10.90.75.130:8080/users/4";
+    private static final String URL_JSON_OBJECT = "http://10.90.75.130:8080/users";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,18 +50,10 @@ public class JsonObjReqActivity extends AppCompatActivity {
         userPassword = findViewById(R.id.userPassword);
 
         JsonObjectInput = findViewById(R.id.getJsonObject);
+        JsonObjectDisplay = findViewById(R.id.objectDisplay);
 
-        btnJsonObjReq.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                makeJsonObjReq();
-            }
-        });
-
-        btnJsonObjPost.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {   makeJSONPostRequest(); }
-        });
+        btnJsonObjReq.setOnClickListener(v -> makeJsonObjReq());
+        btnJsonObjPost.setOnClickListener(v -> makeJSONPostRequest());
    }
 
     /**
@@ -76,6 +68,8 @@ public class JsonObjReqActivity extends AppCompatActivity {
                 //response function in lambda function form
                 response -> {
                     Log.d("Volley Response", response.toString());
+                    //print string before parsing for debugging
+                    JsonObjectDisplay.setText(response.toString());
                     try {
                         // Parse JSON object data
                         String name = response.getString("name");
@@ -103,12 +97,7 @@ public class JsonObjReqActivity extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                        Log.e("Volley Error", error.toString());
-                    }
-                }
+                error -> Log.e("Volley Error", error.toString())
         ) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
@@ -149,8 +138,8 @@ public class JsonObjReqActivity extends AppCompatActivity {
                 URL_JSON_OBJECT,
                 objectBody,
                 //response function to lambda
-                response -> JsonObjectInput.setText(response.toString()),
-                error -> JsonObjectInput.setText(error.getMessage())
+                response -> JsonObjectDisplay.setText(response.toString()),
+                error -> JsonObjectDisplay.setText(error.getMessage())
         ) {
             @Override
             public Map<String, String> getHeaders() throws AuthFailureError {
