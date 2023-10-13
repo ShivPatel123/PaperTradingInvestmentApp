@@ -21,6 +21,7 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -121,8 +122,23 @@ public class StringReqActivity extends AppCompatActivity {
                 return params;
             }
 
-        };
+            @Override
+            public byte[] getBody() {
+                // Convert your string data to bytes (UTF-8 encoded) here
+                String body = inputStringText.getText().toString();
+                try {
+                    return body.getBytes("UTF-8");
+                } catch (UnsupportedEncodingException e) {
+                    return null;
+                }
+            }
+            @Override
+            public String getBodyContentType() {
+                return "string"; // Set the appropriate content type here
+            }
 
+        };
+        
         // Adding request to request queue
         VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringPost);
         // queue.add(stringRequest);
