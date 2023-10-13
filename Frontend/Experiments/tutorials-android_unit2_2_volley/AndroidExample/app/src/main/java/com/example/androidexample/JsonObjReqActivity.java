@@ -30,7 +30,7 @@ public class JsonObjReqActivity extends AppCompatActivity {
 //    private String TAG = JsonObjReqActivity.class.getSimpleName();
 //    private String tag_json_obj = "jobj_req";
 
-    private static final String URL_JSON_OBJECT = "http://10.90.75.130:8080/users";
+    private static final String URL_JSON_OBJECT = "http://10.90.75.130:8080/users/2";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -123,7 +123,7 @@ public class JsonObjReqActivity extends AppCompatActivity {
     private void makeJSONPostRequest() {
 
         // Convert input to JSONObject
-        JSONObject objectBody = null;
+        JSONObject objectBody = new JSONObject();
         try {
             // etRequest should contain a JSON object string as your POST body
             // similar to what you would have in POSTMAN-body field
@@ -163,3 +163,4 @@ public class JsonObjReqActivity extends AppCompatActivity {
 
 
 }
+// [{"id":1,"money":1987654,"name":"Nick","email":"kokottni@iastate.edu","dob":"oldenough","username":"user","password":"Password"}
