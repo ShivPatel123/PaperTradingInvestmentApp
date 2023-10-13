@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.android.volley.AuthFailureError;
@@ -26,7 +27,9 @@ import java.util.Map;
 public class StringReqActivity extends AppCompatActivity {
 
     private Button btnStringReq;
+    private Button btnStringPost;
     private TextView msgResponse;
+    private EditText inputStringText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,18 +37,17 @@ public class StringReqActivity extends AppCompatActivity {
         setContentView(R.layout.activity_string_req);
 
         btnStringReq = (Button) findViewById(R.id.btnStringReq);
+        btnStringPost = (Button) findViewById(R.id.btnStringPost);
         msgResponse = (TextView) findViewById(R.id.msgResponse);
+        inputStringText = (EditText) findViewById(R.id.inputStringText) ;
 
-        btnStringReq.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                makeStringReq();
-            }
-        });
+        btnStringReq.setOnClickListener(v -> makeStringReq());
+
+        btnStringPost.setOnClickListener(v -> makeStringPost());
     }
 
     //  private static final String URL_STRING_REQ = "https://jsonplaceholder.typicode.com/users/1";
-    //public static final String URL_STRING_REQ = "https://b12f7c8b-6dac-45d7-ae37-b4741526b57e.mock.pstmn.io/users/1";
+   // public static final String URL_STRING_REQ = "https://b12f7c8b-6dac-45d7-ae37-b4741526b57e.mock.pstmn.io/users/1";
     public static final String URL_STRING_REQ = "http://10.90.75.130:8080/users";
     /**
      * Making string request
@@ -63,7 +65,7 @@ public class StringReqActivity extends AppCompatActivity {
                 error -> {
                     // Handle any errors that occur during the request
                     Log.e("Volley Error", error.toString());
-                    msgResponse.setText("Volley Error");
+                    msgResponse.setText("Volley Error: " + error.toString());
                 }
         ) {
             @Override
@@ -86,6 +88,44 @@ public class StringReqActivity extends AppCompatActivity {
         // Adding request to request queue
         VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringRequest);
        // queue.add(stringRequest);
+    }
+
+    private void makeStringPost() {
+
+        StringRequest stringPost = new StringRequest(
+                Request.Method.POST, //connect to endpoint
+                URL_STRING_REQ,
+                response -> {
+                    // Handle the successful response here
+                    Log.d("Volley Response", response);
+                    inputStringText.getText().toString();
+                },
+                error -> {
+                    // Handle any errors that occur during the request
+                    Log.e("Volley Error", error.toString());
+                    msgResponse.setText("Volley Error");
+                }
+        ) {
+            @Override
+            public Map<String, String> getHeaders() {
+                Map<String, String> headers = new HashMap<>();
+//                headers.put("Authorization", "Bearer YOUR_ACCESS_TOKEN");
+//                headers.put("Content-Type", "application/json");
+                return headers;
+            }
+
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                // params.put("money", "0");
+                return params;
+            }
+
+        };
+
+        // Adding request to request queue
+        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(stringPost);
+        // queue.add(stringRequest);
     }
 
 }
