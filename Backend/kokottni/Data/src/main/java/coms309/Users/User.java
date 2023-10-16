@@ -93,11 +93,19 @@ public class User {
 
     public void setDob(String dob){this.dob = dob;}
 
-    public void setStock(Stock stock){stocksOwned.add(stock);}
+    public void setStock(Stock stock){
+        stocksOwned.add(stock);
+        StockPurchased curr = new StockPurchased();
+        curr.setStock(stock);
+        curr.setUser(this);
+        curr.setNumPurchased(1);
+        curr.setCostPurchase(curr.getNumPurchased() * stock.getCurrValue());
+        amountPurchased.add(curr);
+    }
 
-//    public void purchase(int numStocks){
-//        if(numStocks < 1) return;
-//        this.numStocks += numStocks;
+//    public void purchase(int numStocks, Stock stock){
+//        if(numStocks < 1 || stock == null) return;
+//        amountPurchased.
 //        int change = (int) (this.stock.getCurrValue() * numStocks);
 //        if(change > money) return;
 //        money -= change;
