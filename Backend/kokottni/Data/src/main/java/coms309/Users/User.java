@@ -1,38 +1,49 @@
 package coms309.Users;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 import coms309.Stocks.Stock;
+import coms309.Stocks.StockPurchased;
+
+import java.util.Set;
 
 @Entity
+@Table(name = "user")
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @Column(name = "id")
+    private Long id;
+
+    @Column(name = "money")
     private int money;
 
-    private int numStocks;
+    @ManyToMany
+    @JoinTable(name = "owned_stocks", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "stock_id"))
+    private Set<Stock> stocksOwned;
+
+    @OneToMany(mappedBy = "user")
+    private Set<StockPurchased> amountPurchased;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "email")
     private String email;
+
+    @Column(name = "date_of_birth")
     private String dob;
+
+    @Column(name = "username")
     private String username;
+
+    @Column(name = "password")
     private String password;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "stock_id")
-    private Stock stock;
 
-    public User(int id, int money, String name, String email, String dob, String username, String password){
+    public User(Long id, int money, String name, String email, String dob, String username, String password){
         this.id = id;
         this.money = money;
-        this.numStocks = 0;
         this.name = name;
         this.email = email;
         this.dob = dob;
@@ -42,11 +53,11 @@ public class User {
 
     public User(){}
 
-    public int getId(){
+    public Long getId(){
         return id;
     }
 
-    public void setId(int id){
+    public void setId(Long id){
         this.id = id;
     }
 
@@ -82,20 +93,41 @@ public class User {
 
     public void setDob(String dob){this.dob = dob;}
 
-    public void setStock(Stock stock){this.stock = stock;}
+    public void setStock(Stock stock){stocksOwned.add(stock);}
 
-    public void purchase(int numStocks){
-        if(numStocks < 1) return;
-        this.numStocks += numStocks;
-        int change = (int) (this.stock.getCurrValue() * numStocks);
-        if(change > money) return;
-        money -= change;
+//    public void purchase(int numStocks){
+//        if(numStocks < 1) return;
+//        this.numStocks += numStocks;
+//        int change = (int) (this.stock.getCurrValue() * numStocks);
+//        if(change > money) return;
+//        money -= change;
+//    }
+//
+//    public void sellStocks(int numStocks){
+//        if(numStocks > this.numStocks) return;
+//        this.numStocks -= numStocks;
+//        money += (int) (this.stock.getCurrValue() * numStocks);
+//    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = (int) (prime * result + ((id == null) ? 0 : id));
+        return result;
     }
 
-    public void sellStocks(int numStocks){
-        if(numStocks > this.numStocks) return;
-        this.numStocks -= numStocks;
-        money += (int) (this.stock.getCurrValue() * numStocks);
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        User other = (User) obj;
+        if (id == null) {
+            return other.id == null;
+        } else return id.equals(other.id);
     }
-
 }

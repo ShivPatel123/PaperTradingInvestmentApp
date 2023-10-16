@@ -26,14 +26,7 @@ public class Main {
             User user1 = new User(1, 1987654, "Nick", "kokottni@iastate.edu", "oldenough", "user", "Password");
             User user2 = new User(2, 34578, "Josh", "jwhit@iastate.edu", "oldenough", "username", "password");
             User user3 = new User(3, 6543, "Shiv", "shiv@iastate.edu", "nah", "username2", "password");
-            Stock stock1 = new Stock(1, "TSLA", "Tesla", 101.23, -2.13);
-            Stock stock2 = new Stock(2, "INTL", "Intel", 67.12, 1.34);
-            Stock stock3 = new Stock(3, "GOOGL", "Google", 213.56, 3.14);
-
-            User user1 = new User(1, 1987654, "Nick", "kokottni@iastate.edu", "oldenough");
-            User user2 = new User(2, 34578, "Josh", "jwhit@iastate.edu", "oldenough");
-            User user3 = new User(3, 6543, "Shiv", "shiv@iastate.edu", "nah");
-            User user4 = new User(4, 7765, "Skyler", "sky@iastate.edu", "yup");
+            User user4 = new User(4, 7765, "Skyler", "sky@iastate.edu", "yup", "user3", "passman");
             Stock stock1 = new Stock(1, "TSLA", "Tesla", 101.23, -2.13);
             Stock stock2 = new Stock(2, "INTL", "Intel", 67.12, 1.34);
             Stock stock3 = new Stock(3, "GGL", "Google", 213.56, 3.14);
