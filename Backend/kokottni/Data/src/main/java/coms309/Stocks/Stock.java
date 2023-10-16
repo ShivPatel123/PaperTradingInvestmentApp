@@ -15,9 +15,17 @@ public class Stock {
     @Id
     @Column(name = "id")
     private Long id;
+
+    @Column(name = "symbol")
     private String symbol;
+
+    @Column(name = "company")
     private String company;
+
+    @Column(name = "current_value")
     private double currValue;
+
+    @Column(name = "previous_day_change")
     private double prevDayChange;
 
     @ManyToMany(mappedBy = "stock")
