@@ -28,7 +28,7 @@ public class Stock {
     @Column(name = "previous_day_change")
     private double prevDayChange;
 
-    @ManyToMany(mappedBy = "stock")
+    @ManyToMany(mappedBy = "stocksOwned")
     private Set<User> userOwners;
 
     @OneToMany(mappedBy = "stock")

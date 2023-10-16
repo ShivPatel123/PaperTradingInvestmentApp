@@ -16,7 +16,7 @@ public class User {
     private Long id;
 
     @Column(name = "money")
-    private int money;
+    private double money;
 
     @ManyToMany
     @JoinTable(name = "owned_stocks", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "stock_id"))
@@ -41,7 +41,7 @@ public class User {
     private String password;
 
 
-    public User(Long id, int money, String name, String email, String dob, String username, String password){
+    public User(Long id, double money, String name, String email, String dob, String username, String password){
         this.id = id;
         this.money = money;
         this.name = name;
@@ -61,9 +61,9 @@ public class User {
         this.id = id;
     }
 
-    public int getMoney(){return money;}
+    public double getMoney(){return money;}
 
-    public void setMoney(int money){this.money = money;}
+    public void setMoney(double money){this.money = money;}
 
     public String getName(){
         return name;
@@ -101,6 +101,7 @@ public class User {
         curr.setNumPurchased(1);
         curr.setCostPurchase(curr.getNumPurchased() * stock.getCurrValue());
         amountPurchased.add(curr);
+        money -= stock.getCurrValue();
     }
 
 //    public void purchase(int numStocks, Stock stock){
