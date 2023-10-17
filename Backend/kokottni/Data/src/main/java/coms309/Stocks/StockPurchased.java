@@ -4,26 +4,22 @@ import coms309.Users.User;
 
 import java.time.LocalDateTime;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "stock_purchased")
 public class StockPurchased {
 
-    @Id
-    @Column(name = "id")
-    private Long id;
+    @EmbeddedId
+    private StockPurchasedKey id;
 
     @ManyToOne
+    @MapsId("user_id")
     @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne
+    @MapsId("stock_id")
     @JoinColumn(name = "stock_id")
     private Stock stock;
 
@@ -44,7 +40,7 @@ public class StockPurchased {
 
     public void setStock(Stock stock){this.stock = stock;}
 
-    public Long getId(){return id;}
+    public StockPurchasedKey getId(){return id;}
 
     public int getNumPurchased(){return numPurchased;}
 

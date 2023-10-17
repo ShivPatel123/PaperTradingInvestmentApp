@@ -82,9 +82,9 @@ public class UserController {
     @PutMapping("/users/{userId}/stocks/{stockId}")
     String assignStockToUser(@PathVariable Long userId, @PathVariable Long stockId){
         User user = userRepository.getOne(userId);
-        Stock laptop = stockRepository.getOne(stockId);
-        laptop.setUser(user);
-        user.setStock(laptop);
+        Stock stock = stockRepository.getOne(stockId);
+        stock.setUser(user);
+        user.setStock(stock);
         userRepository.save(user);
         return success;
     }
