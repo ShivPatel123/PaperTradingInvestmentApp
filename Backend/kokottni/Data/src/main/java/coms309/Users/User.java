@@ -5,6 +5,8 @@ import javax.persistence.*;
 import coms309.Stocks.Stock;
 import coms309.Stocks.StockPurchased;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
