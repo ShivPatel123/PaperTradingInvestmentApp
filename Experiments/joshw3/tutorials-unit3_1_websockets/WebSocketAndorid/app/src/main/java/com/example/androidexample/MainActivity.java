@@ -84,8 +84,12 @@ public class MainActivity extends AppCompatActivity implements WebSocketListener
     }
 
     @Override
-    public void onWebSocketOpen(ServerHandshake handshakedata) {}
+    public void onWebSocketOpen(ServerHandshake handshakedata) {
+        Log.i("Websocket", "Opened");
+    }
 
     @Override
-    public void onWebSocketError(Exception ex) {}
+    public void onWebSocketError(Exception ex) {
+        Log.i("Websocket", "Error" + ex.getMessage());
+    }
 }
