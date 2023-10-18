@@ -5,9 +5,7 @@ import javax.persistence.*;
 import coms309.Stocks.Stock;
 import coms309.Stocks.StockPurchased;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Table(name = "user")
@@ -22,10 +20,10 @@ public class User {
 
     @ManyToMany
     @JoinTable(name = "owned_stocks", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "stock_id"))
-    private Set<Stock> stocksOwned;
+    private List<Stock> stocksOwned = new ArrayList<>();
 
     @OneToMany(mappedBy = "user")
-    private Set<StockPurchased> amountPurchased;
+    private List<StockPurchased> amountPurchased = new ArrayList<>();
 
     @Column(name = "name")
     private String name;

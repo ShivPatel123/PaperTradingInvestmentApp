@@ -6,7 +6,8 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import coms309.Users.User;
 
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "stock")
@@ -29,10 +30,10 @@ public class Stock {
     private double prevDayChange;
 
     @ManyToMany(mappedBy = "stocksOwned")
-    private Set<User> userOwners;
+    private List<User> userOwners = new ArrayList<>();
 
     @OneToMany(mappedBy = "stock")
-    private Set<StockPurchased> amountPurchased;
+    private List<StockPurchased> amountPurchased = new ArrayList<>();
 
 
     public Stock(Long id, String symbol, String company, double currValue, double prevDayChange){
