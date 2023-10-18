@@ -6,9 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="44a9acee-fd98-4759-adc9-7b5469c99b42" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/coms309/Stocks/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coms309/Stocks/Stock.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/coms309/Stocks/StockPurchased.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coms309/Stocks/StockPurchased.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/coms309/Users/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coms309/Users/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/coms309/Users/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coms309/Users/UserController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,7 +47,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "45-manytomanywithcurrentmain",
-    "last_opened_file_path": "C:/Users/Nick Kokott/cs309/ms_316/Experiments/kokottni/tutorials-springboot_unit3_1_manytomany",
+    "last_opened_file_path": "C:/Users/Nick Kokott/cs309/ms_316/Experiments/kokottni/tutorials-unit3_1_websockets",
     "onboarding.tips.debug.path": "C:/Users/Nick Kokott/cs309/ms_316/Backend/kokottni/Data/src/main/java/coms309/Main.java"
   }
 }]]></component>
@@ -83,5 +83,17 @@
       <updated>1695416472059</updated>
     </task>
     <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-field">
+          <url>file://$PROJECT_DIR$/src/main/java/coms309/Stocks/Stock.java</url>
+          <line>36</line>
+          <properties field="amountPurchased" class="coms309.Stocks.Stock" />
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
