@@ -30,8 +30,13 @@ public class JsonObjReqActivity extends AppCompatActivity {
 //    private String TAG = JsonObjReqActivity.class.getSimpleName();
 //    private String tag_json_obj = "jobj_req";
 
-    private static final String URL_JSON_OBJECT = "http://10.90.75.130:8080/users/2";
+    private static final String URL_JSON_OBJECT = "http://10.90.75.130:8080/users";
 
+// @/users returns JSON object ARRAY, JSON post sends JSON object
+    //either get 1 user or change to get JSON array, post needs to be JSON object type
+    //hard code a user, try to send
+    // need different methods on backend for getting string vs getting object??
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
