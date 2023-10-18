@@ -1,5 +1,10 @@
 package coms309.chat;
 
+import coms309.Users.User;
+import coms309.Users.UserRepository;
+import coms309.Users.UserController;
+import coms309.Users.UserController;
+
 import java.io.IOException;
 import java.util.Hashtable;
 import java.util.List;
@@ -16,6 +21,7 @@ import javax.websocket.server.ServerEndpoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.stereotype.Controller;
 
 @Controller      // this is needed for this to be an endpoint to springboot
@@ -24,7 +30,10 @@ public class ChatSocket {
 
   // cannot autowire static directly (instead we do it by the below
   // method
-	private static MessageRepository msgRepo; 
+	private static MessageRepository msgRepo;
+
+	@Autowired
+	private UserRepository userRepository;
 
 	/*
    * Grabs the MessageRepository singleton from the Spring Application
@@ -47,6 +56,10 @@ public class ChatSocket {
 	@OnOpen
 	public void onOpen(Session session, @PathParam("username") String username) 
       throws IOException {
+
+//		User user = userRepository.findByUsername(username);
+//
+//		broadcast("hello " + user.getName());
 
 		logger.info("Entered into Open");
 
