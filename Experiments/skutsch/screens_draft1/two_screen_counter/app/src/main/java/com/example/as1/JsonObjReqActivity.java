@@ -1,4 +1,4 @@
-package com.example.androidexample;
+package com.example.as1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -40,24 +40,24 @@ public class JsonObjReqActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_json_obj_req);
-      //  RequestQueue queue = Volley.newRequestQueue(this);
-
-        //User user1 = new User(5,20,"userTest", "userTest@gmail","07252002", "userTest","userPass");
-
-        btnJsonObjReq = findViewById(R.id.btnJsonObj);
-        btnJsonObjPost = findViewById(R.id.btnJsonObj_post);
-        userName = findViewById(R.id.userName);
-        userEmail = findViewById(R.id.emailTv);
-        userID = findViewById(R.id.userID);
-        userMoney = findViewById(R.id.userMoney);
-        userNumStocks = findViewById(R.id.userNumStocks);
-        userDOB = findViewById(R.id.userDOB);
-        userUsername = findViewById(R.id.userUsername);
-        userPassword = findViewById(R.id.userPassword);
-
-        JsonObjectInput = findViewById(R.id.getJsonObject);
-        JsonObjectDisplay = findViewById(R.id.objectDisplay);
+//        setContentView(R.layout.activity_json_obj_req);
+//      //  RequestQueue queue = Volley.newRequestQueue(this);
+//
+//        //User user1 = new User(5,20,"userTest", "userTest@gmail","07252002", "userTest","userPass");
+//
+//        btnJsonObjReq = findViewById(R.id.btnJsonObj);
+//        btnJsonObjPost = findViewById(R.id.btnJsonObj_post);
+//        userName = findViewById(R.id.userName);
+//        userEmail = findViewById(R.id.emailTv);
+//        userID = findViewById(R.id.userID);
+//        userMoney = findViewById(R.id.userMoney);
+//        userNumStocks = findViewById(R.id.userNumStocks);
+//        userDOB = findViewById(R.id.userDOB);
+//        userUsername = findViewById(R.id.userUsername);
+//        userPassword = findViewById(R.id.userPassword);
+//
+//        JsonObjectInput = findViewById(R.id.getJsonObject);
+//        JsonObjectDisplay = findViewById(R.id.objectDisplay);
 
         btnJsonObjReq.setOnClickListener(v -> makeJsonObjReq());
         btnJsonObjPost.setOnClickListener(v -> makeJSONPostRequest());

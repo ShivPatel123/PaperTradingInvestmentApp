@@ -1,4 +1,4 @@
-package com.example.androidexample;
+package com.example.as1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import com.android.volley.RequestQueue;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -34,10 +35,10 @@ public class JsonArrReqActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_json_arr_req);
+       // setContentView(R.layout.activity_json_arr_req);
 
-        btnJsonArrReq = findViewById(R.id.btnJsonArr);
-        listView = findViewById(R.id.listView);
+      //  btnJsonArrReq = findViewById(R.id.btnJsonArr);
+     //   listView = findViewById(R.id.listView);
 
         // Initialize the adapter with an empty list (data will be added later)
         adapter = new ListAdapter(this, new ArrayList<>());

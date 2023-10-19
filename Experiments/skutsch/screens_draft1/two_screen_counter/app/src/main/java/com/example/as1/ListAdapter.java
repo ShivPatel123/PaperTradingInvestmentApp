@@ -1,4 +1,4 @@
-package com.example.androidexample;
+package com.example.as1;
 
 
 import android.content.Context;
@@ -21,17 +21,17 @@ public class ListAdapter extends ArrayAdapter<ListItemObject> {
         ListItemObject item = getItem(position);
 
         // Check if an existing view is being reused, otherwise inflate the view
-        if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_item, parent, false);
-        }
+//        if (convertView == null) {
+//            convertView = LayoutInflater.from(getContext()).inflate(R.layout.list_item, parent, false);
+//        }
 
         // Lookup view for data population
-        TextView itemName = convertView.findViewById(R.id.itemName);
-        TextView itemEmail = convertView.findViewById(R.id.itemEmail);
+//        TextView itemName = convertView.findViewById(R.id.itemName);
+//        TextView itemEmail = convertView.findViewById(R.id.itemEmail);
 
         // Populate the data into the template view using the data object
-        itemName.setText(item.getName());
-        itemEmail.setText(item.getEmail());
+//        itemName.setText(item.getName());
+//        itemEmail.setText(item.getEmail());
 
         // Return the completed view to render on screen
         return convertView;

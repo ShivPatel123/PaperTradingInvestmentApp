@@ -1,4 +1,4 @@
-package com.example.androidexample;
+package com.example.as1;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -35,12 +35,12 @@ public class StringReqActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_string_req);
+        //setContentView(R.layout.activity_string_req);
 
-        btnStringReq = (Button) findViewById(R.id.btnStringReq);
-        btnStringPost = (Button) findViewById(R.id.btnStringPost);
-        msgResponse = (TextView) findViewById(R.id.msgResponse);
-        inputStringText = (EditText) findViewById(R.id.inputStringText) ;
+//        btnStringReq = (Button) findViewById(R.id.btnStringReq);
+//        btnStringPost = (Button) findViewById(R.id.btnStringPost);
+//        msgResponse = (TextView) findViewById(R.id.msgResponse);
+//        inputStringText = (EditText) findViewById(R.id.inputStringText) ;
 
         btnStringReq.setOnClickListener(v -> makeStringReq());
 
