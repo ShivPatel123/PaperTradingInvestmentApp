@@ -1,4 +1,4 @@
-package com.example.androidexample;
+package com.example.as1;
 
 public class ListItemObject {
     private String name;
