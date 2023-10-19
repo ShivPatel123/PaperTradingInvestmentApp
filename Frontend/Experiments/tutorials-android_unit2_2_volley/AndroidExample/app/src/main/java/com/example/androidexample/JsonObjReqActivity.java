@@ -43,6 +43,8 @@ public class JsonObjReqActivity extends AppCompatActivity {
         setContentView(R.layout.activity_json_obj_req);
       //  RequestQueue queue = Volley.newRequestQueue(this);
 
+        //User user1 = new User(5,20,"userTest", "userTest@gmail","07252002", "userTest","userPass");
+
         btnJsonObjReq = findViewById(R.id.btnJsonObj);
         btnJsonObjPost = findViewById(R.id.btnJsonObj_post);
         userName = findViewById(R.id.userName);
@@ -130,10 +132,11 @@ public class JsonObjReqActivity extends AppCompatActivity {
         // Convert input to JSONObject
         JSONObject objectBody = new JSONObject();
         try {
+            User user1 = new User(5,20,"userTest", "userTest@gmail","07252002", "userTest","userPass");
             // etRequest should contain a JSON object string as your POST body
             // similar to what you would have in POSTMAN-body field
             // and the fields should match with the object structure of @RequestBody on sb
-            objectBody = new JSONObject(JsonObjectInput.getText().toString());
+            objectBody = new JSONObject(user1.toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
