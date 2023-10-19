@@ -54,7 +54,7 @@ public class User {
         this.id = id;
     }
     public int getMoney(){  return money; }
-    public void setMoney(int money){    this.money = money; }
+    public void setMoney(int money){   this.money = money; }
 
     public String getName(){
         return name;
@@ -79,6 +79,7 @@ public class User {
     }
 
     public String getPassword() {   return password; }
+
     public void setPassword(String pass){
         this.password = pass;
     }
@@ -89,3 +90,4 @@ public class User {
 
 
 }//end
+
