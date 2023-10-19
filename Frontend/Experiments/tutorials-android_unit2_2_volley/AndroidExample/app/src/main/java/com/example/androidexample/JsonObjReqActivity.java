@@ -32,11 +32,18 @@ public class JsonObjReqActivity extends AppCompatActivity {
 
     private static final String URL_JSON_OBJECT = "http://10.90.75.130:8080/users";
 
+// @/users returns JSON object ARRAY, JSON post sends JSON object
+    //either get 1 user or change to get JSON array, post needs to be JSON object type
+    //hard code a user, try to send
+    // need different methods on backend for getting string vs getting object??
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_json_obj_req);
       //  RequestQueue queue = Volley.newRequestQueue(this);
+
+        //User user1 = new User(5,20,"userTest", "userTest@gmail","07252002", "userTest","userPass");
 
         btnJsonObjReq = findViewById(R.id.btnJsonObj);
         btnJsonObjPost = findViewById(R.id.btnJsonObj_post);
@@ -123,12 +130,13 @@ public class JsonObjReqActivity extends AppCompatActivity {
     private void makeJSONPostRequest() {
 
         // Convert input to JSONObject
-        JSONObject objectBody = null;
+        JSONObject objectBody = new JSONObject();
         try {
+            User user1 = new User(5,20,"userTest", "userTest@gmail","07252002", "userTest","userPass");
             // etRequest should contain a JSON object string as your POST body
             // similar to what you would have in POSTMAN-body field
             // and the fields should match with the object structure of @RequestBody on sb
-            objectBody = new JSONObject(JsonObjectInput.getText().toString());
+            objectBody = new JSONObject(user1.toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -163,3 +171,4 @@ public class JsonObjReqActivity extends AppCompatActivity {
 
 
 }
+// [{"id":1,"money":1987654,"name":"Nick","email":"kokottni@iastate.edu","dob":"oldenough","username":"user","password":"Password"}
