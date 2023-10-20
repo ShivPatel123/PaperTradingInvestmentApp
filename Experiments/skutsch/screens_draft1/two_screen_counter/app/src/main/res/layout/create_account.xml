@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginPage"
+    tools:context=".screens.LoginPage"
     android:background="@color/background">
 
     <EditText
@@ -34,10 +34,12 @@
         app:layout_constraintVertical_bias="0.33" />
 
     <Button
-        android:id="@+id/toHome_loginPagebtn"
+        android:id="@+id/toHome_SignupPagebtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Back"
+        android:textColor="@color/txtclr"
+        android:background="@color/btn_bg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.467"
@@ -50,6 +52,7 @@
         android:layout_width="180dp"
         android:layout_height="62dp"
         android:text="Login"
+        android:background="@color/btn_bg"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="@color/txtclr"
         android:textStyle="bold|italic"
@@ -69,7 +72,39 @@
         android:inputType="text"
         android:text="       Have an account?"
         android:textColor="@color/txtclr"
-        tools:layout_editor_absoluteX="-1dp"
-        tools:layout_editor_absoluteY="1dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+    <Button
+        android:id="@+id/sendSignupReq_btn"
+        android:layout_width="234dp"
+        android:layout_height="58dp"
+        android:text="SIGNUP"
+        android:background="@color/btn_bg"
+        android:textColor="@color/txtclr"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.517" />
+
+    <EditText
+        android:id="@+id/loginReqResponse_txt"
+        android:layout_width="403dp"
+        android:layout_height="43dp"
+        android:clickable="false"
+        android:ems="10"
+        android:inputType="text"
+        android:textAlignment="center"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/editTextText"
+        app:layout_constraintVertical_bias="0.177" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

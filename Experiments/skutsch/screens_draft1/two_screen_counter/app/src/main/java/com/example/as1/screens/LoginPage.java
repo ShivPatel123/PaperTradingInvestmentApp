@@ -22,7 +22,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LoginPage extends AppCompatActivity {
-
+//set variable fro userID, use that throughout the app.
+//setter methods in profile page
+    //stock prediction page/ feature??
     Button toHome_btn;
     Button toSignUp_btn;
     Button sendLoginReq_btn;
@@ -84,19 +86,7 @@ public class LoginPage extends AppCompatActivity {
                 objectBody,
                 //response function to lambda
                 response -> volleyOutput_txt.setText(response.toString()),
-                error -> volleyOutput_txt.setText(error.getMessage())) {
-
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<String, String>();
-                return headers;
-            }
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-                return params;
-            }
-        };
+                error -> volleyOutput_txt.setText(error.getMessage())) { };
         // Adding request to request queue
         VolleySingleton.getInstance(context.getApplicationContext()).addToRequestQueue(request);
     }
