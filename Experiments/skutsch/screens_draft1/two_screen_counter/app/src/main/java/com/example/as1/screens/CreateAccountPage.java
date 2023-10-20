@@ -1,12 +1,13 @@
-package com.example.as1;
-
-import androidx.appcompat.app.AppCompatActivity;
+package com.example.as1.screens;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.as1.R;
 
 public class CreateAccountPage extends AppCompatActivity {
 
