@@ -1,14 +1,25 @@
 package com.example.as1.screens;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.toolbox.JsonObjectRequest;
+
+import com.example.as1.LoginAttempt;
 import com.example.as1.R;
-import com.example.as1.RequestController;
+import com.example.as1.VolleySingleton;
+
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginPage extends AppCompatActivity {
 
@@ -16,21 +27,22 @@ public class LoginPage extends AppCompatActivity {
     Button toSignUp_btn;
     Button sendLoginReq_btn;
 
+    EditText usernameInput_txt = findViewById(R.id.usernameLogin_txtInput);
+    EditText passwordInput_txt = findViewById(R.id.passwordLogin_txtInput);
+    EditText volleyOutput_txt = findViewById(R.id.loginReqResponse_txt);
+    String usernameInput;
+    String passwordInput;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_page);
 
-
         //button back to home page
         toHome_btn = findViewById(R.id.toHome_loginPagebtn);
-        toHome_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view)
-            {
-                Intent intent = new Intent(LoginPage.this, HomePage.class);
-                startActivity(intent);
-            }
+        toHome_btn.setOnClickListener(view -> {
+            Intent intent = new Intent(LoginPage.this, HomePage.class);
+            startActivity(intent);
         });
 
         //button to Create Account page
@@ -41,12 +53,51 @@ public class LoginPage extends AppCompatActivity {
         });
 
         //button to try login
-        //TODO : parse input from username/password EditText windows, create new user object with parsed info, send request
-        //TODO : login authetication on backend or frontend side?
-        // Frontend will have to have if/else to determine what to do with backend response
         sendLoginReq_btn = findViewById(R.id.sendLoginReq_btn);
         sendLoginReq_btn.setOnClickListener(view -> {
+            //parse inputs
+            usernameInput = usernameInput_txt.getText().toString();
+            passwordInput = passwordInput_txt.getText().toString();
+            //make new login
+            LoginAttempt loginAuth = new LoginAttempt (usernameInput, passwordInput);
+            //Post login
+            makeLoginPostReq(getApplicationContext(), loginAuth);
         });
 
+    }
+
+    public void makeLoginPostReq(Context context, LoginAttempt loginA) {
+        String URL_JSON_OBJECT = "http://10.90.75.130:8080/login";
+
+        // Convert input to JSONObject
+        JSONObject objectBody = new JSONObject();
+        try {
+            objectBody = new JSONObject(loginA.toString());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        //Create new request
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.POST,
+                URL_JSON_OBJECT,
+                objectBody,
+                //response function to lambda
+                response -> volleyOutput_txt.setText(response.toString()),
+                error -> volleyOutput_txt.setText(error.getMessage())) {
+
+            @Override
+            public Map<String, String> getHeaders() throws AuthFailureError {
+                HashMap<String, String> headers = new HashMap<String, String>();
+                return headers;
+            }
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                return params;
+            }
+        };
+        // Adding request to request queue
+        VolleySingleton.getInstance(context.getApplicationContext()).addToRequestQueue(request);
     }
 }

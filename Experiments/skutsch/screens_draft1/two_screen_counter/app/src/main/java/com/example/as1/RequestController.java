@@ -1,5 +1,6 @@
 package com.example.as1;
 
+import android.app.Activity;
 import android.util.Log;
 
 import com.android.volley.AuthFailureError;
@@ -14,6 +15,8 @@ import org.json.JSONObject;
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
+import androidx.appcompat.app.AppCompatActivity;
+import android.content.Context;
 
 
 public interface RequestController{
@@ -26,7 +29,7 @@ public interface RequestController{
      */
 
    // private static final String URL_JSON_OBJECT = "http://10.90.75.130:8080/users";
-    static void makeJsonObjReq(String URL_JSON_OBJECT) {
+    static void makeJsonObjReq(String URL_JSON_OBJECT, Context context){
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(
                 Request.Method.GET,
                 URL_JSON_OBJECT,
@@ -82,10 +85,10 @@ public interface RequestController{
                 return params;
             }
         };
-
+    
         // Adding request to request queue
-        //    VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(jsonObjReq);
-    //TODO : replace getApplicationContext() function with something
+        VolleySingleton.getInstance(context.getApplicationContext()).addToRequestQueue(jsonObjReq);
+
     }
 
 
@@ -93,16 +96,17 @@ public interface RequestController{
      *  POST JSON OBJECT
      */
 
-    private void makeJSONPostRequest(String URL_JSON_OBJECT) {
+    default void makeJSONPostRequest(String URL_JSON_OBJECT, Context context) {
 
         // Convert input to JSONObject
         JSONObject objectBody = new JSONObject();
         try {
-            User user1 = new User(5,20,"userTest", "userTest@gmail","07252002", "userTest","userPass");
+//            User user1 = new User(5,20,"userTest", "userTest@gmail","07252002", "userTest","userPass");
+//            objectBody = new JSONObject(user1.toString());
             // etRequest should contain a JSON object string as your POST body
             // similar to what you would have in POSTMAN-body field
             // and the fields should match with the object structure of @RequestBody on sb
-            objectBody = new JSONObject(user1.toString());
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -132,7 +136,7 @@ public interface RequestController{
             }
         };
         // Adding request to request queue
-        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(request);
+        VolleySingleton.getInstance(context.getApplicationContext()).addToRequestQueue(request);
     }
 
     public static final String URL_STRING_REQ = "http://10.90.75.130:8080/users";
@@ -291,5 +295,7 @@ public interface RequestController{
         // Adding request to request queue
         VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(jsonArrReq);
     }
+
+    void makeJSONPostRequest("http://10.90.75.130:8080/login",Context context);
 }//end
 
