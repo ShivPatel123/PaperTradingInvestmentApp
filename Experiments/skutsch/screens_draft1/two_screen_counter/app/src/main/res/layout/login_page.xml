@@ -43,7 +43,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.843" />
+        app:layout_constraintVertical_bias="0.92" />
 
     <Button
         android:id="@+id/toSignupBtn"
@@ -92,8 +92,8 @@
 
     <EditText
         android:id="@+id/loginReqResponse_txt"
-        android:layout_width="403dp"
-        android:layout_height="43dp"
+        android:layout_width="405dp"
+        android:layout_height="175dp"
         android:clickable="false"
         android:ems="10"
         android:inputType="text"
@@ -101,9 +101,9 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/editTextText"
-        app:layout_constraintVertical_bias="0.177" />
+        app:layout_constraintVertical_bias="0.76" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
