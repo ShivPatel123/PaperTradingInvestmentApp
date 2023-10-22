@@ -2,6 +2,7 @@ package coms309.Users;
 
 import java.util.List;
 
+import coms309.Stocks.StockPurchased;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,6 +31,9 @@ public class UserController {
     List<User> getAllUsers(){
         return userRepository.findAll();
     }
+
+    @GetMapping(path = "/user/{id}")
+    List<StockPurchased> getAllStocksForUser(@PathVariable long id){return userRepository.getOne(id).getStocks();}
 
     @GetMapping(path = "/users/{id}")
     User getUserById(@PathVariable Long id){

@@ -15,12 +15,10 @@ public class StockPurchased {
     private Long id;
 
     @ManyToOne
-   // @MapsId("id")
     @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne
-   // @MapsId("id")
     @JoinColumn(name = "stock_id")
     private Stock stock;
 
