@@ -81,7 +81,6 @@ public class StockController {
     String deleteStock(@PathVariable Long id){
 
         User user = userRepository.getOne(id);
-        user.setStock(null);
         userRepository.save(user);
 
         stockRepository.deleteById(id);

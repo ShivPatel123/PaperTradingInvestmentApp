@@ -29,11 +29,8 @@ public class Stock {
     @Column(name = "previous_day_change")
     private double prevDayChange;
 
-    @ManyToMany(mappedBy = "stocksOwned")
-    private List<User> userOwners = new ArrayList<>();
-
     @OneToMany(mappedBy = "stock")
-    private List<StockPurchased> amountPurchased = new ArrayList<>();
+    private List<StockPurchased> users = new ArrayList<>();
 
 
     public Stock(Long id, String symbol, String company, double currValue, double prevDayChange){
@@ -56,7 +53,17 @@ public class Stock {
     public void setCurrValue(double currValue){this.currValue = currValue;}
     public double getPrevDayChange(){return prevDayChange;}
     public void setPrevDayChange(double prevDayChange){this.prevDayChange = prevDayChange;}
-    public void setUser(User user){userOwners.add(user);}
+    public void setUser(User user, int numBuying, Long id){
+        StockPurchased curr = new StockPurchased();
+        curr.setId(id);
+        curr.setUser(user);
+        curr.setStock(this);
+        curr.setNumPurchased(numBuying);
+        curr.setCostPurchase(numBuying * currValue);
+        users.add(curr);
+    }
+
+    public List<StockPurchased> getUsers(){return users;}
 
     @Override
     public int hashCode() {
