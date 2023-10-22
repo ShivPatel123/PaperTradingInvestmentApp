@@ -1,5 +1,6 @@
 package coms309;
 
+import coms309.Stocks.StockPurchasedRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -20,29 +21,18 @@ import coms309.Users.UserRepository;
 public class Main {
     public static void main(String[] args) {SpringApplication.run(Main.class, args);}
     @Bean
-    CommandLineRunner initUser(UserRepository userRepository, StockRepository stockRepository){
+    CommandLineRunner initUser(UserRepository userRepository, StockRepository stockRepository, StockPurchasedRepository spRepository){
         return args -> {
 
-            User user1 = new User(1, 1987654, "Nick", "kokottni@iastate.edu", "oldenough", "user", "Password");
-            User user2 = new User(2, 34578, "Josh", "jwhit@iastate.edu", "oldenough", "username", "password");
-            User user3 = new User(3, 6543, "Shiv", "shiv@iastate.edu", "nah", "username2", "password");
-            Stock stock1 = new Stock(1, "TSLA", "Tesla", 101.23, -2.13);
-            Stock stock2 = new Stock(2, "INTL", "Intel", 67.12, 1.34);
-            Stock stock3 = new Stock(3, "GOOGL", "Google", 213.56, 3.14);
+            User user1 = new User(1L, 1987654, "Nick", "kokottni@iastate.edu", "oldenough", "user", "Password");
+            User user2 = new User(2L, 34578, "Josh", "jwhit@iastate.edu", "oldenough", "username", "password");
+            User user3 = new User(3L, 6543, "Shiv", "shiv@iastate.edu", "nah", "username2", "password");
+            User user4 = new User(4L, 7765, "Skyler", "sky@iastate.edu", "yup", "user3", "passman");
+            Stock stock1 = new Stock(1L, "TSLA", "Tesla", 101.23, -2.13);
+            Stock stock2 = new Stock(2L, "INTL", "Intel", 67.12, 1.34);
+            Stock stock3 = new Stock(3L, "GGL", "Google", 213.56, 3.14);
+            Stock stock4 = new Stock(4L, "EXAS", "Exact Sciences", 67.34, -2.13);
 
-            User user1 = new User(1, 1987654, "Nick", "kokottni@iastate.edu", "oldenough");
-            User user2 = new User(2, 34578, "Josh", "jwhit@iastate.edu", "oldenough");
-            User user3 = new User(3, 6543, "Shiv", "shiv@iastate.edu", "nah");
-            User user4 = new User(4, 7765, "Skyler", "sky@iastate.edu", "yup");
-            Stock stock1 = new Stock(1, "TSLA", "Tesla", 101.23, -2.13);
-            Stock stock2 = new Stock(2, "INTL", "Intel", 67.12, 1.34);
-            Stock stock3 = new Stock(3, "GGL", "Google", 213.56, 3.14);
-            Stock stock4 = new Stock(4, "EXAS", "Exact Sciences", 67.34, -2.13);
-
-            user1.setStock(stock1);
-            user2.setStock(stock2);
-            user3.setStock(stock3);
-            user4.setStock(stock4);
             userRepository.save(user1);
             userRepository.save(user2);
             userRepository.save(user3);
@@ -51,6 +41,15 @@ public class Main {
             stockRepository.save(stock2);
             stockRepository.save(stock3);
             stockRepository.save(stock4);
+
+            user1.setStock(stock1, 2, stock1.getId());
+            stock1.setUser(user1, 2, stock1.getId());
+            user2.setStock(stock2, 3, stock2.getId());
+            stock2.setUser(user2, 3, stock2.getId());
+            user3.setStock(stock3, 1, stock3.getId());
+            stock3.setUser(user3, 1, stock3.getId());
+            user4.setStock(stock4, 4, stock4.getId());
+            stock4.setUser(user4, 4, stock4.getId());
         };
     }
 }
