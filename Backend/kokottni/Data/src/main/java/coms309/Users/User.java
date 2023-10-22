@@ -59,6 +59,8 @@ public class User {
 
     public double getMoney(){return money;}
 
+    public int getNumStocksPurchased(){return stocks.size() - 1;}
+
     public void setMoney(double money){this.money = money;}
 
     public String getName(){
