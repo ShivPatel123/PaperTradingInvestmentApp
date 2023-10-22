@@ -18,12 +18,8 @@ public class User {
     @Column(name = "money")
     private double money;
 
-    @ManyToMany
-    @JoinTable(name = "owned_stocks", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "stock_id"))
-    private List<Stock> stocksOwned = new ArrayList<>();
-
     @OneToMany(mappedBy = "user")
-    private List<StockPurchased> amountPurchased = new ArrayList<>();
+    private List<StockPurchased> stocks = new ArrayList<>();
 
     @Column(name = "name")
     private String name;
@@ -93,16 +89,20 @@ public class User {
 
     public void setDob(String dob){this.dob = dob;}
 
-    public void setStock(Stock stock){
-        stocksOwned.add(stock);
+    public void setStock(Stock stock, int numPurchase, Long id){
         StockPurchased curr = new StockPurchased();
         curr.setStock(stock);
         curr.setUser(this);
-        curr.setNumPurchased(1);
+        curr.setId(id);
+        curr.setNumPurchased(numPurchase);
+        curr.setSinglePrice(stock.getCurrValue());
         curr.setCostPurchase(curr.getNumPurchased() * stock.getCurrValue());
-        amountPurchased.add(curr);
+        stocks.add(curr);
+        stock.setUser(this, numPurchase, id);
         money -= stock.getCurrValue();
     }
+
+    public List<StockPurchased> getStocks(){return stocks;}
 
 //    public void purchase(int numStocks, Stock stock){
 //        if(numStocks < 1 || stock == null) return;

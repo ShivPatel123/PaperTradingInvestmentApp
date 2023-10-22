@@ -10,16 +10,17 @@ import javax.persistence.*;
 @Table(name = "stock_purchased")
 public class StockPurchased {
 
-    @EmbeddedId
-    private StockPurchasedKey id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @ManyToOne
-    @MapsId("user_id")
+   // @MapsId("id")
     @JoinColumn(name = "user_id")
     private User user;
 
     @ManyToOne
-    @MapsId("stock_id")
+   // @MapsId("id")
     @JoinColumn(name = "stock_id")
     private Stock stock;
 
@@ -28,6 +29,9 @@ public class StockPurchased {
 
     @Column(name = "cost_of_purchased")
     private double costPurchase;
+
+    @Column(name = "price_of_one_at_purchase")
+    private double singlePrice;
 
     public StockPurchased(){
     }
@@ -40,7 +44,7 @@ public class StockPurchased {
 
     public void setStock(Stock stock){this.stock = stock;}
 
-    public StockPurchasedKey getId(){return id;}
+    public Long getId(){return id;}
 
     public int getNumPurchased(){return numPurchased;}
 
@@ -49,6 +53,13 @@ public class StockPurchased {
     public double getCostPurchase() {return costPurchase;}
 
     public void setCostPurchase(double costPurchase){this.costPurchase = costPurchase;}
+
+    public void setId(Long id){this.id = id;}
+
+    public double getSinglePrice(){return singlePrice;}
+    public void setSinglePrice(double singlePrice){this.singlePrice = singlePrice;}
+
+
 
     @Override
     public int hashCode() {
