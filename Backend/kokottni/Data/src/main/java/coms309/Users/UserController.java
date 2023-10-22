@@ -18,9 +18,10 @@ import coms309.Stocks.StockRepository;
 
 @RestController
 public class UserController {
+
+    long purchaseNum = 5;
     @Autowired
     UserRepository userRepository;
-
     @Autowired
     StockRepository stockRepository;
 
@@ -38,6 +39,12 @@ public class UserController {
     @GetMapping(path = "/users/{id}")
     User getUserById(@PathVariable Long id){
         return userRepository.getOne(id);
+    }
+
+    @GetMapping(path = "/buy/{id}")
+    StockPurchased purchaseStock(@PathVariable long id){
+        Stock stock = stockRepository.getOne(id);
+        
     }
 
 //    @GetMapping(path = "/purchase/{id}/{numStocks}")
