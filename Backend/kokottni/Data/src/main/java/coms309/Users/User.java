@@ -97,20 +97,18 @@ public class User {
         curr.setNumPurchased(numPurchase);
         curr.setSinglePrice(stock.getCurrValue());
         curr.setCostPurchase(curr.getNumPurchased() * stock.getCurrValue());
+        if( curr.getNumPurchased() * stock.getCurrValue() > money) return;
         stocks.add(curr);
         stock.setUser(this, numPurchase, id);
-        money -= stock.getCurrValue();
+        money -= curr.getCostPurchase();
     }
 
     public List<StockPurchased> getStocks(){return stocks;}
 
-//    public void purchase(int numStocks, Stock stock){
-//        if(numStocks < 1 || stock == null) return;
-//        amountPurchased.
-//        int change = (int) (this.stock.getCurrValue() * numStocks);
-//        if(change > money) return;
-//        money -= change;
-//    }
+    public void purchase(int numStocks, Stock stock, long id){
+        if(numStocks < 1 || stock == null) return;
+        setStock(stock, numStocks, id);
+    }
 //
 //    public void sellStocks(int numStocks){
 //        if(numStocks > this.numStocks) return;
