@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
-
+import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.AuthFailureError;
@@ -24,7 +24,7 @@ import java.util.Map;
 public class LoginPage extends AppCompatActivity {
 //set variable fro userID, use that throughout the app.
 //setter methods in profile page
-    //stock prediction page/ feature??
+// stock prediction page/ feature??
     Button toHome_btn;
     Button toSignUp_btn;
     Button sendLoginReq_btn;
@@ -60,10 +60,19 @@ public class LoginPage extends AppCompatActivity {
             //parse inputs
             usernameInput = usernameInput_txt.getText().toString();
             passwordInput = passwordInput_txt.getText().toString();
+
+            //set username and password so they are not null
+            if(usernameInput == "" || usernameInput == null){
+                usernameInput = "default";
+            }
+            if(passwordInput == "" || passwordInput == null){
+                passwordInput = "default";
+            }
+
             //make new login
-            LoginAttempt loginAuth = new LoginAttempt (usernameInput, passwordInput);
+           LoginAttempt loginAuth = new LoginAttempt (usernameInput, passwordInput);
             //Post login
-            makeLoginPostReq(getApplicationContext(), loginAuth);
+           makeLoginPostReq(this.getBaseContext(), loginAuth);
         });
 
     }
