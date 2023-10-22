@@ -33,6 +33,9 @@ public class StockController {
     @GetMapping(path = "/stocks")
     List<Stock> getAllStocks(){return stockRepository.findAll();}
 
+    @GetMapping(path = "/stock/{id}")
+    List<StockPurchased> getAllUsersForStock(@PathVariable long id){return stockRepository.getOne(id).getUsers();}
+
 
     @GetMapping(path = "/stocksUpdate/{symbol}")
     String getStockAPIInfo(@PathVariable String symbol){

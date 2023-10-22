@@ -58,6 +58,7 @@ public class Stock {
         curr.setId(id);
         curr.setUser(user);
         curr.setStock(this);
+        curr.setSinglePrice(currValue);
         curr.setNumPurchased(numBuying);
         curr.setCostPurchase(numBuying * currValue);
         users.add(curr);
