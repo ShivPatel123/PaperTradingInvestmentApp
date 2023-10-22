@@ -23,35 +23,23 @@ public class HomePage extends AppCompatActivity {
 
         //button to login page
         toLogin_btn = findViewById(R.id.toLoginBtn);
-        toLogin_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                Intent intent = new Intent(HomePage.this, LoginPage.class);
-                startActivity(intent);
-            }
+        toLogin_btn.setOnClickListener(v -> {
+            Intent intent = new Intent(HomePage.this, LoginPage.class);
+            startActivity(intent);
         });
 
         //button to stock page
         toStocks_btn = findViewById(R.id.toStockBtn);
-        toStocks_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                Intent intent = new Intent(HomePage.this, StockPage.class);
-                startActivity(intent);
-            }
+        toStocks_btn.setOnClickListener(v -> {
+            Intent intent = new Intent(HomePage.this, StockPage.class);
+            startActivity(intent);
         });
 
         //button to create account page
         toStocks_btn = findViewById(R.id.toCreateAccountBtn);
-        toStocks_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                Intent intent = new Intent(HomePage.this, CreateAccountPage.class);
-                startActivity(intent);
-            }
+        toStocks_btn.setOnClickListener(v -> {
+            Intent intent = new Intent(HomePage.this, CreateAccountPage.class);
+            startActivity(intent);
         });
 
 
