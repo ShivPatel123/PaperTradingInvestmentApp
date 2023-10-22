@@ -44,20 +44,11 @@ public class UserController {
     @GetMapping(path = "/buy/{id}/user/{uid}/amt/{amount}")
     StockPurchased purchaseStock(@PathVariable long id, @PathVariable long uid, @PathVariable int amount){
         Stock stock = stockRepository.getOne(id);
-        User user = userRepository.getOne(uid);
-        user.purchase(amount, stock, purchaseNum);
+        userRepository.getOne(uid).purchase(amount, stock, purchaseNum);
         ++purchaseNum;
-        userRepository.delete(user);
-        userRepository.save(user);
-        return user.getStocks().get(user.getNumStocksPurchased());
+        return userRepository.getOne(uid).getStocks().get(userRepository.getOne(uid).getNumStocksPurchased());
     }
 
-//    @GetMapping(path = "/purchase/{id}/{numStocks}")
-//    User purchaseById(@PathVariable int id, @PathVariable int numStocks){
-//        userRepository.findById(id).purchase(numStocks);
-//        return userRepository.findById(id);
-//    }
-//
 //    @GetMapping(path = "/sell/{id}/{numStocks}")
 //    User sellById(@PathVariable int id, @PathVariable int numStocks){
 //        userRepository.findById(id).sellStocks(numStocks);

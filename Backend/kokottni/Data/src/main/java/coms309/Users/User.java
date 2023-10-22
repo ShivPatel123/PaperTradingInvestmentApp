@@ -92,6 +92,13 @@ public class User {
     public void setDob(String dob){this.dob = dob;}
 
     public void setStock(Stock stock, int numPurchase, Long id){
+        for(int i = 0; i <  stocks.size(); ++i){
+            if(stock.getId().equals(stocks.get(i).getStock().getId()) && money >= numPurchase * stock.getCurrValue()){
+                stocks.get(i).setNumPurchased(stocks.get(i).getNumPurchased() + numPurchase);
+                stocks.get(i).setCostPurchase(stocks.get(i).getCostPurchase() + stocks.get(i).getStock().getCurrValue() * numPurchase);
+                return;
+            }
+        }
         StockPurchased curr = new StockPurchased();
         curr.setStock(stock);
         curr.setUser(this);
@@ -111,12 +118,12 @@ public class User {
         if(numStocks < 1 || stock == null) return;
         setStock(stock, numStocks, id);
     }
-//
-//    public void sellStocks(int numStocks){
-//        if(numStocks > this.numStocks) return;
-//        this.numStocks -= numStocks;
-//        money += (int) (this.stock.getCurrValue() * numStocks);
-//    }
+
+    public void sellStocks(int numStocks){
+        if(numStocks > this.numStocks) return;
+        this.numStocks -= numStocks;
+        money += (int) (this.stock.getCurrValue() * numStocks);
+    }
 
     @Override
     public int hashCode() {
