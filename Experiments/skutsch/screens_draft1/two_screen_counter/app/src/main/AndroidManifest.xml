@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.as1">
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -12,6 +14,15 @@
         <activity
             android:name=".LoginPage"
             android:exported="true" />
+        <activity
+            android:name=".JsonArrReqActivity"
+            android:exported="false" />
+        <activity
+            android:name=".JsonObjReqActivity"
+            android:exported="false" />
+        <activity
+            android:name=".StringReqActivity"
+            android:exported="false" />
         <activity
             android:name=".HomePage"
             android:exported="true">
