@@ -29,7 +29,7 @@ public class ProfilePage extends AppCompatActivity {
     /**
      * Making image request
      * */
-    private void makeImageRequest() {
+    private void ImageGetRequest() {
 
         ImageRequest imageRequest = new ImageRequest(
                 URL_IMAGE,
@@ -40,6 +40,28 @@ public class ProfilePage extends AppCompatActivity {
                         0, // Height, set to 0 to get the original height
                         ImageView.ScaleType.FIT_XY, // ScaleType
                         Bitmap.Config.RGB_565, // Bitmap config
+
+                (Response.ErrorListener) error -> {
+                    // Handle errors here
+                    Log.d("Volley Error", error.toString());
+                }
+        );
+
+        // Adding request to request queue
+        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(imageRequest);
+    }
+
+    private void ImagePostRequest() {
+
+        ImageRequest imageRequest = new ImageRequest(
+                URL_IMAGE,
+                (Response.Listener<Bitmap>) response -> {
+                    //on response
+                },
+                0, // Width, set to 0 to get the original width
+                0, // Height, set to 0 to get the original height
+                ImageView.ScaleType.FIT_XY, // ScaleType
+                Bitmap.Config.RGB_565, // Bitmap config
 
                 (Response.ErrorListener) error -> {
                     // Handle errors here
