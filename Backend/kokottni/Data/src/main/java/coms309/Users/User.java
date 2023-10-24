@@ -112,6 +112,27 @@ public class User {
         money -= curr.getCostPurchase();
     }
 
+    //returns the amount of money that was gained from selling if it was 0, either the user doesn't have any or wasn't found
+    public double removeStocks(int numStocks, Stock stock, long id){
+        for(int i = 0; i < stocks.size(); ++i){
+            if(stock.getId().equals(stocks.get(i).getStock().getId())){
+                if(numStocks > stocks.get(i).getNumPurchased()){
+                    double moneyChanged = stocks.get(i).getCostPurchase();
+                    money += moneyChanged;
+                    stocks.remove(stocks.get(i));
+                    return moneyChanged;
+                }else{
+                    double moneyChanged = stocks.get(i).getSinglePrice() * numStocks;
+                    money += moneyChanged;
+                    stocks.get(i).setNumPurchased(stocks.get(i).getNumPurchased() - numStocks);
+                    stocks.get(i).setCostPurchase(stocks.get(i).getCostPurchase() - numStocks * stocks.get(i).getSinglePrice());
+                    return moneyChanged;
+                }
+            }
+        }
+        return 0;
+    }
+
     public List<StockPurchased> getStocks(){return stocks;}
 
     public void purchase(int numStocks, Stock stock, long id){
@@ -119,7 +140,7 @@ public class User {
         setStock(stock, numStocks, id);
     }
 
-    public void sellStocks(int numStocks){
+    public void sell(int numStocks){
         if(numStocks > this.numStocks) return;
         this.numStocks -= numStocks;
         money += (int) (this.stock.getCurrValue() * numStocks);
