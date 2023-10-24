@@ -49,11 +49,12 @@ public class UserController {
         return userRepository.getOne(uid).getStocks().get(userRepository.getOne(uid).getNumStocksPurchased());
     }
 
-//    @GetMapping(path = "/sell/{id}/{numStocks}")
-//    User sellById(@PathVariable int id, @PathVariable int numStocks){
-//        userRepository.findById(id).sellStocks(numStocks);
-//        return userRepository.findById(id);
-//    }
+    @GetMapping(path = "/sell/{id}/user/{id}/{numStocks}")
+    double sellStock(@PathVariable long id, @PathVariable long uid, @PathVariable int numStocks){
+        Stock stock = stockRepository.getOne(id);
+        userRepository.getOne(uid).sell(numStocks, stock);
+        return stock.getCurrValue() * numStocks;
+    }
 
     @PostMapping(path = "/users")
     String createUser(@RequestBody User user, @PathVariable Long id){

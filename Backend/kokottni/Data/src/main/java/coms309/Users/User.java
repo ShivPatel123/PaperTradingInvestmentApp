@@ -113,7 +113,7 @@ public class User {
     }
 
     //returns the amount of money that was gained from selling if it was 0, either the user doesn't have any or wasn't found
-    public double removeStocks(int numStocks, Stock stock, long id){
+    public double removeStocks(int numStocks, Stock stock){
         for(int i = 0; i < stocks.size(); ++i){
             if(stock.getId().equals(stocks.get(i).getStock().getId())){
                 if(numStocks >= stocks.get(i).getNumPurchased()){
@@ -140,9 +140,9 @@ public class User {
         setStock(stock, numStocks, id);
     }
 
-    public void sell(int numStocks, Stock stock, long id){
+    public void sell(int numStocks, Stock stock){
         if(numStocks < 1 || stock == null) return;
-        removeStocks(numStocks, stock, id);
+        removeStocks(numStocks, stock);
     }
 
     @Override
