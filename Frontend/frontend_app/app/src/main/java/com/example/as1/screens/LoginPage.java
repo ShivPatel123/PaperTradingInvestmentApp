@@ -40,6 +40,7 @@ public class LoginPage extends AppCompatActivity {
 
         EditText usernameInput_txt = findViewById(R.id.usernameLogin_txtInput);
         EditText passwordInput_txt = findViewById(R.id.passwordLogin_txtInput);
+        EditText volleyOutput_txt = findViewById(R.id.loginReqResponse_txt);
 
         //button back to home page
         toHome_btn.setOnClickListener(view -> {
@@ -62,6 +63,12 @@ public class LoginPage extends AppCompatActivity {
            LoginAttempt loginAuth = new LoginAttempt (usernameInput, passwordInput);
             //Post login
            makeLoginPostReq(this.getApplicationContext(), loginAuth);
+
+           //If backend returns success, open main page
+           if(volleyOutput_txt.getText().toString() == "{\"message\":\"success\"}"){
+               Intent intent = new Intent(LoginPage.this, MainPage.class);
+               startActivity(intent);
+           }
         });
     }
 
