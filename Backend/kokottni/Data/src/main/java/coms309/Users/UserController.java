@@ -23,6 +23,9 @@ public class UserController {
     @Autowired
     StockRepository stockRepository;
 
+    @Autowired
+    FriendGroupRepository friendGroupRepository;
+
     private String success = "{\"message\":\"success\"}";
     private String failure = "{\"message\":\"failure\"}";
 
@@ -71,6 +74,31 @@ public class UserController {
             return "Username not Found";
         }
     }
+    //creates a new friend group using the name in the requestbody
+    @PostMapping(path = "/friendgroup/{groupName}")
+    String createFriendGroup(@PathVariable String groupName){
+        FriendGroup friendGroup = new FriendGroup();
+        friendGroup.setGroupName(groupName);
+        friendGroupRepository.save(friendGroup);
+        return success;
+    }
+//
+//    //creates a new friend group using the name in the requestbody and adds the user from the path variable into the group
+//    @PostMapping(path = "/friendgroup/{userID}")
+//    String createFriendGroup(@RequestBody String name, @PathVariable int userID){
+//        FriendGroup friendGroup = new FriendGroup();
+//        friendGroup.setGroupName(name);
+//        friendGroup.addUser(userRepository.findById(userID));
+//        friendGroupRepository.save(friendGroup);
+//        return success;
+//    }
+
+    //adds user userID to FriendGroup groupName
+    @PutMapping("/friendgroup/{groupName}/{userID}")
+    String addUserToGroup(@PathVariable String groupName, @PathVariable int userID){
+        friendGroupRepository.findBygroupName(groupName).addUser(userRepository.findById(userID));
+        return success;
+    }
 
     @PutMapping("/users/{id}")
     User updateUser(@PathVariable int id, @RequestBody User request){
@@ -96,6 +124,13 @@ public class UserController {
     @DeleteMapping(path = "/users/{id}")
     String deleteUser(@PathVariable int id){
         userRepository.deleteById(id);
+        return success;
+    }
+
+    //removes user userID from FriendGroup groupName
+    @DeleteMapping("/friendgroup/{groupName}/{userID}")
+    String removeUserFromGroup(@PathVariable String groupName, @PathVariable int userID){
+        friendGroupRepository.findBygroupName(groupName).removeUser(userRepository.findById(userID));
         return success;
     }
 }

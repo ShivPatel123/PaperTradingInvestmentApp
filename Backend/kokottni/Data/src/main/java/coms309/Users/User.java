@@ -7,6 +7,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
 import coms309.Stocks.Stock;
 
@@ -28,6 +29,10 @@ public class User {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "stock_id")
     private Stock stock;
+
+    @ManyToOne
+    @JoinColumn(name = "friend_group_id")
+    private FriendGroup friendGroup;
 
     public User(int id, int money, String name, String email, String dob, String username, String password){
         this.id = id;

@@ -6,6 +6,8 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.util.List;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 
@@ -13,6 +15,7 @@ public class StockUpdater{
 
 //    Alpha Vantage API Key: UOICPFOUUT832ZST
     private final HttpClient httpClient = HttpClient.newBuilder().build();
+    private final Logger logger = LoggerFactory.getLogger(StockUpdater.class);
 
     public String updateStockData(String symbol){
         try{
@@ -60,16 +63,23 @@ public class StockUpdater{
 
 
     //TODO Update in batches of 5 because of api rate limit 5 per minute
-    public String updateAllStocks(StockRepository repo){
+
+
+public void updateAllStocks(StockRepository repo) {
+    logger.info("Scheduled task started.");
+    try {
         List<Stock> allStocks = repo.findAll();
-        for(Stock stock: allStocks){
+        for (Stock stock : allStocks) {
             String stockInfo = updateStockData(stock.getSymbol());
             stock.setCurrValue(Double.valueOf(getUpdatedStockPrice(stockInfo)));
             stock.setPrevDayChange(Double.valueOf(getUpdatedStockChange(stockInfo)));
             repo.save(stock);
         }
-        return "Success";
+        logger.info("Scheduled task completed successfully.");
+    } catch (Exception e) {
+        logger.error("Scheduled task encountered an error.", e);
     }
+}
 
 
 }
