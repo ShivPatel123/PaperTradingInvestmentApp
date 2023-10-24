@@ -3,6 +3,7 @@ package com.example.as1.screens;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.JsonReader;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -15,9 +16,10 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.as1.LoginAttempt;
 import com.example.as1.R;
 import com.example.as1.VolleySingleton;
-//import com.google.gson.JsonParser;
+import com.google.gson.JsonParser;
 
-import org.json.JSONObject;
+import android.util.Log;
+import org.json.*;
 
 import java.util.Map;
 
@@ -31,7 +33,7 @@ public class LoginPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_page);
 
-        //Buttons
+        //Initialize stuff
         Button toHome_btn = findViewById(R.id.toHome_loginPagebtn);
         Button toSignUp_btn = findViewById(R.id.toSignupBtn);
         Button sendLoginReq_btn = findViewById(R.id.sendLoginReq_btn);
@@ -56,15 +58,6 @@ public class LoginPage extends AppCompatActivity {
             //parse inputs
             String usernameInput = usernameInput_txt.getText().toString();
             String passwordInput = passwordInput_txt.getText().toString();
-
-            //set username and password so they are not null
-            if(usernameInput == "" || usernameInput == null){
-                usernameInput = "empty";
-            }
-            if(passwordInput == "" || passwordInput == null){
-                passwordInput = "empty";
-            }
-
             //make new login
            LoginAttempt loginAuth = new LoginAttempt (usernameInput, passwordInput);
             //Post login
@@ -78,9 +71,13 @@ public class LoginPage extends AppCompatActivity {
 
         // Convert input to JSONObject
         JSONObject objectBody = new JSONObject();
+
+        String stringToParse =  "{\"username\" : " +"\"" + loginA.getUsername().toString() +"\"" + ", " +
+                                "\"password\" : "  +"\"" +  loginA.getPassword().toString()  +"\"" +  "}";
+
         try {
-            volleyOutput_txt.setText(loginA.toString());
-            objectBody = new JSONObject("{" + loginA.toString() + "}");
+            objectBody = new JSONObject(JSONObject.quote(stringToParse));
+            Log.d("loginA", JSONObject.quote(stringToParse));
         } catch (Exception e) {
             e.printStackTrace();
         }

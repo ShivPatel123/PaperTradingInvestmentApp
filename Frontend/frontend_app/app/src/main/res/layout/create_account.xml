@@ -10,7 +10,7 @@
     <EditText
         android:id="@+id/passwordSignup_txtInput"
         android:layout_width="290dp"
-        android:layout_height="52dp"
+        android:layout_height="54dp"
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
@@ -23,8 +23,9 @@
 
     <EditText
         android:id="@+id/usernameSignup_txtInput"
-        android:layout_width="283dp"
+        android:layout_width="290dp"
         android:layout_height="54dp"
+        android:ems="10"
         android:hint="Username"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -51,17 +52,17 @@
         android:id="@+id/toLogin_frmSignUp_Btn"
         android:layout_width="180dp"
         android:layout_height="62dp"
-        android:text="Login"
         android:background="@color/btn_bg"
+        android:text="Login"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="@color/txtclr"
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.835"
+        app:layout_constraintHorizontal_bias="0.93"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.037" />
+        app:layout_constraintVertical_bias="0.047" />
 
     <TextView
         android:id="@+id/editTextText"
@@ -69,7 +70,8 @@
         android:layout_height="122dp"
         android:background="@color/darkBack"
         android:ems="10"
-        android:text="       Have an account?"
+        android:text="\n\n\t\tAlready signed up?"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="@color/txtclr"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -91,7 +93,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.499" />
 
-    <TextView
+    <EditText
         android:id="@+id/signupReqResponse_txt"
         android:layout_width="412dp"
         android:layout_height="187dp"
