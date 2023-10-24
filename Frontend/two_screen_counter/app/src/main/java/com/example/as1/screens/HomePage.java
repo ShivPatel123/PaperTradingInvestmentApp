@@ -11,33 +11,30 @@ import com.example.as1.R;
 
 public class HomePage extends AppCompatActivity {
 
-    Button toStocks_btn;
-    Button toLogin_btn;
-    Button toCreateAccount_btn;
-    Button toHelp_btn;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.home_page);
 
+        //Instantiate buttons
+        Button toStocks_btn = findViewById(R.id.toStockBtn);
+        Button toLogin_btn = findViewById(R.id.toLoginBtn);
+        Button toCreateAccount_btn = findViewById(R.id.toCreateAccountBtn);
+
         //button to login page
-        toLogin_btn = findViewById(R.id.toLoginBtn);
         toLogin_btn.setOnClickListener(v -> {
             Intent intent = new Intent(HomePage.this, LoginPage.class);
             startActivity(intent);
         });
 
         //button to stock page
-        toStocks_btn = findViewById(R.id.toStockBtn);
         toStocks_btn.setOnClickListener(v -> {
             Intent intent = new Intent(HomePage.this, StockPage.class);
             startActivity(intent);
         });
 
         //button to create account page
-        toStocks_btn = findViewById(R.id.toCreateAccountBtn);
-        toStocks_btn.setOnClickListener(v -> {
+        toCreateAccount_btn.setOnClickListener(v -> {
             Intent intent = new Intent(HomePage.this, CreateAccountPage.class);
             startActivity(intent);
         });

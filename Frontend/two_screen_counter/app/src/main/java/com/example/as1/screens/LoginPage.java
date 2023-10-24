@@ -5,85 +5,82 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
-import android.view.View;
+import android.widget.TextView;
+
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
 
 import com.example.as1.LoginAttempt;
 import com.example.as1.R;
 import com.example.as1.VolleySingleton;
+//import com.google.gson.JsonParser;
 
 import org.json.JSONObject;
 
-import java.util.HashMap;
 import java.util.Map;
 
 public class LoginPage extends AppCompatActivity {
 //set variable fro userID, use that throughout the app.
 //setter methods in profile page
 // stock prediction page/ feature??
-    Button toHome_btn;
-    Button toSignUp_btn;
-    Button sendLoginReq_btn;
-
-    EditText usernameInput_txt = findViewById(R.id.usernameLogin_txtInput);
-    EditText passwordInput_txt = findViewById(R.id.passwordLogin_txtInput);
-    EditText volleyOutput_txt = findViewById(R.id.loginReqResponse_txt);
-    String usernameInput;
-    String passwordInput;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_page);
 
+        //Buttons
+        Button toHome_btn = findViewById(R.id.toHome_loginPagebtn);
+        Button toSignUp_btn = findViewById(R.id.toSignupBtn);
+        Button sendLoginReq_btn = findViewById(R.id.sendLoginReq_btn);
+
+        EditText usernameInput_txt = findViewById(R.id.usernameLogin_txtInput);
+        EditText passwordInput_txt = findViewById(R.id.passwordLogin_txtInput);
+
         //button back to home page
-        toHome_btn = findViewById(R.id.toHome_loginPagebtn);
         toHome_btn.setOnClickListener(view -> {
             Intent intent = new Intent(LoginPage.this, HomePage.class);
             startActivity(intent);
         });
 
         //button to Create Account page
-        toSignUp_btn = findViewById(R.id.toSignupBtn);
         toSignUp_btn.setOnClickListener(view -> {
             Intent intent = new Intent(LoginPage.this, CreateAccountPage.class);
             startActivity(intent);
         });
 
         //button to try login
-        sendLoginReq_btn = findViewById(R.id.sendLoginReq_btn);
         sendLoginReq_btn.setOnClickListener(view -> {
             //parse inputs
-            usernameInput = usernameInput_txt.getText().toString();
-            passwordInput = passwordInput_txt.getText().toString();
+            String usernameInput = usernameInput_txt.getText().toString();
+            String passwordInput = passwordInput_txt.getText().toString();
 
             //set username and password so they are not null
             if(usernameInput == "" || usernameInput == null){
-                usernameInput = "default";
+                usernameInput = "empty";
             }
             if(passwordInput == "" || passwordInput == null){
-                passwordInput = "default";
+                passwordInput = "empty";
             }
 
             //make new login
            LoginAttempt loginAuth = new LoginAttempt (usernameInput, passwordInput);
             //Post login
-           makeLoginPostReq(this.getBaseContext(), loginAuth);
+           makeLoginPostReq(this.getApplicationContext(), loginAuth);
         });
-
     }
 
     public void makeLoginPostReq(Context context, LoginAttempt loginA) {
         String URL_JSON_OBJECT = "http://10.90.75.130:8080/login";
+        EditText volleyOutput_txt = findViewById(R.id.loginReqResponse_txt);
 
         // Convert input to JSONObject
         JSONObject objectBody = new JSONObject();
         try {
-            objectBody = new JSONObject(loginA.toString());
+            volleyOutput_txt.setText(loginA.toString());
+            objectBody = new JSONObject("{" + loginA.toString() + "}");
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -96,7 +93,9 @@ public class LoginPage extends AppCompatActivity {
                 //response function to lambda
                 response -> volleyOutput_txt.setText(response.toString()),
                 error -> volleyOutput_txt.setText(error.getMessage())) { };
+
         // Adding request to request queue
         VolleySingleton.getInstance(context.getApplicationContext()).addToRequestQueue(request);
     }
+
 }
