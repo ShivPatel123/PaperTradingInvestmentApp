@@ -116,7 +116,7 @@ public class User {
     public double removeStocks(int numStocks, Stock stock, long id){
         for(int i = 0; i < stocks.size(); ++i){
             if(stock.getId().equals(stocks.get(i).getStock().getId())){
-                if(numStocks > stocks.get(i).getNumPurchased()){
+                if(numStocks >= stocks.get(i).getNumPurchased()){
                     double moneyChanged = stocks.get(i).getCostPurchase();
                     money += moneyChanged;
                     stocks.remove(stocks.get(i));
@@ -140,10 +140,9 @@ public class User {
         setStock(stock, numStocks, id);
     }
 
-    public void sell(int numStocks){
-        if(numStocks > this.numStocks) return;
-        this.numStocks -= numStocks;
-        money += (int) (this.stock.getCurrValue() * numStocks);
+    public void sell(int numStocks, Stock stock, long id){
+        if(numStocks < 1 || stock == null) return;
+        removeStocks(numStocks, stock, id);
     }
 
     @Override
