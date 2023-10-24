@@ -66,14 +66,14 @@ public class CreateAccountPage extends AppCompatActivity {
 
     public void makeSignUPPostReq(Context context, User userSignup) {
         String URL_JSON_OBJECT = "http://10.90.75.130:8080/users";
-        TextView volleyOutput_txt = findViewById(R.id.signupReqResponse_txt);
+        EditText volleyOutput_txt = findViewById(R.id.signupReqResponse_txt);
 
         // Convert input to JSONObject
         JSONObject objectBody = new JSONObject();
         try {
-            objectBody = new JSONObject("{" + userSignup.toString() + "}");
-            //set response window to user signup string for testing
-            volleyOutput_txt.setText(userSignup.toString());
+            objectBody = new JSONObject(
+                    "{username : " + userSignup.getUsername().toString() + "}" +
+                    "{password : " + userSignup.getPassword().toString() + "}");
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -67,7 +67,7 @@
         android:layout_height="122dp"
         android:background="@color/darkBack"
         android:ems="10"
-        android:text="\n\t\tNo account?"
+        android:text="\n\t\t\tNo account?"
         android:textAppearance="@style/TextAppearance.AppCompat.Display1"
         android:textColor="@color/txtclr"
         app:layout_constraintBottom_toBottomOf="parent"
