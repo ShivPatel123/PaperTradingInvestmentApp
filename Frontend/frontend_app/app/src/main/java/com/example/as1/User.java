@@ -33,10 +33,10 @@ public class User {
     private String password;
 
 //Constructors
-    public User(int id, int money, String name, String email, String dob, String username, String password){
+    public User(int id, int money, int numStocks, String name, String email, String dob, String username, String password){
         this.id = id;
         this.money = money;
-        this.numStocks = 0;
+        this.numStocks = numStocks;
         this.name = name;
         this.email = email;
         this.dob = dob;
@@ -87,6 +87,9 @@ public class User {
     public String getDob(){ return dob; }
 
     public void setDob(String dob){ this.dob = dob; }
+
+    public void setNumStocks(int stocks)    {this.numStocks=stocks;}
+    public int getNumStocks()     {return this.numStocks;}
 
 
 }//end
