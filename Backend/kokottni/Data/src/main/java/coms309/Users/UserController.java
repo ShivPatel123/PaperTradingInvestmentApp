@@ -3,6 +3,7 @@ package coms309.Users;
 import java.util.List;
 
 import coms309.Stocks.StockPurchased;
+import coms309.Stocks.StockPurchasedRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -25,6 +26,9 @@ public class UserController {
     @Autowired
     StockRepository stockRepository;
 
+    @Autowired
+    StockPurchasedRepository stockPurchasedRepository;
+
     private String success = "{\"message\":\"success\"}";
     private String failure = "{\"message\":\"failure\"}";
 
@@ -46,15 +50,40 @@ public class UserController {
         Stock stock = stockRepository.getOne(id);
         userRepository.getOne(uid).purchase(amount, stock, purchaseNum);
         ++purchaseNum;
+        stockPurchasedRepository.save(userRepository.getOne(uid).getStocks().get(userRepository.getOne(uid).getStocks().size() - 1));
         return userRepository.getOne(uid).getStocks().get(userRepository.getOne(uid).getNumStocksPurchased());
     }
 
     @GetMapping(path = "/sell/{id}/user/{id}/{numStocks}")
     double sellStock(@PathVariable long id, @PathVariable long uid, @PathVariable int numStocks){
         Stock stock = stockRepository.getOne(id);
-        userRepository.getOne(uid).sell(numStocks, stock);
+        int currLength = userRepository.getOne(uid).getStocks().size();
+        StockPurchased changed = userRepository.getOne(uid).sell(numStocks, stock);
+        if(currLength != userRepository.getOne(uid).getStocks().size()){
+            stockPurchasedRepository.delete(changed);
+        }else{
+            stockPurchasedRepository.delete(changed);
+            modifySPRepo(uid);
+        }
         return stock.getCurrValue() * numStocks;
     }
+
+    private void modifySPRepo(long uid){
+        int foundidx = -1;
+        for(long i = 0; i < stockPurchasedRepository.count(); ++i){
+            for(int j = 0; j < userRepository.getOne(uid).getStocks().size(); ++j){
+                if(!stockPurchasedRepository.getOne(i).getStock().equals(userRepository.getOne(uid).getStocks().get(j).getStock())){
+                    foundidx = j;
+                    break;
+                }
+            }
+            if(foundidx != -1){
+                break;
+            }
+        }
+        stockPurchasedRepository.save(userRepository.getOne(uid).getStocks().get(foundidx));
+    }
+
 
     @PostMapping(path = "/users")
     String createUser(@RequestBody User user, @PathVariable Long id){
