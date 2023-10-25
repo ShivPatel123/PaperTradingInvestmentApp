@@ -30,7 +30,7 @@ public class ProfilePage extends AppCompatActivity {
     TextView dob_display = findViewById(R.id.dob_Display);
     TextView money_display = findViewById(R.id.money_Display);
     TextView stock_display = findViewById(R.id.stock_Display);
-    User testUser = new User(4,7765, "Skyler", "sky@iastate.edu", "yup", "Skyler", "SkylersPassword");
+    User testUser = new User(4,7765, 12, "Skyler", "sky@iastate.edu", "yup", "Skyler", "SkylersPassword");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,10 +43,7 @@ public class ProfilePage extends AppCompatActivity {
         email_display.setText(testUser.getEmail().toString());
         dob_display.setText(testUser.getDob().toString());
         money_display.setText(testUser.getMoney());
-//need get stock function in userAPI
-
-
-
+        stock_display.setText(testUser.getNumStocks());
 
     }
 
