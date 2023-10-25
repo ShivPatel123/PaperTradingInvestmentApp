@@ -19,31 +19,31 @@ import com.example.as1.VolleySingleton;
 public class ProfilePage extends AppCompatActivity {
 
     private static final String URL_IMAGE ="";
-    ImageView imageView;
-    Button backHome_btn = findViewById(R.id.backHome_mainBtn);
-    Button editProfile_btn = findViewById(R.id.editProfile_btn);
-    Button toStock_btn = findViewById(R.id.toStockPage_btn);
-    TextView welcomeTxt = findViewById(R.id.welcome_txtView);
-    TextView username_display = findViewById(R.id.username_Display);
-    TextView password_display = findViewById(R.id.password_Display);
-    TextView email_display = findViewById(R.id.email_Display);
-    TextView dob_display = findViewById(R.id.dob_Display);
-    TextView money_display = findViewById(R.id.money_Display);
-    TextView stock_display = findViewById(R.id.stock_Display);
-    User testUser = new User(4,7765, 12, "Skyler", "sky@iastate.edu", "yup", "Skyler", "SkylersPassword");
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_page);
+//TODO: declare profiile picture so it shows up, find a way to parse ints
+        Button backHome_btn = findViewById(R.id.backHome_mainBtn);
+        Button editProfile_btn = findViewById(R.id.editProfile_btn);
+        Button toStock_btn = findViewById(R.id.toStockPage_btn);
+        TextView welcomeTxt = findViewById(R.id.welcome_txtView);
+        TextView username_display = findViewById(R.id.username_Display);
+        TextView password_display = findViewById(R.id.password_Display);
+        TextView email_display = findViewById(R.id.email_Display);
+        TextView dob_display = findViewById(R.id.dob_Display);
+        TextView money_display = findViewById(R.id.money_Display);
+        TextView stock_display = findViewById(R.id.stock_Display);
+
+        User testUser = new User(4,7765, 12, "Skyler", "sky@iastate.edu", "yup", "Skyler", "SkylersPassword");
 
         welcomeTxt.setText("Welcome, " + testUser.getName() + "!");
         username_display.setText(testUser.getUsername().toString());
         password_display.setText(testUser.getPassword().toString());
         email_display.setText(testUser.getEmail().toString());
         dob_display.setText(testUser.getDob().toString());
-        money_display.setText(testUser.getMoney());
-        stock_display.setText(testUser.getNumStocks());
+        //money_display.setText(testUser.getMoney());
+       // stock_display.setText(testUser.getNumStocks());
 
     }
 

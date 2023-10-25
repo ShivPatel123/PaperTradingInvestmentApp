@@ -20,6 +20,7 @@ public class HomePage extends AppCompatActivity {
         Button toStocks_btn = findViewById(R.id.toStockBtn);
         Button toLogin_btn = findViewById(R.id.toLoginBtn);
         Button toCreateAccount_btn = findViewById(R.id.toCreateAccountBtn);
+        Button profiletest = findViewById(R.id.profiletest);
 
         //button to login page
         toLogin_btn.setOnClickListener(v -> {
@@ -39,6 +40,11 @@ public class HomePage extends AppCompatActivity {
             startActivity(intent);
         });
 
+        //button to test profile
+        profiletest.setOnClickListener(v -> {
+            Intent intent = new Intent(HomePage.this, ProfilePage.class);
+            startActivity(intent);
+        });
 
 
 
