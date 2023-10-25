@@ -31,6 +31,7 @@ public class CreateAccountPage extends AppCompatActivity {
         Button sendSignupReq_btn;
         EditText usernameInput_txt = findViewById(R.id.usernameSignup_txtInput);
         EditText passwordInput_txt = findViewById(R.id.passwordSignup_txtInput);
+        EditText volleyOutput_txt = findViewById(R.id.signupReqResponse_txt);
 
         //button back to home page
         toHome_btn = findViewById(R.id.toHome_SignupPagebtn);
@@ -51,16 +52,23 @@ public class CreateAccountPage extends AppCompatActivity {
         sendSignupReq_btn.setOnClickListener(view -> {
 
             //make new user
-            User signupUser = new User ();
+
 
             //parse inputs
             String usernameInput = usernameInput_txt.getText().toString();
             String passwordInput = passwordInput_txt.getText().toString();
-            signupUser.setUsername(usernameInput);
-            signupUser.setPassword(passwordInput);
+            User signupUser = new User();
+            //= new User (usernameInput, passwordInput);
+            //have backend make signup class like login class
 
             //Post login
             makeSignUPPostReq(this.getApplicationContext(), signupUser);
+
+            //If backend returns success, open main page
+            if(volleyOutput_txt.getText().toString() == "{\"message\":\"success\"}"){
+                Intent intent = new Intent(CreateAccountPage.this, MainPage.class);
+                startActivity(intent);
+            }
         });
     }
 
@@ -86,7 +94,8 @@ public class CreateAccountPage extends AppCompatActivity {
                 //response function to lambda
                 response -> volleyOutput_txt.setText(response.toString()),
                 error -> Log.e("Volley Error", volleyOutput_txt.toString())
-               // volleyOutput_txt.setText(error.getMessage())
+        //volleyOutput_txt.setText(error.getMessage())
+               //
         ){ };
         // Adding request to request queue
         VolleySingleton.getInstance(context.getApplicationContext()).addToRequestQueue(request);
