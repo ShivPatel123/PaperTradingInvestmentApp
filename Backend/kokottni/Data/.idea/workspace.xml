@@ -5,10 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="44a9acee-fd98-4759-adc9-7b5469c99b42" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/coms309/Stocks/Stock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coms309/Stocks/Stock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/coms309/Stocks/StockController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coms309/Stocks/StockController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/coms309/Stocks/StockPurchased.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coms309/Stocks/StockPurchased.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/coms309/Users/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coms309/Users/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/coms309/Users/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coms309/Users/UserController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -46,7 +46,7 @@
   &quot;keyToString&quot;: {
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;45-manytomanywithcurrentmain&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;50-buy-and-sell-stocks-feature&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/Nick Kokott/cs309/ms_316/Backend/kokottni/Data&quot;,
     &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/Nick Kokott/cs309/ms_316/Backend/kokottni/Data/src/main/java/coms309/Main.java&quot;
   }

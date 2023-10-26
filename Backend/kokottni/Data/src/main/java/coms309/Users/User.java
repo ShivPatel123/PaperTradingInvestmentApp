@@ -4,6 +4,7 @@ import javax.persistence.*;
 
 import coms309.Stocks.Stock;
 import coms309.Stocks.StockPurchased;
+import coms309.Stocks.StockPurchasedRepository;
 
 import java.util.*;
 
@@ -59,6 +60,8 @@ public class User {
 
     public double getMoney(){return money;}
 
+    public int getNumStocksPurchased(){return stocks.size() - 1;}
+
     public void setMoney(double money){this.money = money;}
 
     public String getName(){
@@ -89,7 +92,15 @@ public class User {
 
     public void setDob(String dob){this.dob = dob;}
 
-    public void setStock(Stock stock, int numPurchase, Long id){
+    public StockPurchased setStock(Stock stock, int numPurchase, Long id){
+        for(int i = 0; i <  stocks.size(); ++i){
+            if(stock.getId().equals(stocks.get(i).getStock().getId()) && money >= numPurchase * stock.getCurrValue()){
+                StockPurchased toRemove = stocks.get(i);
+                stocks.get(i).setNumPurchased(stocks.get(i).getNumPurchased() + numPurchase);
+                stocks.get(i).setCostPurchase(stocks.get(i).getCostPurchase() + stocks.get(i).getStock().getCurrValue() * numPurchase);
+                return toRemove;
+            }
+        }
         StockPurchased curr = new StockPurchased();
         curr.setStock(stock);
         curr.setUser(this);
@@ -97,26 +108,48 @@ public class User {
         curr.setNumPurchased(numPurchase);
         curr.setSinglePrice(stock.getCurrValue());
         curr.setCostPurchase(curr.getNumPurchased() * stock.getCurrValue());
+        if( curr.getNumPurchased() * stock.getCurrValue() > money) return null;
         stocks.add(curr);
         stock.setUser(this, numPurchase, id);
-        money -= stock.getCurrValue();
+        money -= curr.getCostPurchase();
+        return curr;
+    }
+
+    //returns the amount of money that was gained from selling if it was 0, either the user doesn't have any or wasn't found
+    public StockPurchased removeStocks(int numStocks, Stock stock){
+        StockPurchased potentiallyRemoved;
+        for(int i = 0; i < stocks.size(); ++i){
+            if(stock.getId().equals(stocks.get(i).getStock().getId())){
+                if(numStocks >= stocks.get(i).getNumPurchased()){
+                    double moneyChanged = stocks.get(i).getCostPurchase();
+                    money += moneyChanged;
+                    potentiallyRemoved = stocks.get(i);
+                    stocks.remove(stocks.get(i));
+                    return potentiallyRemoved;
+                }else{
+                    double moneyChanged = stocks.get(i).getSinglePrice() * numStocks;
+                    money += moneyChanged;
+                    potentiallyRemoved = stocks.get(i);
+                    stocks.get(i).setNumPurchased(stocks.get(i).getNumPurchased() - numStocks);
+                    stocks.get(i).setCostPurchase(stocks.get(i).getCostPurchase() - numStocks * stocks.get(i).getSinglePrice());
+                    return potentiallyRemoved;
+                }
+            }
+        }
+        return null;
     }
 
     public List<StockPurchased> getStocks(){return stocks;}
 
-//    public void purchase(int numStocks, Stock stock){
-//        if(numStocks < 1 || stock == null) return;
-//        amountPurchased.
-//        int change = (int) (this.stock.getCurrValue() * numStocks);
-//        if(change > money) return;
-//        money -= change;
-//    }
-//
-//    public void sellStocks(int numStocks){
-//        if(numStocks > this.numStocks) return;
-//        this.numStocks -= numStocks;
-//        money += (int) (this.stock.getCurrValue() * numStocks);
-//    }
+    public StockPurchased purchase(int numStocks, Stock stock, long id){
+        if(numStocks < 1 || stock == null) return null;
+        return setStock(stock, numStocks, id);
+    }
+
+    public StockPurchased sell(int numStocks, Stock stock){
+        if(numStocks < 1 || stock == null) return null;
+        return removeStocks(numStocks, stock);
+    }
 
     @Override
     public int hashCode() {
