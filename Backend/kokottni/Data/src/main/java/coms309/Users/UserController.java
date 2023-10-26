@@ -51,6 +51,12 @@ public class UserController {
         return userRepository.findById(id);
     }
 
+    //gets list of people in the friend group
+    @GetMapping(path = "/friendgroup/{groupName}")
+    List<String> getGroupMembers(@PathVariable String groupName){
+        return friendGroupRepository.findBygroupName(groupName).getGroupMembers();
+    }
+
     @PostMapping(path = "/users")
     String createUser(@RequestBody User user){
         //if there is no body or the username already exists
@@ -62,16 +68,19 @@ public class UserController {
         return success;
     }
     @PostMapping("/login")
-    String login(@RequestBody LoginAttempt login){
+    LoginAttempt login(@RequestBody LoginAttempt login){
         User user = userRepository.findByUsername(login.getUsername());
         if (user != null) {
             if (user.getPassword().equals(login.getPassword())) {
-                return "Success!";
+                login.setSuccess("Success!");
+                return login;
             } else {
-                return "Wrong Password";
+                login.setSuccess("Wrong Password");
+                return login;
             }
         } else {
-            return "Username not Found";
+            login.setSuccess("Username Not Found");
+            return login;
         }
     }
     //creates a new friend group using the name in the requestbody

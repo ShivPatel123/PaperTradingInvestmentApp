@@ -103,4 +103,6 @@ public class User {
         money += (int) (this.stock.getCurrValue() * numStocks);
     }
 
+
+
 }
