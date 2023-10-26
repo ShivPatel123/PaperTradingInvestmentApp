@@ -92,12 +92,13 @@ public class User {
 
     public void setDob(String dob){this.dob = dob;}
 
-    public void setStock(Stock stock, int numPurchase, Long id){
+    public StockPurchased setStock(Stock stock, int numPurchase, Long id){
         for(int i = 0; i <  stocks.size(); ++i){
             if(stock.getId().equals(stocks.get(i).getStock().getId()) && money >= numPurchase * stock.getCurrValue()){
+                StockPurchased toRemove = stocks.get(i);
                 stocks.get(i).setNumPurchased(stocks.get(i).getNumPurchased() + numPurchase);
                 stocks.get(i).setCostPurchase(stocks.get(i).getCostPurchase() + stocks.get(i).getStock().getCurrValue() * numPurchase);
-                return;
+                return toRemove;
             }
         }
         StockPurchased curr = new StockPurchased();
@@ -107,10 +108,11 @@ public class User {
         curr.setNumPurchased(numPurchase);
         curr.setSinglePrice(stock.getCurrValue());
         curr.setCostPurchase(curr.getNumPurchased() * stock.getCurrValue());
-        if( curr.getNumPurchased() * stock.getCurrValue() > money) return;
+        if( curr.getNumPurchased() * stock.getCurrValue() > money) return null;
         stocks.add(curr);
         stock.setUser(this, numPurchase, id);
         money -= curr.getCostPurchase();
+        return curr;
     }
 
     //returns the amount of money that was gained from selling if it was 0, either the user doesn't have any or wasn't found
@@ -139,10 +141,9 @@ public class User {
 
     public List<StockPurchased> getStocks(){return stocks;}
 
-    public void purchase(int numStocks, Stock stock, long id){
-        if(numStocks < 1 || stock == null) return;
-        setStock(stock, numStocks, id);
-
+    public StockPurchased purchase(int numStocks, Stock stock, long id){
+        if(numStocks < 1 || stock == null) return null;
+        return setStock(stock, numStocks, id);
     }
 
     public StockPurchased sell(int numStocks, Stock stock){
