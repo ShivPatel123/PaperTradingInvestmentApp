@@ -23,6 +23,7 @@ public class LoginPage extends AppCompatActivity {
 //set variable fro userID, use that throughout the app.
 //setter methods in profile page
 // stock prediction page/ feature??
+    //TODO:make javadoc for frontend layout files and all files
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

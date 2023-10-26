@@ -1,25 +1,5 @@
 package com.example.as1;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
-
-import org.json.JSONObject;
-
-import java.util.HashMap;
-import java.util.Map;
 public class User {
 
     //Params
@@ -53,8 +33,10 @@ public class User {
     public void setId(int id){
         this.id = id;
     }
-    public int getMoney(){  return money; }
+    public String getMoney(){  return String.valueOf(money); }
+    public int getMoneyInt(){  return money; }
     public void setMoney(int money){   this.money = money; }
+    public void setMoneyString(String money){   this.money = Integer.parseInt(money); }
 
     public String getName(){
         return name;
