@@ -1,6 +1,7 @@
 package com.example.as1.screens;
 
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
@@ -45,8 +46,27 @@ public class ProfilePage extends AppCompatActivity {
         //money_display.setText(testUser.getMoney());
        // stock_display.setText(testUser.getNumStocks());
 
+        //Back to Home page button
+        backHome_btn.setOnClickListener(view -> {
+            Intent intent = new Intent(ProfilePage.this, MainPage.class);
+            startActivity(intent);
+        });
+
+        //Edit Profile button
+        editProfile_btn.setOnClickListener(view -> {
+            Intent intent = new Intent(ProfilePage.this, EditProfilePage.class);
+            startActivity(intent);
+        });
+
+        //To Stock Page button
+        toStock_btn.setOnClickListener(view -> {
+            Intent intent = new Intent(ProfilePage.this, StockPage.class);
+            startActivity(intent);
+        });
+
     }
 
+    //TODO:Image get and post to set profile picture
     /**
      * Making image GET request
      * */
