@@ -50,6 +50,10 @@ public class Main {
             stock3.setUser(user3, 1, stock3.getId());
             user4.setStock(stock4, 4, stock4.getId());
             stock4.setUser(user4, 4, stock4.getId());
+            spRepository.save(user1.getStocks().get(0));
+            spRepository.save(user2.getStocks().get(0));
+            spRepository.save(user3.getStocks().get(0));
+            spRepository.save(user4.getStocks().get(0));
         };
     }
 }
