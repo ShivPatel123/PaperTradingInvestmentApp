@@ -48,10 +48,32 @@ public class UserController {
     @GetMapping(path = "/buy/{id}/user/{uid}/amt/{amount}")
     StockPurchased purchaseStock(@PathVariable long id, @PathVariable long uid, @PathVariable int amount){
         Stock stock = stockRepository.getOne(id);
-        userRepository.getOne(uid).purchase(amount, stock, purchaseNum);
+        int countBefore = userRepository.getOne(uid).getStocks().size();
+        StockPurchased potentiallyRemove = userRepository.getOne(uid).purchase(amount, stock, purchaseNum);
         ++purchaseNum;
-        stockPurchasedRepository.save(userRepository.getOne(uid).getStocks().get(userRepository.getOne(uid).getStocks().size() - 1));
+        if(countBefore != userRepository.getOne(uid).getStocks().size()){
+            stockPurchasedRepository.save(userRepository.getOne(uid).getStocks().get(userRepository.getOne(uid).getStocks().size() - 1));
+        }else{
+            modifySPRepoPurchase(uid);
+            stockPurchasedRepository.delete(potentiallyRemove);
+        }
         return userRepository.getOne(uid).getStocks().get(userRepository.getOne(uid).getNumStocksPurchased());
+    }
+
+    private void modifySPRepoPurchase(long uid){
+        int foundidx = -1;
+        for(long i = 0; i < stockPurchasedRepository.count(); ++i){
+            for(int j = 0; j < userRepository.getOne(uid).getStocks().size(); ++j){
+                if(stockPurchasedRepository.getOne(i).getStock().equals(userRepository.getOne(uid).getStocks().get(j).getStock()) && stockPurchasedRepository.getOne(i).getUser().equals(userRepository.getOne(uid))){
+                    foundidx = j;
+                    break;
+                }
+            }
+            if(foundidx != -1){
+                break;
+            }
+        }
+        stockPurchasedRepository.save(userRepository.getOne(uid).getStocks().get(foundidx));
     }
 
     @GetMapping(path = "/sell/{id}/user/{id}/{numStocks}")
@@ -62,17 +84,17 @@ public class UserController {
         if(currLength != userRepository.getOne(uid).getStocks().size()){
             stockPurchasedRepository.delete(changed);
         }else{
+            modifySPRepoSell(uid);
             stockPurchasedRepository.delete(changed);
-            modifySPRepo(uid);
         }
         return stock.getCurrValue() * numStocks;
     }
 
-    private void modifySPRepo(long uid){
+    private void modifySPRepoSell(long uid){
         int foundidx = -1;
         for(long i = 0; i < stockPurchasedRepository.count(); ++i){
-            for(int j = 0; j < userRepository.getOne(uid).getStocks().size(); ++j){
-                if(!stockPurchasedRepository.getOne(i).getStock().equals(userRepository.getOne(uid).getStocks().get(j).getStock())){
+            for(int j = 0; j < userRepository.getOne(uid).getStocks().size() && stockPurchasedRepository.getOne(i).getUser().getId().equals(uid) && stockPurchasedRepository.getOne(i).getStock().equals(userRepository.getOne(uid).getStocks().get(j).getStock()); ++j){
+                if(stockPurchasedRepository.getOne(i).getNumPurchased() != userRepository.getOne(uid).getStocks().get(j).getNumPurchased()){
                     foundidx = j;
                     break;
                 }
