@@ -42,14 +42,18 @@ public class Main {
             stockRepository.save(stock3);
             stockRepository.save(stock4);
 
-            user1.setStock(stock1, 2, stock1.getId());
-            stock1.setUser(user1, 2, stock1.getId());
-            user2.setStock(stock2, 3, stock2.getId());
-            stock2.setUser(user2, 3, stock2.getId());
-            user3.setStock(stock3, 1, stock3.getId());
-            stock3.setUser(user3, 1, stock3.getId());
+            user1.setStock(stock2, 2, stock2.getId());
+            stock2.setUser(user1, 2, stock2.getId());
+            user2.setStock(stock3, 3, stock3.getId());
+            stock3.setUser(user2, 3, stock3.getId());
+            user3.setStock(stock1, 1, stock1.getId());
+            stock1.setUser(user3, 1, stock1.getId());
             user4.setStock(stock4, 4, stock4.getId());
             stock4.setUser(user4, 4, stock4.getId());
+            spRepository.save(user1.getStocks().get(0));
+            spRepository.save(user2.getStocks().get(0));
+            spRepository.save(user3.getStocks().get(0));
+            spRepository.save(user4.getStocks().get(0));
         };
     }
 }
