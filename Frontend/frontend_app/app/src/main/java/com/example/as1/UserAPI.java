@@ -31,6 +31,9 @@ public interface UserAPI {
     @POST("/login")
     Call<User> login(@Body LoginAttempt login);
 
+    @POST("/users/{id}")
+    Call<User> updateUser(@Body User updateUser);
+
 //
 //    @PutMapping("/users/{id}")
 //    User updateUser(@PathVariable int id, @RequestBody User request){

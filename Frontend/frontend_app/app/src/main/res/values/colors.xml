@@ -11,4 +11,5 @@
     <color name="txtclr">#dcf8c6</color>
     <color name="darkBack">#075e54</color>
     <color name="btn_bg">#FF3700B3</color>
+    <color name="greenConfirm">#00e600</color>
 </resources>
