@@ -3,30 +3,26 @@ package com.example.as1.screens;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.JsonReader;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
 
-import com.example.as1.LoginAttempt;
+import com.example.as1.Controllers.LoginAttempt;
 import com.example.as1.R;
 import com.example.as1.VolleySingleton;
-import com.google.gson.JsonParser;
 
 import android.util.Log;
 import org.json.*;
-
-import java.util.Map;
 
 public class LoginPage extends AppCompatActivity {
 //set variable fro userID, use that throughout the app.
 //setter methods in profile page
 // stock prediction page/ feature??
+    //TODO:make javadoc for frontend layout files and all files
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +36,7 @@ public class LoginPage extends AppCompatActivity {
 
         EditText usernameInput_txt = findViewById(R.id.usernameLogin_txtInput);
         EditText passwordInput_txt = findViewById(R.id.passwordLogin_txtInput);
+        EditText volleyOutput_txt = findViewById(R.id.loginReqResponse_txt);
 
         //button back to home page
         toHome_btn.setOnClickListener(view -> {
@@ -62,22 +59,25 @@ public class LoginPage extends AppCompatActivity {
            LoginAttempt loginAuth = new LoginAttempt (usernameInput, passwordInput);
             //Post login
            makeLoginPostReq(this.getApplicationContext(), loginAuth);
+
+           //If backend returns success, open main page
+           if(volleyOutput_txt.getText().toString() == "{\"message\":\"success\"}") {
+               Intent intent = new Intent(LoginPage.this, MainPage.class);
+               startActivity(intent);
+           }
         });
     }
 
     public void makeLoginPostReq(Context context, LoginAttempt loginA) {
         String URL_JSON_OBJECT = "http://10.90.75.130:8080/login";
         EditText volleyOutput_txt = findViewById(R.id.loginReqResponse_txt);
-
-        // Convert input to JSONObject
         JSONObject objectBody = new JSONObject();
 
-        String stringToParse =  "{\"username\" : " +"\"" + loginA.getUsername().toString() +"\"" + ", " +
-                                "\"password\" : "  +"\"" +  loginA.getPassword().toString()  +"\"" +  "}";
-
+        // Convert input to JSONObject
         try {
-            objectBody = new JSONObject(JSONObject.quote(stringToParse));
-            Log.d("loginA", JSONObject.quote(stringToParse));
+            objectBody.put("username",loginA.getUsername());
+            objectBody.put("password",loginA.getPassword());
+            Log.d("loginA JSON Object: ", objectBody.toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -87,7 +87,6 @@ public class LoginPage extends AppCompatActivity {
                 Request.Method.POST,
                 URL_JSON_OBJECT,
                 objectBody,
-                //response function to lambda
                 response -> volleyOutput_txt.setText(response.toString()),
                 error -> volleyOutput_txt.setText(error.getMessage())) { };
 

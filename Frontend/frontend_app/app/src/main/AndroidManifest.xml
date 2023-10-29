@@ -36,6 +36,9 @@
         <activity
             android:name=".screens.LoginPage"
             android:exported="true" />
+        <activity
+            android:name=".screens.EditProfilePage"
+            android:exported="true" />
 
     </application>
 
