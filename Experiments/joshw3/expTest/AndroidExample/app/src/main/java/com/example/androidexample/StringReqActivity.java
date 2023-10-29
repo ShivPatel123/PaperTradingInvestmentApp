@@ -23,7 +23,12 @@ public class StringReqActivity extends AppCompatActivity {
     private TextView msgResponse;
 
     //private static final String URL_STRING_REQ = "https://jsonplaceholder.typicode.com/users/1";
-    private static final String URL_STRING_REQ = "http://10.90.75.130:8080/users";
+
+
+    //private static final String URL_STRING_REQ = "http://10.90.75.130:8080/users";
+
+    private static final String URL_STRING_REQ = "http://10.90.75.130:8080/stocks";
+
 
 
 
@@ -61,7 +66,8 @@ public class StringReqActivity extends AppCompatActivity {
                     public void onResponse(String response) {
                         // Handle the successful response here
                         Log.d("Volley Response", response);
-                        msgResponse.setText(response.toString());
+
+                        msgResponse.setText(response.toString() + "test");
                     }
                 },
                 new Response.ErrorListener() {

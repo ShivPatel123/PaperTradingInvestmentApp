@@ -24,7 +24,10 @@ public class JsonArrReqActivity extends AppCompatActivity {
     private Button btnJsonArrReq;
     private TextView msgResponse;
 
-    private static final String URL_JSON_ARRAY = "https://jsonplaceholder.typicode.com/users";
+
+
+    //private static final String URL_JSON_ARRAY = "https://jsonplaceholder.typicode.com/users";
+    private static final String URL_JSON_ARRAY = "http://10.90.75.130:8080/stocks";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +57,8 @@ public class JsonArrReqActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONArray response) {
                         Log.d("Volley Response", response.toString());
-                        msgResponse.setText(response.toString());
+
+                        msgResponse.setText(response.toString() + "test");
                     }
                 },
                 new Response.ErrorListener() {
