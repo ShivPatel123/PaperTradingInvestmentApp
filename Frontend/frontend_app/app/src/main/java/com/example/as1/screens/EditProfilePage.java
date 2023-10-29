@@ -15,7 +15,7 @@ import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
 
 import com.example.as1.R;
-import com.example.as1.User;
+import com.example.as1.Controllers.User;
 import com.example.as1.VolleySingleton;
 
 import org.json.JSONException;
@@ -41,7 +41,7 @@ public class EditProfilePage extends AppCompatActivity {
         EditText dob_display = findViewById(R.id.Edob_Display);
         EditText money_display = findViewById(R.id.Emoney_Display);
 
-        User testUser = new User(4, 7765, 12, "Skyler", "sky@iastate.edu", "yup", "Skyler", "SkylersPassword");
+       User testUser = new User(4, 7765,null, "Skyler", "sky@iastate.edu", "yup", "Skyler", "SkylersPassword");
 
         //set text to initial profile data
         welcomeTxt.setText(testUser.getName().toString());
@@ -49,7 +49,7 @@ public class EditProfilePage extends AppCompatActivity {
         password_display.setText(testUser.getPassword().toString());
         email_display.setText(testUser.getEmail().toString());
         dob_display.setText(testUser.getDob().toString());
-        money_display.setText(testUser.getMoney().toString());
+        money_display.setText((int) testUser.getMoney());
 
         // save changes button
         saveProfile_btn.setOnClickListener(view -> {
@@ -58,7 +58,7 @@ public class EditProfilePage extends AppCompatActivity {
             testUser.setPassword(password_display.getText().toString());
             testUser.setEmail(email_display.getText().toString());
             testUser.setDob(dob_display.getText().toString());
-            testUser.setMoneyString(money_display.getText().toString());
+            testUser.setMoney(Double.parseDouble(money_display.getText().toString()));
 
             updateUserReq(this.getApplicationContext(), testUser);
 
@@ -105,8 +105,8 @@ public class EditProfilePage extends AppCompatActivity {
                         user.setEmail(email);
                         user.setId(Integer.parseInt(id));
                         user.setDob(dob);
-                        user.setMoneyString(money);
-                        user.setNumStocks(Integer.parseInt(numStocks));
+                        user.setMoney(Double.parseDouble(money));
+                       // user.setNumStocks(Integer.parseInt(numStocks));
                         user.setUsername(username);
                         user.setPassword(password);
 
@@ -136,7 +136,7 @@ public class EditProfilePage extends AppCompatActivity {
             objectBody.put("name",user.getName());
             objectBody.put("dob",user.getDob());
             objectBody.put("email",user.getEmail());
-            objectBody.put("money",user.getMoneyInt());
+            objectBody.put("money",user.getMoney());
             objectBody.put("id",user.getId());
 
             Log.d("user JSON Object: ", objectBody.toString());
