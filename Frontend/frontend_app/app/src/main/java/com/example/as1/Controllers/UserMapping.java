@@ -1,4 +1,4 @@
-package com.example.as1;
+package com.example.as1.Controllers;
 
 import java.util.List;
 import retrofit2.Call;
@@ -6,11 +6,7 @@ import retrofit2.http.Body;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
-
-
-
-
-public interface UserAPI {
+public interface UserMapping {
 
     @GET("/users")
     Call<List<User>> getAllUsers();
@@ -20,7 +16,6 @@ public interface UserAPI {
 
     @GET("/purchase/{id}/{numStocks}")
     Call<User> purchaseById(@Path("id") int id, @Path("numStocks") int numStocks);
-
 
     @GET("/sell/{id}/{numStocks}")
     Call<User> sellById(@Path("id") int id, @Path("numStocks") int numStocks);

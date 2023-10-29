@@ -5,14 +5,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
 
-import com.example.as1.LoginAttempt;
+import com.example.as1.Controllers.LoginAttempt;
 import com.example.as1.R;
 import com.example.as1.VolleySingleton;
 

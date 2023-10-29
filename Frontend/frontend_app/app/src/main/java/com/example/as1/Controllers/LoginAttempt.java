@@ -1,4 +1,4 @@
-package com.example.as1;
+package com.example.as1.Controllers;
 
 public class LoginAttempt {
     String username;

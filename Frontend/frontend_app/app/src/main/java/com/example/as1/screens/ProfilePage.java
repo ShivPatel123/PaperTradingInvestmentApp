@@ -14,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.android.volley.Response;
 import com.android.volley.toolbox.ImageRequest;
 import com.example.as1.R;
-import com.example.as1.User;
+import com.example.as1.Controllers.User;
 import com.example.as1.VolleySingleton;
 
 public class ProfilePage extends AppCompatActivity {
@@ -24,7 +24,7 @@ public class ProfilePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_page);
-//TODO: declare profiile picture so it shows up, find a way to parse ints
+
         Button backHome_btn = findViewById(R.id.backHome_mainBtn);
         Button editProfile_btn = findViewById(R.id.editProfile_btn);
         Button toStock_btn = findViewById(R.id.toStockPage_btn);
@@ -36,7 +36,7 @@ public class ProfilePage extends AppCompatActivity {
         TextView money_display = findViewById(R.id.money_Display);
         TextView stock_display = findViewById(R.id.stock_Display);
 
-        User testUser = new User(4,7765, 12, "Skyler", "sky@iastate.edu", "yup", "Skyler", "SkylersPassword");
+        User testUser = new User(4,7765, null, "Skyler", "sky@iastate.edu", "yup", "Skyler", "SkylersPassword");
 
         welcomeTxt.setText("Welcome, " + testUser.getName() + "!");
         username_display.setText(testUser.getUsername().toString());
