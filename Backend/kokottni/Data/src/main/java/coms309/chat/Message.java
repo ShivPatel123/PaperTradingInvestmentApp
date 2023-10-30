@@ -31,13 +31,18 @@ public class Message {
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "sent")
     private Date sent = new Date();
-	
+
+    @Column
+    private String target;
+
+
 	
 	public Message() {};
 	
-	public Message(String userName, String content) {
+	public Message(String userName, String content, String target) {
 		this.userName = userName;
 		this.content = content;
+        this.target = target;
 	}
 
     public Long getId() {

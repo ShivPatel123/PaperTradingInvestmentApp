@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -24,7 +25,7 @@ public class FriendGroup {
 
 
 
-
+    @Column
     @OneToMany(mappedBy = "friendGroup")
     private List<User> groupMembers;
 
@@ -35,11 +36,9 @@ public class FriendGroup {
     }
 
     public List<String> getGroupMembers() {
-        private final Logger logger = LoggerFactory.getLogger(FriendGroup.class);
         List<String> groupMembersNames = new ArrayList<>();
         for(User user : groupMembers){
             groupMembersNames.add(user.getName());
-            logger.info(user.getName());
         }
 
         return groupMembersNames;
