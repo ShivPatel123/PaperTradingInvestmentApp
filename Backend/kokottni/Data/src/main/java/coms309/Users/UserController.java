@@ -192,6 +192,18 @@ public class UserController {
         if(admin.getPrivilege() != 'a') return failure;
         User user = userRepository.getOne(uid);
         user.setPrivilege('b');
+        removeStocksPurchaseOnBan(uid);
         return success;
+    }
+
+    void removeStocksPurchaseOnBan(long uid){
+        int foundidx = -1;
+        for(long i = 0; i < stockPurchasedRepository.count(); ++i){
+            for(int j = 0; j < userRepository.getOne(uid).getStocks().size() && stockPurchasedRepository.getOne(i).getUser().getId().equals(uid) && stockPurchasedRepository.getOne(i).getStock().equals(userRepository.getOne(uid).getStocks().get(j).getStock()); ++j){
+                foundidx = j;
+                stockPurchasedRepository.delete(userRepository.getOne(uid).getStocks().get(foundidx));
+                break;
+            }
+        }
     }
 }
