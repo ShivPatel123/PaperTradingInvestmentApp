@@ -192,7 +192,17 @@ public class UserController {
         if(admin.getPrivilege() != 'a') return failure;
         User user = userRepository.getOne(uid);
         user.setPrivilege('b');
+        removeStocks(uid);
         return success;
+    }
+
+    private void removeStocks(long uid){
+        for(long i = 0; i < stockPurchasedRepository.count(); ++i){
+            for(int j = 0; j < userRepository.getOne(uid).getStocks().size() && stockPurchasedRepository.getOne(i).getUser().getId().equals(uid) && stockPurchasedRepository.getOne(i).getStock().equals(userRepository.getOne(uid).getStocks().get(j).getStock()); ++j){
+                stockPurchasedRepository.delete(userRepository.getOne(uid).getStocks().get(j));
+                userRepository.getOne(uid).getStocks().remove(j);
+            }
+        }
     }
 
     @PutMapping(path = "/unban/{uid}/byadmin{aid}")
