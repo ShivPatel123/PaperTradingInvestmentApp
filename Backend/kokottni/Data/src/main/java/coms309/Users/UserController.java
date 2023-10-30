@@ -186,12 +186,21 @@ public class UserController {
         return success;
     }
 
-    @PutMapping(path = "/banuser/{uid}/byadmin{aid}")
+    @PutMapping(path = "/banuser/{uid}/byadmin/{aid}")
     String banUser(@PathVariable long uid, @PathVariable long aid){
         User admin = userRepository.getOne(aid);
         if(admin.getPrivilege() != 'a') return failure;
         User user = userRepository.getOne(uid);
         user.setPrivilege('b');
+        return success;
+    }
+
+    @PutMapping(path = "/unban/{uid}/byadmin{aid}")
+    String unbanUser(@PathVariable long uid, @PathVariable long aid){
+        User admin = userRepository.getOne(aid);
+        if(admin.getPrivilege() != 'a') return failure;
+        User user = userRepository.getOne(uid);
+        user.setPrivilege('u');
         return success;
     }
 }
