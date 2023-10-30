@@ -82,10 +82,6 @@ public class StockController {
 
     @DeleteMapping(path = "/stocks/{id}")
     String deleteStock(@PathVariable Long id){
-
-        User user = userRepository.getOne(id);
-        userRepository.save(user);
-
         stockRepository.deleteById(id);
         return success;
     }

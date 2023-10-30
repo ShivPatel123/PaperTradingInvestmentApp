@@ -2,8 +2,7 @@ package coms309.Users;
 
 import java.util.List;
 
-import coms309.Stocks.StockPurchased;
-import coms309.Stocks.StockPurchasedRepository;
+import coms309.Stocks.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,9 +13,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import coms309.Stocks.Stock;
-import coms309.Stocks.StockRepository;
-
 @RestController
 public class UserController {
 
@@ -25,6 +21,8 @@ public class UserController {
     UserRepository userRepository;
     @Autowired
     StockRepository stockRepository;
+
+    StockUpdater stockAPI = new StockUpdater();
 
     @Autowired
     StockPurchasedRepository stockPurchasedRepository;
@@ -152,6 +150,28 @@ public class UserController {
     @DeleteMapping(path = "/users/{id}")
     String deleteUser(@PathVariable Long id){
         userRepository.getOne(id);
+        return success;
+    }
+
+    @PostMapping(path = "/stocks/{uid}")
+    String createStock(Stock stock, @PathVariable long uid){
+        User user = userRepository.getOne(uid);
+        if(user.getPrivilege() != 'a' || stock == null) return failure;
+        stockRepository.save(stock);
+        return success;
+    }
+
+    @DeleteMapping(path = "/stocks/{sid}/{uid}")
+    String deleteStock(@PathVariable long sid, @PathVariable long uid){
+        User user = userRepository.getOne(uid);
+        if(user.getPrivilege() != 'a') return failure;
+        stockRepository.deleteById(sid);
+        return success;
+    }
+
+    @PutMapping(path = "/stocks")
+    String updateAllStocks(){
+        stockAPI.updateAllStocks(stockRepository);
         return success;
     }
 }
