@@ -15,7 +15,7 @@ import com.android.volley.Response;
 import com.android.volley.toolbox.ImageRequest;
 import com.example.as1.R;
 import com.example.as1.Controllers.User;
-import com.example.as1.VolleySingleton;
+import com.example.as1.ExternalControllers.VolleySingleton;
 
 public class ProfilePage extends AppCompatActivity {
 

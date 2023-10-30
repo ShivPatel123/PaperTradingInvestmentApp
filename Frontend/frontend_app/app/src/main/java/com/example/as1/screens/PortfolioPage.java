@@ -1,4 +1,26 @@
 package com.example.as1.screens;
 
-public class PortfolioPage {
-}
+import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.as1.R;
+
+public class PortfolioPage extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.user_portfolio_page);
+
+
+
+
+
+
+
+
+
+
+    }
+}//end
