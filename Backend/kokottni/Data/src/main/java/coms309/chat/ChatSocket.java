@@ -5,6 +5,7 @@ import coms309.Users.UserRepository;
 import coms309.Users.UserController;
 import coms309.Users.UserController;
 
+
 import java.io.IOException;
 import java.util.Hashtable;
 import java.util.List;
@@ -23,6 +24,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @Controller      // this is needed for this to be an endpoint to springboot
 @ServerEndpoint(value = "/chat/{username}")  // this is Websocket url
@@ -83,9 +88,11 @@ public class ChatSocket {
 		logger.info("Entered into Message: Got Message:" + message);
 		String username = sessionUsernameMap.get(session);
 
-    // Direct message to a user using the format "@username <message>"
+		String destUsername = message.split(" ")[0].substring(1);
+
+		// Direct message to a user using the format "@username <message>"
 		if (message.startsWith("@")) {
-			String destUsername = message.split(" ")[0].substring(1); 
+
 
       // send the message to the sender and receiver
 			sendMessageToPArticularUser(destUsername, "[DM] " + username + ": " + message);
@@ -97,7 +104,7 @@ public class ChatSocket {
 		}
 
 		// Saving chat history to repository
-		msgRepo.save(new Message(username, message));
+		msgRepo.save(new Message(username, message, destUsername));
 	}
 
 
@@ -125,14 +132,20 @@ public class ChatSocket {
 
 
 	private void sendMessageToPArticularUser(String username, String message) {
-		try {
-			usernameSessionMap.get(username).getBasicRemote().sendText(message);
-		} 
-    catch (IOException e) {
-			logger.info("Exception: " + e.getMessage().toString());
-			e.printStackTrace();
+		Session userSession = usernameSessionMap.get(username);
+		if (userSession != null) {
+			try {
+				userSession.getBasicRemote().sendText(message);
+			} catch (IOException e) {
+				logger.error("Error sending message to user: " + e.getMessage());
+				e.printStackTrace();
+			}
+		} else {
+			logger.error("User session not found for username: " + username);
+			// You can log an error or take appropriate action here.
 		}
 	}
+
 
 
 	private void broadcast(String message) {
@@ -163,5 +176,20 @@ public class ChatSocket {
 		}
 		return sb.toString();
 	}
+
+	@RestController
+	@RequestMapping("/chat/messages")
+
+	public class MessageController {
+
+		@Autowired
+		private MessageRepository messageRepository;
+
+		@GetMapping("/{target}")
+		public List<Message> getMessagesByTarget(@PathVariable String target) {
+			return messageRepository.findByTarget(target);
+		}
+	}
+
 
 } // end of Class
