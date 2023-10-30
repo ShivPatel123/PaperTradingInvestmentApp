@@ -37,6 +37,8 @@ public class User {
     @Column(name = "password")
     private String password;
 
+    @Column(name = "privilege")
+    private char privilege;
 
     public User(Long id, double money, String name, String email, String dob, String username, String password){
         this.id = id;
@@ -46,6 +48,7 @@ public class User {
         this.dob = dob;
         this.username = username;
         this.password = password;
+        this.privilege = 'u';
     }
 
     public User(){}
@@ -84,9 +87,11 @@ public class User {
         this.username = user;
     }
     public String getPassword() {return password;}
-    public void setPassword(String pass){
-        this.password = pass;
-    }
+    public void setPassword(String pass){this.password = pass;}
+
+    public char getPrivilege(){return privilege;}
+
+    private void setPrivilege(char privilege){this.privilege = privilege;}
 
     public String getDob(){return dob;}
 
