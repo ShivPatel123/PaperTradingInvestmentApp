@@ -1,4 +1,4 @@
-package com.example.as1;
+package com.example.as1.ExternalControllers;
 
 public class ListItemObject {
     private String name;

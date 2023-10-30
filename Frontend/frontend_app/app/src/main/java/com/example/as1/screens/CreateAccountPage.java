@@ -13,7 +13,7 @@ import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.as1.R;
 import com.example.as1.Controllers.User;
-import com.example.as1.VolleySingleton;
+import com.example.as1.ExternalControllers.VolleySingleton;
 
 import org.json.JSONObject;
 
