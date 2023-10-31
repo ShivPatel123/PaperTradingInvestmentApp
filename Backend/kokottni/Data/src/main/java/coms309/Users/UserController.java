@@ -2,8 +2,7 @@ package coms309.Users;
 
 import java.util.List;
 
-import coms309.Stocks.StockPurchased;
-import coms309.Stocks.StockPurchasedRepository;
+import coms309.Stocks.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -14,9 +13,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import coms309.Stocks.Stock;
-import coms309.Stocks.StockRepository;
-
 @RestController
 public class UserController {
 
@@ -25,6 +21,8 @@ public class UserController {
     UserRepository userRepository;
     @Autowired
     StockRepository stockRepository;
+
+    StockUpdater stockAPI = new StockUpdater();
 
     @Autowired
     StockPurchasedRepository stockPurchasedRepository;
@@ -47,6 +45,7 @@ public class UserController {
 
     @GetMapping(path = "/buy/{id}/user/{uid}/amt/{amount}")
     StockPurchased purchaseStock(@PathVariable long id, @PathVariable long uid, @PathVariable int amount){
+        if(userRepository.getOne(uid).getPrivilege() == 'b') return null;
         Stock stock = stockRepository.getOne(id);
         int countBefore = userRepository.getOne(uid).getStocks().size();
         StockPurchased potentiallyRemove = userRepository.getOne(uid).purchase(amount, stock, purchaseNum);
@@ -78,19 +77,22 @@ public class UserController {
 
     @GetMapping(path = "/sell/{id}/user/{id}/{numStocks}")
     double sellStock(@PathVariable long id, @PathVariable long uid, @PathVariable int numStocks){
+        if(userRepository.getOne(uid).getPrivilege() == 'b') return -1;
         Stock stock = stockRepository.getOne(id);
         int currLength = userRepository.getOne(uid).getStocks().size();
         StockPurchased changed = userRepository.getOne(uid).sell(numStocks, stock);
+        int soldStocks = changed.getNumPurchased();
         if(currLength != userRepository.getOne(uid).getStocks().size()){
             stockPurchasedRepository.delete(changed);
         }else{
-            modifySPRepoSell(uid);
+            StockPurchased sp = modifySPRepoSell(uid);
+            soldStocks -= sp.getNumPurchased();
             stockPurchasedRepository.delete(changed);
         }
-        return stock.getCurrValue() * numStocks;
+        return stock.getCurrValue() * soldStocks;
     }
 
-    private void modifySPRepoSell(long uid){
+    private StockPurchased modifySPRepoSell(long uid){
         int foundidx = -1;
         for(long i = 0; i < stockPurchasedRepository.count(); ++i){
             for(int j = 0; j < userRepository.getOne(uid).getStocks().size() && stockPurchasedRepository.getOne(i).getUser().getId().equals(uid) && stockPurchasedRepository.getOne(i).getStock().equals(userRepository.getOne(uid).getStocks().get(j).getStock()); ++j){
@@ -103,7 +105,10 @@ public class UserController {
                 break;
             }
         }
-        stockPurchasedRepository.save(userRepository.getOne(uid).getStocks().get(foundidx));
+        if(foundidx != -1){
+            return stockPurchasedRepository.save(userRepository.getOne(uid).getStocks().get(foundidx));
+        }
+        return null;
     }
 
 
@@ -120,6 +125,7 @@ public class UserController {
     @PostMapping("/login")
     String login(@RequestBody LoginAttempt login, @PathVariable Long id){
         User user = userRepository.getOne(id);
+        if(user.getPrivilege() == 'b') return failure;
         if (user != null) {
             if (user.getPassword().equals(login.getPassword())) {
                 return "Success!";
@@ -134,6 +140,7 @@ public class UserController {
     @PutMapping("/users/{id}")
     User updateUser(@PathVariable Long id, @RequestBody User request){
         User user = userRepository.getOne(id);
+        if(user.getPrivilege() == 'b') return null;
         userRepository.save(request);
         return userRepository.getOne(id);
     }
@@ -141,6 +148,7 @@ public class UserController {
     @PutMapping("/users/{userId}/stocks/{stockId}/{numPurchasing}")
     String assignStockToUser(@PathVariable Long userId, @PathVariable Long stockId, @PathVariable int numPurchasing){
         User user = userRepository.getOne(userId);
+        if(user.getPrivilege() == 'b') return failure;
         Stock stock = stockRepository.getOne(stockId);
         stock.setUser(user, numPurchasing, userId);
         user.setStock(stock, numPurchasing, stockId);
@@ -154,4 +162,56 @@ public class UserController {
         userRepository.getOne(id);
         return success;
     }
+
+    @PostMapping(path = "/stocks/{uid}")
+    String createStock(Stock stock, @PathVariable long uid){
+        User user = userRepository.getOne(uid);
+        if(user.getPrivilege() != 'a' || stock == null) return failure;
+        stockRepository.save(stock);
+        return success;
+    }
+
+    @DeleteMapping(path = "/stocks/{sid}/{uid}")
+    String deleteStock(@PathVariable long sid, @PathVariable long uid){
+        User user = userRepository.getOne(uid);
+        if(user.getPrivilege() != 'a') return failure;
+        stockRepository.deleteById(sid);
+        return success;
+    }
+
+    @PutMapping(path = "/stocks/{uid}")
+    String updateAllStocks(@PathVariable long uid){
+        if(userRepository.getOne(uid).getPrivilege() != 'a') return failure;
+        stockAPI.updateAllStocks(stockRepository);
+        return success;
+    }
+
+    @PutMapping(path = "/banuser/{uid}/byadmin/{aid}")
+    String banUser(@PathVariable long uid, @PathVariable long aid){
+        User admin = userRepository.getOne(aid);
+        if(admin.getPrivilege() != 'a') return failure;
+        User user = userRepository.getOne(uid);
+        user.setPrivilege('b');
+        removeStocks(uid);
+        return success;
+    }
+
+    private void removeStocks(long uid){
+        for(long i = 0; i < stockPurchasedRepository.count(); ++i){
+            for(int j = 0; j < userRepository.getOne(uid).getStocks().size() && stockPurchasedRepository.getOne(i).getUser().getId().equals(uid) && stockPurchasedRepository.getOne(i).getStock().equals(userRepository.getOne(uid).getStocks().get(j).getStock()); ++j){
+                stockPurchasedRepository.delete(userRepository.getOne(uid).getStocks().get(j));
+                userRepository.getOne(uid).getStocks().remove(j);
+            }
+        }
+    }
+
+    @PutMapping(path = "/unban/{uid}/byadmin/{aid}")
+    String unbanUser(@PathVariable long uid, @PathVariable long aid){
+        User admin = userRepository.getOne(aid);
+        if(admin.getPrivilege() != 'a') return failure;
+        User user = userRepository.getOne(uid);
+        user.setPrivilege('u');
+        return success;
+    }
+
 }
