@@ -1,5 +1,8 @@
 package com.example.as1.screens;
 
+import static com.example.as1.Controllers.User.getInstance;
+import static com.example.as1.Controllers.UserSingleton.getGlobalUser;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +15,7 @@ import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
 
 import com.example.as1.Controllers.LoginAttempt;
+import com.example.as1.Controllers.User;
 import com.example.as1.R;
 import com.example.as1.ExternalControllers.VolleySingleton;
 
@@ -60,8 +64,12 @@ public class LoginPage extends AppCompatActivity {
             //Post login
            makeLoginPostReq(this.getApplicationContext(), loginAuth);
 
-           //If backend returns success, open main page
+           //TODO: fix this: If backend returns success, open main page
            if(volleyOutput_txt.getText().toString() == "{\"message\":\"success\"}") {
+               //set global user variables for username and passw
+               getInstance().setUsername(usernameInput);
+               getInstance().setPassword(passwordInput);
+               //go to MainPage
                Intent intent = new Intent(LoginPage.this, MainPage.class);
                startActivity(intent);
            }
