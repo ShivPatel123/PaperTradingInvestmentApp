@@ -34,9 +34,10 @@ public class PortfolioPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_portfolio_page);
 
-        List<StockPurchased> stockPurchasedList = new ArrayList<StockPurchased>() {};
+        List<StockPurchased> stockPurchasedList;
 
         //get all user purchased stocks
+        //TODO: get all stocks from global user
         User testUser = new User(4, 7765,"Skyler", "sky@iastate.edu", "yup", "Skyler", "SkylersPassword");
         stockPurchasedList = testUser.getStocks();
         //parse: for each element in <>
