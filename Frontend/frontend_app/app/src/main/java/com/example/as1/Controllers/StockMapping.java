@@ -9,7 +9,6 @@ import retrofit2.http.Path;
 
 public interface StockMapping {
 
-
         @GET("/stocks")
         Call<List<Stock>> getAllStocks();
 

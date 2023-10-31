@@ -16,7 +16,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 
 import com.example.as1.R;
 import com.example.as1.Controllers.User;
-import com.example.as1.VolleySingleton;
+import com.example.as1.ExternalControllers.VolleySingleton;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -30,7 +30,6 @@ public class EditProfilePage extends AppCompatActivity {
         setContentView(R.layout.edit_profile);
 
         //Instantiate Buttons
-        //private static final String URL_IMAGE = "";
         Button back_btn = findViewById(R.id.EbackProfile_btn);
         Button saveProfile_btn = findViewById(R.id.saveProfile_btn);
         Button toPortfolio_btn = findViewById(R.id.toStockPage_btn);
@@ -41,26 +40,37 @@ public class EditProfilePage extends AppCompatActivity {
         EditText dob_display = findViewById(R.id.Edob_Display);
         EditText money_display = findViewById(R.id.Emoney_Display);
 
-       User testUser = new User(4, 7765,null, "Skyler", "sky@iastate.edu", "yup", "Skyler", "SkylersPassword");
+        //Get global user data for get request
+        User getGlobal = User.getInstance();
+        //Get req for user data, need to be sure global user has id set after logging in
+        getGlobal = getUserData(this.getApplicationContext(),getGlobal);
+        //TODO: update global user data (need to make function)
 
-        //set text to initial profile data
-        welcomeTxt.setText(testUser.getName().toString());
-        username_display.setText(testUser.getUsername().toString());
-        password_display.setText(testUser.getPassword().toString());
-        email_display.setText(testUser.getEmail().toString());
-        dob_display.setText(testUser.getDob().toString());
-        money_display.setText((int) testUser.getMoney());
+        //set display to user data
+        welcomeTxt.setText("Welcome, " + getGlobal.getName() + "!");
+        username_display.setText(getGlobal.getUsername().toString());
+        password_display.setText(getGlobal.getPassword().toString());
+        email_display.setText(getGlobal.getEmail().toString());
+        dob_display.setText(getGlobal.getDob().toString());
+        double money1 = (double) getGlobal.getMoney();
+        money_display.setText(String.valueOf(money1));
+        //TODO: stock_display.setText(getGlobal.getNumStocksPurchased());
 
         // save changes button
         saveProfile_btn.setOnClickListener(view -> {
-            testUser.setName(welcomeTxt.getText().toString());
-            testUser.setUsername(username_display.getText().toString());
-            testUser.setPassword(password_display.getText().toString());
-            testUser.setEmail(email_display.getText().toString());
-            testUser.setDob(dob_display.getText().toString());
-            testUser.setMoney(Double.parseDouble(money_display.getText().toString()));
-
-            updateUserReq(this.getApplicationContext(), testUser);
+            //write inputs to user
+            User inputUser = new User();
+            inputUser.setName(welcomeTxt.getText().toString());
+            inputUser.setUsername(username_display.getText().toString());
+            inputUser.setPassword(password_display.getText().toString());
+            inputUser.setEmail(email_display.getText().toString());
+            inputUser.setDob(dob_display.getText().toString());
+            inputUser.setMoney(Double.parseDouble(money_display.getText().toString()));
+            //post request
+            updateUserReq(this.getApplicationContext(), inputUser);
+            //go back to profile page
+            Intent intent = new Intent(EditProfilePage.this, ProfilePage.class);
+            startActivity(intent);
 
         });
 
