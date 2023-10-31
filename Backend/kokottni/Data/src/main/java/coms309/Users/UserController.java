@@ -186,23 +186,21 @@ public class UserController {
         return success;
     }
 
-    @PutMapping(path = "/banuser/{uid}/byadmin{aid}")
+    @PutMapping(path = "/banuser/{uid}/byadmin/{aid}")
     String banUser(@PathVariable long uid, @PathVariable long aid){
         User admin = userRepository.getOne(aid);
         if(admin.getPrivilege() != 'a') return failure;
         User user = userRepository.getOne(uid);
         user.setPrivilege('b');
-        removeStocksPurchaseOnBan(uid);
+        removeStocks(uid);
         return success;
     }
 
-    void removeStocksPurchaseOnBan(long uid){
-        int foundidx = -1;
+    private void removeStocks(long uid){
         for(long i = 0; i < stockPurchasedRepository.count(); ++i){
             for(int j = 0; j < userRepository.getOne(uid).getStocks().size() && stockPurchasedRepository.getOne(i).getUser().getId().equals(uid) && stockPurchasedRepository.getOne(i).getStock().equals(userRepository.getOne(uid).getStocks().get(j).getStock()); ++j){
-                foundidx = j;
-                stockPurchasedRepository.delete(userRepository.getOne(uid).getStocks().get(foundidx));
-                break;
+                stockPurchasedRepository.delete(userRepository.getOne(uid).getStocks().get(j));
+                userRepository.getOne(uid).getStocks().remove(j);
             }
         }
     }
