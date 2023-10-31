@@ -11,10 +11,10 @@
         android:id="@+id/stock_scroll"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart=""
-        android:layout_marginTop=""
-        android:layout_marginEnd=""
-        android:layout_marginBottom="" />
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp" />
 
     <TextView
         android:id="@+id/portfolio_Title"
@@ -48,9 +48,12 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/stockCard1"
-        android:layout_width="237dp"
-        android:layout_height="84dp"
-        android:layout_margin="10dp"
+        android:layout_width="367dp"
+        android:layout_height="172dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="10dp"
         android:paddingBottom="10dp"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="10dp"
@@ -71,15 +74,15 @@
 
         <EditText
             android:id="@+id/stock1_num"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="97dp"
+            android:layout_height="112dp"
             android:layout_gravity="center"
             android:layout_margin="20dp"
             android:text="x0" />
 
         <EditText
             android:id="@+id/stock1_price"
-            android:layout_width="wrap_content"
+            android:layout_width="86dp"
             android:layout_height="match_parent"
             android:layout_gravity="right|center_horizontal"
             android:layout_margin="20dp"
