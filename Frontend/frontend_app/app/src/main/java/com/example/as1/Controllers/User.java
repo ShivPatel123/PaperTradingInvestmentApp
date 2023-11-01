@@ -6,12 +6,19 @@ import java.util.Objects;
 
 public class User {
 
-    private ArrayList numStocks;
+    //Global User
+    private static User instance = null;
+    public static User getInstance(){
+        if (instance == null){
+            instance = new User(-1,-1,"NoInputs", "NoInputs", "NoInputs", "NoInputs", "NoInputs");
+        }
+        return instance;
+    }
+
+    private List<StockPurchased> stocks = new ArrayList<>();
     //Params
     private long id;
     private double money;
-
-    List<StockPurchased> stocks = new ArrayList<>();
     private String name;
     private String email;
     private String dob;
@@ -19,10 +26,9 @@ public class User {
     private String password;
 
 //Constructors
-    public User(long id, double money,  ArrayList numStocks, String name, String email, String dob, String username, String password){
+    public User(long id, double money, String name, String email, String dob, String username, String password){
         this.id = id;
         this.money = money;
-        this.numStocks = numStocks;
         this.name = name;
         this.email = email;
         this.dob = dob;
@@ -30,6 +36,9 @@ public class User {
         this.password = password;
     }
     public User(){}
+
+    //Global user instance
+
 
     //Getters and Setters
     public long getId(){
@@ -92,6 +101,7 @@ public class User {
         curr.setNumPurchased(numPurchase);
         curr.setSinglePrice(stock.getCurrValue());
         curr.setCostPurchase(curr.getNumPurchased() * stock.getCurrValue());
+
         if( curr.getNumPurchased() * stock.getCurrValue() > money) return null;
         stocks.add(curr);
         stock.setUser(this, numPurchase, id);

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 D:\Comp Sci Projects\ms_316\Backend\kokottni\Data\src\main\java\coms309\Users\User.java
 D:\Comp Sci Projects\ms_316\Backend\kokottni\Data\src\main\java\coms309\Stocks\StockPurchased.java
 D:\Comp Sci Projects\ms_316\Backend\kokottni\Data\src\main\java\coms309\Stocks\StockUpdater.java
@@ -10,3 +11,16 @@ D:\Comp Sci Projects\ms_316\Backend\kokottni\Data\src\main\java\coms309\Stocks\S
 D:\Comp Sci Projects\ms_316\Backend\kokottni\Data\src\main\java\coms309\Stocks\StockRepository.java
 D:\Comp Sci Projects\ms_316\Backend\kokottni\Data\src\main\java\coms309\Users\UserController.java
 D:\Comp Sci Projects\ms_316\Backend\kokottni\Data\src\main\java\coms309\Stocks\StockController.java
+=======
+C:\Users\kokottni\cs309\ms_316\Backend\kokottni\Data\src\main\java\coms309\Stocks\StockUpdater.java
+C:\Users\kokottni\cs309\ms_316\Backend\kokottni\Data\src\main\java\coms309\Main.java
+C:\Users\kokottni\cs309\ms_316\Backend\kokottni\Data\src\main\java\coms309\Users\UserController.java
+C:\Users\kokottni\cs309\ms_316\Backend\kokottni\Data\src\main\java\coms309\Users\LoginAttempt.java
+C:\Users\kokottni\cs309\ms_316\Backend\kokottni\Data\src\main\java\coms309\Stocks\Stock.java
+C:\Users\kokottni\cs309\ms_316\Backend\kokottni\Data\src\main\java\coms309\Users\UserRepository.java
+C:\Users\kokottni\cs309\ms_316\Backend\kokottni\Data\src\main\java\coms309\Stocks\StockController.java
+C:\Users\kokottni\cs309\ms_316\Backend\kokottni\Data\src\main\java\coms309\Stocks\StockRepository.java
+C:\Users\kokottni\cs309\ms_316\Backend\kokottni\Data\src\main\java\coms309\Stocks\StockPurchasedRepository.java
+C:\Users\kokottni\cs309\ms_316\Backend\kokottni\Data\src\main\java\coms309\Stocks\StockPurchased.java
+C:\Users\kokottni\cs309\ms_316\Backend\kokottni\Data\src\main\java\coms309\Users\User.java
+>>>>>>> 0e062921edc72c1c5dca46f72aa49f297b008c80
