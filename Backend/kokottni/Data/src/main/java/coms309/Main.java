@@ -28,21 +28,6 @@ public class Main {
         return args -> {
 
 
-            User user1 = new User(1, 1987654, "Nick", "kokottni@iastate.edu", "oldenough", "user", "Password");
-            User user2 = new User(2, 34578, "Josh", "jwhit@iastate.edu", "oldenough", "username", "password");
-            User user3 = new User(3, 6543, "Shiv", "shiv@iastate.edu", "nah", "username2", "password");
-            User user4 = new User(4, 7765, "Skyler", "sky@iastate.edu", "yup", "Skyler", "SkylersPassword");
-            Stock stock1 = new Stock(1, "TSLA", "Tesla", 101.23, -2.13);
-            Stock stock2 = new Stock(2, "INTC", "Intel", 67.12, 1.34);
-            Stock stock3 = new Stock(3, "GOOGL", "Google", 213.56, 3.14);
-            Stock stock4 = new Stock(4, "EXAS", "Exact Sciences", 67.34, -2.13);
-
-
-
-            user1.setStock(stock1);
-            user2.setStock(stock2);
-            user3.setStock(stock3);
-            user4.setStock(stock4);
 
             User user1 = new User(1L, 1987654, "Nick", "kokottni@iastate.edu", "oldenough", "user", "Password");
             user1.setPrivilege('a');
