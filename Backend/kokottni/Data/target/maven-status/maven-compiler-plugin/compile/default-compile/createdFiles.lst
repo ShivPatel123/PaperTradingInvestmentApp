@@ -1,3 +1,14 @@
+<<<<<<< HEAD
+coms309\Stocks\Stock.class
+coms309\Users\User.class
+coms309\Stocks\StockController.class
+coms309\Stocks\StockRepository.class
+coms309\Users\LoginAttempt.class
+coms309\Users\UserRepository.class
+coms309\Users\UserController.class
+coms309\Main.class
+coms309\Stocks\StockUpdater.class
+=======
 coms309\Users\LoginAttempt.class
 coms309\Stocks\Stock.class
 coms309\Stocks\StockPurchased.class
@@ -9,3 +20,4 @@ coms309\Stocks\StockController.class
 coms309\Stocks\StockPurchasedRepository.class
 coms309\Stocks\StockUpdater.class
 coms309\Stocks\StockRepository.class
+>>>>>>> 0e062921edc72c1c5dca46f72aa49f297b008c80
