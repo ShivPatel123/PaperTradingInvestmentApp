@@ -10,4 +10,5 @@
     <color name="background">#128c7e</color>
     <color name="txtclr">#dcf8c6</color>
     <color name="darkBack">#075e54</color>
+    <color name="btn_bg">#FF3700B3</color>
 </resources>

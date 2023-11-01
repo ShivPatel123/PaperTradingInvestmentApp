@@ -90,8 +90,8 @@ public class StockUpdater{
         return stockInfo.substring((priceIndex+23), (priceIndex+22) + endPriceIndex);
     }
 
-    public String updateStockInfo(int id, StockRepository repo){
-        Stock stockToUpdate = repo.findById(id);
+    public String updateStockInfo(Long id, StockRepository repo){
+        Stock stockToUpdate = repo.getOne(id);
         String stockInfo = updateStockData(stockToUpdate.getSymbol());
         stockToUpdate.setCurrValue(Double.valueOf(getUpdatedStockPrice(stockInfo)));
         stockToUpdate.setPrevDayChange(Double.valueOf(getUpdatedStockChange(stockInfo)));
