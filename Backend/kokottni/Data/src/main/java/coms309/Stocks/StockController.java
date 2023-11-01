@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.scheduling.annotation.Scheduled;
 
 import coms309.Users.User;
 import coms309.Users.UserRepository;
@@ -46,6 +47,19 @@ public class StockController {
     @GetMapping(path = "/stockchange/{id}")
     double getCurrPrice(@PathVariable int id){return stockRepository.findById(id).getCurrValue();}
 
+
+    //retrieves news articles pertaining to stock (id)
+    @GetMapping(path = "/stocks/news/{id}")
+    String getStockNews(@PathVariable int id){
+        return stockAPI.getStockNews(stockRepository.findById(id).getSymbol());
+    }
+
+    //retrieves weekly price history of stock (id)
+    @GetMapping(path = "/stocks/history/{id}")
+    String getStockHistory(@PathVariable int id){
+        return stockAPI.getStockHistory(stockRepository.findById(id).getSymbol());
+    }
+
     @PostMapping(path = "/stocks")
     String createStock(Stock stock){
         if(stock == null){
@@ -70,6 +84,10 @@ public class StockController {
         stockAPI.updateStockInfo(id, stockRepository);
         return stockRepository.findById(id);
     }
+
+    //updates stock repo every 15 min
+    //TODO: alternate which 5 are being updated
+    @Scheduled(fixedRate = 900000)
     @PutMapping(path = "/stocks")
     String updateAllStocks(){
         stockAPI.updateAllStocks(stockRepository);
