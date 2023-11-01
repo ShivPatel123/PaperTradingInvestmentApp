@@ -201,9 +201,11 @@ public class UserController {
 
     private void removeStocks(long uid){
         for(long i = 0; i < stockPurchasedRepository.count(); ++i){
-            for(int j = 0; j < userRepository.getOne(uid).getStocks().size() && stockPurchasedRepository.getOne(i).getUser().getId().equals(uid) && stockPurchasedRepository.getOne(i).getStock().equals(userRepository.getOne(uid).getStocks().get(j).getStock()); ++j){
-                stockPurchasedRepository.delete(userRepository.getOne(uid).getStocks().get(j));
-                userRepository.getOne(uid).getStocks().remove(j);
+            for(int j = 0; j < userRepository.getOne(uid).getStocks().size(); ++j){
+                if(stockPurchasedRepository.getOne(i).getUser().equals(userRepository.getOne(uid)) && stockPurchasedRepository.getOne(i).getStock().equals(userRepository.getOne(uid).getStocks().get(j).getStock())){
+                    stockPurchasedRepository.delete(userRepository.getOne(uid).getStocks().get(j));
+                    userRepository.getOne(uid).getStocks().remove(j);
+                }
             }
         }
     }
