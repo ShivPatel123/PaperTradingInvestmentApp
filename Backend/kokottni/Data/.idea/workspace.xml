@@ -6,6 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="8826602c-dd7b-42c8-af7c-b59c9d018776" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/coms309/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coms309/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/coms309/Users/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coms309/Users/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/coms309/Users/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coms309/Users/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/Data-1.0.0.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/target/Data-1.0.0.jar.original" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +47,26 @@
     &quot;last_opened_file_path&quot;: &quot;C:/Users/Nick Kokott/cs309/Data&quot;
   }
 }</component>
+  <component name="RunManager">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="coms309.Main" />
+      <module name="Data" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="coms309.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

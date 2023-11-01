@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     long purchaseNum = 5;
+    long stockNum = 5;
     @Autowired
     UserRepository userRepository;
     @Autowired
@@ -75,7 +76,7 @@ public class UserController {
         stockPurchasedRepository.save(userRepository.getOne(uid).getStocks().get(foundidx));
     }
 
-    @GetMapping(path = "/sell/{id}/user/{id}/{numStocks}")
+    @GetMapping(path = "/sell/{id}/user/{uid}/{numStocks}")
     double sellStock(@PathVariable long id, @PathVariable long uid, @PathVariable int numStocks){
         if(userRepository.getOne(uid).getPrivilege() == 'b') return -1;
         Stock stock = stockRepository.getOne(id);
@@ -163,10 +164,12 @@ public class UserController {
         return success;
     }
 
-    @PostMapping(path = "/stocks/{uid}")
-    String createStock(Stock stock, @PathVariable long uid){
+    @GetMapping(path = "/stocks/{uid}/{symbol}/{company}/{currValue}/{prevDayChange}")
+    String createStock(@PathVariable long uid, @PathVariable String symbol, @PathVariable String company, @PathVariable double currValue, @PathVariable double prevDayChange){
         User user = userRepository.getOne(uid);
+        Stock stock = new Stock(stockNum, symbol, company, currValue, prevDayChange);
         if(user.getPrivilege() != 'a' || stock == null) return failure;
+        ++stockNum;
         stockRepository.save(stock);
         return success;
     }
@@ -179,7 +182,7 @@ public class UserController {
         return success;
     }
 
-    @PutMapping(path = "/stocks/{uid}")
+    @PutMapping(path = "/update/{uid}")
     String updateAllStocks(@PathVariable long uid){
         if(userRepository.getOne(uid).getPrivilege() != 'a') return failure;
         stockAPI.updateAllStocks(stockRepository);
