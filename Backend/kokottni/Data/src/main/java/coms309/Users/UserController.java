@@ -1,6 +1,7 @@
 package coms309.Users;
 
 import java.util.List;
+import java.util.Objects;
 
 import coms309.Stocks.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -242,15 +243,17 @@ public class UserController {
         User user = userRepository.getOne(uid);
         user.setPrivilege('b');
         removeStocks(uid);
+        userRepository.save(user);
         return success;
     }
 
     private void removeStocks(long uid){
-        for(long i = 0; i < stockPurchasedRepository.count(); ++i){
+        for(long i = 1; i < stockPurchasedRepository.count(); ++i){
             for(int j = 0; j < userRepository.getOne(uid).getStocks().size(); ++j){
-                if(stockPurchasedRepository.getOne(i).getUser().equals(userRepository.getOne(uid)) && stockPurchasedRepository.getOne(i).getStock().equals(userRepository.getOne(uid).getStocks().get(j).getStock())){
-                    stockPurchasedRepository.delete(userRepository.getOne(uid).getStocks().get(j));
+                if(stockPurchasedRepository.getOne(i).getUser().getId().equals(userRepository.getOne(uid).getId())){
+                    stockPurchasedRepository.deleteById(i);
                     userRepository.getOne(uid).getStocks().remove(j);
+                    break;
                 }
             }
         }
@@ -262,6 +265,7 @@ public class UserController {
         if(admin.getPrivilege() != 'a') return failure;
         User user = userRepository.getOne(uid);
         user.setPrivilege('u');
+        userRepository.save(user);
         return success;
     }
 
