@@ -23,6 +23,9 @@ public class UserController {
     @Autowired
     StockRepository stockRepository;
 
+    @Autowired
+    FriendGroupRepository friendGroupRepository;
+
     private String success = "{\"message\":\"success\"}";
     private String failure = "{\"message\":\"failure\"}";
 
@@ -48,6 +51,12 @@ public class UserController {
         return userRepository.findById(id);
     }
 
+    //gets list of people in the friend group
+    @GetMapping(path = "/friendgroup/{groupName}")
+    List<String> getGroupMembers(@PathVariable String groupName){
+        return friendGroupRepository.findBygroupName(groupName).getGroupMembers();
+    }
+
     @PostMapping(path = "/users")
     String createUser(@RequestBody User user){
         //if there is no body or the username already exists
@@ -59,17 +68,45 @@ public class UserController {
         return success;
     }
     @PostMapping("/login")
-    String login(@RequestBody LoginAttempt login){
+    LoginAttempt login(@RequestBody LoginAttempt login){
         User user = userRepository.findByUsername(login.getUsername());
         if (user != null) {
             if (user.getPassword().equals(login.getPassword())) {
-                return "Success!";
+                login.setSuccess("Success!");
+                return login;
             } else {
-                return "Wrong Password";
+                login.setSuccess("Wrong Password");
+                return login;
             }
         } else {
-            return "Username not Found";
+            login.setSuccess("Username Not Found");
+            return login;
         }
+    }
+    //creates a new friend group using the name in the requestbody
+    @PostMapping(path = "/friendgroup/{groupName}")
+    String createFriendGroup(@PathVariable String groupName){
+        FriendGroup friendGroup = new FriendGroup();
+        friendGroup.setGroupName(groupName);
+        friendGroupRepository.save(friendGroup);
+        return success;
+    }
+//
+//    //creates a new friend group using the name in the requestbody and adds the user from the path variable into the group
+//    @PostMapping(path = "/friendgroup/{userID}")
+//    String createFriendGroup(@RequestBody String name, @PathVariable int userID){
+//        FriendGroup friendGroup = new FriendGroup();
+//        friendGroup.setGroupName(name);
+//        friendGroup.addUser(userRepository.findById(userID));
+//        friendGroupRepository.save(friendGroup);
+//        return success;
+//    }
+
+    //adds user userID to FriendGroup groupName
+    @PutMapping("/friendgroup/{groupName}/{userID}")
+    String addUserToGroup(@PathVariable String groupName, @PathVariable int userID){
+        friendGroupRepository.findBygroupName(groupName).addUser(userRepository.findById(userID));
+        return success;
     }
 
     @PutMapping("/users/{id}")
@@ -96,6 +133,13 @@ public class UserController {
     @DeleteMapping(path = "/users/{id}")
     String deleteUser(@PathVariable int id){
         userRepository.deleteById(id);
+        return success;
+    }
+
+    //removes user userID from FriendGroup groupName
+    @DeleteMapping("/friendgroup/{groupName}/{userID}")
+    String removeUserFromGroup(@PathVariable String groupName, @PathVariable int userID){
+        friendGroupRepository.findBygroupName(groupName).removeUser(userRepository.findById(userID));
         return success;
     }
 }
