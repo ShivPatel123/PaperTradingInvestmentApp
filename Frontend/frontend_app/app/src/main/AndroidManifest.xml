@@ -39,6 +39,9 @@
         <activity
             android:name=".screens.EditProfilePage"
             android:exported="true" />
+        <activity
+            android:name=".screens.PortfolioPage"
+            android:exported="true" />
 
     </application>
 
