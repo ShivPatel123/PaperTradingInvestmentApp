@@ -34,6 +34,9 @@ public class StockController {
     @GetMapping(path = "/stocks")
     List<Stock> getAllStocks(){return stockRepository.findAll();}
 
+    @GetMapping(path = "/stock/{id}")
+    List<StockPurchased> getAllUsersForStock(@PathVariable long id){return stockRepository.getOne(id).getUsers();}
+
 
     @GetMapping(path = "/stocksUpdate/{symbol}")
     String getStockAPIInfo(@PathVariable String symbol){
@@ -42,10 +45,10 @@ public class StockController {
 
 
     @GetMapping(path = "/stocks/{id}")
-    Stock getStockById(@PathVariable int id){return stockRepository.findById(id);}
+    Stock getStockById(@PathVariable Long id){return stockRepository.getOne(id);}
 
     @GetMapping(path = "/stockchange/{id}")
-    double getCurrPrice(@PathVariable int id){return stockRepository.findById(id).getCurrValue();}
+    double getCurrPrice(@PathVariable Long id){return stockRepository.getOne(id).getCurrValue();}
 
 
     //retrieves news articles pertaining to stock (id)
@@ -80,9 +83,9 @@ public class StockController {
 //    }
 
     @PutMapping(path = "/stocks/{id}")
-    Stock updateStockById(@PathVariable int id){
+    String updateStockById(@PathVariable Long id){
         stockAPI.updateStockInfo(id, stockRepository);
-        return stockRepository.findById(id);
+        return success;
     }
 
     //updates stock repo every 15 min
@@ -96,12 +99,7 @@ public class StockController {
 
 
     @DeleteMapping(path = "/stocks/{id}")
-    String deleteStock(@PathVariable int id){
-
-        User user = userRepository.findByStockId(id);
-        user.setStock(null);
-        userRepository.save(user);
-
+    String deleteStock(@PathVariable Long id){
         stockRepository.deleteById(id);
         return success;
     }

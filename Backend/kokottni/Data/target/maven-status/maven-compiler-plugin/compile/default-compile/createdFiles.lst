@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 coms309/Users/User.class
 coms309/Stocks/StockUpdater.class
 coms309/chat/ChatSocketConfig.class
@@ -14,3 +15,28 @@ coms309/Users/FriendGroupRepository.class
 coms309/Stocks/StockRepository.class
 coms309/Stocks/Stock.class
 coms309/chat/Message.class
+=======
+<<<<<<< HEAD
+coms309\Stocks\Stock.class
+coms309\Users\User.class
+coms309\Stocks\StockController.class
+coms309\Stocks\StockRepository.class
+coms309\Users\LoginAttempt.class
+coms309\Users\UserRepository.class
+coms309\Users\UserController.class
+coms309\Main.class
+coms309\Stocks\StockUpdater.class
+=======
+coms309\Users\LoginAttempt.class
+coms309\Stocks\Stock.class
+coms309\Stocks\StockPurchased.class
+coms309\Users\UserRepository.class
+coms309\Users\User.class
+coms309\Users\UserController.class
+coms309\Main.class
+coms309\Stocks\StockController.class
+coms309\Stocks\StockPurchasedRepository.class
+coms309\Stocks\StockUpdater.class
+coms309\Stocks\StockRepository.class
+>>>>>>> 0e062921edc72c1c5dca46f72aa49f297b008c80
+>>>>>>> 99e9caf31d5da5208b9a826f89a2e61d368ba2d1
