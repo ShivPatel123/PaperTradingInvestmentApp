@@ -30,7 +30,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @Controller      // this is needed for this to be an endpoint to springboot
-@ServerEndpoint(value = "/chat/{username}")  // this is Websocket url
+@ServerEndpoint(value = "/chat/{username}/{target}")  // this is Websocket url
 public class ChatSocket {
 
   // cannot autowire static directly (instead we do it by the below
@@ -82,7 +82,7 @@ public class ChatSocket {
 
 
 	@OnMessage
-	public void onMessage(Session session, String message) throws IOException {
+	public void onMessage(Session session, String message, @PathParam("target") String target) throws IOException {
 
 		// Handle new messages
 		logger.info("Entered into Message: Got Message:" + message);
@@ -104,7 +104,7 @@ public class ChatSocket {
 		}
 
 		// Saving chat history to repository
-		msgRepo.save(new Message(username, message, destUsername));
+		msgRepo.save(new Message(username, message, target));
 	}
 
 
