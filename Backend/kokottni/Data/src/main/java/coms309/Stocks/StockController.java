@@ -47,6 +47,19 @@ public class StockController {
     @GetMapping(path = "/stockchange/{id}")
     double getCurrPrice(@PathVariable int id){return stockRepository.findById(id).getCurrValue();}
 
+
+    //retrieves news articles pertaining to stock (id)
+    @GetMapping(path = "/stocks/news/{id}")
+    String getStockNews(@PathVariable int id){
+        return stockAPI.getStockNews(stockRepository.findById(id).getSymbol());
+    }
+
+    //retrieves weekly price history of stock (id)
+    @GetMapping(path = "/stocks/history/{id}")
+    String getStockHistory(@PathVariable int id){
+        return stockAPI.getStockHistory(stockRepository.findById(id).getSymbol());
+    }
+
     @PostMapping(path = "/stocks")
     String createStock(Stock stock){
         if(stock == null){

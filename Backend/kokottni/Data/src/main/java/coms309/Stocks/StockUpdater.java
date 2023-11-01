@@ -17,6 +17,44 @@ public class StockUpdater{
     private final HttpClient httpClient = HttpClient.newBuilder().build();
     private final Logger logger = LoggerFactory.getLogger(StockUpdater.class);
 
+    public String getStockNews(String symbol){
+        try{
+            String apiRequest = "https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers=" + symbol + "&apikey=UOICPFOUUT832ZST";
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(new URI(apiRequest))
+                    .build();
+            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() == 200) {
+                return response.body();
+            } else {
+                return null;
+            }
+        }
+        catch(IOException | InterruptedException | java.net.URISyntaxException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public String getStockHistory(String symbol){
+        try{
+            String apiRequest = "https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=" + symbol + "&apikey=UOICPFOUUT832ZST";
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(new URI(apiRequest))
+                    .build();
+            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() == 200) {
+                return response.body();
+            } else {
+                return null;
+            }
+        }
+        catch(IOException | InterruptedException | java.net.URISyntaxException e){
+            e.printStackTrace();
+            return null;
+        }
+    }
+
     public String updateStockData(String symbol){
         try{
             String apiRequest = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=" + symbol + "&apikey=UOICPFOUUT832ZST";
