@@ -91,7 +91,7 @@ public class User {
 
     public char getPrivilege(){return privilege;}
 
-    void setPrivilege(char privilege){this.privilege = privilege;}
+    public void setPrivilege(char privilege){this.privilege = privilege;}
 
     public String getDob(){return dob;}
 
