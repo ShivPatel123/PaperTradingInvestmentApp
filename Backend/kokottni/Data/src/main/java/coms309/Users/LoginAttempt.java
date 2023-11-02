@@ -4,6 +4,8 @@ public class LoginAttempt{
     String username;
     String password;
 
+    String success;
+
     public LoginAttempt(){
 
     }
@@ -17,5 +19,9 @@ public class LoginAttempt{
     public String getPassword(){
         return this.password;
     }
+
+    public String getSuccess(){return this.success;}
+
+    public void setSuccess(String Success){this.success = Success;}
 }
 
