@@ -39,12 +39,7 @@ public class UserController {
 
     @GetMapping(path = "/users")
     List<User> getAllUsers(){
-        long id = 0;
-        List<User> users = new ArrayList<>();
-        while(userRepository.existsById(id)){
-            users.add(userRepository.findById(id));
-        }
-        return users;
+        return userRepository.findAll();
     }
 
     @GetMapping(path = "/user/{id}")
