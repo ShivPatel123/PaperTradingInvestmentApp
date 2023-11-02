@@ -24,6 +24,7 @@ public class MainPage extends AppCompatActivity {
     Button toGroup_btn;
     Button toPortfolio_btn;
     Button toHelp_btn;
+    Button toFriends_btn;
 
 
     @Override
@@ -97,7 +98,16 @@ public class MainPage extends AppCompatActivity {
             }
         });
 
-
+        //button to friends page
+        toFriends_btn = findViewById(R.id.friends_Main_btn);
+        toFriends_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(MainPage.this, FriendsPage.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
