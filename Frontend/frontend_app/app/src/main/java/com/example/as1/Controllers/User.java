@@ -134,6 +134,8 @@ public class User {
 
     public List<StockPurchased> getStocks(){return stocks;}
 
+    public void setStocks(List<StockPurchased> stocksIn){this.stocks = stocksIn;}
+
     public StockPurchased purchase(int numStocks, Stock stock, long id){
         if(numStocks < 1 || stock == null) return null;
         return setStock(stock, numStocks, id);
