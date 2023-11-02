@@ -1,8 +1,10 @@
 package com.example.as1.screens;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,7 +37,7 @@ public class PortfolioPage extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.stock_scroll);
 
         List<StockPurchased> stockPurchasedList;
-        ArrayList<ScrollStockCard> stockCardArrayList= new ArrayList<ScrollStockCard>();
+        ArrayList<ScrollStockCard> stockCardArrayList= new ArrayList<>();
 
         //get all user purchased stocks
         //TODO: get all stocks from global user
@@ -54,6 +56,13 @@ public class PortfolioPage extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new ScrollAdapter(this.getApplicationContext(), stockCardArrayList));
+
+       Button backHome_btn = findViewById(R.id.backHome_PortfolioBtn);
+        //Back to Home page button
+        backHome_btn.setOnClickListener(view -> {
+            Intent intent = new Intent(PortfolioPage.this, MainPage.class);
+            startActivity(intent);
+        });
 
     }//onCreate
 

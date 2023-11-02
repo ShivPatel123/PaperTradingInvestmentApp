@@ -1,6 +1,5 @@
 package com.example.as1.screens;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,7 +16,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.as1.R;
 import com.example.as1.Controllers.User;
 import com.example.as1.ExternalControllers.VolleySingleton;
-
+import android.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -120,13 +119,11 @@ public class EditProfilePage extends AppCompatActivity {
                         user.setUsername(username);
                         user.setPassword(password);
 
-                        confirm_display.setTextColor(confirm);
-
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 },
-                error -> confirm_display.setText(error.getMessage())) {
+                error ->  Log.i("error", "getUserData: " + error)) {
         };
 
         // Adding request to request queue
@@ -137,8 +134,6 @@ public class EditProfilePage extends AppCompatActivity {
     public void updateUserReq(Context context, User user) {
         String URL_JSON_OBJECT = "http://10.90.75.130:8080/user/".concat(String.valueOf(user.getId()));
         JSONObject objectBody = new JSONObject();
-        int confirm = getResources().getColor(R.color.greenConfirm);
-        TextView confirm_display = findViewById(R.id.confirmWindow);
         // Convert input to JSONObject
         try {
             objectBody.put("username",user.getUsername());
@@ -156,11 +151,13 @@ public class EditProfilePage extends AppCompatActivity {
 
         //Create new request
         JsonObjectRequest request = new JsonObjectRequest(
-                Request.Method.POST,
+                Request.Method.PUT,
                 URL_JSON_OBJECT,
                 objectBody,
-                response -> confirm_display.setTextColor(confirm),
-                error -> confirm_display.setText(error.getMessage())) { };
+                response ->{
+                    Log.i("response", "updateUserReq: " + response);
+                },
+                error -> Log.i("error", "updateUserReq: " + error)) { };
 
         // Adding request to request queue
         VolleySingleton.getInstance(context.getApplicationContext()).addToRequestQueue(request);
