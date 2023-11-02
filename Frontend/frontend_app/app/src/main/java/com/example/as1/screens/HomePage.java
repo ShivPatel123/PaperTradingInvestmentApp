@@ -42,7 +42,7 @@ public class HomePage extends AppCompatActivity {
 
         //button to test profile
         profiletest.setOnClickListener(v -> {
-            Intent intent = new Intent(HomePage.this, ProfilePage.class);
+            Intent intent = new Intent(HomePage.this, MainPage.class);
             startActivity(intent);
         });
 

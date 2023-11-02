@@ -53,7 +53,7 @@ public class ProfilePage extends AppCompatActivity {
         password_display.setText(getGlobal.getPassword());
         email_display.setText(getGlobal.getEmail());
         dob_display.setText(getGlobal.getDob());
-        double money1 = (double) getGlobal.getMoney();
+        double money1 = getGlobal.getMoney();
         money_display.setText(String.valueOf(money1));
         //stock_display.setText(getGlobal.getNumStocksPurchased());
 
