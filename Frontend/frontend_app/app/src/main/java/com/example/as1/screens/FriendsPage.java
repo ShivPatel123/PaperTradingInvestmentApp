@@ -26,7 +26,7 @@ public class FriendsPage extends AppCompatActivity implements WebSocketListener 
         setContentView(R.layout.friends_page);
 
         //URL from springboot endpoint, DOES IT NEED TO BE WS OR HTTP??
-        //what is {target}
+        //TODO: what is {target}
          String BASE_URL = "ws://10.90.75.130:8080/chat/";
          Button connectBtn, sendBtn;
          EditText usernameEtx, msgEtx;
