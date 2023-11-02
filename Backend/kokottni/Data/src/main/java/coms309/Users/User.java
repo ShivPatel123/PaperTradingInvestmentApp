@@ -1,6 +1,16 @@
 package coms309.Users;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
+
 import javax.persistence.*;
+
 
 import coms309.Stocks.Stock;
 import coms309.Stocks.StockPurchased;
@@ -40,7 +50,14 @@ public class User {
     @Column(name = "privilege")
     private char privilege;
 
+
+    @ManyToOne
+    @JoinColumn(name = "friend_group_id")
+    private FriendGroup friendGroup;
+
+
     public User(Long id, double money, String name, String email, String dob, String username, String password){
+
         this.id = id;
         this.money = money;
         this.name = name;
@@ -144,6 +161,7 @@ public class User {
         return null;
     }
 
+
     public List<StockPurchased> getStocks(){return stocks;}
 
     public StockPurchased purchase(int numStocks, Stock stock, long id){
@@ -177,4 +195,5 @@ public class User {
             return other.id == null;
         } else return id.equals(other.id);
     }
+
 }
