@@ -1,49 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
     tools:context=".screens.FriendsPage"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/background">
+
+    <TextView
+        android:id="@+id/chat_title"
+        android:layout_width="match_parent"
+        android:layout_height="97dp"
+        android:background="@color/darkBack"
+        android:ems="10"
+        android:fontFamily="@font/advent_pro_medium"
+        android:padding="20dp"
+        android:text="        Friends Chat"
+        android:textColor="@color/txtclr"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/welcome_display"
+        android:layout_width="189dp"
+        android:layout_height="55dp"
+        android:layout_gravity="left"
+        android:layout_margin="20dp"
+        android:text="Welcome, name!"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        android:textColor="@color/txtclr"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.187"
+        tools:ignore="RtlCompat" />
+
+    <Button
+        android:id="@+id/bt1"
+        android:layout_width="176dp"
+        android:layout_height="54dp"
+        android:layout_margin="20dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="45dp"
+        android:text="Connect"
+        app:layout_constraintBottom_toTopOf="@+id/et2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/welcome_display"
+        app:layout_constraintTop_toBottomOf="@+id/chat_title" />
 
     <EditText
-        android:layout_marginTop="20dp"
-        android:layout_height="50dp"
-        android:layout_width="match_parent"
-        android:hint="username"
-        android:textSize="20dp"
-        android:id="@+id/et1" />
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Connect"
-        android:id="@+id/bt1" />
-    <EditText
-        android:layout_height="50dp"
-        android:layout_width="match_parent"
+        android:id="@+id/et2"
+        android:layout_width="400dp"
+        android:layout_height="51dp"
         android:hint="message"
         android:textSize="20dp"
-        android:id="@+id/et2" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chat_title"
+        app:layout_constraintVertical_bias="0.193" />
+
     <Button
+        android:id="@+id/bt2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Send"
-        android:id="@+id/bt2" />
+        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.95"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et2"
+        app:layout_constraintVertical_bias="0.4" />
+
+    <Button
+        android:id="@+id/backHome_mainBtn"
+        android:layout_width="81dp"
+        android:layout_height="60dp"
+        android:text="Back"
+        android:textColor="@color/txtclr"
+        app:layout_constraintBottom_toBottomOf="@+id/chat_title"
+        app:layout_constraintEnd_toEndOf="@+id/chat_title"
+        app:layout_constraintHorizontal_bias="0.047"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.372"
+        tools:layout_editor_absoluteY="16dp" />
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et2"
+        app:layout_constraintVertical_bias="0.215">
 
         <TextView
             android:id="@+id/tx1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="The Conversation will appear here:\n"
+            android:text="No messages yet...\n"
             android:textSize="20dp" />
 
     </ScrollView>
 
-
-</androidx.appcompat.widget.LinearLayoutCompat>
+</androidx.constraintlayout.widget.ConstraintLayout>

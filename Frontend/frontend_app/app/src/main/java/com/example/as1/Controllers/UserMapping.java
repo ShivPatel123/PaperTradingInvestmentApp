@@ -3,22 +3,27 @@ package com.example.as1.Controllers;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
+import retrofit2.http.PUT;
 import retrofit2.http.Path;
 public interface UserMapping {
+
+
+
+/*
+    User Mapping
+ */
 
     @GET("/users")
     Call<List<User>> getAllUsers();
 
     @GET("/users/{id}")
-    Call<User> getUserByID(@Path("id") int id);
+    Call<User> getUserByID(@Path("id") long id);
 
-    @GET("/purchase/{id}/{numStocks}")
-    Call<User> purchaseById(@Path("id") int id, @Path("numStocks") int numStocks);
-
-    @GET("/sell/{id}/{numStocks}")
-    Call<User> sellById(@Path("id") int id, @Path("numStocks") int numStocks);
+    @GET("/user/{id}")
+    Call<List<StockPurchased>> getAllStocksForUser(@Path("id") long id);
 
     @POST("/users")
     Call<User> createUser (@Body User user);
@@ -26,35 +31,64 @@ public interface UserMapping {
     @POST("/login")
     Call<User> login(@Body LoginAttempt login);
 
-    @POST("/users/{id}")
+    @PUT("/users/{id}")
     Call<User> updateUser(@Body User updateUser);
 
-//
-//    @PutMapping("/users/{id}")
-//    User updateUser(@PathVariable int id, @RequestBody User request){
-//        User user = userRepository.findById(id);
-//        if(user == null)
-//            return null;
-//        userRepository.save(request);
-//        return userRepository.findById(id);
-//    }
-//
-//    @PutMapping("/users/{userId}/stocks/{stockId}")
-//    String assignStockToUser(@PathVariable int userId,@PathVariable int stockId){
-//        User user = userRepository.findById(userId);
-//        Stock laptop = stockRepository.findById(stockId);
-//        if(user == null || laptop == null)
-//            return failure;
-//        laptop.setUser(user);
-//        user.setStock(laptop);
-//        userRepository.save(user);
-//        return success;
-//    }
-//
-//    @DeleteMapping(path = "/users/{id}")
-//    String deleteUser(@PathVariable int id){
-//        userRepository.deleteById(id);
-//        return success;
-//    }
+    @DELETE("/users/{id}")
+    Call<String> deleteUser(@Path("id") Long id);
 
-}
+/*
+    Stock Mapping -- for user stocks
+ */
+
+    @GET("/buy/{id}/user/{uid}/amt/{amount}")
+    Call<StockPurchased> purchaseStock(@Path("id") long id, @Path("uid") long uid, @Path("amount") int amount);
+
+    @GET("/sell/{id}/user/{uid}/{numStocks}")
+    Call<User> sellStock(@Path("id") long id, @Path("uid") long uid, @Path("numStocks") int numStocks);
+
+    @PUT("/users/{userId}/stocks/{stockId}/{numPurchasing}")
+    Call<String> assignStockToUser(@Path("userID") Long userId, @Path("stockID") Long stockId, @Path("numPurchasing") int numPurchasing);
+
+    @GET("/stocks/{uid}/{symbol}/{company}/{currValue}/{prevDayChange}")
+    Call<String> createStock(@Path("uid") long uid, @Path("symbol") String symbol, @Path("company") String company,
+                             @Path("currValue") double currValue, @Path("prevDayChange") double prevDayChange);
+
+    @DELETE("/stocks/{sid}/{uid}")
+    Call<String> deleteStock(@Path("sid") long sid, @Path("uid") long uid);
+
+    @PUT("/update/{uid}")
+    Call<String> updateAllStocks(@Path("uid") long uid);
+
+
+    /*
+        Group and Friend Group Mapping
+     */
+
+    @GET("/friendgroup/{groupName}")
+    Call<List<String>> getGroupMembers(@Path("groupName") String groupName);
+
+    @POST("/friendgroup/{groupName}")
+    Call<FriendGroup> createFriendGroup(@Path("groupName") String groupName);
+
+    //adds user userID to FriendGroup groupName
+    @PUT("/friendgroup/{groupName}/{userID}")
+    Call<String> addUserToGroup(@Path("groupName") String groupName, @Path("userID") int userID);
+
+    //removes user userID from FriendGroup groupName
+    @DELETE("/friendgroup/{groupName}/{userID}")
+    Call<String> removeUserFromGroup(@Path("groupName") String groupName, @Path("userID") int userID);
+
+
+    /*
+        Admin Only
+     */
+
+    @PUT("/banuser/{uid}/byadmin/{aid}")
+    Call<String> banUser(@Path("uid") long uid, @Path("aid") long aid);
+
+    @PUT("/unban/{uid}/byadmin/{aid}")
+    Call<String> unbanUser(@Path("uid") long uid, @Path("aid") long aid);
+
+
+    }

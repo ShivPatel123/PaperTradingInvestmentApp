@@ -64,7 +64,7 @@ public class LoginPage extends AppCompatActivity {
             //Post login
            makeLoginPostReq(this.getApplicationContext(), loginAuth);
 
-           //TODO: fix this: If backend returns success, open main page
+           //TODO: make sure this is working: If backend returns success, open main page
            if(volleyOutput_txt.getText().toString() == "{\"message\":\"success\"}") {
                //set global user variables for username and passw
                getInstance().setUsername(usernameInput);

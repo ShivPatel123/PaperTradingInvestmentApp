@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.as1.Controllers.User;
 import com.example.as1.ExternalControllers.WebSocketListener;
 import com.example.as1.ExternalControllers.WebSocketManager;
 import com.example.as1.R;
@@ -24,20 +25,28 @@ public class FriendsPage extends AppCompatActivity implements WebSocketListener 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.friends_page);
 
-         String BASE_URL = "ws://10.0.2.2:8080/chat/";
+        //URL from springboot endpoint, DOES IT NEED TO BE WS OR HTTP??
+        //what is {target}
+         String BASE_URL = "ws://10.90.75.130:8080/chat/";
          Button connectBtn, sendBtn;
          EditText usernameEtx, msgEtx;
          TextView msgTv;
 
         connectBtn = findViewById(R.id.bt1);
         sendBtn =  findViewById(R.id.bt2);
-        usernameEtx =  findViewById(R.id.et1);
         msgEtx =  findViewById(R.id.et2);
+
+        //Get global user data for get request (just need id for get req)
+        User getGlobal = User.getInstance();
+        //Get req for user data, need to be sure global user has id set after logging in
+        //TODO: make get and post reqs generic then call this from generic
+       // getGlobal = User.getUserData(this.getApplicationContext(),getGlobal);
 
 
         /* connect button listener */
         connectBtn.setOnClickListener(view -> {
-            String serverUrl = BASE_URL + usernameEtx.getText().toString();
+            //set server url with url + username (may need changed)
+            String serverUrl = BASE_URL + getGlobal.getUsername().toString();
 
             // Establish WebSocket connection and set listener
             WebSocketManager.getInstance().connectWebSocket(serverUrl);
@@ -47,7 +56,6 @@ public class FriendsPage extends AppCompatActivity implements WebSocketListener 
         /* send button listener */
         sendBtn.setOnClickListener(v -> {
             try {
-
                 // send message
                 WebSocketManager.getInstance().sendMessage(msgEtx.getText().toString());
             } catch (Exception e) {
