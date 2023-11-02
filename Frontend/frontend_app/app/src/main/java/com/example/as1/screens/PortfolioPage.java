@@ -1,31 +1,17 @@
 package com.example.as1.screens;
 
-import android.content.Context;
 import android.os.Bundle;
-import android.view.ViewGroup;
-import android.widget.TextView;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.volley.Request;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.example.as1.Controllers.StockAdapter;
+import com.example.as1.Controllers.ScrollAdapter;
 import com.example.as1.Controllers.StockPurchased;
 import com.example.as1.Controllers.User;
-import com.example.as1.ExternalControllers.VolleySingleton;
 import com.example.as1.R;
 
-import org.json.JSONException;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 
 public class PortfolioPage extends AppCompatActivity {
 
@@ -45,8 +31,9 @@ public class PortfolioPage extends AppCompatActivity {
         //stockPurchasedList.add(i, element);
 
         RecyclerView recyclerView = findViewById(R.id.stock_scroll);
-        recyclerView.setAdapter(new StockAdapter(this.getApplicationContext(), stockPurchasedList));
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(new ScrollAdapter(this.getApplicationContext(), stockPurchasedList));
+
 
 
     }//onCreate

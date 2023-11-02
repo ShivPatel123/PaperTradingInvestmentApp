@@ -11,12 +11,12 @@ import com.example.as1.R;
 
 import java.util.List;
 
-public class StockAdapter extends RecyclerView.Adapter<ScrollViewHolder> {
+public class ScrollAdapter extends RecyclerView.Adapter<ScrollViewHolder> {
 
     Context context;
     List<StockPurchased> stockPurch;
 
-    public StockAdapter(Context context, List<StockPurchased> stockPurch){
+    public ScrollAdapter(Context context, List<StockPurchased> stockPurch){
         this.stockPurch=stockPurch;
         this.context=context;
     }

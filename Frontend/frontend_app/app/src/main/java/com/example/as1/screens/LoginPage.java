@@ -20,6 +20,8 @@ import com.example.as1.R;
 import com.example.as1.ExternalControllers.VolleySingleton;
 
 import android.util.Log;
+import android.widget.TextView;
+
 import org.json.*;
 
 public class LoginPage extends AppCompatActivity {
@@ -67,6 +69,8 @@ public class LoginPage extends AppCompatActivity {
            //TODO: make sure this is working: If backend returns success, open main page
            if(volleyOutput_txt.getText().toString() == "{\"message\":\"success\"}") {
                //set global user variables for username and passw
+               //TODO: if the login is successful, get the user data and set the global user to it. this
+               // should solve the functions returning nothing.
                getInstance().setUsername(usernameInput);
                getInstance().setPassword(passwordInput);
                //go to MainPage
@@ -100,6 +104,48 @@ public class LoginPage extends AppCompatActivity {
 
         // Adding request to request queue
         VolleySingleton.getInstance(context.getApplicationContext()).addToRequestQueue(request);
+    }
+
+    public User getUserData(Context context, User user) {
+        String URL_JSON_OBJECT = "http://10.90.75.130:8080/user/".concat(String.valueOf(user.getId())); //TODO: no user id after login
+
+        //Create new request
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.GET,
+                URL_JSON_OBJECT,
+                null,
+                response -> {
+                    try {
+                        // Parse JSON object data
+                        String name = response.getString("name");
+                        String email = response.getString("email");
+                        String id = response.getString("id");
+                        String dob = response.getString("dob");
+                        String money = response.getString("money");
+                        String numStocks = response.getString("numStocks");
+                        String username = response.getString("username");
+                        String password = response.getString("password");
+
+                        // Populate text views with the parsed data
+                        user.setName(name);
+                        user.setEmail(email);
+                        user.setId(Integer.parseInt(id));
+                        user.setDob(dob);
+                        user.setMoney(Double.parseDouble(money));
+                        // user.setNumStocks(Integer.parseInt(numStocks));
+                        user.setUsername(username);
+                        user.setPassword(password);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                },
+                error -> Log.e("Error Message for ", "getUserData: " + error.getMessage().toString())) {
+        };
+
+        // Adding request to request queue
+        VolleySingleton.getInstance(context.getApplicationContext()).addToRequestQueue(request);
+        return user;
     }
 
 }
