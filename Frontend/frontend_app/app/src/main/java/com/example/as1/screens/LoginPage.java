@@ -25,9 +25,7 @@ import android.widget.TextView;
 import org.json.*;
 
 public class LoginPage extends AppCompatActivity {
-//set variable fro userID, use that throughout the app.
-//setter methods in profile page
-// stock prediction page/ feature??
+
     //TODO:make javadoc for frontend layout files and all files
 
     @Override
@@ -99,7 +97,10 @@ public class LoginPage extends AppCompatActivity {
                 Request.Method.POST,
                 URL_JSON_OBJECT,
                 objectBody,
-                response -> volleyOutput_txt.setText(response.toString()),
+                response -> {
+                    volleyOutput_txt.setText(response.toString());
+                    Log.i("Post req response", "makeLoginPostReq: " + response);
+                },
                 error -> volleyOutput_txt.setText(error.getMessage())) { };
 
         // Adding request to request queue

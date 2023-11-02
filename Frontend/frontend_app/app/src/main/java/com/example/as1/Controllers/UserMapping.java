@@ -19,9 +19,6 @@ public interface UserMapping {
     @GET("/users")
     Call<List<User>> getAllUsers();
 
-    @GET("/users/{id}")
-    Call<User> getUserByID(@Path("id") long id);
-
     @GET("/user/{id}")
     Call<List<StockPurchased>> getAllStocksForUser(@Path("id") long id);
 
