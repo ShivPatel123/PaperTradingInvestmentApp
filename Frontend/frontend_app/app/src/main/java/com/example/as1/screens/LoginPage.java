@@ -12,8 +12,10 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 
+import com.android.volley.toolbox.Volley;
 import com.example.as1.Controllers.LoginAttempt;
 import com.example.as1.Controllers.User;
 import com.example.as1.R;
@@ -37,6 +39,7 @@ public class LoginPage extends AppCompatActivity {
         Button toHome_btn = findViewById(R.id.toHome_loginPagebtn);
         Button toSignUp_btn = findViewById(R.id.toSignupBtn);
         Button sendLoginReq_btn = findViewById(R.id.sendLoginReq_btn);
+
 
         EditText usernameInput_txt = findViewById(R.id.usernameLogin_txtInput);
         EditText passwordInput_txt = findViewById(R.id.passwordLogin_txtInput);
@@ -63,6 +66,7 @@ public class LoginPage extends AppCompatActivity {
            LoginAttempt loginAuth = new LoginAttempt (usernameInput, passwordInput);
             //Post login
            makeLoginPostReq(this.getApplicationContext(), loginAuth);
+            Log.i("after post req called", "");
 
            //TODO: make sure this is working: If backend returns success, open main page
            if(volleyOutput_txt.getText().toString() == "{\"message\":\"success\"}") {
@@ -87,7 +91,7 @@ public class LoginPage extends AppCompatActivity {
         try {
             objectBody.put("username",loginA.getUsername());
             objectBody.put("password",loginA.getPassword());
-            Log.d("loginA JSON Object: ", objectBody.toString());
+            Log.i("loginA JSON Object: ", objectBody.toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -101,10 +105,11 @@ public class LoginPage extends AppCompatActivity {
                     volleyOutput_txt.setText(response.toString());
                     Log.i("Post req response", "makeLoginPostReq: " + response);
                 },
-                error -> volleyOutput_txt.setText(error.getMessage())) { };
+                error -> Log.i("Login error", "error message: " + error)) { };
 
         // Adding request to request queue
         VolleySingleton.getInstance(context.getApplicationContext()).addToRequestQueue(request);
+
     }
 
     public User getUserData(Context context, User user) {
