@@ -42,6 +42,10 @@ public class PortfolioPage extends AppCompatActivity {
         //get all user purchased stocks
         User getGlobal = getInstance();
         getGlobal = getUserData(this.getApplicationContext(), getGlobal);
+        if(getGlobal.getId() <= 0) {
+            getGlobal.setId(1);
+        }
+
         //get user stocks from server
         stockPurchasedList = getAllUserStocks(this.getApplicationContext(), getGlobal);
         //update local/global user
@@ -89,22 +93,33 @@ public class PortfolioPage extends AppCompatActivity {
                             stockPurchased.setId(object.getLong(0));
                             //parse array into user
                             JSONArray responseUser = object.getJSONArray(1);
-                            JSONObject parseUser;
+                            JSONArray parseUser;
                             User inputUser = new User();
                             for(int j = 0; j < responseUser.length(); i++) {
-                                parseUser = responseUser.getJSONObject(j);
-                                inputUser.setId(parseUser.getLong("id"));
-                                inputUser.setMoney(parseUser.getDouble("money"));
-                                inputUser.setPassword(parseUser.getString("password"));
-                                inputUser.setUsername(parseUser.getString("username"));
-                                inputUser.setName(parseUser.getString("name"));
-                                inputUser.setDob(parseUser.getString("dob"));
-                                inputUser.setUsername(parseUser.getString("email"));
+                                parseUser = responseUser.getJSONArray(j);
+                                inputUser.setId(parseUser.getLong(0));
+                                inputUser.setMoney(parseUser.getDouble(1));
+                                inputUser.setName(parseUser.getString(2));
+                                inputUser.setEmail(parseUser.getString(3));
+                                inputUser.setDob(parseUser.getString(4));
+                                inputUser.setUsername(parseUser.getString(5));
+                                inputUser.setPassword(parseUser.getString(6));
+
                             }
                             stockPurchased.setUser(inputUser);
 
                             //parse stock array into stock
-                            stockPurchased.setStock((Stock) object.get(2));
+                            JSONArray responseStock = object.getJSONArray(2);
+                            JSONArray parseStock;
+                            Stock inputStock = new Stock();
+                            for(int k = 0; k < responseJSONArray.length(); k++) {
+                                parseStock = responseStock.getJSONArray(k);
+                                inputStock.setId(parseStock.getLong(0));
+                                inputStock.setSymbol(parseStock.getString(1));
+                                inputStock.setCompany(parseStock.getString(2));
+                                inputStock.setCurrValue(parseStock.getDouble(3));
+                                inputStock.setPrevDayChange(parseStock.getDouble(4));
+                            }
 
                             stockPurchased.setNumPurchased(object.getInt(3));
                             stockPurchased.setCostPurchase(object.getDouble(4));
