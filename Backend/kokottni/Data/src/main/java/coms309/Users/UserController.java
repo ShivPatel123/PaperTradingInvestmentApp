@@ -86,9 +86,14 @@ public class UserController {
     }
 
 
+    @GetMapping(path = "/friendgroup")
+    List<FriendGroup> getFriendGroups(){
+        return friendGroupRepository.findAll();
+    }
+
     //gets list of people in the friend group
     @GetMapping(path = "/friendgroup/{groupName}")
-    List<String> getGroupMembers(@PathVariable String groupName){
+    List<User> getGroupMembers(@PathVariable String groupName){
         return friendGroupRepository.findBygroupName(groupName).getGroupMembers();
     }
 
@@ -159,10 +164,13 @@ public class UserController {
     //creates a new friend group using the name in the requestbody
     @PostMapping(path = "/friendgroup/{groupName}")
     String createFriendGroup(@PathVariable String groupName){
-        FriendGroup friendGroup = new FriendGroup();
-        friendGroup.setGroupName(groupName);
-        friendGroupRepository.save(friendGroup);
-        return success;
+        if(friendGroupRepository.findBygroupName(groupName) == null) {
+            FriendGroup friendGroup = new FriendGroup();
+            friendGroup.setGroupName(groupName);
+            friendGroupRepository.save(friendGroup);
+            return success;
+        }
+        return failure;
     }
 //
 //    //creates a new friend group using the name in the requestbody and adds the user from the path variable into the group
@@ -177,10 +185,25 @@ public class UserController {
 
     //adds user userID to FriendGroup groupName
     @PutMapping("/friendgroup/{groupName}/{userID}")
-    String addUserToGroup(@PathVariable String groupName, @PathVariable int userID){
-        friendGroupRepository.findBygroupName(groupName).addUser(userRepository.findById(userID));
-        return success;
+    @Transactional
+    String addUserToGroup(@PathVariable String groupName, @PathVariable int userID) {
+        FriendGroup group = friendGroupRepository.findBygroupName(groupName);
+        User user = userRepository.findById(userID);
+
+        if (group != null && user != null) {
+            user.setFriendGroup(group);
+            userRepository.save(user);
+
+            // Save the friend group to update the user-group relationship
+            friendGroupRepository.save(group);
+
+            return success;
+        } else {
+            return failure;
+        }
     }
+
+
 
     @PutMapping("/users/{id}")
     User updateUser(@PathVariable long id, @RequestBody User request){
