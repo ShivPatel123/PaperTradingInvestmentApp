@@ -27,6 +27,14 @@ public class JsonObjReqActivity extends AppCompatActivity {
 
     private static final String URL_JSON_OBJECT = "https://jsonplaceholder.typicode.com/users/1";
 
+//    private static final String URL_JSON_OBJECT = "http://10.90.75.130:8080/stocks";
+
+//    private static final String URL_JSON_OBJECT = "http://coms-309-051.class.las.iastate.edu:8080/users/2";
+
+//    private static final String URL_STRING_REQ = "http://coms-309-051.class.las.iastate.edu:8080/users";
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

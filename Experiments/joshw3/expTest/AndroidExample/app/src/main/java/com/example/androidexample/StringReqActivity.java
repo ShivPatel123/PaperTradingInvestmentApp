@@ -22,10 +22,13 @@ public class StringReqActivity extends AppCompatActivity {
     private Button btnStringReq;
     private TextView msgResponse;
 
-    private static final String URL_STRING_REQ = "https://jsonplaceholder.typicode.com/users/1";
+//    private static final String URL_STRING_REQ = "https://jsonplaceholder.typicode.com/users/1";
 
 
-    //private static final String URL_STRING_REQ = "http://10.90.75.130:8080/users";
+//    private static final String URL_STRING_REQ = "http://10.90.75.130:8080/users";
+
+    private static final String URL_STRING_REQ = "http://coms-309-051.class.las.iastate.edu:8080/users/2";
+
 
 //    private static final String URL_STRING_REQ = "http://10.90.75.130:8080/stocks";
 
