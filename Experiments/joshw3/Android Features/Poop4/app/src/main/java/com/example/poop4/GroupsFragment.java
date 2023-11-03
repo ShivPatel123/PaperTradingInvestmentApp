@@ -163,8 +163,9 @@ public class GroupsFragment extends Fragment implements View.OnClickListener, We
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        view.findViewById(R.id.connectButton).setOnClickListener(this);
-
+//        view.findViewById(R.id.connectButton).setOnClickListener(this);
+//I HATE THIS
+        
     }
 
 
