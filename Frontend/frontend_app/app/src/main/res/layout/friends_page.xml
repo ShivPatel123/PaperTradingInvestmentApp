@@ -28,34 +28,51 @@
 
     <TextView
         android:id="@+id/welcome_display"
-        android:layout_width="189dp"
-        android:layout_height="55dp"
+        android:layout_width="144dp"
+        android:layout_height="53dp"
         android:layout_gravity="left"
         android:layout_margin="20dp"
-        android:text="Welcome, name!"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="80dp"
+        android:gravity="center_vertical"
+        android:text="Welcome!"
+        android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Large"
         android:textColor="@color/txtclr"
         android:textStyle="bold|italic"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/et2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.059"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.187"
+        app:layout_constraintTop_toBottomOf="@+id/chat_title"
+        app:layout_constraintVertical_bias="0.0"
         tools:ignore="RtlCompat" />
 
     <Button
         android:id="@+id/bt1"
-        android:layout_width="176dp"
-        android:layout_height="54dp"
+        android:layout_width="120dp"
+        android:layout_height="48dp"
         android:layout_margin="20dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginBottom="45dp"
-        android:text="Connect"
+        android:text="Group 1"
+        app:layout_constraintBottom_toTopOf="@+id/et2"
+        app:layout_constraintEnd_toStartOf="@+id/group2_btn"
+        app:layout_constraintHorizontal_bias="0.246"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/welcome_display"
+        app:layout_constraintVertical_bias="0.375" />
+
+    <Button
+        android:id="@+id/group2_btn"
+        android:layout_width="120dp"
+        android:layout_height="48dp"
+        android:layout_margin="20dp"
+        android:text="Group 2"
         app:layout_constraintBottom_toTopOf="@+id/et2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/welcome_display"
-        app:layout_constraintTop_toBottomOf="@+id/chat_title" />
+        app:layout_constraintHorizontal_bias="0.556"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chat_title"
+        app:layout_constraintVertical_bias="1.0" />
 
     <EditText
         android:id="@+id/et2"
@@ -68,7 +85,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/chat_title"
-        app:layout_constraintVertical_bias="0.193" />
+        app:layout_constraintVertical_bias="0.262" />
 
     <Button
         android:id="@+id/bt2"
@@ -83,7 +100,7 @@
         app:layout_constraintVertical_bias="0.4" />
 
     <Button
-        android:id="@+id/backHome_mainBtn"
+        android:id="@+id/backHome_FriendsBtn"
         android:layout_width="81dp"
         android:layout_height="60dp"
         android:text="Back"
@@ -102,17 +119,17 @@
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et2"
-        app:layout_constraintVertical_bias="0.215">
+        app:layout_constraintVertical_bias="0.152">
 
         <TextView
             android:id="@+id/tx1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
-            android:text="No messages yet...\n"
+            android:text="Messages will appear here:"
             android:textSize="20dp" />
 
     </ScrollView>
