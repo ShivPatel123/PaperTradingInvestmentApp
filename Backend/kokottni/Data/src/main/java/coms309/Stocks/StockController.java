@@ -45,10 +45,10 @@ public class StockController {
 
 
     @GetMapping(path = "/stocks/{id}")
-    Stock getStockById(@PathVariable Long id){return stockRepository.getOne(id);}
+    Stock getStockById(@PathVariable long id){return stockRepository.findById(id);}
 
     @GetMapping(path = "/stockchange/{id}")
-    double getCurrPrice(@PathVariable Long id){return stockRepository.getOne(id).getCurrValue();}
+    double getCurrPrice(@PathVariable long id){return stockRepository.getOne(id).getCurrValue();}
 
 
     //retrieves news articles pertaining to stock (id)
