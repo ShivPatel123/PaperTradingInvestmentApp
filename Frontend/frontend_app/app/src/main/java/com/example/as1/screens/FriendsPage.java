@@ -26,15 +26,15 @@ public class FriendsPage extends AppCompatActivity implements WebSocketListener 
         setContentView(R.layout.friends_page);
 
         //URL from springboot endpoint, DOES IT NEED TO BE WS OR HTTP??
-        //TODO: what is {target}
-         String BASE_URL = "ws://10.90.75.130:8080/chat/";
-         Button connectBtn, sendBtn;
-         EditText usernameEtx, msgEtx;
+        //what is {target}: /chat/{username}/{target} target is message reciever
+        //message reciever should be groupname or user id
+         String BASE_URL = "ws://coms-309-051.class.las.iastate.edu:8080/chat/";
+         EditText usernameEtx;
          TextView msgTv;
 
-        connectBtn = findViewById(R.id.bt1);
-        sendBtn =  findViewById(R.id.bt2);
-        msgEtx =  findViewById(R.id.et2);
+        Button connectBtn = findViewById(R.id.bt1);
+        Button sendBtn =  findViewById(R.id.bt2);
+        EditText msgEtx =  findViewById(R.id.et2);
 
         //Get global user data for get request (just need id for get req)
         User getGlobal = User.getInstance();
@@ -59,7 +59,7 @@ public class FriendsPage extends AppCompatActivity implements WebSocketListener 
                 // send message
                 WebSocketManager.getInstance().sendMessage(msgEtx.getText().toString());
             } catch (Exception e) {
-                Log.d("ExceptionSendMessage:", e.getMessage().toString());
+                Log.i("ExceptionSendMessage:", e.getMessage().toString());
             }
         });
 
