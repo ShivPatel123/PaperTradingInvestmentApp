@@ -80,6 +80,10 @@ public class User {
         this.id = id;
     }
 
+    public void setFriendGroup(FriendGroup group){
+        this.friendGroup = group;
+    }
+
     public double getMoney(){return money;}
 
     public int getNumStocksPurchased(){return stocks.size() - 1;}
