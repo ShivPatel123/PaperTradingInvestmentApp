@@ -101,7 +101,7 @@ public class UserController {
     @GetMapping(path = "/sell/{id}/user/{uid}/{numStocks}")
     double sellStock(@PathVariable long id, @PathVariable long uid, @PathVariable int numStocks){
         Stock stock = stockRepository.findById(id);
-        if(userRepository.findById(uid).getPrivilege() == 'b' || !userRepository.findById(uid).getStocks().contains(stock)) return -1;
+        if(userRepository.findById(uid).getPrivilege() == 'b' || userRepository.findById(uid).getStocks().contains(stock)) return -1;
         int currLength = userRepository.findById(uid).getStocks().size();
         StockPurchased changed = userRepository.findById(uid).sell(numStocks, stock);
         int soldStocks = changed.getNumPurchased();
