@@ -92,4 +92,7 @@ public class MainActivity extends AppCompatActivity implements WebSocketListener
     public void onWebSocketError(Exception ex) {
         Log.i("Websocket", "Error" + ex.getMessage());
     }
+
+
+
 }

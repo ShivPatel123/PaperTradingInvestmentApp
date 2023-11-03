@@ -96,7 +96,7 @@
             android:layout_marginTop="350dp"
             android:layout_marginEnd="100dp"
             android:background="#FFFFFF"
-            android:text="Yesterday Price:" />
+            android:text="Past Change:" />
 
         <TextView
             android:id="@+id/testPrice"

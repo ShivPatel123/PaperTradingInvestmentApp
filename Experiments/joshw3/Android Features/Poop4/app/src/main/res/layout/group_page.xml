@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <Button
-        android:id="@+id/sendButton"
+        android:id="@+id/send_Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
@@ -35,7 +35,7 @@
         app:layout_constraintVertical_bias="0.094" />
 
     <Button
-        android:id="@+id/connectButton"
+        android:id="@+id/connect_Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
@@ -48,7 +48,7 @@
         app:layout_constraintVertical_bias="0.105" />
 
     <EditText
-        android:id="@+id/messageEditText"
+        android:id="@+id/messageEdit_Text"
         android:layout_width="242dp"
         android:layout_height="68dp"
         android:layout_marginEnd="115dp"
@@ -68,7 +68,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="25dp"
         android:layout_marginEnd="50dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="-25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -77,7 +77,7 @@
         app:layout_constraintVertical_bias="0.338">
 
         <TextView
-            android:id="@+id/chatTextView"
+            android:id="@+id/chatText_View"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="The Conversation will appear here:\n"

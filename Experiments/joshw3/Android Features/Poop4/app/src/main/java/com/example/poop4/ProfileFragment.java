@@ -92,8 +92,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
 //    private static final String URL_JSON_OBJECT = "https://jsonplaceholder.typicode.com/users/";
 
-    private String URL_JSON_OBJECT = "https://jsonplaceholder.typicode.com/users/";
+//    private String URL_JSON_OBJECT = "https://jsonplaceholder.typicode.com/users/";
 
+    private String URL_JSON_OBJECT = "http://coms-309-051.class.las.iastate.edu:8080/stock/";
 
 
 //    public String adapList[] = {"Apple", "Banana", "Orange", "Watermelon"};
@@ -109,6 +110,10 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     public ArrayList<String> mainStockList = new ArrayList<String>();
 
     public ArrayList<Integer> mainStockPrice = new ArrayList<Integer>();
+
+    public ArrayList<Integer> mainStockID = new ArrayList<Integer>();
+
+    public ArrayList<String> mainStockSymbol = new ArrayList<String>();
 
 
 
@@ -171,8 +176,11 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
 
 
-        for(int i=1;i<11;i++) {
-            URL_JSON_OBJECT = new String ("https://jsonplaceholder.typicode.com/users/" + i);
+        for(int i=1;i<5;i++) {
+//            URL_JSON_OBJECT = new String ("https://jsonplaceholder.typicode.com/users/" + i);
+            URL_JSON_OBJECT = new String ("http://coms-309-051.class.las.iastate.edu:8080/stocks/" + i);
+
+
 
             makeJsonObjReqq();
         }
@@ -198,15 +206,18 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
 
                 String temp = stockListNames.get(position);
-                Integer stockId = mainStockPrice.get(position);
+                Integer stockPriceTest = mainStockPrice.get(position);
+                Integer stockIdTest = mainStockID.get(position);
+                String tempSymbol = mainStockSymbol.get(position);
+
                 t.setText(temp);
 
                 Log.d(temp, "getting somewhere");
-                Log.d(String.valueOf(stockId), "gett");
+                Log.d(String.valueOf(stockPriceTest), "gett");
 
 //    public HomeFragment(int stockNumber, String stockName, int currentPrice, int pastPrice, int stockHigh, int stockLow){
 
-                replaceFragment(new HomeFragment(stockId, temp, stockId, stockId, stockId, stockId));
+                replaceFragment(new HomeFragment(stockPriceTest, temp, stockPriceTest, stockIdTest, stockPriceTest+5, stockPriceTest-7));
 
 
             }
@@ -236,7 +247,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
 
         for(int i = 0; i < stockListNames.size(); i++) {
-            list.add(stockListNames.get(i));
+            list.add(stockListNames.get(i) + " - " + mainStockSymbol.get(i));
             Log.d("hi", "WHY FUCK" + i);
         }
 
@@ -316,8 +327,12 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
                         try {
                             // Parse JSON object data
-                            String name = response.getString("name");
+
+                            //changed from name
+                            String name = response.getString("company");
                             Integer id = response.getInt("id");
+                            Integer stockValue = response.getInt("currValue");
+                            String symbol = response.getString("symbol");
 //                            String email = response.getString("email");
 //                            String phone = response.getString("phone");
 
@@ -329,7 +344,9 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 //
                             t.setText(name);
                             stockListNames.add(t.getText().toString());
-                            mainStockPrice.add(id);
+                            mainStockPrice.add(stockValue);
+                            mainStockID.add(id);
+                            mainStockSymbol.add(symbol);
                             mainStockList.add(t.getText().toString());
 
 
