@@ -8,11 +8,17 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.context.annotation.ComponentScan;
 
 import coms309.Stocks.Stock;
 import coms309.Stocks.StockRepository;
 import coms309.Users.User;
 import coms309.Users.UserRepository;
+import coms309.Users.FriendGroup;
+import coms309.Users.FriendGroupRepository;
+import coms309.chat.ChatSocket;
+import coms309.chat.Message;
+import coms309.chat.MessageRepository;
 
 
 
@@ -21,10 +27,16 @@ import coms309.Users.UserRepository;
 @SpringBootApplication
 @EnableScheduling
 @EnableJpaRepositories
+@ComponentScan(basePackages = {"coms309", "coms309.Users", "coms309.chat"})
 public class Main {
     public static void main(String[] args) {SpringApplication.run(Main.class, args);}
     @Bean
-    CommandLineRunner initUser(UserRepository userRepository, StockRepository stockRepository, StockPurchasedRepository spRepository){
+    CommandLineRunner initUser(
+            UserRepository userRepository,
+            StockRepository stockRepository,
+            StockPurchasedRepository spRepository,
+            FriendGroupRepository friendGroupRepository
+    ) {
         return args -> {
 
 

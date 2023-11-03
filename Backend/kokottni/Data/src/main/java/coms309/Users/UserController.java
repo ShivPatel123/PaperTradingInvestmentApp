@@ -1,5 +1,6 @@
 package coms309.Users;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -42,22 +43,25 @@ public class UserController {
     }
 
     @GetMapping(path = "/user/{id}")
-    List<StockPurchased> getAllStocksForUser(@PathVariable long id){return userRepository.getOne(id).getStocks();}
+    List<StockPurchased> getAllStocksForUser(@PathVariable long id){return userRepository.findById(id).getStocks();}
 
     @GetMapping(path = "/users/{id}")
-    User getUserById(@PathVariable Long id){
-        return userRepository.getOne(id);
+    User getUserById(@PathVariable long id){
+        return userRepository.findById(id);
     }
+
+    @GetMapping(path = "/userByName/{username}")
+    User getUserByUsername(@PathVariable String username){return userRepository.findByUsername(username);}
 
     @GetMapping(path = "/buy/{id}/user/{uid}/amt/{amount}")
     double purchaseStock(@PathVariable long id, @PathVariable long uid, @PathVariable int amount){
-        if(userRepository.getOne(uid).getPrivilege() == 'b') return -1;
-        Stock stock = stockRepository.getOne(id);
-        int countBefore = userRepository.getOne(uid).getStocks().size();
-        StockPurchased potentiallyRemove = userRepository.getOne(uid).purchase(amount, stock, purchaseNum);
+        if(userRepository.findById(uid).getPrivilege() == 'b') return -1;
+        Stock stock = stockRepository.findById(id);
+        int countBefore = userRepository.findById(uid).getStocks().size();
+        StockPurchased potentiallyRemove = userRepository.findById(uid).purchase(amount, stock, purchaseNum);
         ++purchaseNum;
-        if(countBefore != userRepository.getOne(uid).getStocks().size()){
-            stockPurchasedRepository.save(userRepository.getOne(uid).getStocks().get(userRepository.getOne(uid).getStocks().size() - 1));
+        if(countBefore != userRepository.findById(uid).getStocks().size()){
+            stockPurchasedRepository.save(userRepository.findById(uid).getStocks().get(userRepository.findById(uid).getStocks().size() - 1));
         }else{
             modifySPRepoPurchase(uid);
             stockPurchasedRepository.delete(potentiallyRemove);
@@ -68,8 +72,8 @@ public class UserController {
     private void modifySPRepoPurchase(long uid){
         int foundidx = -1;
         for(long i = 0; i < stockPurchasedRepository.count(); ++i){
-            for(int j = 0; j < userRepository.getOne(uid).getStocks().size(); ++j){
-                if(stockPurchasedRepository.getOne(i).getStock().equals(userRepository.getOne(uid).getStocks().get(j).getStock()) && stockPurchasedRepository.getOne(i).getUser().equals(userRepository.getOne(uid))){
+            for(int j = 0; j < userRepository.findById(uid).getStocks().size(); ++j){
+                if(stockPurchasedRepository.findById(i).getStock().equals(userRepository.findById(uid).getStocks().get(j).getStock()) && stockPurchasedRepository.findById(i).getUser().equals(userRepository.findById(uid))){
                     foundidx = j;
                     break;
                 }
@@ -78,25 +82,30 @@ public class UserController {
                 break;
             }
         }
-        stockPurchasedRepository.save(userRepository.getOne(uid).getStocks().get(foundidx));
+        stockPurchasedRepository.save(userRepository.findById(uid).getStocks().get(foundidx));
     }
 
 
+    @GetMapping(path = "/friendgroup")
+    List<FriendGroup> getFriendGroups(){
+        return friendGroupRepository.findAll();
+    }
+
     //gets list of people in the friend group
     @GetMapping(path = "/friendgroup/{groupName}")
-    List<String> getGroupMembers(@PathVariable String groupName){
+    List<User> getGroupMembers(@PathVariable String groupName){
         return friendGroupRepository.findBygroupName(groupName).getGroupMembers();
     }
 
 
     @GetMapping(path = "/sell/{id}/user/{uid}/{numStocks}")
     double sellStock(@PathVariable long id, @PathVariable long uid, @PathVariable int numStocks){
-        Stock stock = stockRepository.getOne(id);
-        if(userRepository.getOne(uid).getPrivilege() == 'b' || !userRepository.getOne(uid).getStocks().contains(stock)) return -1;
-        int currLength = userRepository.getOne(uid).getStocks().size();
-        StockPurchased changed = userRepository.getOne(uid).sell(numStocks, stock);
+        Stock stock = stockRepository.findById(id);
+        if(userRepository.findById(uid).getPrivilege() == 'b' || !userRepository.findById(uid).getStocks().contains(stock)) return -1;
+        int currLength = userRepository.findById(uid).getStocks().size();
+        StockPurchased changed = userRepository.findById(uid).sell(numStocks, stock);
         int soldStocks = changed.getNumPurchased();
-        if(currLength != userRepository.getOne(uid).getStocks().size()){
+        if(currLength != userRepository.findById(uid).getStocks().size()){
             stockPurchasedRepository.delete(changed);
         }else{
             StockPurchased sp = modifySPRepoSell(uid);
@@ -109,8 +118,8 @@ public class UserController {
     private StockPurchased modifySPRepoSell(long uid){
         int foundidx = -1;
         for(long i = 0; i < stockPurchasedRepository.count(); ++i){
-            for(int j = 0; j < userRepository.getOne(uid).getStocks().size() && stockPurchasedRepository.getOne(i).getUser().getId().equals(uid) && stockPurchasedRepository.getOne(i).getStock().equals(userRepository.getOne(uid).getStocks().get(j).getStock()); ++j){
-                if(stockPurchasedRepository.getOne(i).getNumPurchased() != userRepository.getOne(uid).getStocks().get(j).getNumPurchased()){
+            for(int j = 0; j < userRepository.findById(uid).getStocks().size() && stockPurchasedRepository.findById(i).getUser().getId().equals(uid) && stockPurchasedRepository.findById(i).getStock().equals(userRepository.findById(uid).getStocks().get(j).getStock()); ++j){
+                if(stockPurchasedRepository.findById(i).getNumPurchased() != userRepository.findById(uid).getStocks().get(j).getNumPurchased()){
                     foundidx = j;
                     break;
                 }
@@ -120,7 +129,7 @@ public class UserController {
             }
         }
         if(foundidx != -1){
-            return stockPurchasedRepository.save(userRepository.getOne(uid).getStocks().get(foundidx));
+            return stockPurchasedRepository.save(userRepository.findById(uid).getStocks().get(foundidx));
         }
         return null;
     }
@@ -155,10 +164,13 @@ public class UserController {
     //creates a new friend group using the name in the requestbody
     @PostMapping(path = "/friendgroup/{groupName}")
     String createFriendGroup(@PathVariable String groupName){
-        FriendGroup friendGroup = new FriendGroup();
-        friendGroup.setGroupName(groupName);
-        friendGroupRepository.save(friendGroup);
-        return success;
+        if(friendGroupRepository.findBygroupName(groupName) == null) {
+            FriendGroup friendGroup = new FriendGroup();
+            friendGroup.setGroupName(groupName);
+            friendGroupRepository.save(friendGroup);
+            return success;
+        }
+        return failure;
     }
 //
 //    //creates a new friend group using the name in the requestbody and adds the user from the path variable into the group
@@ -173,24 +185,39 @@ public class UserController {
 
     //adds user userID to FriendGroup groupName
     @PutMapping("/friendgroup/{groupName}/{userID}")
-    String addUserToGroup(@PathVariable String groupName, @PathVariable int userID){
-        friendGroupRepository.findBygroupName(groupName).addUser(userRepository.findById(userID));
-        return success;
+    @Transactional
+    String addUserToGroup(@PathVariable String groupName, @PathVariable int userID) {
+        FriendGroup group = friendGroupRepository.findBygroupName(groupName);
+        User user = userRepository.findById(userID);
+
+        if (group != null && user != null) {
+            user.setFriendGroup(group);
+            userRepository.save(user);
+
+            // Save the friend group to update the user-group relationship
+            friendGroupRepository.save(group);
+
+            return success;
+        } else {
+            return failure;
+        }
     }
 
+
+
     @PutMapping("/users/{id}")
-    User updateUser(@PathVariable Long id, @RequestBody User request){
-        User user = userRepository.getOne(id);
+    User updateUser(@PathVariable long id, @RequestBody User request){
+        User user = userRepository.findById(id);
         if(user.getPrivilege() == 'b') return null;
         userRepository.save(request);
-        return userRepository.getOne(id);
+        return userRepository.findById(id);
     }
 
     @PutMapping("/users/{userId}/stocks/{stockId}/{numPurchasing}")
-    String assignStockToUser(@PathVariable Long userId, @PathVariable Long stockId, @PathVariable int numPurchasing){
-        User user = userRepository.getOne(userId);
+    String assignStockToUser(@PathVariable long userId, @PathVariable long stockId, @PathVariable int numPurchasing){
+        User user = userRepository.findById(userId);
         if(user.getPrivilege() == 'b') return failure;
-        Stock stock = stockRepository.getOne(stockId);
+        Stock stock = stockRepository.findById(stockId);
         stock.setUser(user, numPurchasing, userId);
         user.setStock(stock, numPurchasing, stockId);
         userRepository.save(user);
@@ -200,7 +227,7 @@ public class UserController {
 
     @DeleteMapping(path = "/users/{id}")
     String deleteUser(@PathVariable Long id){
-        userRepository.getOne(id);
+        userRepository.findById(id);
         return success;
     }
 
@@ -213,7 +240,7 @@ public class UserController {
     }
     @PostMapping(path = "/newstocks/{uid}")
     String createStock(@RequestBody Stock stock, @PathVariable long uid){
-        User user = userRepository.getOne(uid);
+        User user = userRepository.findById(uid);
         if(user.getPrivilege() != 'a' || stock == null) return failure;
         stock.setId(stockNum);
         ++stockNum;
@@ -223,7 +250,7 @@ public class UserController {
 
     @DeleteMapping(path = "/stocks/{sid}/{uid}")
     String deleteStock(@PathVariable long sid, @PathVariable long uid){
-        User user = userRepository.getOne(uid);
+        User user = userRepository.findById(uid);
         if(user.getPrivilege() != 'a') return failure;
         stockRepository.deleteById(sid);
         return success;
@@ -231,16 +258,16 @@ public class UserController {
 
     @PutMapping(path = "/update/{uid}")
     String updateAllStocks(@PathVariable long uid){
-        if(userRepository.getOne(uid).getPrivilege() != 'a') return failure;
+        if(userRepository.findById(uid).getPrivilege() != 'a') return failure;
         stockAPI.updateAllStocks(stockRepository);
         return success;
     }
 
     @PutMapping(path = "/banuser/{uid}/byadmin/{aid}")
     String banUser(@PathVariable long uid, @PathVariable long aid){
-        User admin = userRepository.getOne(aid);
+        User admin = userRepository.findById(aid);
         if(admin.getPrivilege() != 'a') return failure;
-        User user = userRepository.getOne(uid);
+        User user = userRepository.findById(uid);
         user.setPrivilege('b');
         removeStocks(uid);
         userRepository.save(user);
@@ -249,10 +276,10 @@ public class UserController {
 
     private void removeStocks(long uid){
         for(long i = 1; i < stockPurchasedRepository.count(); ++i){
-            for(int j = 0; j < userRepository.getOne(uid).getStocks().size(); ++j){
-                if(stockPurchasedRepository.getOne(i).getUser().getId().equals(userRepository.getOne(uid).getId())){
+            for(int j = 0; j < userRepository.findById(uid).getStocks().size(); ++j){
+                if(stockPurchasedRepository.findById(i).getUser().getId().equals(userRepository.findById(uid).getId())){
                     stockPurchasedRepository.deleteById(i);
-                    userRepository.getOne(uid).getStocks().remove(j);
+                    userRepository.findById(uid).getStocks().remove(j);
                     break;
                 }
             }
@@ -261,9 +288,9 @@ public class UserController {
 
     @PutMapping(path = "/unban/{uid}/byadmin/{aid}")
     String unbanUser(@PathVariable long uid, @PathVariable long aid){
-        User admin = userRepository.getOne(aid);
+        User admin = userRepository.findById(aid);
         if(admin.getPrivilege() != 'a') return failure;
-        User user = userRepository.getOne(uid);
+        User user = userRepository.findById(uid);
         user.setPrivilege('u');
         userRepository.save(user);
         return success;
