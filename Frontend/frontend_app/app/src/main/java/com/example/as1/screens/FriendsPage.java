@@ -1,5 +1,6 @@
 package com.example.as1.screens;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,12 +12,16 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.Request;
+import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.as1.Controllers.User;
+import com.example.as1.ExternalControllers.VolleySingleton;
 import com.example.as1.ExternalControllers.WebSocketListener;
 import com.example.as1.ExternalControllers.WebSocketManager;
 import com.example.as1.R;
 
 import org.java_websocket.handshake.ServerHandshake;
+import org.json.JSONException;
 
 public class FriendsPage extends AppCompatActivity implements WebSocketListener {
 
@@ -33,20 +38,36 @@ public class FriendsPage extends AppCompatActivity implements WebSocketListener 
          TextView msgTv;
 
         Button connectBtn = findViewById(R.id.bt1);
+        Button connect2Btn = findViewById(R.id.group2_btn);
         Button sendBtn =  findViewById(R.id.bt2);
         EditText msgEtx =  findViewById(R.id.et2);
+        TextView welcome = findViewById(R.id.welcome_display);
+
+        //TODO: get call /chat/messages/target for messages history
 
         //Get global user data for get request (just need id for get req)
         User getGlobal = User.getInstance();
         //Get req for user data, need to be sure global user has id set after logging in
         //TODO: make get and post reqs generic then call this from generic
-       // getGlobal = User.getUserData(this.getApplicationContext(),getGlobal);
+        getGlobal = getUserData(this.getApplicationContext(),getGlobal);
+
+        welcome.setText("Welcome " + getGlobal.getName() + "!");
 
 
         /* connect button listener */
+        User finalGetGlobal = getGlobal;
         connectBtn.setOnClickListener(view -> {
             //set server url with url + username (may need changed)
-            String serverUrl = BASE_URL + getGlobal.getUsername().toString();
+            String serverUrl = BASE_URL + finalGetGlobal.getName().toString() + "/StockGroup1";
+
+            // Establish WebSocket connection and set listener
+            WebSocketManager.getInstance().connectWebSocket(serverUrl);
+            WebSocketManager.getInstance().setWebSocketListener(FriendsPage.this);
+        });
+
+        connect2Btn.setOnClickListener(view -> {
+            //set server url with url + username (may need changed)
+            String serverUrl = BASE_URL + finalGetGlobal.getName().toString() + "/StockGroup2";
 
             // Establish WebSocket connection and set listener
             WebSocketManager.getInstance().connectWebSocket(serverUrl);
@@ -97,5 +118,44 @@ public class FriendsPage extends AppCompatActivity implements WebSocketListener 
     @Override
     public void onWebSocketError(Exception ex) {}
 
+    public User getUserData(Context context, User user) {
+        String URL_JSON_OBJECT = "http://coms-309-051.class.las.iastate.edu:8080/userByName/" + user.getUsername();
 
+        //Create new request
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.GET,
+                URL_JSON_OBJECT,
+                null,
+                response -> {
+                    try {
+                        // Parse JSON object data
+                        String name = response.getString("name");
+                        String email = response.getString("email");
+                        String id = response.getString("id");
+                        String dob = response.getString("dob");
+                        String money = response.getString("money");
+                        String username = response.getString("username");
+                        String password = response.getString("password");
+                        //TODO parse arraylist to get stock list
+
+                        // Populate text views with the parsed data
+                        user.setName(name);
+                        user.setEmail(email);
+                        user.setId(Integer.parseInt(id));
+                        user.setDob(dob);
+                        user.setMoney(Double.parseDouble(money));
+                        user.setUsername(username);
+                        user.setPassword(password);
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                },
+                error -> Log.i("error msg", "getUserData: " + error.getMessage())) {
+        };
+
+        // Adding request to request queue
+        VolleySingleton.getInstance(context.getApplicationContext()).addToRequestQueue(request);
+        return user;
+    }
 }
