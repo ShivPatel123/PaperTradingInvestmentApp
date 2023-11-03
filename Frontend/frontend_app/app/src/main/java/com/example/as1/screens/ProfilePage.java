@@ -16,11 +16,14 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.as1.Controllers.StockPurchased;
 import com.example.as1.R;
 import com.example.as1.Controllers.User;
 import com.example.as1.ExternalControllers.VolleySingleton;
 
 import org.json.JSONException;
+
+import java.util.List;
 
 public class ProfilePage extends AppCompatActivity {
 
@@ -45,7 +48,6 @@ public class ProfilePage extends AppCompatActivity {
         User getGlobal = User.getInstance();
         //Get req for user data, need to be sure global user has id set after logging in
         getGlobal = getUserData(this.getApplicationContext(),getGlobal);
-        //TODO: update global user data (may need to make function)
 
         //set display to user data
         welcomeTxt.setText("Welcome, " + getGlobal.getName() + "!");
@@ -78,7 +80,7 @@ public class ProfilePage extends AppCompatActivity {
     }
 
     public User getUserData(Context context, User user) {
-        String URL_JSON_OBJECT = "http://10.90.75.130:8080/user/".concat(String.valueOf(user.getId()));
+        String URL_JSON_OBJECT = "http://coms-309-051.class.las.iastate.edu:8080/userByName/" + user.getUsername();
 
         //Create new request
         JsonObjectRequest request = new JsonObjectRequest(
@@ -93,17 +95,16 @@ public class ProfilePage extends AppCompatActivity {
                         String id = response.getString("id");
                         String dob = response.getString("dob");
                         String money = response.getString("money");
-                        //TODO: String numStocks = response.getJSONArray("numStocks");
                         String username = response.getString("username");
                         String password = response.getString("password");
+                        //TODO parse arraylist to get stock list
 
                         // Populate text views with the parsed data
                         user.setName(name);
                         user.setEmail(email);
-                       // user.setId(Integer.parseInt(id));
+                        user.setId(Integer.parseInt(id));
                         user.setDob(dob);
                         user.setMoney(Double.parseDouble(money));
-                        // user.setNumStocks(Integer.parseInt(numStocks));
                         user.setUsername(username);
                         user.setPassword(password);
 
@@ -111,7 +112,7 @@ public class ProfilePage extends AppCompatActivity {
                         e.printStackTrace();
                     }
                 },
-                error -> Log.d("error msg", "getUserData: " + error.getMessage())) {
+                error -> Log.i("error msg", "getUserData: " + error.getMessage())) {
         };
 
         // Adding request to request queue

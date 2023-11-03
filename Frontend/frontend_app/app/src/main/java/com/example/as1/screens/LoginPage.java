@@ -40,7 +40,6 @@ public class LoginPage extends AppCompatActivity {
         Button toSignUp_btn = findViewById(R.id.toSignupBtn);
         Button sendLoginReq_btn = findViewById(R.id.sendLoginReq_btn);
 
-
         EditText usernameInput_txt = findViewById(R.id.usernameLogin_txtInput);
         EditText passwordInput_txt = findViewById(R.id.passwordLogin_txtInput);
         EditText volleyOutput_txt = findViewById(R.id.loginReqResponse_txt);
@@ -68,11 +67,8 @@ public class LoginPage extends AppCompatActivity {
            makeLoginPostReq(this.getApplicationContext(), loginAuth);
             Log.i("after post req called", "");
 
-           //TODO: make sure this is working: If backend returns success, open main page
-           if(volleyOutput_txt.getText().toString() == "{\"message\":\"success\"}") {
+           if(volleyOutput_txt.getText().toString().equals("Success!")) {
                //set global user variables for username and passw
-               //TODO: if the login is successful, get the user data and set the global user to it. this
-               // should solve the functions returning nothing.
                getInstance().setUsername(usernameInput);
                getInstance().setPassword(passwordInput);
                //go to MainPage
@@ -83,7 +79,7 @@ public class LoginPage extends AppCompatActivity {
     }
 
     public void makeLoginPostReq(Context context, LoginAttempt loginA) {
-        String URL_JSON_OBJECT = "http://10.90.75.130:8080/login";
+        String URL_JSON_OBJECT = "http://coms-309-051.class.las.iastate.edu:8080/login";
         EditText volleyOutput_txt = findViewById(R.id.loginReqResponse_txt);
         JSONObject objectBody = new JSONObject();
 
@@ -102,18 +98,22 @@ public class LoginPage extends AppCompatActivity {
                 URL_JSON_OBJECT,
                 objectBody,
                 response -> {
-                    volleyOutput_txt.setText(response.toString());
+                    try {
+                        volleyOutput_txt.setText(response.getString("success"));
+                    } catch (JSONException e) {
+                        Log.i("response.getString", "Error message: ");
+                        throw new RuntimeException(e);
+                    }
                     Log.i("Post req response", "makeLoginPostReq: " + response);
                 },
                 error -> Log.i("Login error", "error message: " + error)) { };
 
         // Adding request to request queue
         VolleySingleton.getInstance(context.getApplicationContext()).addToRequestQueue(request);
-
     }
 
     public User getUserData(Context context, User user) {
-        String URL_JSON_OBJECT = "http://10.90.75.130:8080/user/".concat(String.valueOf(user.getId())); //TODO: no user id after login
+        String URL_JSON_OBJECT = "http://coms-309-051.class.las.iastate.edu:8080/user/".concat(String.valueOf(user.getId())); //TODO: no user id after login
 
         //Create new request
         JsonObjectRequest request = new JsonObjectRequest(
