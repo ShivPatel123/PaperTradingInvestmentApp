@@ -40,14 +40,17 @@ public class UserController {
     private String success = "{\"message\":\"success\"}";
     private String failure = "{\"message\":\"failure\"}";
 
+    @ApiOperation(value = "Gets a list of all the users in the userRepository", response = Iterable.class, tags = "users")
     @GetMapping(path = "/users")
     List<User> getAllUsers(){
         return userRepository.findAll();
     }
 
+    @ApiOperation(value = "Gets the list of purchased stocks for a specific user", response = Iterable.class, tags = "user/{id}")
     @GetMapping(path = "/user/{id}")
     List<StockPurchased> getAllStocksForUser(@PathVariable long id){return userRepository.findById(id).getStocks();}
 
+    @ApiOperation(value = "Gets the user and their information by their id", response = User.class, tags = "users/{id}")
     @GetMapping(path = "/users/{id}")
     User getUserById(@PathVariable long id){
         return userRepository.findById(id);
@@ -56,6 +59,7 @@ public class UserController {
     @GetMapping(path = "/userByName/{username}")
     User getUserByUsername(@PathVariable String username){return userRepository.findByUsername(username);}
 
+    @ApiOperation(value = "Has the user purchase a stock, will show the money spent from the transaction", response = double.class, tags = "buy/{id}/user/{uid}/amt/{amount}")
     @GetMapping(path = "/buy/{id}/user/{uid}/amt/{amount}")
     double purchaseStock(@PathVariable long id, @PathVariable long uid, @PathVariable int amount){
         if(userRepository.findById(uid).getPrivilege() == 'b') return -1;
@@ -101,6 +105,7 @@ public class UserController {
     }
 
 
+    @ApiOperation(value = "Has the user sell a stock, returns their money that they earned from the transaction", response = double.class, tags = "sell/{id}/user/{uid}/{numstocks}")
     @GetMapping(path = "/sell/{id}/user/{uid}/{numStocks}")
     double sellStock(@PathVariable long id, @PathVariable long uid, @PathVariable int numStocks){
         Stock stock = stockRepository.findById(id);
@@ -216,6 +221,7 @@ public class UserController {
         return userRepository.findById(id);
     }
 
+    @ApiOperation(value = "Assigns a stock to the user, essentially having them purchase it just a little different", response = String.class, tags = "user/{userId}/stock/{stockId}/{numPurchasing}")
     @PutMapping("/users/{userId}/stocks/{stockId}/{numPurchasing}")
     String assignStockToUser(@PathVariable long userId, @PathVariable long stockId, @PathVariable int numPurchasing){
         User user = userRepository.findById(userId);
