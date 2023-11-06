@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Objects;
 
 import coms309.Stocks.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+@Api(value = "UserController", description = "REST APIs for the user/admin entity")
 @RestController
 public class UserController {
 
@@ -238,6 +241,8 @@ public class UserController {
         friendGroupRepository.findBygroupName(groupName).removeUser(userRepository.findById(userID));
         return success;
     }
+
+    @ApiOperation(value = "Creates a new stock based on a stock json object, admins have permissions to do this", response = String.class, tags = "newstocks/{uid}")
     @PostMapping(path = "/newstocks/{uid}")
     String createStock(@RequestBody Stock stock, @PathVariable long uid){
         User user = userRepository.findById(uid);
@@ -248,6 +253,7 @@ public class UserController {
         return success;
     }
 
+    @ApiOperation(value = "Deletes a stock based on its id, if the admin wants to have that stock deleted", response = String.class, tags = "stocks/{sid}/{uid}")
     @DeleteMapping(path = "/stocks/{sid}/{uid}")
     String deleteStock(@PathVariable long sid, @PathVariable long uid){
         User user = userRepository.findById(uid);
@@ -256,6 +262,7 @@ public class UserController {
         return success;
     }
 
+    @ApiOperation(value = "Updates all the stocks if the admin user calls upon the stocks to be updated", response = String.class, tags = "update/{uid}")
     @PutMapping(path = "/update/{uid}")
     String updateAllStocks(@PathVariable long uid){
         if(userRepository.findById(uid).getPrivilege() != 'a') return failure;
@@ -263,6 +270,7 @@ public class UserController {
         return success;
     }
 
+    @ApiOperation(value = "Bans a user based on their uid, but ensures that this is being done by an admin with aid", response = String.class, tags = "banuser/{uid}/byadmin/{aid}")
     @PutMapping(path = "/banuser/{uid}/byadmin/{aid}")
     String banUser(@PathVariable long uid, @PathVariable long aid){
         User admin = userRepository.findById(aid);
@@ -286,6 +294,8 @@ public class UserController {
         }
     }
 
+
+    @ApiOperation(value = "Unbans the user with the uid, but must be done by an admin called by aid", response = String.class, tags = "unban/{uid}/byadmin/{aid}")
     @PutMapping(path = "/unban/{uid}/byadmin/{aid}")
     String unbanUser(@PathVariable long uid, @PathVariable long aid){
         User admin = userRepository.findById(aid);
