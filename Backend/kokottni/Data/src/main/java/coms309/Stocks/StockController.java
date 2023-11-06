@@ -34,46 +34,46 @@ public class StockController {
     private String success = "{\"message\":\"success\"}";
     private String failure = "{\"message\":\"failure\"}";
 
-    @ApiOperation(value = "Gets a list of all the stocks in the stockRepository", response = Iterable.class, tags = "stocks")
+    @ApiOperation(value = "Gets a list of all the stocks in the stockRepository", response = Iterable.class, tags = "stock")
     @GetMapping(path = "/stocks")
     List<Stock> getAllStocks(){return stockRepository.findAll();}
 
-    @ApiOperation(value = "Gets all users single stock based on its id value from the stockRepository", response = Iterable.class, tags = "stock/{id}")
+    @ApiOperation(value = "Gets all users single stock based on its id value from the stockRepository", response = Iterable.class, tags = "stock")
     @GetMapping(path = "/stock/{id}")
     List<StockPurchased> getAllUsersForStock(@PathVariable long id){return stockRepository.getOne(id).getUsers();}
 
 
-    @ApiOperation(value = "Gets the live stock information from AlphaVantage to apply to one of our stocks so that current information is displayed.", response = String.class, tags = "stocksupdate/{symbol}")
+    @ApiOperation(value = "Gets the live stock information from AlphaVantage to apply to one of our stocks so that current information is displayed.", response = String.class, tags = "stock")
     @GetMapping(path = "/stocksUpdate/{symbol}")
     String getStockAPIInfo(@PathVariable String symbol){
         return stockAPI.getUpdatedStockChange(symbol);
     }
 
 
-    @ApiOperation(value = "Gets a stock to return based on its id", response = Stock.class, tags = "stocks/{id}")
+    @ApiOperation(value = "Gets a stock to return based on its id", response = Stock.class, tags = "stock")
     @GetMapping(path = "/stocks/{id}")
     Stock getStockById(@PathVariable long id){return stockRepository.findById(id);}
 
-    @ApiOperation(value = "Gets the current price from a stock based on its id", response = double.class, tags = "stockchange/{id}")
+    @ApiOperation(value = "Gets the current price from a stock based on its id", response = double.class, tags = "stock")
     @GetMapping(path = "/stockchange/{id}")
     double getCurrPrice(@PathVariable long id){return stockRepository.getOne(id).getCurrValue();}
 
 
     //retrieves news articles pertaining to stock (id)
-    @ApiOperation(value = "Gets the current news for a stock from AlphaVantage API based on the id of that stock", response = String.class, tags = "stock/news/{id}")
+    @ApiOperation(value = "Gets the current news for a stock from AlphaVantage API based on the id of that stock", response = String.class, tags = "stock")
     @GetMapping(path = "/stocks/news/{id}")
     String getStockNews(@PathVariable int id){
         return stockAPI.getStockNews(stockRepository.findById(id).getSymbol());
     }
 
     //retrieves weekly price history of stock (id)
-    @ApiOperation(value = "Gets the price history of a stock from AlphaVantage API based on the id of the stock", response = String.class, tags = "stocks/history/{id}")
+    @ApiOperation(value = "Gets the price history of a stock from AlphaVantage API based on the id of the stock", response = String.class, tags = "stock")
     @GetMapping(path = "/stocks/history/{id}")
     String getStockHistory(@PathVariable int id){
         return stockAPI.getStockHistory(stockRepository.findById(id).getSymbol());
     }
 
-    @ApiOperation(value = "Creates a new stock that gets added to the stockRepository", response = String.class, tags = "stocks")
+    @ApiOperation(value = "Creates a new stock that gets added to the stockRepository", response = String.class, tags = "stock")
     @PostMapping(path = "/stocks")
     String createStock(Stock stock){
         if(stock == null){
@@ -84,7 +84,7 @@ public class StockController {
     }
 
 
-    @ApiOperation(value = "Updates a stock from the AlphaVantage API based on the stock id", response = String.class, tags = "stocks/{id}")
+    @ApiOperation(value = "Updates a stock from the AlphaVantage API based on the stock id", response = String.class, tags = "stock")
     @PutMapping(path = "/stocks/{id}")
     String updateStockById(@PathVariable Long id){
         stockAPI.updateStockInfo(id, stockRepository);
@@ -93,8 +93,8 @@ public class StockController {
 
     //updates stock repo every 15 min
     //TODO: alternate which 5 are being updated
-    @ApiOperation(value = "Updates every stock in the stockRepostiory from the AlphaVantage API, based on current data", response = String.class, tags = "stocks")
-    @Scheduled(fixedRate = 900000)
+    @ApiOperation(value = "Updates every stock in the stockRepostiory from the AlphaVantage API, based on current data", response = String.class, tags = "stock")
+    //@Scheduled(fixedRate = 900000)
     @PutMapping(path = "/stocks")
     String updateAllStocks(){
         stockAPI.updateAllStocks(stockRepository);
@@ -102,7 +102,7 @@ public class StockController {
     }
 
 
-    @ApiOperation(value = "Deletes a stock from the stockRepository based on its id", response = String.class, tags = "stocks/id")
+    @ApiOperation(value = "Deletes a stock from the stockRepository based on its id", response = String.class, tags = "stock")
     @DeleteMapping(path = "/stocks/{id}")
     String deleteStock(@PathVariable Long id){
         stockRepository.deleteById(id);
