@@ -208,10 +208,8 @@ public class ChatSocket {
 
 
 	@Api(value = "MessageController", description = "REST API related to Web Socket Messages")
-
 	@RestController
 	@RequestMapping("/chat/messages")
-
 	public class MessageController {
 
 		@Autowired
@@ -220,13 +218,13 @@ public class ChatSocket {
 		@Autowired
 		FriendGroupRepository friendGroupRepository;
 
-		@ApiOperation(value = "Get list of Messages sent to {target} ", response = List<Message>, tags = "{target}")
+		@ApiOperation(value = "Get list of Messages sent to {target} ", response = Iterable.class, tags = "message-controller")
 		@GetMapping("/{target}")
 		public List<Message> getMessagesByTarget(@PathVariable String target) {
 			return messageRepository.findByTarget(target);
 		}
 
-		@ApiOperation(value = "Get list of all friend group objects", response = List<FriendGroup>, tags = "friendgroup")
+		@ApiOperation(value = "Get list of all friend group objects", response = Iterable.class, tags = "friendgroup")
 		@GetMapping(path = "/friendgroup")
 		List<FriendGroup> getFriendGroups(){
 			return friendGroupRepository.findAll();
