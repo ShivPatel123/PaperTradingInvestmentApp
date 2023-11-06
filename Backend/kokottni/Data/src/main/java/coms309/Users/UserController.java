@@ -184,6 +184,9 @@ public class UserController {
 //    }
 
     //adds user userID to FriendGroup groupName
+
+    @ApiOperation(value = "Add User {userId} to friend group {groupName}", response = String, tags = "/friendgroup/{groupName}/{userID}")
+
     @PutMapping("/friendgroup/{groupName}/{userID}")
     @Transactional
     String addUserToGroup(@PathVariable String groupName, @PathVariable int userID) {
@@ -233,6 +236,9 @@ public class UserController {
 
 
     //removes user userID from FriendGroup groupName
+
+    @ApiOperation(value = "Remove User {userId} from friend group {groupName}", response = String, tags = "/friendgroup/{groupName}/{userID}")
+
     @DeleteMapping("/friendgroup/{groupName}/{userID}")
     String removeUserFromGroup(@PathVariable String groupName, @PathVariable int userID){
         friendGroupRepository.findBygroupName(groupName).removeUser(userRepository.findById(userID));
