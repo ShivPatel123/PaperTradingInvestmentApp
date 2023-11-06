@@ -3,6 +3,8 @@ package coms309.Stocks;
 import java.util.List;
 
 import coms309.Users.UserRepository;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -17,6 +19,7 @@ import org.springframework.scheduling.annotation.Scheduled;
 import coms309.Users.User;
 import coms309.Users.UserRepository;
 
+@Api(value = "StockController", description = "REST APIs related to the stock entity")
 @RestController
 public class StockController {
 
@@ -31,38 +34,46 @@ public class StockController {
     private String success = "{\"message\":\"success\"}";
     private String failure = "{\"message\":\"failure\"}";
 
+    @ApiOperation(value = "Gets a list of all the stocks in the stockRepository", response = Iterable.class, tags = "stocks")
     @GetMapping(path = "/stocks")
     List<Stock> getAllStocks(){return stockRepository.findAll();}
 
+    @ApiOperation(value = "Gets all users single stock based on its id value from the stockRepository", response = Iterable.class, tags = "stock/{id}")
     @GetMapping(path = "/stock/{id}")
     List<StockPurchased> getAllUsersForStock(@PathVariable long id){return stockRepository.getOne(id).getUsers();}
 
 
+    @ApiOperation(value = "Gets the live stock information from AlphaVantage to apply to one of our stocks so that current information is displayed.", response = String.class, tags = "stocksupdate/{symbol}")
     @GetMapping(path = "/stocksUpdate/{symbol}")
     String getStockAPIInfo(@PathVariable String symbol){
         return stockAPI.getUpdatedStockChange(symbol);
     }
 
 
+    @ApiOperation(value = "Gets a stock to return based on its id", response = Stock.class, tags = "stocks/{id}")
     @GetMapping(path = "/stocks/{id}")
     Stock getStockById(@PathVariable long id){return stockRepository.findById(id);}
 
+    @ApiOperation(value = "Gets the current price from a stock based on its id", response = double.class, tags = "stockchange/{id}")
     @GetMapping(path = "/stockchange/{id}")
     double getCurrPrice(@PathVariable long id){return stockRepository.getOne(id).getCurrValue();}
 
 
     //retrieves news articles pertaining to stock (id)
+    @ApiOperation(value = "Gets the current news for a stock from AlphaVantage API based on the id of that stock", response = String.class, tags = "stock/news/{id}")
     @GetMapping(path = "/stocks/news/{id}")
     String getStockNews(@PathVariable int id){
         return stockAPI.getStockNews(stockRepository.findById(id).getSymbol());
     }
 
     //retrieves weekly price history of stock (id)
+    @ApiOperation(value = "Gets the price history of a stock from AlphaVantage API based on the id of the stock", response = String.class, tags = "stocks/history/{id}")
     @GetMapping(path = "/stocks/history/{id}")
     String getStockHistory(@PathVariable int id){
         return stockAPI.getStockHistory(stockRepository.findById(id).getSymbol());
     }
 
+    @ApiOperation(value = "Creates a new stock that gets added to the stockRepository", response = String.class, tags = "stocks")
     @PostMapping(path = "/stocks")
     String createStock(Stock stock){
         if(stock == null){
@@ -72,16 +83,8 @@ public class StockController {
         return success;
     }
 
-//    @PutMapping(path = "/stocks/{id}")
-//    Stock updateStockById(@PathVariable int id, @RequestBody Stock request){
-//        Stock stock = stockRepository.findById(id);
-//        if(stock == null){
-//            return null;
-//        }
-//        stockRepository.save(stock);
-//        return stockRepository.findById(id);
-//    }
 
+    @ApiOperation(value = "Updates a stock from the AlphaVantage API based on the stock id", response = String.class, tags = "stocks/{id}")
     @PutMapping(path = "/stocks/{id}")
     String updateStockById(@PathVariable Long id){
         stockAPI.updateStockInfo(id, stockRepository);
@@ -90,6 +93,7 @@ public class StockController {
 
     //updates stock repo every 15 min
     //TODO: alternate which 5 are being updated
+    @ApiOperation(value = "Updates every stock in the stockRepostiory from the AlphaVantage API, based on current data", response = String.class, tags = "stocks")
     @Scheduled(fixedRate = 900000)
     @PutMapping(path = "/stocks")
     String updateAllStocks(){
@@ -98,6 +102,7 @@ public class StockController {
     }
 
 
+    @ApiOperation(value = "Deletes a stock from the stockRepository based on its id", response = String.class, tags = "stocks/id")
     @DeleteMapping(path = "/stocks/{id}")
     String deleteStock(@PathVariable Long id){
         stockRepository.deleteById(id);
