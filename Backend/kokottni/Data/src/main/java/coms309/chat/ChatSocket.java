@@ -30,7 +30,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.stereotype.Component;
-
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 
 
@@ -205,6 +206,9 @@ public class ChatSocket {
 		return sb.toString();
 	}
 
+
+	@Api(value = "MessageController", description = "REST API related to Web Socket Messages")
+
 	@RestController
 	@RequestMapping("/chat/messages")
 
@@ -216,11 +220,13 @@ public class ChatSocket {
 		@Autowired
 		FriendGroupRepository friendGroupRepository;
 
+		@ApiOperation(value = "Get list of Messages sent to {target} ", response = List<Message>, tags = "{target}")
 		@GetMapping("/{target}")
 		public List<Message> getMessagesByTarget(@PathVariable String target) {
 			return messageRepository.findByTarget(target);
 		}
 
+		@ApiOperation(value = "Get list of all friend group objects", response = List<FriendGroup>, tags = "friendgroup")
 		@GetMapping(path = "/friendgroup")
 		List<FriendGroup> getFriendGroups(){
 			return friendGroupRepository.findAll();
