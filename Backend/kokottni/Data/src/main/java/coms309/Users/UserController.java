@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Objects;
 
 import coms309.Stocks.*;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+@Api(value = "UserController", description = "REST APIs for the user/admin entity")
 @RestController
 public class UserController {
 
@@ -37,14 +40,17 @@ public class UserController {
     private String success = "{\"message\":\"success\"}";
     private String failure = "{\"message\":\"failure\"}";
 
+    @ApiOperation(value = "Gets a list of all the users in the userRepository", response = Iterable.class, tags = "users")
     @GetMapping(path = "/users")
     List<User> getAllUsers(){
         return userRepository.findAll();
     }
 
+    @ApiOperation(value = "Gets the list of purchased stocks for a specific user", response = Iterable.class, tags = "user/{id}")
     @GetMapping(path = "/user/{id}")
     List<StockPurchased> getAllStocksForUser(@PathVariable long id){return userRepository.findById(id).getStocks();}
 
+    @ApiOperation(value = "Gets the user and their information by their id", response = User.class, tags = "users/{id}")
     @GetMapping(path = "/users/{id}")
     User getUserById(@PathVariable long id){
         return userRepository.findById(id);
@@ -53,6 +59,7 @@ public class UserController {
     @GetMapping(path = "/userByName/{username}")
     User getUserByUsername(@PathVariable String username){return userRepository.findByUsername(username);}
 
+    @ApiOperation(value = "Has the user purchase a stock, will show the money spent from the transaction", response = double.class, tags = "buy/{id}/user/{uid}/amt/{amount}")
     @GetMapping(path = "/buy/{id}/user/{uid}/amt/{amount}")
     double purchaseStock(@PathVariable long id, @PathVariable long uid, @PathVariable int amount){
         if(userRepository.findById(uid).getPrivilege() == 'b') return -1;
@@ -98,6 +105,7 @@ public class UserController {
     }
 
 
+    @ApiOperation(value = "Has the user sell a stock, returns their money that they earned from the transaction", response = double.class, tags = "sell/{id}/user/{uid}/{numstocks}")
     @GetMapping(path = "/sell/{id}/user/{uid}/{numStocks}")
     double sellStock(@PathVariable long id, @PathVariable long uid, @PathVariable int numStocks){
         Stock stock = stockRepository.findById(id);
@@ -216,6 +224,7 @@ public class UserController {
         return userRepository.findById(id);
     }
 
+    @ApiOperation(value = "Assigns a stock to the user, essentially having them purchase it just a little different", response = String.class, tags = "user/{userId}/stock/{stockId}/{numPurchasing}")
     @PutMapping("/users/{userId}/stocks/{stockId}/{numPurchasing}")
     String assignStockToUser(@PathVariable long userId, @PathVariable long stockId, @PathVariable int numPurchasing){
         User user = userRepository.findById(userId);
@@ -244,6 +253,8 @@ public class UserController {
         friendGroupRepository.findBygroupName(groupName).removeUser(userRepository.findById(userID));
         return success;
     }
+
+    @ApiOperation(value = "Creates a new stock based on a stock json object, admins have permissions to do this", response = String.class, tags = "newstocks/{uid}")
     @PostMapping(path = "/newstocks/{uid}")
     String createStock(@RequestBody Stock stock, @PathVariable long uid){
         User user = userRepository.findById(uid);
@@ -254,6 +265,7 @@ public class UserController {
         return success;
     }
 
+    @ApiOperation(value = "Deletes a stock based on its id, if the admin wants to have that stock deleted", response = String.class, tags = "stocks/{sid}/{uid}")
     @DeleteMapping(path = "/stocks/{sid}/{uid}")
     String deleteStock(@PathVariable long sid, @PathVariable long uid){
         User user = userRepository.findById(uid);
@@ -262,6 +274,7 @@ public class UserController {
         return success;
     }
 
+    @ApiOperation(value = "Updates all the stocks if the admin user calls upon the stocks to be updated", response = String.class, tags = "update/{uid}")
     @PutMapping(path = "/update/{uid}")
     String updateAllStocks(@PathVariable long uid){
         if(userRepository.findById(uid).getPrivilege() != 'a') return failure;
@@ -269,6 +282,7 @@ public class UserController {
         return success;
     }
 
+    @ApiOperation(value = "Bans a user based on their uid, but ensures that this is being done by an admin with aid", response = String.class, tags = "banuser/{uid}/byadmin/{aid}")
     @PutMapping(path = "/banuser/{uid}/byadmin/{aid}")
     String banUser(@PathVariable long uid, @PathVariable long aid){
         User admin = userRepository.findById(aid);
@@ -292,6 +306,8 @@ public class UserController {
         }
     }
 
+
+    @ApiOperation(value = "Unbans the user with the uid, but must be done by an admin called by aid", response = String.class, tags = "unban/{uid}/byadmin/{aid}")
     @PutMapping(path = "/unban/{uid}/byadmin/{aid}")
     String unbanUser(@PathVariable long uid, @PathVariable long aid){
         User admin = userRepository.findById(aid);
