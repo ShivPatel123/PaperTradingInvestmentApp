@@ -57,30 +57,53 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.267">
 
-        <TextView
-            android:id="@+id/yourGroup_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:text="Your Group"
-            android:textColor="@color/txtclr"
-            android:textStyle="bold" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <Button
-            android:id="@+id/toChat_friendGroupBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:layout_margin="10dp"
-            android:text="Chat" />
+            <TextView
+                android:id="@+id/yourGroup_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="20dp"
+                android:text="Your Group"
+                android:textColor="@color/txtclr"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/groupDisplay"
+                app:layout_constraintEnd_toStartOf="@+id/toChat_friendGroupBtn"
+                app:layout_constraintHorizontal_bias="0.087"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.179" />
 
-        <TextView
-            android:id="@+id/groupDisplay"
-            android:layout_width="215dp"
-            android:layout_height="161dp"
-            android:layout_gravity="center_vertical"
-            android:text="TextView"
-            android:textColor="@color/txtclr" />
+            <TextView
+                android:id="@+id/groupDisplay"
+                android:layout_width="330dp"
+                android:layout_height="171dp"
+                android:layout_gravity="center_vertical"
+                android:text="TextView"
+                android:textColor="@color/txtclr"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.697" />
+
+            <Button
+                android:id="@+id/toChat_friendGroupBtn"
+                android:layout_width="98dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginBottom="38dp"
+                android:text="Chat"
+                app:layout_constraintBottom_toTopOf="@+id/groupDisplay"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.988"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView

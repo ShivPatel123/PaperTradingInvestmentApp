@@ -48,11 +48,11 @@ public class StockList extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_profile);
+        setContentView(R.layout.stock_list_page);
             // Inflate the layout for this fragment
             LayoutInflater inflater = null;
             ViewGroup container = null;
-            view = inflater.inflate(R.layout.fragment_profile, container, false);
+            view = inflater.inflate(R.layout.stock_list_page, container, false);
             replacement = view.findViewById(R.id.fragList);
 
             view.findViewById(R.id.renderStocks).setOnClickListener((View.OnClickListener) this);
