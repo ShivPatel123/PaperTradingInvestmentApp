@@ -79,6 +79,11 @@ public interface UserMapping {
     @DELETE("/friendgroup/{groupName}/{userID}")
     Call<String> removeUserFromGroup(@Path("groupName") String groupName, @Path("userID") int userID);
 
+    //Get list of friend groups
+    @GET("/friendgroup")
+    Call<List<FriendGroup>> getFriendGroups();
+
+
 
     /*
         Admin Only

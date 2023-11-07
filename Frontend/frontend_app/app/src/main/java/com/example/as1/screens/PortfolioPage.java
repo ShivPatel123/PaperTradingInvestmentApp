@@ -80,50 +80,50 @@ public class PortfolioPage extends AppCompatActivity {
                 URL_JSON_OBJECT,
                 null,
                 response -> {
-                    try {
+
                         //parse stocks from json array
-                        JSONArray responseJSONArray = response.getJSONArray("stocks");
-                        JSONArray object;
-                        for(int i = 0; i < responseJSONArray.length(); i++){
-                            //each index in response array is a JSON array
-                            object = responseJSONArray.getJSONArray(i);
-                            StockPurchased stockPurchased = new StockPurchased();
-
-                            //numbers are the indexes of the object array
-                            stockPurchased.setId(object.getLong(0));
-                            //parse array into user
-                            JSONArray responseUser = object.getJSONArray(1);
-                            JSONArray parseUser;
-                            User inputUser = new User();
-                            for(int j = 0; j < responseUser.length(); i++) {
-                                parseUser = responseUser.getJSONArray(j);
-                                inputUser.setId(parseUser.getLong(0));
-                                inputUser.setMoney(parseUser.getDouble(1));
-                                inputUser.setName(parseUser.getString(2));
-                                inputUser.setEmail(parseUser.getString(3));
-                                inputUser.setDob(parseUser.getString(4));
-                                inputUser.setUsername(parseUser.getString(5));
-                                inputUser.setPassword(parseUser.getString(6));
-
-                            }
-                            stockPurchased.setUser(inputUser);
+                        Log.i("response", "repsonse: " + response.toString());
+                                JSONArray object;
+//                        for(int i = 0; i < responseJSONArray.length(); i++){
+//                            //each index in response array is a JSON array
+//                            object = responseJSONArray.getJSONArray(i);
+                              StockPurchased stockPurchased = new StockPurchased();
+//
+//                            //numbers are the indexes of the object array
+//                            stockPurchased.setId(object.getLong(0));
+//                            //parse array into user
+//                            JSONArray responseUser = object.getJSONArray(1);
+//                            JSONArray parseUser;
+//                            User inputUser = new User();
+//                            for(int j = 0; j < responseUser.length(); i++) {
+//                                parseUser = responseUser.getJSONArray(j);
+//                                inputUser.setId(parseUser.getLong(0));
+//                                inputUser.setMoney(parseUser.getDouble(1));
+//                                inputUser.setName(parseUser.getString(2));
+//                                inputUser.setEmail(parseUser.getString(3));
+//                                inputUser.setDob(parseUser.getString(4));
+//                                inputUser.setUsername(parseUser.getString(5));
+//                                inputUser.setPassword(parseUser.getString(6));
+//
+//                            }
+//                            stockPurchased.setUser(inputUser);
 
                             //parse stock array into stock
-                            JSONArray responseStock = object.getJSONArray(2);
-                            JSONArray parseStock;
-                            Stock inputStock = new Stock();
-                            for(int k = 0; k < responseJSONArray.length(); k++) {
-                                parseStock = responseStock.getJSONArray(k);
-                                inputStock.setId(parseStock.getLong(0));
-                                inputStock.setSymbol(parseStock.getString(1));
-                                inputStock.setCompany(parseStock.getString(2));
-                                inputStock.setCurrValue(parseStock.getDouble(3));
-                                inputStock.setPrevDayChange(parseStock.getDouble(4));
-                            }
-
-                            stockPurchased.setNumPurchased(object.getInt(3));
-                            stockPurchased.setCostPurchase(object.getDouble(4));
-                            stockPurchased.setSinglePrice(object.getDouble(5));
+//                            JSONArray responseStock = object.getJSONArray(2);
+//                            JSONArray parseStock;
+//                            Stock inputStock = new Stock();
+//                            for(int k = 0; k < responseJSONArray.length(); k++) {
+//                                parseStock = responseStock.getJSONArray(k);
+//                                inputStock.setId(parseStock.getLong(0));
+//                                inputStock.setSymbol(parseStock.getString(1));
+//                                inputStock.setCompany(parseStock.getString(2));
+//                                inputStock.setCurrValue(parseStock.getDouble(3));
+//                                inputStock.setPrevDayChange(parseStock.getDouble(4));
+//                            }
+//
+//                            stockPurchased.setNumPurchased(object.getInt(3));
+//                            stockPurchased.setCostPurchase(object.getDouble(4));
+//                            stockPurchased.setSinglePrice(object.getDouble(5));
 
 //                            Stock stock = new Stock();
 //                            stock.setId((Long) object.get(Integer.parseInt("id")));
@@ -134,13 +134,9 @@ public class PortfolioPage extends AppCompatActivity {
 //                            stockPurchased.setNumPurchased(object.getInt("numPurchased"));
 //                            stockPurchased.setCostPurchase(object.getDouble("costPurchase"));
 //                            stockPurchased.setSinglePrice(object.getDouble("singlePrice"));
-                            stockPurchasedList.add(i, stockPurchased);
-                        }
+                            //stockPurchasedList.add(i, stockPurchased);
+                        },
 
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                },
                 error -> Log.i("parse error ", "getAllUserStocks: "+ error.getMessage())) {};
 
         // Adding request to request queue
