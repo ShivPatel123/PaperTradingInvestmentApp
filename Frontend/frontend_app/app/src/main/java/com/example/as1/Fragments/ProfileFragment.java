@@ -130,16 +130,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-//                int temp = position+1;
-//
-//                URL_JSON_OBJECT = new String ("https://jsonplaceholder.typicode.com/users/" + temp);
-//                makeJsonObjReqq();
-//
-//                String temp2 = t.getText().toString();
-//                t.setText("UMTien" + temp + temp2);
-//                Log.d(t.getText().toString(), "wat");
-
-
                 String temp = stockListNames.get(position);
                 Integer stockPriceTest = mainStockPrice.get(position);
                 Integer stockIdTest = mainStockID.get(position);
@@ -152,7 +142,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
 //    public HomeFragment(int stockNumber, String stockName, int currentPrice, int pastPrice, int stockHigh, int stockLow){
 
-                replaceFragment(new HomeFragment(stockPriceTest, temp, stockPriceTest, stockIdTest, stockPriceTest + 5, stockPriceTest - 7));
+                //replaceFragment(new HomeFragment(stockPriceTest, temp, stockPriceTest, stockIdTest, stockPriceTest + 5, stockPriceTest - 7));
             }
         });
 
@@ -164,7 +154,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
 
-        //t.setText("UMTien");
         replacement2 = view.findViewById(R.id.fragList);
 
         //added Array
@@ -182,9 +171,6 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         view.findViewById(R.id.renderStocks).setOnClickListener(this);
-
-//        // or
-//        getActivity().findViewById(R.id.yourId).setOnClickListener(this);
     }
 
     class CustomAdapter extends BaseAdapter {
@@ -275,35 +261,12 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                     public void onErrorResponse(VolleyError error) {
                         Log.e("Volley Error", error.toString());
                     }
-                }
-        ) {
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError {
-                HashMap<String, String> headers = new HashMap<String, String>();
-//                headers.put("Authorization", "Bearer YOUR_ACCESS_TOKEN");
-//                headers.put("Content-Type", "application/json");
-                return headers;
-            }
-
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<String, String>();
-//                params.put("param1", "value1");
-//                params.put("param2", "value2");
-                return params;
-            }
-        };
+                }) {};
 
         // Adding request to request queue
         VolleySingleton.getInstance(getActivity().getApplicationContext()).addToRequestQueue(jsonObjReq);
     }
 
-    private void replaceFragment(Fragment fragment) {
-        FragmentManager fragmentManager = getFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frame_layout, fragment);
-        fragmentTransaction.commit();
-    }
 
 }
 
