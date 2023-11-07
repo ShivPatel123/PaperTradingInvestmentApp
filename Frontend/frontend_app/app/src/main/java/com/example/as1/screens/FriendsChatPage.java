@@ -2,10 +2,7 @@ package com.example.as1.screens;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.content.Intent;
-import android.os.Bundle;
 import android.util.Log;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -23,12 +20,12 @@ import com.example.as1.R;
 import org.java_websocket.handshake.ServerHandshake;
 import org.json.JSONException;
 
-public class FriendsPage extends AppCompatActivity implements WebSocketListener {
+public class FriendsChatPage extends AppCompatActivity implements WebSocketListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.friends_page);
+        setContentView(R.layout.friends_chat_page);
 
         //URL from springboot endpoint, DOES IT NEED TO BE WS OR HTTP??
         //what is {target}: /chat/{username}/{target} target is message reciever
@@ -62,7 +59,7 @@ public class FriendsPage extends AppCompatActivity implements WebSocketListener 
 
             // Establish WebSocket connection and set listener
             WebSocketManager.getInstance().connectWebSocket(serverUrl);
-            WebSocketManager.getInstance().setWebSocketListener(FriendsPage.this);
+            WebSocketManager.getInstance().setWebSocketListener(FriendsChatPage.this);
         });
 
         connect2Btn.setOnClickListener(view -> {
@@ -71,7 +68,7 @@ public class FriendsPage extends AppCompatActivity implements WebSocketListener 
 
             // Establish WebSocket connection and set listener
             WebSocketManager.getInstance().connectWebSocket(serverUrl);
-            WebSocketManager.getInstance().setWebSocketListener(FriendsPage.this);
+            WebSocketManager.getInstance().setWebSocketListener(FriendsChatPage.this);
         });
 
         /* send button listener */

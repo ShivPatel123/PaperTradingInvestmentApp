@@ -104,7 +104,7 @@ public class MainPage extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(MainPage.this, FriendsPage.class);
+                Intent intent = new Intent(MainPage.this, FriendsChatPage.class);
                 startActivity(intent);
             }
         });
