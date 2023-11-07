@@ -79,11 +79,11 @@ public class GroupsFragment extends Fragment implements View.OnClickListener, We
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        groupView = inflater.inflate(R.layout.fragment_groups, container, false);
+        groupView = inflater.inflate(R.layout.group_page, container, false);
 
         connectBtn = (Button) groupView.findViewById(R.id.connectButton);
         sendBtn = (Button) groupView.findViewById(R.id.sendButton);
-        usernameEtx = (TextView) groupView.findViewById(R.id.usernameTextView);
+       // usernameEtx = (TextView) groupView.findViewById(R.id.usernameTextView);
         msgEtx = (EditText) groupView.findViewById(R.id.messageEditText);
         msgTv = (TextView) groupView.findViewById(R.id.chatTextView);
 

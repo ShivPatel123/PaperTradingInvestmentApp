@@ -98,7 +98,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        homeView = inflater.inflate(R.layout.fragment_home, container, false);
+        homeView = inflater.inflate(R.layout.stock_page, container, false);
 //        homeListView = homeView.findViewById(R.id.fragList);
 
 

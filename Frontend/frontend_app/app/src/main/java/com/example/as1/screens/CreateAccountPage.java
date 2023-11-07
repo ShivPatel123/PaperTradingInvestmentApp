@@ -34,7 +34,7 @@ public class CreateAccountPage extends AppCompatActivity {
         //button back to home page
         toHome_btn = findViewById(R.id.toHome_SignupPagebtn);
         toHome_btn.setOnClickListener(v -> {
-            Intent intent = new Intent(CreateAccountPage.this, HomePage.class);
+            Intent intent = new Intent(CreateAccountPage.this, StartPage.class);
             startActivity(intent);
         });
 
@@ -64,7 +64,7 @@ public class CreateAccountPage extends AppCompatActivity {
 
             //If backend returns success, open main page
             if(volleyOutput_txt.getText().toString() == "{\"message\":\"success\"}"){
-                Intent intent = new Intent(CreateAccountPage.this, MainPage.class);
+                Intent intent = new Intent(CreateAccountPage.this, NavPage.class);
                 startActivity(intent);
             }
         });

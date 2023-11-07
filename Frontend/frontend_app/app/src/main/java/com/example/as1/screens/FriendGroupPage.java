@@ -11,13 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.example.as1.Controllers.FriendGroup;
-import com.example.as1.Controllers.User;
 import com.example.as1.ExternalControllers.VolleySingleton;
 import com.example.as1.R;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 public class FriendGroupPage extends AppCompatActivity {
 
@@ -30,7 +25,7 @@ public class FriendGroupPage extends AppCompatActivity {
         //back to main button
         Button backHome_btn = findViewById(R.id.backHome_FriendGroupBtn);
         backHome_btn.setOnClickListener(view -> {
-            Intent intent = new Intent(FriendGroupPage.this, MainPage.class);
+            Intent intent = new Intent(FriendGroupPage.this, NavPage.class);
             startActivity(intent);
         });
 

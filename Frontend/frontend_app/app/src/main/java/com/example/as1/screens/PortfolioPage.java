@@ -5,7 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
-import android.widget.TextView;
+
 import static com.example.as1.Controllers.User.getInstance;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,15 +15,12 @@ import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.as1.Controllers.ScrollAdapter;
 import com.example.as1.Controllers.ScrollStockCard;
-import com.example.as1.Controllers.Stock;
 import com.example.as1.Controllers.StockPurchased;
 import com.example.as1.Controllers.User;
 import com.example.as1.ExternalControllers.VolleySingleton;
 import com.example.as1.R;
 
-import org.json.JSONArray;
 import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,14 +61,15 @@ public class PortfolioPage extends AppCompatActivity {
         //back to main button
         Button backHome_btn = findViewById(R.id.backHome_PortfolioBtn);
         backHome_btn.setOnClickListener(view -> {
-            Intent intent = new Intent(PortfolioPage.this, MainPage.class);
+            Intent intent = new Intent(PortfolioPage.this, NavPage.class);
             startActivity(intent);
         });
 
     }//onCreate
 
     public List<StockPurchased> getAllUserStocks(Context context, User user) {
-        String URL_JSON_OBJECT = "http://coms-309-051.class.las.iastate.edu:8080/user/" + user.getId();
+        String URL_JSON_OBJECT = "http://10.90.75.130:8080/user/" + user.getId();
+        //http://coms-309-051.class.las.iastate.edu:8080/user/
         List<StockPurchased> stockPurchasedList = new ArrayList<StockPurchased>() {};
 
         //Create new request
@@ -81,9 +79,9 @@ public class PortfolioPage extends AppCompatActivity {
                 null,
                 response -> {
 
-                        //parse stocks from json array
+                        //parse stocks from response JSON object
                         Log.i("response", "repsonse: " + response.toString());
-                                JSONArray object;
+
 //                        for(int i = 0; i < responseJSONArray.length(); i++){
 //                            //each index in response array is a JSON array
 //                            object = responseJSONArray.getJSONArray(i);
