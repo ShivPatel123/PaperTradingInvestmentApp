@@ -16,14 +16,11 @@ import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.toolbox.ImageRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.example.as1.Controllers.StockPurchased;
 import com.example.as1.R;
 import com.example.as1.Controllers.User;
 import com.example.as1.ExternalControllers.VolleySingleton;
 
 import org.json.JSONException;
-
-import java.util.List;
 
 public class ProfilePage extends AppCompatActivity {
 
@@ -61,7 +58,7 @@ public class ProfilePage extends AppCompatActivity {
 
         //Back to Home page button
         backHome_btn.setOnClickListener(view -> {
-            Intent intent = new Intent(ProfilePage.this, MainPage.class);
+            Intent intent = new Intent(ProfilePage.this, NavPage.class);
             startActivity(intent);
         });
 
