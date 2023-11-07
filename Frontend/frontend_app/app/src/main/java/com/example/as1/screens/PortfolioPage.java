@@ -12,18 +12,22 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.as1.Controllers.ScrollAdapter;
 import com.example.as1.Controllers.ScrollStockCard;
+import com.example.as1.Controllers.Stock;
 import com.example.as1.Controllers.StockPurchased;
 import com.example.as1.Controllers.User;
 import com.example.as1.ExternalControllers.VolleySingleton;
 import com.example.as1.R;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class PortfolioPage extends AppCompatActivity {
 
@@ -45,6 +49,14 @@ public class PortfolioPage extends AppCompatActivity {
 
         //get user stocks from server
         stockPurchasedList = getAllUserStocks(this.getApplicationContext(), getGlobal);
+        //Try to wait a second so the code doesnt move to getGlobal.setStocks
+        // without getting stockPurchasedList first
+        try {
+            wait();
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
         //update local/global user
         getGlobal.setStocks(stockPurchasedList);
 
@@ -73,66 +85,43 @@ public class PortfolioPage extends AppCompatActivity {
         List<StockPurchased> stockPurchasedList = new ArrayList<StockPurchased>() {};
 
         //Create new request
-        JsonObjectRequest request = new JsonObjectRequest(
+        JsonArrayRequest request = new JsonArrayRequest(
                 Request.Method.GET,
                 URL_JSON_OBJECT,
                 null,
                 response -> {
+                        Log.i("response", "getAllUserStocks: " + response.toString());
 
-                        //parse stocks from response JSON object
-                        Log.i("response", "repsonse: " + response.toString());
+                        StockPurchased stockPurchased = new StockPurchased();
+                        JSONObject object;
 
-//                        for(int i = 0; i < responseJSONArray.length(); i++){
-//                            //each index in response array is a JSON array
-//                            object = responseJSONArray.getJSONArray(i);
-                              StockPurchased stockPurchased = new StockPurchased();
-//
-//                            //numbers are the indexes of the object array
-//                            stockPurchased.setId(object.getLong(0));
-//                            //parse array into user
-//                            JSONArray responseUser = object.getJSONArray(1);
-//                            JSONArray parseUser;
-//                            User inputUser = new User();
-//                            for(int j = 0; j < responseUser.length(); i++) {
-//                                parseUser = responseUser.getJSONArray(j);
-//                                inputUser.setId(parseUser.getLong(0));
-//                                inputUser.setMoney(parseUser.getDouble(1));
-//                                inputUser.setName(parseUser.getString(2));
-//                                inputUser.setEmail(parseUser.getString(3));
-//                                inputUser.setDob(parseUser.getString(4));
-//                                inputUser.setUsername(parseUser.getString(5));
-//                                inputUser.setPassword(parseUser.getString(6));
-//
-//                            }
-//                            stockPurchased.setUser(inputUser);
+                        for(int i = 0; i < response.length(); i++) {
+                            try {
+                                object = (JSONObject) response.get(i);
+                                Log.i("Response at " + i, " : " + object);
+                                stockPurchased.setId(object.getLong("id"));
 
-                            //parse stock array into stock
-//                            JSONArray responseStock = object.getJSONArray(2);
-//                            JSONArray parseStock;
-//                            Stock inputStock = new Stock();
-//                            for(int k = 0; k < responseJSONArray.length(); k++) {
-//                                parseStock = responseStock.getJSONArray(k);
-//                                inputStock.setId(parseStock.getLong(0));
-//                                inputStock.setSymbol(parseStock.getString(1));
-//                                inputStock.setCompany(parseStock.getString(2));
-//                                inputStock.setCurrValue(parseStock.getDouble(3));
-//                                inputStock.setPrevDayChange(parseStock.getDouble(4));
-//                            }
-//
-//                            stockPurchased.setNumPurchased(object.getInt(3));
-//                            stockPurchased.setCostPurchase(object.getDouble(4));
-//                            stockPurchased.setSinglePrice(object.getDouble(5));
+                                //Dont need to get user here
+                                //Do need stock tho
+                                JSONObject stockObj = (JSONObject) object.get("stock");
+                                Stock stockIN = new Stock();
+                                stockIN.setPrevDayChange(stockObj.getDouble("prevDayChange"));
+                                stockIN.setCurrValue(stockObj.getDouble("currValue"));
+                                stockIN.setCompany(stockObj.getString("company"));
+                                stockIN.setId(stockObj.getLong("id"));
+                                stockIN.setSymbol(stockObj.getString("symbol"));
+                                stockPurchased.setStock(stockIN);
 
-//                            Stock stock = new Stock();
-//                            stock.setId((Long) object.get(Integer.parseInt("id")));
-//
-//                            stockPurchased.setId(object.getLong(Integer.parseInt("id")));
-//                            stockPurchased.setUser((User) object.get(Integer.parseInt("user")));
-//                            stockPurchased.setStock((Stock) object.get("stock"));
-//                            stockPurchased.setNumPurchased(object.getInt("numPurchased"));
-//                            stockPurchased.setCostPurchase(object.getDouble("costPurchase"));
-//                            stockPurchased.setSinglePrice(object.getDouble("singlePrice"));
-                            //stockPurchasedList.add(i, stockPurchased);
+                                //Done parsing stock, continue parsing response
+                                stockPurchased.setCostPurchase(object.getDouble("costPurchase"));
+                                stockPurchased.setNumPurchased(object.getInt("numPurchased"));
+                                stockPurchased.setSinglePrice(object.getDouble("singlePrice"));
+
+                            } catch (JSONException e) {
+                                throw new RuntimeException(e);
+                            }
+                            stockPurchasedList.add(stockPurchased);
+                            }
                         },
 
                 error -> Log.i("parse error ", "getAllUserStocks: "+ error.getMessage())) {};

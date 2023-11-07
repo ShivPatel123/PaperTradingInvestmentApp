@@ -1,6 +1,5 @@
 package com.example.as1.screens;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -63,7 +62,7 @@ public class NavPage extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(NavPage.this, StockPage.class);
+                Intent intent = new Intent(NavPage.this, StockList.class);
                 startActivity(intent);
             }
         });

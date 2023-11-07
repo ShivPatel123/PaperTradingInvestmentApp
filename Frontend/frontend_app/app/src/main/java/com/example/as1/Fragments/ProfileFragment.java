@@ -3,8 +3,6 @@ package com.example.as1.Fragments;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
 import com.example.as1.ExternalControllers.VolleySingleton;
 
@@ -20,12 +18,9 @@ import android.widget.TextView;
 import android.widget.BaseAdapter;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.example.as1.R;
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -108,7 +103,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        view = inflater.inflate(R.layout.fragment_profile, container, false);
+        view = inflater.inflate(R.layout.stock_list_page, container, false);
         replacement = view.findViewById(R.id.fragList);
 
         allStocks = (Button) view.findViewById(R.id.renderStocks);
