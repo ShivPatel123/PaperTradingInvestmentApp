@@ -10,6 +10,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.as1.ExternalControllers.VolleySingleton;
 import com.example.as1.R;
@@ -37,24 +38,24 @@ public class FriendGroupPage extends AppCompatActivity {
         });
 
         TextView groupDisplay = findViewById(R.id.groupDisplay);
-        getAllFriendGroups(this.getApplicationContext());
-
+        getGroupMembers(this.getApplicationContext());
 
     }//onCreate
 
-    public void getAllFriendGroups(Context context) {
-        String URL_JSON_OBJECT = "http://coms-309-051.class.las.iastate.edu:8080/friendgroup";
+    public void getGroupMembers(Context context) {
+        String groupName = "StockGroup1";
+        String URL_JSON_OBJECT = "http://coms-309-051.class.las.iastate.edu:8080/friendgroup/" + groupName;
 
         //Create new request
-        JsonObjectRequest request = new JsonObjectRequest(
+        JsonArrayRequest request = new JsonArrayRequest(
                 Request.Method.GET,
                 URL_JSON_OBJECT,
                 null,
                 response -> {
-                    Log.i("response", "getAllFriendGroups: " +  response.toString());
+                    Log.i("response", "getAllGroupMembers: " +  response.toString());
 
                 },
-                error -> Log.e("Error Message for ", "getFriendGroups: " + error.getMessage().toString())) {
+                error -> Log.i("Error Message for ", "getGroupMembers: " + error.getMessage().toString())) {
         };
 
         // Adding request to request queue
