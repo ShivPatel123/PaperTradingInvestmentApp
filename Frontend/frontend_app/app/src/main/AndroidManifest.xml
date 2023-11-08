@@ -48,6 +48,12 @@
         <activity
             android:name=".screens.FriendGroupPage"
             android:exported="true" />
+        <activity
+            android:name=".screens.StockList"
+            android:exported="true" />
+        <activity
+            android:name=".screens.GroupPage"
+            android:exported="true" />
 
     </application>
 
