@@ -34,8 +34,8 @@ public class ScrollAdapter extends RecyclerView.Adapter<ScrollAdapter.ScrollView
     public void onBindViewHolder(@NonNull ScrollViewHolder holder, int position) {
         ScrollStockCard model = scrollCardList.get(position);
         holder.stockName.setText("" + model.getStockName());
-        holder.stockNum.setText("" + model.getNumPurchased());
-        holder.stockPrice.setText("" + model.getStockPrice());
+        holder.stockNum.setText("x" + model.getNumPurchased());
+        holder.stockPrice.setText("$" + model.getStockPrice());
     }
 
     @Override
