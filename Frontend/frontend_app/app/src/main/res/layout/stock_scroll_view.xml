@@ -15,6 +15,7 @@
         app:cardMaxElevation="12dp"
         app:cardPreventCornerOverlap="true"
         app:cardUseCompatPadding="false"
+        android:layout_margin="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.638"
@@ -28,10 +29,11 @@
 
             <TextView
                 android:id="@+id/stock1_name"
-                android:layout_width="wrap_content"
+                android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left|center_vertical"
-                android:layout_margin="20dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="20dp"
                 android:text="Stock 1"
                 android:textColor="@color/white"
                 android:textSize="17sp"
@@ -39,7 +41,7 @@
 
             <TextView
                 android:id="@+id/stock1_num"
-                android:layout_width="wrap_content"
+                android:layout_width="30dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_margin="10dp"
@@ -49,7 +51,7 @@
 
             <TextView
                 android:id="@+id/stock1_price"
-                android:layout_width="wrap_content"
+                android:layout_width="50dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|center_vertical"
                 android:layout_margin="10dp"
@@ -62,6 +64,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|center_vertical"
+                android:layout_margin="10dp"
                 app:srcCompat="@android:drawable/ic_menu_save" />
 
         </LinearLayout>

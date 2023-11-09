@@ -37,12 +37,11 @@ public class PortfolioPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_portfolio_page);
-        RecyclerView recyclerView = findViewById(R.id.stock_scroll);
 
         //Initialize recycler view
+        RecyclerView recyclerView = findViewById(R.id.stock_scroll);
         ArrayList<ScrollStockCard> stockCardArrayList= new ArrayList<>();
         stockCardArrayList.add(new ScrollStockCard("noname", -1, -1));
-
         ScrollAdapter scrollAdapter = new ScrollAdapter(this, stockCardArrayList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 
@@ -50,15 +49,16 @@ public class PortfolioPage extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(scrollAdapter);
 
-        //get all user purchased stocks
+        //get id from global user
         User getGlobal = getInstance();
-        getGlobal = getUserData(this.getApplicationContext(), getGlobal);
+        getUserData(this.getApplicationContext());
+        //set id to 1 for testing/display purposes in case getUserData doesnt work
         if(getGlobal.getId() <= 0) getGlobal.setId(1);
 
         //get user stocks from server
         getAllUserStocks(this.getApplicationContext(), getGlobal);
 
-        //update local/global user
+        //TODO: update local/global? Is stockPurchasedList needed locally?
         //getGlobal.setStocks(stockPurchasedList);
 
         //back to main button
@@ -68,22 +68,14 @@ public class PortfolioPage extends AppCompatActivity {
             startActivity(intent);
         });
 
-    }//onCreate
+        //To Stock list button
+        Button toStockList_btn = findViewById(R.id.stockEdit_PortfolioBtn);
+        toStockList_btn.setOnClickListener(view -> {
+            Intent intent = new Intent(PortfolioPage.this, StockList.class);
+            startActivity(intent);
+        });
 
-//    private class AsyncGetReq extends AsyncTask<User, Void, Void>{
-//        List<StockPurchased> stockPurchasedList;
-//        @Override
-//        protected Void doInBackground(User... users) {
-//            stockPurchasedList = getAllUserStocks(getApplicationContext(), users[0]);
-//            Log.i("Print stock List", "doInBackground: " + stockPurchasedList.toString());
-//            return null;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(Void result) {
-//            Log.i("background", "onPostExecute: " + stockPurchasedList.toString());
-//        }
-//    }
+    }//onCreate
 
     public void getAllUserStocks(Context context, User user) {
         String URL_JSON_OBJECT = "http://10.90.75.130:8080/user/" + user.getId();
@@ -138,8 +130,9 @@ public class PortfolioPage extends AppCompatActivity {
         VolleySingleton.getInstance(context.getApplicationContext()).addToRequestQueue(request);
     }
 
-    public User getUserData(Context context, User user) {
-        String URL_JSON_OBJECT = "http://coms-309-051.class.las.iastate.edu:8080/userByName/" + user.getUsername();
+    public void getUserData(Context context) {
+        User getGlobal = getInstance();
+        String URL_JSON_OBJECT = "http://coms-309-051.class.las.iastate.edu:8080/userByName/" + getGlobal.getUsername();
 
         //Create new request
         JsonObjectRequest request = new JsonObjectRequest(
@@ -154,17 +147,15 @@ public class PortfolioPage extends AppCompatActivity {
                         String id = response.getString("id");
                         String dob = response.getString("dob");
                         String money = response.getString("money");
-                        String username = response.getString("username");
-                        String password = response.getString("password");
 
                         // Populate text views with the parsed data
-                        user.setName(name);
-                        user.setEmail(email);
-                        user.setId(Integer.parseInt(id));
-                        user.setDob(dob);
-                        user.setMoney(Double.parseDouble(money));
-                        user.setUsername(username);
-                        user.setPassword(password);
+                        getGlobal.setName(name);
+                        getGlobal.setEmail(email);
+                        getGlobal.setId(Integer.parseInt(id));
+                        getGlobal.setDob(dob);
+                        getGlobal.setMoney(Double.parseDouble(money));
+
+                        Log.i("getUserData result", "getGlobal Updated if id != -1: " + getGlobal.getId());
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -175,6 +166,5 @@ public class PortfolioPage extends AppCompatActivity {
 
         // Adding request to request queue
         VolleySingleton.getInstance(context.getApplicationContext()).addToRequestQueue(request);
-        return user;
     }
 }//end
