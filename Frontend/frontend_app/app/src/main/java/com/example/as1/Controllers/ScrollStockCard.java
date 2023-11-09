@@ -7,20 +7,10 @@ public class ScrollStockCard {
     private int stockPrice;
     private String stockName;
 
-    public ScrollStockCard(String stockName, int numPurchased, int stockPrice, Integer imageView){
-        this.imageView = imageView;
+    public ScrollStockCard(String stockName, int numPurchased, int stockPrice){
         this.stockName = stockName;
         this.numPurchased = numPurchased;
         this.stockPrice = stockPrice;
-    }
-
-
-    public int getImageView() {
-        return imageView;
-    }
-
-    public void setImageView(int imageView) {
-        this.imageView = imageView;
     }
 
     public int getNumPurchased() {
