@@ -37,32 +37,29 @@ public class PortfolioPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_portfolio_page);
+
+        //Initialize recycler view
         RecyclerView recyclerView = findViewById(R.id.stock_scroll);
-
         ArrayList<ScrollStockCard> stockCardArrayList= new ArrayList<>();
-        List<StockPurchased> stockPurchasedList;
+        stockCardArrayList.add(new ScrollStockCard("noname", -1, -1));
+        ScrollAdapter scrollAdapter = new ScrollAdapter(this, stockCardArrayList);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 
-        //get all user purchased stocks
+        //Set recycler view
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(scrollAdapter);
+
+        //get id from global user
         User getGlobal = getInstance();
-        getGlobal = getUserData(this.getApplicationContext(), getGlobal);
+        getUserData(this.getApplicationContext());
+        //set id to 1 for testing/display purposes in case getUserData doesnt work
         if(getGlobal.getId() <= 0) getGlobal.setId(1);
 
         //get user stocks from server
-        stockPurchasedList = getAllUserStocks(this.getApplicationContext(), getGlobal);
-        Log.i("end of get request", "Stock Purchased List:" + stockPurchasedList);
+        getAllUserStocks(this.getApplicationContext(), getGlobal);
 
-        //update local/global user
-        getGlobal.setStocks(stockPurchasedList);
-
-        //Add stock cards for each stock in user's stock purchased list
-        for(StockPurchased stockPurchased : stockPurchasedList){
-            stockCardArrayList.add(new ScrollStockCard(stockPurchased.getStock().getCompany().toString(),
-                    stockPurchased.getNumPurchased(), (int) stockPurchased.getCostPurchase(), null));
-        }
-
-        //dynamic scroll view for putting cards on screen
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new ScrollAdapter(this.getApplicationContext(), stockCardArrayList));
+        //TODO: update local/global? Is stockPurchasedList needed locally?
+        //getGlobal.setStocks(stockPurchasedList);
 
         //back to main button
         Button backHome_btn = findViewById(R.id.backHome_PortfolioBtn);
@@ -71,27 +68,21 @@ public class PortfolioPage extends AppCompatActivity {
             startActivity(intent);
         });
 
+        //To Stock list button
+        Button toStockList_btn = findViewById(R.id.stockEdit_PortfolioBtn);
+        toStockList_btn.setOnClickListener(view -> {
+            Intent intent = new Intent(PortfolioPage.this, StockList.class);
+            startActivity(intent);
+        });
+
     }//onCreate
 
-//    private class AsyncGetReq extends AsyncTask<User, Void, Void>{
-//        List<StockPurchased> stockPurchasedList;
-//        @Override
-//        protected Void doInBackground(User... users) {
-//            stockPurchasedList = getAllUserStocks(getApplicationContext(), users[0]);
-//            Log.i("Print stock List", "doInBackground: " + stockPurchasedList.toString());
-//            return null;
-//        }
-//
-//        @Override
-//        protected void onPostExecute(Void result) {
-//            Log.i("background", "onPostExecute: " + stockPurchasedList.toString());
-//        }
-//    }
-
-    public List<StockPurchased> getAllUserStocks(Context context, User user) {
+    public void getAllUserStocks(Context context, User user) {
         String URL_JSON_OBJECT = "http://10.90.75.130:8080/user/" + user.getId();
         //http://coms-309-051.class.las.iastate.edu:8080/user/
-        List<StockPurchased> stockPurchasedList = new ArrayList<StockPurchased>() {};
+
+        ArrayList<ScrollStockCard> stockCardArrayList= new ArrayList<>();
+        RecyclerView recyclerView = findViewById(R.id.stock_scroll);
 
         //Create new request
         JsonArrayRequest request = new JsonArrayRequest(
@@ -99,50 +90,49 @@ public class PortfolioPage extends AppCompatActivity {
                 URL_JSON_OBJECT,
                 null,
                 response -> {
-                        Log.i("response", "getAllUserStocks: " + response.toString());
+                        Log.i(" full response", "getAllUserStocks: " + response.toString());
 
                         StockPurchased stockPurchased = new StockPurchased();
                         JSONObject object;
 
                         for(int i = 0; i < response.length(); i++) {
                             try {
+                                //Get next stock from response JSON array
                                 object = (JSONObject) response.get(i);
-                                Log.i("Response at " + i, " : " + object);
-                                stockPurchased.setId(object.getLong("id"));
-
-                                //Dont need to get user here
-                                //Do need stock tho
                                 JSONObject stockObj = (JSONObject) object.get("stock");
                                 Stock stockIN = new Stock();
-                                stockIN.setPrevDayChange(stockObj.getDouble("prevDayChange"));
-                                stockIN.setCurrValue(stockObj.getDouble("currValue"));
-                                stockIN.setCompany(stockObj.getString("company"));
-                                stockIN.setId(stockObj.getLong("id"));
-                                stockIN.setSymbol(stockObj.getString("symbol"));
-                                stockPurchased.setStock(stockIN);
 
-                                //Done parsing stock, continue parsing response
-                                stockPurchased.setCostPurchase(object.getDouble("costPurchase"));
-                                stockPurchased.setNumPurchased(object.getInt("numPurchased"));
-                                stockPurchased.setSinglePrice(object.getDouble("singlePrice"));
+                                //parse relevant info
+                                String stockName = stockObj.getString("company");
+                                int numP = object.getInt("numPurchased");
+                                int price = (int) object.getDouble("singlePrice");
+
+                                //add to arraylist to be displayed in recycle view
+                                stockCardArrayList.add(new ScrollStockCard(stockName, numP, price));
 
                             } catch (JSONException e) {
                                 throw new RuntimeException(e);
                             }
-                            stockPurchasedList.add(stockPurchased);
-                            Log.i("loop", "stockPurchased List after loop "+ i + " " + stockPurchasedList.toString());
-                            }
+
+                        }
+                        //Initialize recycler view
+                        ScrollAdapter scrollAdapter = new ScrollAdapter(this, stockCardArrayList);
+                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+
+                        //Set recycler view
+                        recyclerView.setLayoutManager(linearLayoutManager);
+                        recyclerView.setAdapter(scrollAdapter);
                         },
 
                 error -> Log.i("parse error ", "getAllUserStocks: "+ error.getMessage())) {};
 
         // Adding request to request queue
         VolleySingleton.getInstance(context.getApplicationContext()).addToRequestQueue(request);
-        return stockPurchasedList;
     }
 
-    public User getUserData(Context context, User user) {
-        String URL_JSON_OBJECT = "http://coms-309-051.class.las.iastate.edu:8080/userByName/" + user.getUsername();
+    public void getUserData(Context context) {
+        User getGlobal = getInstance();
+        String URL_JSON_OBJECT = "http://coms-309-051.class.las.iastate.edu:8080/userByName/" + getGlobal.getUsername();
 
         //Create new request
         JsonObjectRequest request = new JsonObjectRequest(
@@ -157,17 +147,15 @@ public class PortfolioPage extends AppCompatActivity {
                         String id = response.getString("id");
                         String dob = response.getString("dob");
                         String money = response.getString("money");
-                        String username = response.getString("username");
-                        String password = response.getString("password");
 
                         // Populate text views with the parsed data
-                        user.setName(name);
-                        user.setEmail(email);
-                        user.setId(Integer.parseInt(id));
-                        user.setDob(dob);
-                        user.setMoney(Double.parseDouble(money));
-                        user.setUsername(username);
-                        user.setPassword(password);
+                        getGlobal.setName(name);
+                        getGlobal.setEmail(email);
+                        getGlobal.setId(Integer.parseInt(id));
+                        getGlobal.setDob(dob);
+                        getGlobal.setMoney(Double.parseDouble(money));
+
+                        Log.i("getUserData result", "getGlobal Updated if id != -1: " + getGlobal.getId());
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -178,6 +166,5 @@ public class PortfolioPage extends AppCompatActivity {
 
         // Adding request to request queue
         VolleySingleton.getInstance(context.getApplicationContext()).addToRequestQueue(request);
-        return user;
     }
 }//end
