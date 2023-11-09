@@ -39,8 +39,16 @@ public class PortfolioPage extends AppCompatActivity {
         setContentView(R.layout.user_portfolio_page);
         RecyclerView recyclerView = findViewById(R.id.stock_scroll);
 
+        //Initialize recycler view
         ArrayList<ScrollStockCard> stockCardArrayList= new ArrayList<>();
-        List<StockPurchased> stockPurchasedList;
+        stockCardArrayList.add(new ScrollStockCard("noname", -1, -1));
+
+        ScrollAdapter scrollAdapter = new ScrollAdapter(this, stockCardArrayList);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+
+        //Set recycler view
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(scrollAdapter);
 
         //get all user purchased stocks
         User getGlobal = getInstance();
@@ -48,21 +56,10 @@ public class PortfolioPage extends AppCompatActivity {
         if(getGlobal.getId() <= 0) getGlobal.setId(1);
 
         //get user stocks from server
-        stockPurchasedList = getAllUserStocks(this.getApplicationContext(), getGlobal);
-        Log.i("end of get request", "Stock Purchased List:" + stockPurchasedList);
+        getAllUserStocks(this.getApplicationContext(), getGlobal);
 
         //update local/global user
-        getGlobal.setStocks(stockPurchasedList);
-
-        //Add stock cards for each stock in user's stock purchased list
-        for(StockPurchased stockPurchased : stockPurchasedList){
-            stockCardArrayList.add(new ScrollStockCard(stockPurchased.getStock().getCompany().toString(),
-                    stockPurchased.getNumPurchased(), (int) stockPurchased.getCostPurchase(), null));
-        }
-
-        //dynamic scroll view for putting cards on screen
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(new ScrollAdapter(this.getApplicationContext(), stockCardArrayList));
+        //getGlobal.setStocks(stockPurchasedList);
 
         //back to main button
         Button backHome_btn = findViewById(R.id.backHome_PortfolioBtn);
@@ -88,10 +85,12 @@ public class PortfolioPage extends AppCompatActivity {
 //        }
 //    }
 
-    public List<StockPurchased> getAllUserStocks(Context context, User user) {
+    public void getAllUserStocks(Context context, User user) {
         String URL_JSON_OBJECT = "http://10.90.75.130:8080/user/" + user.getId();
         //http://coms-309-051.class.las.iastate.edu:8080/user/
-        List<StockPurchased> stockPurchasedList = new ArrayList<StockPurchased>() {};
+
+        ArrayList<ScrollStockCard> stockCardArrayList= new ArrayList<>();
+        RecyclerView recyclerView = findViewById(R.id.stock_scroll);
 
         //Create new request
         JsonArrayRequest request = new JsonArrayRequest(
@@ -99,46 +98,44 @@ public class PortfolioPage extends AppCompatActivity {
                 URL_JSON_OBJECT,
                 null,
                 response -> {
-                        Log.i("response", "getAllUserStocks: " + response.toString());
+                        Log.i(" full response", "getAllUserStocks: " + response.toString());
 
                         StockPurchased stockPurchased = new StockPurchased();
                         JSONObject object;
 
                         for(int i = 0; i < response.length(); i++) {
                             try {
+                                //Get next stock from response JSON array
                                 object = (JSONObject) response.get(i);
-                                Log.i("Response at " + i, " : " + object);
-                                stockPurchased.setId(object.getLong("id"));
-
-                                //Dont need to get user here
-                                //Do need stock tho
                                 JSONObject stockObj = (JSONObject) object.get("stock");
                                 Stock stockIN = new Stock();
-                                stockIN.setPrevDayChange(stockObj.getDouble("prevDayChange"));
-                                stockIN.setCurrValue(stockObj.getDouble("currValue"));
-                                stockIN.setCompany(stockObj.getString("company"));
-                                stockIN.setId(stockObj.getLong("id"));
-                                stockIN.setSymbol(stockObj.getString("symbol"));
-                                stockPurchased.setStock(stockIN);
 
-                                //Done parsing stock, continue parsing response
-                                stockPurchased.setCostPurchase(object.getDouble("costPurchase"));
-                                stockPurchased.setNumPurchased(object.getInt("numPurchased"));
-                                stockPurchased.setSinglePrice(object.getDouble("singlePrice"));
+                                //parse relevant info
+                                String stockName = stockObj.getString("company");
+                                int numP = object.getInt("numPurchased");
+                                int price = (int) object.getDouble("singlePrice");
+
+                                //add to arraylist to be displayed in recycle view
+                                stockCardArrayList.add(new ScrollStockCard(stockName, numP, price));
 
                             } catch (JSONException e) {
                                 throw new RuntimeException(e);
                             }
-                            stockPurchasedList.add(stockPurchased);
-                            Log.i("loop", "stockPurchased List after loop "+ i + " " + stockPurchasedList.toString());
-                            }
+
+                        }
+                        //Initialize recycler view
+                        ScrollAdapter scrollAdapter = new ScrollAdapter(this, stockCardArrayList);
+                        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+
+                        //Set recycler view
+                        recyclerView.setLayoutManager(linearLayoutManager);
+                        recyclerView.setAdapter(scrollAdapter);
                         },
 
                 error -> Log.i("parse error ", "getAllUserStocks: "+ error.getMessage())) {};
 
         // Adding request to request queue
         VolleySingleton.getInstance(context.getApplicationContext()).addToRequestQueue(request);
-        return stockPurchasedList;
     }
 
     public User getUserData(Context context, User user) {
