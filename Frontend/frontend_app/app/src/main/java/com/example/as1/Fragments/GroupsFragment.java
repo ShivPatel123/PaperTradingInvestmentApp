@@ -81,11 +81,11 @@ public class GroupsFragment extends Fragment implements View.OnClickListener, We
 
         groupView = inflater.inflate(R.layout.group_page, container, false);
 
-        connectBtn = (Button) groupView.findViewById(R.id.connectButton);
-        sendBtn = (Button) groupView.findViewById(R.id.sendButton);
-       // usernameEtx = (TextView) groupView.findViewById(R.id.usernameTextView);
-        msgEtx = (EditText) groupView.findViewById(R.id.messageEditText);
-        msgTv = (TextView) groupView.findViewById(R.id.chatTextView);
+//        connectBtn = (Button) groupView.findViewById(R.id.connectButton);
+//        sendBtn = (Button) groupView.findViewById(R.id.sendButton);
+//        usernameEtx = (TextView) groupView.findViewById(R.id.usernameTextView);
+//        msgEtx = (EditText) groupView.findViewById(R.id.messageEditText);
+//        msgTv = (TextView) groupView.findViewById(R.id.chatTextView);
 
 
         //  /StockGroup2
@@ -125,7 +125,7 @@ public class GroupsFragment extends Fragment implements View.OnClickListener, We
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        view.findViewById(R.id.connectButton).setOnClickListener(this);
+        //view.findViewById(R.id.connectButton).setOnClickListener(this);
 
     }
 

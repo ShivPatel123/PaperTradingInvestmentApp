@@ -20,12 +20,12 @@ import com.example.as1.R;
 import org.java_websocket.handshake.ServerHandshake;
 import org.json.JSONException;
 
-public class FriendsChatPage extends AppCompatActivity implements WebSocketListener {
+public class GroupChatPage extends AppCompatActivity implements WebSocketListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.friends_chat_page);
+        setContentView(R.layout.group_chat_page);
 
         //URL from springboot endpoint, DOES IT NEED TO BE WS OR HTTP??
         //what is {target}: /chat/{username}/{target} target is message reciever
@@ -59,7 +59,7 @@ public class FriendsChatPage extends AppCompatActivity implements WebSocketListe
 
             // Establish WebSocket connection and set listener
             WebSocketManager.getInstance().connectWebSocket(serverUrl);
-            WebSocketManager.getInstance().setWebSocketListener(FriendsChatPage.this);
+            WebSocketManager.getInstance().setWebSocketListener(GroupChatPage.this);
         });
 
         connect2Btn.setOnClickListener(view -> {
@@ -68,7 +68,7 @@ public class FriendsChatPage extends AppCompatActivity implements WebSocketListe
 
             // Establish WebSocket connection and set listener
             WebSocketManager.getInstance().connectWebSocket(serverUrl);
-            WebSocketManager.getInstance().setWebSocketListener(FriendsChatPage.this);
+            WebSocketManager.getInstance().setWebSocketListener(GroupChatPage.this);
         });
 
         /* send button listener */

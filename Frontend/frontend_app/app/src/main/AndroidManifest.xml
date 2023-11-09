@@ -43,10 +43,10 @@
             android:name=".screens.PortfolioPage"
             android:exported="true" />
         <activity
-            android:name=".screens.FriendsChatPage"
+            android:name=".screens.GroupChatPage"
             android:exported="true" />
         <activity
-            android:name=".screens.FriendGroupPage"
+            android:name=".screens.GroupPage"
             android:exported="true" />
         <activity
             android:name=".screens.StockList"
