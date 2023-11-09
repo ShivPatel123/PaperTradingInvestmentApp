@@ -26,7 +26,7 @@
             android:layout_width="263dp"
             android:layout_height="match_parent">
 
-            <EditText
+            <TextView
                 android:id="@+id/stock1_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -37,7 +37,7 @@
                 android:textSize="17sp"
                 android:textStyle="bold" />
 
-            <EditText
+            <TextView
                 android:id="@+id/stock1_num"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -47,7 +47,7 @@
                 android:textColor="@color/txtclr"
                 android:textStyle="bold" />
 
-            <EditText
+            <TextView
                 android:id="@+id/stock1_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
