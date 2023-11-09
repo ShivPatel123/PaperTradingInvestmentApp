@@ -15,7 +15,7 @@ public class NavPage extends AppCompatActivity {
     Button toTutorials_btn;
     Button toGroup_btn;
     Button toPortfolio_btn;
-    Button toFriends_btn;
+    Button toSingleStock_btn;
 
 
     @Override
@@ -79,12 +79,12 @@ public class NavPage extends AppCompatActivity {
         });
 
         //button to friends page
-        toFriends_btn = findViewById(R.id.friends_Main_btn);
-        toFriends_btn.setOnClickListener(new View.OnClickListener() {
+        toSingleStock_btn = findViewById(R.id.friends_Main_btn);
+        toSingleStock_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(NavPage.this, FriendGroupPage.class);
+                Intent intent = new Intent(NavPage.this, StockPage.class);
                 startActivity(intent);
             }
         });

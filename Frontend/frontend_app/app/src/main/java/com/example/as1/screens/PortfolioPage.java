@@ -2,6 +2,7 @@ package com.example.as1.screens;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -25,6 +26,7 @@ import com.example.as1.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.net.ConnectException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -37,25 +39,17 @@ public class PortfolioPage extends AppCompatActivity {
         setContentView(R.layout.user_portfolio_page);
         RecyclerView recyclerView = findViewById(R.id.stock_scroll);
 
-        List<StockPurchased> stockPurchasedList;
         ArrayList<ScrollStockCard> stockCardArrayList= new ArrayList<>();
+        List<StockPurchased> stockPurchasedList;
 
         //get all user purchased stocks
         User getGlobal = getInstance();
         getGlobal = getUserData(this.getApplicationContext(), getGlobal);
-        if(getGlobal.getId() <= 0) {
-            getGlobal.setId(1);
-        }
+        if(getGlobal.getId() <= 0) getGlobal.setId(1);
 
         //get user stocks from server
         stockPurchasedList = getAllUserStocks(this.getApplicationContext(), getGlobal);
-        //Try to wait a second so the code doesnt move to getGlobal.setStocks
-        // without getting stockPurchasedList first
-        try {
-            wait();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
+        Log.i("end of get request", "Stock Purchased List:" + stockPurchasedList);
 
         //update local/global user
         getGlobal.setStocks(stockPurchasedList);
@@ -78,6 +72,21 @@ public class PortfolioPage extends AppCompatActivity {
         });
 
     }//onCreate
+
+//    private class AsyncGetReq extends AsyncTask<User, Void, Void>{
+//        List<StockPurchased> stockPurchasedList;
+//        @Override
+//        protected Void doInBackground(User... users) {
+//            stockPurchasedList = getAllUserStocks(getApplicationContext(), users[0]);
+//            Log.i("Print stock List", "doInBackground: " + stockPurchasedList.toString());
+//            return null;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(Void result) {
+//            Log.i("background", "onPostExecute: " + stockPurchasedList.toString());
+//        }
+//    }
 
     public List<StockPurchased> getAllUserStocks(Context context, User user) {
         String URL_JSON_OBJECT = "http://10.90.75.130:8080/user/" + user.getId();
@@ -121,6 +130,7 @@ public class PortfolioPage extends AppCompatActivity {
                                 throw new RuntimeException(e);
                             }
                             stockPurchasedList.add(stockPurchased);
+                            Log.i("loop", "stockPurchased List after loop "+ i + " " + stockPurchasedList.toString());
                             }
                         },
 
@@ -149,7 +159,6 @@ public class PortfolioPage extends AppCompatActivity {
                         String money = response.getString("money");
                         String username = response.getString("username");
                         String password = response.getString("password");
-                        //TODO parse arraylist to get stock list
 
                         // Populate text views with the parsed data
                         user.setName(name);
