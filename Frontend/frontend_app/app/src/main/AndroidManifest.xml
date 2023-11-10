@@ -52,7 +52,7 @@
             android:name=".screens.StockList"
             android:exported="true" />
         <activity
-            android:name=".screens.GroupPage"
+            android:name=".screens.AdminDashboardPage"
             android:exported="true" />
 
     </application>

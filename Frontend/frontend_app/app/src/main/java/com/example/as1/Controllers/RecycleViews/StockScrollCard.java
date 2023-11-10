@@ -1,13 +1,13 @@
-package com.example.as1.Controllers;
+package com.example.as1.Controllers.RecycleViews;
 
-public class ScrollStockCard {
+public class StockScrollCard {
 
     private int imageView;
     private int numPurchased;
     private int stockPrice;
     private String stockName;
 
-    public ScrollStockCard(String stockName, int numPurchased, int stockPrice){
+    public StockScrollCard(String stockName, int numPurchased, int stockPrice){
         this.stockName = stockName;
         this.numPurchased = numPurchased;
         this.stockPrice = stockPrice;
