@@ -55,8 +55,8 @@
     <EditText
         android:id="@+id/HomePage_title"
         style="@style/Widget.AppCompat.AutoCompleteTextView"
-        android:layout_width="431dp"
-        android:layout_height="147dp"
+        android:layout_width="match_parent"
+        android:layout_height="115dp"
         android:background="@color/darkBack"
         android:ems="10"
         android:fontFamily="@font/advent_pro_medium"
@@ -81,9 +81,9 @@
         android:text="test"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.182"
+        app:layout_constraintHorizontal_bias="0.919"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.241" />
+        app:layout_constraintVertical_bias="0.202" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

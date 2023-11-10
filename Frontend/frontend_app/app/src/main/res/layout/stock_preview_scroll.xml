@@ -7,7 +7,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/stockPCard1"
-        android:layout_width="355dp"
+        android:layout_width="350dp"
         android:layout_height="98dp"
         android:layout_margin="10dp"
         app:cardBackgroundColor="@color/navy_bg"
@@ -24,7 +24,7 @@
         app:layout_constraintVertical_bias="1.0">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="357dp"
             android:layout_height="match_parent">
 
             <TextView
@@ -46,8 +46,8 @@
                 android:layout_gravity="center_vertical"
                 android:layout_margin="10dp"
                 android:text="ID"
-                android:textSize="16sp"
                 android:textColor="@color/txtclr"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <TextView
@@ -57,16 +57,16 @@
                 android:layout_gravity="right|center_vertical"
                 android:layout_marginLeft="10dp"
                 android:text="$0"
-                android:textSize="16sp"
                 android:textColor="@color/txtclr"
+                android:textSize="16sp"
                 android:textStyle="bold" />
 
             <Button
                 android:id="@+id/deleteStock_Adminbtn"
                 android:layout_width="101dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="20dp"
                 android:layout_gravity="center_vertical"
+                android:layout_margin="20dp"
                 android:text="Delete" />
 
 
