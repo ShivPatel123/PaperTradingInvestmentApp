@@ -1,4 +1,4 @@
-package com.example.as1.Controllers;
+package com.example.as1.Controllers.RecycleViews;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -13,14 +13,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.as1.R;
 
 import java.util.ArrayList;
-import java.util.List;
 
-public class ScrollAdapter extends RecyclerView.Adapter<ScrollAdapter.ScrollViewHolder> {
+public class StockScrollAdapter extends RecyclerView.Adapter<StockScrollAdapter.ScrollViewHolder> {
 
     Context context;
-    ArrayList<ScrollStockCard> scrollCardList;
+    ArrayList<StockScrollCard> scrollCardList;
 
-    public ScrollAdapter(Context context, ArrayList<ScrollStockCard> scrollCardList){
+    public StockScrollAdapter(Context context, ArrayList<StockScrollCard> scrollCardList){
         this.context=context;
         this.scrollCardList = scrollCardList;
     }
@@ -32,7 +31,7 @@ public class ScrollAdapter extends RecyclerView.Adapter<ScrollAdapter.ScrollView
 
     @Override
     public void onBindViewHolder(@NonNull ScrollViewHolder holder, int position) {
-        ScrollStockCard model = scrollCardList.get(position);
+        StockScrollCard model = scrollCardList.get(position);
         holder.stockName.setText("" + model.getStockName());
         holder.stockNum.setText("x" + model.getNumPurchased());
         holder.stockPrice.setText("$" + model.getStockPrice());

@@ -74,6 +74,18 @@
         app:layout_constraintVertical_bias="0.243" />
 
     <Button
+        android:id="@+id/admin_main_btn"
+        android:layout_width="122dp"
+        android:layout_height="82dp"
+        android:text="Admin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.124"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.764" />
+
+    <Button
         android:id="@+id/group_Main_btn"
         android:layout_width="124dp"
         android:layout_height="85dp"

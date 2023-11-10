@@ -2,7 +2,6 @@ package com.example.as1.screens;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -15,8 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.example.as1.Controllers.ScrollAdapter;
-import com.example.as1.Controllers.ScrollStockCard;
+import com.example.as1.Controllers.RecycleViews.StockScrollAdapter;
+import com.example.as1.Controllers.RecycleViews.StockScrollCard;
 import com.example.as1.Controllers.Stock;
 import com.example.as1.Controllers.StockPurchased;
 import com.example.as1.Controllers.User;
@@ -26,10 +25,7 @@ import com.example.as1.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.net.ConnectException;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 public class PortfolioPage extends AppCompatActivity {
 
@@ -40,14 +36,14 @@ public class PortfolioPage extends AppCompatActivity {
 
         //Initialize recycler view
         RecyclerView recyclerView = findViewById(R.id.stock_scroll);
-        ArrayList<ScrollStockCard> stockCardArrayList= new ArrayList<>();
-        stockCardArrayList.add(new ScrollStockCard("noname", -1, -1));
-        ScrollAdapter scrollAdapter = new ScrollAdapter(this, stockCardArrayList);
+        ArrayList<StockScrollCard> stockCardArrayList= new ArrayList<>();
+        stockCardArrayList.add(new StockScrollCard("noname", -1, -1));
+        StockScrollAdapter stockScrollAdapter = new StockScrollAdapter(this, stockCardArrayList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 
         //Set recycler view
         recyclerView.setLayoutManager(linearLayoutManager);
-        recyclerView.setAdapter(scrollAdapter);
+        recyclerView.setAdapter(stockScrollAdapter);
 
         //get id from global user
         User getGlobal = getInstance();
@@ -81,7 +77,7 @@ public class PortfolioPage extends AppCompatActivity {
         String URL_JSON_OBJECT = "http://10.90.75.130:8080/user/" + user.getId();
         //http://coms-309-051.class.las.iastate.edu:8080/user/
 
-        ArrayList<ScrollStockCard> stockCardArrayList= new ArrayList<>();
+        ArrayList<StockScrollCard> stockCardArrayList= new ArrayList<>();
         RecyclerView recyclerView = findViewById(R.id.stock_scroll);
 
         //Create new request
@@ -108,7 +104,7 @@ public class PortfolioPage extends AppCompatActivity {
                                 int price = (int) object.getDouble("singlePrice");
 
                                 //add to arraylist to be displayed in recycle view
-                                stockCardArrayList.add(new ScrollStockCard(stockName, numP, price));
+                                stockCardArrayList.add(new StockScrollCard(stockName, numP, price));
 
                             } catch (JSONException e) {
                                 throw new RuntimeException(e);
@@ -116,12 +112,12 @@ public class PortfolioPage extends AppCompatActivity {
 
                         }
                         //Initialize recycler view
-                        ScrollAdapter scrollAdapter = new ScrollAdapter(this, stockCardArrayList);
+                        StockScrollAdapter stockScrollAdapter = new StockScrollAdapter(this, stockCardArrayList);
                         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 
                         //Set recycler view
                         recyclerView.setLayoutManager(linearLayoutManager);
-                        recyclerView.setAdapter(scrollAdapter);
+                        recyclerView.setAdapter(stockScrollAdapter);
                         },
 
                 error -> Log.i("parse error ", "getAllUserStocks: "+ error.getMessage())) {};
