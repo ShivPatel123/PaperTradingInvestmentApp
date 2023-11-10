@@ -1,9 +1,11 @@
 package com.example.as1.screens;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.GetChars;
 import android.util.Log;
+import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -34,6 +36,19 @@ public class AdminDashboardPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_dash_page);
+
+        //Update Stocks
+        Button updateStocks = findViewById(R.id.updateStocks_Adminbtn);
+        updateStocks.setOnClickListener(view -> {
+            getAllStocks(this.getApplicationContext());
+        });
+
+        //Create Stock
+        Button createStock = findViewById(R.id.createStock_Adminbtn);
+         createStock.setOnClickListener(view -> {
+             Intent intent = new Intent(AdminDashboardPage.this, CreateStock.class);
+                        startActivity(intent);
+        });
 
         //Initialize recycler view (user)
         RecyclerView recyclerView = findViewById(R.id.user_scroll);
