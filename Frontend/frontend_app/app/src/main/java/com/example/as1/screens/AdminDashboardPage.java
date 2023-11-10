@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonArrayRequest;
+import com.example.as1.Controllers.RecycleViews.StockPreviewScrollAdapter;
+import com.example.as1.Controllers.RecycleViews.StockPreviewScrollCard;
 import com.example.as1.Controllers.RecycleViews.StockScrollAdapter;
 import com.example.as1.Controllers.RecycleViews.StockScrollCard;
 import com.example.as1.Controllers.RecycleViews.UserScrollAdapter;
@@ -33,18 +35,30 @@ public class AdminDashboardPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_dash_page);
 
-        //Initialize recycler view
+        //Initialize recycler view (user)
         RecyclerView recyclerView = findViewById(R.id.user_scroll);
         ArrayList<UserScrollCard> userCardArrayList = new ArrayList<>();
         userCardArrayList.add(new UserScrollCard("noname", -1, 'u'));
         UserScrollAdapter userScrollAdapter = new UserScrollAdapter(this, userCardArrayList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 
-        //Set recycler view
+        //set recycler view
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(userScrollAdapter);
+        getAllUsers(this.getApplicationContext());
 
-        getAllUsers(getApplicationContext());
+        //Initialize recycler view (stock)
+        RecyclerView stockRecyclerView = findViewById(R.id.stockPreview_scroll);
+        ArrayList<StockPreviewScrollCard> stockCardArrayList = new ArrayList<>();
+        stockCardArrayList.add(new StockPreviewScrollCard("noname", 0, 0));
+        StockPreviewScrollAdapter StockPreviewScrollAdapter = new StockPreviewScrollAdapter(this, stockCardArrayList);
+        LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+
+        //Set recycler view
+        stockRecyclerView.setLayoutManager(linearLayoutManager2);
+        stockRecyclerView.setAdapter(StockPreviewScrollAdapter);
+        getAllStocks(this.getApplicationContext());
+
     }
 
 
@@ -95,6 +109,58 @@ public class AdminDashboardPage extends AppCompatActivity {
                 },
 
                 error -> Log.i("Error ", "getAllUsers: "+ error.getMessage())) {};
+
+        // Adding request to request queue
+        VolleySingleton.getInstance(context.getApplicationContext()).addToRequestQueue(request);
+    }
+
+    //get all users from server and parse into recycle view
+    public void getAllStocks(Context context) {
+        String URL_JSON_OBJECT = "http://10.90.75.130:8080/stocks";
+        //http://coms-309-051.class.las.iastate.edu:8080/user/
+
+        ArrayList<StockPreviewScrollCard> stockCardArrayList= new ArrayList<>();
+        RecyclerView recyclerView = findViewById(R.id.stockPreview_scroll);
+
+        //Create new request
+        JsonArrayRequest request = new JsonArrayRequest(
+                Request.Method.GET,
+                URL_JSON_OBJECT,
+                null,
+                response -> {
+                    Log.i(" full response", "getAllStocks: " + response.toString());
+
+                    JSONObject object;
+
+                    for(int i = 0; i < response.length(); i++) {
+                        try {
+                            object = (JSONObject) response.get(i);
+                            // JSONObject stockObj = (JSONObject) object.get("user");
+                            //User userIN = new User();
+
+                            //parse relevant info
+                            String company = object.getString("company");
+                            long id = object.getLong("id");
+                            double currValue = object.getDouble("currValue");
+
+                            //add to arraylist to be displayed in recycle view
+                            stockCardArrayList.add(new StockPreviewScrollCard(company, currValue, id));
+
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+
+                    }
+                    //Initialize recycler view
+                    StockPreviewScrollAdapter stockScrollAdapter = new StockPreviewScrollAdapter(this, stockCardArrayList);
+                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+
+                    //Set recycler view
+                    recyclerView.setLayoutManager(linearLayoutManager);
+                    recyclerView.setAdapter(stockScrollAdapter);
+                },
+
+                error -> Log.i("Error ", "getAllStocks: "+ error.getMessage())) {};
 
         // Adding request to request queue
         VolleySingleton.getInstance(context.getApplicationContext()).addToRequestQueue(request);
