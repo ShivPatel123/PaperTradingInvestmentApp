@@ -1,6 +1,5 @@
 package com.example.as1.screens;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,26 +9,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.as1.R;
 
-public class MainPage extends AppCompatActivity {
-        /* need profile page
-         * tutorials page
-         * groups page
-         * portfolio page
-         * button to stock preview page (with tutorials?)
-         * stock listing
-         */
-    Button toStockPreview_btn;
+public class NavPage extends AppCompatActivity {
+    Button toStock_btn;
     Button toProfile_btn;
     Button toTutorials_btn;
     Button toGroup_btn;
     Button toPortfolio_btn;
-    Button toHelp_btn;
+    Button toSingleStock_btn;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_page);
+        setContentView(R.layout.nav_page);
 
         //button to Profile page
         toProfile_btn = findViewById(R.id.profile_Main_btn);
@@ -37,7 +29,7 @@ public class MainPage extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(MainPage.this, ProfilePage.class);
+                Intent intent = new Intent(NavPage.this, ProfilePage.class);
                 startActivity(intent);
             }
         });
@@ -48,7 +40,7 @@ public class MainPage extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(MainPage.this, TutorialsPage.class);
+                Intent intent = new Intent(NavPage.this, TutorialsPage.class);
                 startActivity(intent);
             }
         });
@@ -59,45 +51,43 @@ public class MainPage extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(MainPage.this, GroupPage.class);
+                Intent intent = new Intent(NavPage.this, GroupPage.class);
                 startActivity(intent);
             }
         });
 
-        //button to stock preview page
-        toStockPreview_btn = findViewById(R.id.stockPreview_Main_btn);
-        toStockPreview_btn.setOnClickListener(new View.OnClickListener() {
+        //button to stock list page
+        toStock_btn = findViewById(R.id.stockPreview_Main_btn);
+        toStock_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(MainPage.this, StockPage.class);
+                Intent intent = new Intent(NavPage.this, StockList.class);
                 startActivity(intent);
             }
         });
 
-        //button to login page
+        //button to portfolio page
         toPortfolio_btn = findViewById(R.id.portfolio_Main_btn);
         toPortfolio_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(MainPage.this, PortfolioPage.class);
+                Intent intent = new Intent(NavPage.this, PortfolioPage.class);
                 startActivity(intent);
             }
         });
 
-        //button to login page
-        toHelp_btn = findViewById(R.id.help_Main_btn);
-        toHelp_btn.setOnClickListener(new View.OnClickListener() {
+        //button to friends page
+        toSingleStock_btn = findViewById(R.id.friends_Main_btn);
+        toSingleStock_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
             {
-                Intent intent = new Intent(MainPage.this, HelpPage.class);
+                Intent intent = new Intent(NavPage.this, StockPage.class);
                 startActivity(intent);
             }
         });
-
-
 
     }
 

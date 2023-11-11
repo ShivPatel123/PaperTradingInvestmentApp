@@ -30,12 +30,13 @@ public interface StockMapping {
     @POST("/stocks/{id}")
     Call<Stock> updateStockById(@Path("id") int id);
 
-    //Update all stocks in database or update all stocks for one user?
-//        @PutMapping(path = "/stocks")
-//        String updateAllStocks(){
-//            stockAPI.updateAllStocks(stockRepository);
-//            return success;
-//        }
+    //retrieves news articles pertaining to stock (id)
+    @GET("/stocks/news/{id}")
+    Call<String> getStockNews(@Path("id") int id);
+
+    //retrieves weekly price history of stock (id)
+    @GET("/stocks/history/{id}")
+    Call<String> getStockHistory(@Path("id") int id);
 
         @DELETE("/stocks/{id}")
         Call<Stock> deleteStock(@Path("id") Long id);

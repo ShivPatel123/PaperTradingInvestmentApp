@@ -1,13 +1,11 @@
 package com.example.as1.screens;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -20,6 +18,8 @@ import com.example.as1.ExternalControllers.VolleySingleton;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.concurrent.atomic.AtomicReference;
 
 public class EditProfilePage extends AppCompatActivity {
 
@@ -41,38 +41,37 @@ public class EditProfilePage extends AppCompatActivity {
         EditText money_display = findViewById(R.id.Emoney_Display);
 
         //Get global user data for get request
-        User getGlobal = User.getInstance();
+        AtomicReference<User> getGlobal = new AtomicReference<>(User.getInstance());
         //Get req for user data, need to be sure global user has id set after logging in
-        getGlobal = getUserData(this.getApplicationContext(),getGlobal);
-        //TODO: update global user data (need to make function)
+        //getGlobal = getUserData(this.getApplicationContext(),getGlobal);
 
         //set display to user data
-        welcomeTxt.setText("Welcome, " + getGlobal.getName() + "!");
-        username_display.setText(getGlobal.getUsername().toString());
-        password_display.setText(getGlobal.getPassword().toString());
-        email_display.setText(getGlobal.getEmail().toString());
-        dob_display.setText(getGlobal.getDob().toString());
-        double money1 = (double) getGlobal.getMoney();
+        welcomeTxt.setText(getGlobal.get().getName());
+        username_display.setText(getGlobal.get().getUsername().toString());
+        password_display.setText(getGlobal.get().getPassword().toString());
+        email_display.setText(getGlobal.get().getEmail().toString());
+        dob_display.setText(getGlobal.get().getDob().toString());
+        double money1 = (double) getGlobal.get().getMoney();
         money_display.setText(String.valueOf(money1));
         //TODO: stock_display.setText(getGlobal.getNumStocksPurchased());
 
         // save changes button
         saveProfile_btn.setOnClickListener(view -> {
             //write inputs to user
-            User inputUser = new User();
-            inputUser.setName(welcomeTxt.getText().toString());
-            inputUser.setUsername(username_display.getText().toString());
-            inputUser.setPassword(password_display.getText().toString());
-            inputUser.setEmail(email_display.getText().toString());
-            inputUser.setDob(dob_display.getText().toString());
-            inputUser.setMoney(Double.parseDouble(money_display.getText().toString()));
+            getGlobal.get().setName(welcomeTxt.getText().toString());
+            getGlobal.get().setUsername(username_display.getText().toString());
+            getGlobal.get().setPassword(password_display.getText().toString());
+            getGlobal.get().setEmail(email_display.getText().toString());
+            getGlobal.get().setDob(dob_display.getText().toString());
+            getGlobal.get().setMoney(Double.parseDouble(money_display.getText().toString()));
             //post request
-            updateUserReq(this.getApplicationContext(), inputUser);
+            getGlobal.set(updateUserReq(this.getApplicationContext(), getGlobal.get()));
             //go back to profile page
             Intent intent = new Intent(EditProfilePage.this, ProfilePage.class);
             startActivity(intent);
 
         });
+
 
         //back button
         back_btn.setOnClickListener(view -> {
@@ -89,10 +88,8 @@ public class EditProfilePage extends AppCompatActivity {
     }
 
     public User getUserData(Context context, User user) {
-        String URL_JSON_OBJECT = "http://10.90.75.130:8080/user/".concat(String.valueOf(user.getId()));
-        int confirm = getResources().getColor(R.color.greenConfirm);
-        TextView confirm_display = findViewById(R.id.confirmWindow);
 
+        String URL_JSON_OBJECT = "http://coms-309-051.class.las.iastate.edu:8080/userByName/" + user.getUsername();
         //Create new request
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET,
@@ -106,7 +103,6 @@ public class EditProfilePage extends AppCompatActivity {
                         String id = response.getString("id");
                         String dob = response.getString("dob");
                         String money = response.getString("money");
-                        String numStocks = response.getString("numStocks");
                         String username = response.getString("username");
                         String password = response.getString("password");
 
@@ -120,13 +116,11 @@ public class EditProfilePage extends AppCompatActivity {
                         user.setUsername(username);
                         user.setPassword(password);
 
-                        confirm_display.setTextColor(confirm);
-
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
                 },
-                error -> confirm_display.setText(error.getMessage())) {
+                error ->  Log.i("error", "getUserData: " + error)) {
         };
 
         // Adding request to request queue
@@ -134,11 +128,9 @@ public class EditProfilePage extends AppCompatActivity {
         return user;
     }
 
-    public void updateUserReq(Context context, User user) {
-        String URL_JSON_OBJECT = "http://10.90.75.130:8080/user/".concat(String.valueOf(user.getId()));
+    public User updateUserReq(Context context, User user) {
+        String URL_JSON_OBJECT = "http://coms-309-051.class.las.iastate.edu:8080/users/" + user.getId();
         JSONObject objectBody = new JSONObject();
-        int confirm = getResources().getColor(R.color.greenConfirm);
-        TextView confirm_display = findViewById(R.id.confirmWindow);
         // Convert input to JSONObject
         try {
             objectBody.put("username",user.getUsername());
@@ -149,21 +141,24 @@ public class EditProfilePage extends AppCompatActivity {
             objectBody.put("money",user.getMoney());
             objectBody.put("id",user.getId());
 
-            Log.d("user JSON Object: ", objectBody.toString());
+            Log.i("user JSON Object: ", objectBody.toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         //Create new request
         JsonObjectRequest request = new JsonObjectRequest(
-                Request.Method.POST,
+                Request.Method.PUT,
                 URL_JSON_OBJECT,
                 objectBody,
-                response -> confirm_display.setTextColor(confirm),
-                error -> confirm_display.setText(error.getMessage())) { };
+                response ->{
+                    Log.i("response", "updateUserReq: " + response);
+                },
+                error -> Log.i("error", "updateUserReq: " + error)) { };
 
         // Adding request to request queue
         VolleySingleton.getInstance(context.getApplicationContext()).addToRequestQueue(request);
+        return user;
     }
 
 }

@@ -3,7 +3,8 @@ package coms309.chat;
 import coms309.Users.User;
 import coms309.Users.UserRepository;
 import coms309.Users.UserController;
-import coms309.Users.UserController;
+import coms309.Users.FriendGroup;
+import coms309.Users.FriendGroupRepository;
 
 
 import java.io.IOException;
@@ -28,17 +29,28 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.stereotype.Component;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
-@Controller      // this is needed for this to be an endpoint to springboot
+
+
+@RestController      // this is needed for this to be an endpoint to springboot
 @ServerEndpoint(value = "/chat/{username}/{target}")  // this is Websocket url
 public class ChatSocket {
 
+
+	@Autowired
+	FriendGroupRepository friendGroupRepository;
   // cannot autowire static directly (instead we do it by the below
   // method
 	private static MessageRepository msgRepo;
 
 	@Autowired
 	private UserRepository userRepository;
+
+
+
 
 	/*
    * Grabs the MessageRepository singleton from the Spring Application
@@ -73,7 +85,7 @@ public class ChatSocket {
 		usernameSessionMap.put(username, session);
 
 		//Send chat history to the newly connected user
-		sendMessageToPArticularUser(username, getChatHistory());
+		//sendMessageToPArticularUser(username, getChatHistory());
 		
     // broadcast that new user joined
 		String message = "User:" + username + " has Joined the Chat";
@@ -86,22 +98,39 @@ public class ChatSocket {
 
 		// Handle new messages
 		logger.info("Entered into Message: Got Message:" + message);
+
+
+		//FriendGroup friendGroup = friendGroupRepository.findBygroupName(target);
+
 		String username = sessionUsernameMap.get(session);
 
 		String destUsername = message.split(" ")[0].substring(1);
 
-		// Direct message to a user using the format "@username <message>"
+//		if (friendGroup != null) {
+//			// Send the message to all users in the friend group
+//			List<User> groupMembers = friendGroup.getGroupMembers();
+//			for (User user : groupMembers) {
+//				sendMessageToPArticularUser(user.getUsername(), message);
+//			}
+//		} else {
+//
+//			sendMessageToPArticularUser(target, "[DM] " + username + ": " + message);
+//			sendMessageToPArticularUser(username, "[DM] " + username + ": " + message);
+//
+//		}
+// Direct message to a user using the format "@username <message>"
 		if (message.startsWith("@")) {
 
 
-      // send the message to the sender and receiver
+			// send the message to the sender and receiver
 			sendMessageToPArticularUser(destUsername, "[DM] " + username + ": " + message);
 			sendMessageToPArticularUser(username, "[DM] " + username + ": " + message);
 
-		} 
-    else { // broadcast
+		}
+		else { // broadcast
 			broadcast(username + ": " + message);
 		}
+
 
 		// Saving chat history to repository
 		msgRepo.save(new Message(username, message, target));
@@ -177,17 +206,28 @@ public class ChatSocket {
 		return sb.toString();
 	}
 
+
+	@Api(value = "MessageController", description = "REST API related to Web Socket Messages")
 	@RestController
 	@RequestMapping("/chat/messages")
-
 	public class MessageController {
 
 		@Autowired
 		private MessageRepository messageRepository;
 
+		@Autowired
+		FriendGroupRepository friendGroupRepository;
+
+		@ApiOperation(value = "Get list of Messages sent to {target} ", response = Iterable.class, tags = "message-controller")
 		@GetMapping("/{target}")
 		public List<Message> getMessagesByTarget(@PathVariable String target) {
 			return messageRepository.findByTarget(target);
+		}
+
+		@ApiOperation(value = "Get list of all friend group objects", response = Iterable.class, tags = "friendgroup")
+		@GetMapping(path = "/friendgroup")
+		List<FriendGroup> getFriendGroups(){
+			return friendGroupRepository.findAll();
 		}
 	}
 

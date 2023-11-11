@@ -19,7 +19,7 @@ public class StockUpdater{
 
     public String getStockNews(String symbol){
         try{
-            String apiRequest = "https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers=" + symbol + "&apikey=UOICPFOUUT832ZST";
+            String apiRequest = "https://www.alphavantage.co/query?function=NEWS_SENTIMENT&tickers=" + symbol + "&apikey=JPXFS631336A8RE8";
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(new URI(apiRequest))
                     .build();
@@ -38,7 +38,7 @@ public class StockUpdater{
 
     public String getStockHistory(String symbol){
         try{
-            String apiRequest = "https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=" + symbol + "&apikey=UOICPFOUUT832ZST";
+            String apiRequest = "https://www.alphavantage.co/query?function=TIME_SERIES_WEEKLY&symbol=" + symbol + "&apikey=JPXFS631336A8RE8";
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(new URI(apiRequest))
                     .build();
@@ -57,7 +57,7 @@ public class StockUpdater{
 
     public String updateStockData(String symbol){
         try{
-            String apiRequest = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=" + symbol + "&apikey=UOICPFOUUT832ZST";
+            String apiRequest = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=" + symbol + "&apikey=JPXFS631336A8RE8";
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(new URI(apiRequest))
                     .build();

@@ -25,8 +25,7 @@ public class FriendGroup {
 
 
 
-    @Column
-    @OneToMany(mappedBy = "friendGroup")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "friendGroup" )
     private List<User> groupMembers;
 
 
@@ -35,14 +34,16 @@ public class FriendGroup {
         return groupName;
     }
 
-    public List<String> getGroupMembers() {
-        List<String> groupMembersNames = new ArrayList<>();
-        for(User user : groupMembers){
-            groupMembersNames.add(user.getName());
-        }
-
-        return groupMembersNames;
+    public List<User> getGroupMembers() {
+//        List<String> groupMembersNames = new ArrayList<>();
+//        for(User user : groupMembers){
+//            groupMembersNames.add(user.getName());
+//        }
+//
+//        return groupMembersNames;
+        return groupMembers;
     }
+
 
     public void setGroupName(String groupName){
         this.groupName = groupName;

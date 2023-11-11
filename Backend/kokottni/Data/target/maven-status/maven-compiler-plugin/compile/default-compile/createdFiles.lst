@@ -2,6 +2,7 @@ coms309/Users/User.class
 coms309/Stocks/StockUpdater.class
 coms309/chat/ChatSocketConfig.class
 coms309/Users/FriendGroup.class
+coms309/SpringFoxConfig.class
 coms309/Stocks/StockPurchasedRepository.class
 coms309/chat/ChatSocket.class
 coms309/Users/UserRepository.class

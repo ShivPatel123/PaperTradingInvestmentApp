@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AS1">
         <activity
-            android:name=".screens.HomePage"
+            android:name=".screens.StartPage"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -28,7 +28,7 @@
             android:name=".screens.ProfilePage"
             android:exported="true" />
         <activity
-            android:name=".screens.MainPage"
+            android:name=".screens.NavPage"
             android:exported="true" />
         <activity
             android:name=".screens.CreateAccountPage"
@@ -41,6 +41,18 @@
             android:exported="true" />
         <activity
             android:name=".screens.PortfolioPage"
+            android:exported="true" />
+        <activity
+            android:name=".screens.GroupChatPage"
+            android:exported="true" />
+        <activity
+            android:name=".screens.GroupPage"
+            android:exported="true" />
+        <activity
+            android:name=".screens.StockList"
+            android:exported="true" />
+        <activity
+            android:name=".screens.GroupPage"
             android:exported="true" />
 
     </application>
