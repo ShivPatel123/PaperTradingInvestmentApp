@@ -29,6 +29,7 @@ public class Stock {
     @Column(name = "previous_day_change")
     private double prevDayChange;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "stock")
     private List<StockPurchased> users = new ArrayList<>();
 

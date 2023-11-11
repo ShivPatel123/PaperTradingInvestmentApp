@@ -12,6 +12,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.*;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import coms309.Stocks.Stock;
 import coms309.Stocks.StockPurchased;
 import coms309.Stocks.StockPurchasedRepository;
@@ -29,6 +30,7 @@ public class User {
     @Column(name = "money")
     private double money;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "user")
     private List<StockPurchased> stocks = new ArrayList<>();
 
@@ -76,6 +78,10 @@ public class User {
 
     public void setId(Long id){
         this.id = id;
+    }
+
+    public void setFriendGroup(FriendGroup group){
+        this.friendGroup = group;
     }
 
     public double getMoney(){return money;}

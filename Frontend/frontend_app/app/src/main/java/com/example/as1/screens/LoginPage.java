@@ -1,7 +1,6 @@
 package com.example.as1.screens;
 
 import static com.example.as1.Controllers.User.getInstance;
-import static com.example.as1.Controllers.UserSingleton.getGlobalUser;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,18 +14,16 @@ import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
 
 import com.example.as1.Controllers.LoginAttempt;
-import com.example.as1.Controllers.User;
 import com.example.as1.R;
 import com.example.as1.ExternalControllers.VolleySingleton;
 
 import android.util.Log;
+
 import org.json.*;
 
 public class LoginPage extends AppCompatActivity {
-//set variable fro userID, use that throughout the app.
-//setter methods in profile page
-// stock prediction page/ feature??
-    //TODO:make javadoc for frontend layout files and all files
+
+    //TODO: make javadoc for frontend layout files and all files
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +41,7 @@ public class LoginPage extends AppCompatActivity {
 
         //button back to home page
         toHome_btn.setOnClickListener(view -> {
-            Intent intent = new Intent(LoginPage.this, HomePage.class);
+            Intent intent = new Intent(LoginPage.this, StartPage.class);
             startActivity(intent);
         });
 
@@ -63,21 +60,23 @@ public class LoginPage extends AppCompatActivity {
            LoginAttempt loginAuth = new LoginAttempt (usernameInput, passwordInput);
             //Post login
            makeLoginPostReq(this.getApplicationContext(), loginAuth);
+            Log.i("after post req called", "");
 
-           //TODO: fix this: If backend returns success, open main page
-           if(volleyOutput_txt.getText().toString() == "{\"message\":\"success\"}") {
+           if(volleyOutput_txt.getText().toString().equals("Success!")) {
                //set global user variables for username and passw
                getInstance().setUsername(usernameInput);
                getInstance().setPassword(passwordInput);
                //go to MainPage
-               Intent intent = new Intent(LoginPage.this, MainPage.class);
+               Intent intent = new Intent(LoginPage.this, NavPage.class);
                startActivity(intent);
            }
         });
     }
 
     public void makeLoginPostReq(Context context, LoginAttempt loginA) {
-        String URL_JSON_OBJECT = "http://10.90.75.130:8080/login";
+        String URL_JSON_OBJECT = "http://coms-309-051.class.las.iastate.edu:8080/login";
+                //"http://coms-309-051.class.las.iastate.edu:8080/login";
+        //http://10.90.75.130:8080/login
         EditText volleyOutput_txt = findViewById(R.id.loginReqResponse_txt);
         JSONObject objectBody = new JSONObject();
 
@@ -85,7 +84,7 @@ public class LoginPage extends AppCompatActivity {
         try {
             objectBody.put("username",loginA.getUsername());
             objectBody.put("password",loginA.getPassword());
-            Log.d("loginA JSON Object: ", objectBody.toString());
+            Log.i("loginA JSON Object: ", objectBody.toString());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -95,8 +94,16 @@ public class LoginPage extends AppCompatActivity {
                 Request.Method.POST,
                 URL_JSON_OBJECT,
                 objectBody,
-                response -> volleyOutput_txt.setText(response.toString()),
-                error -> volleyOutput_txt.setText(error.getMessage())) { };
+                response -> {
+                    try {
+                        volleyOutput_txt.setText(response.getString("success"));
+                    } catch (JSONException e) {
+                        Log.i("response.getString", "Error message: ");
+                        throw new RuntimeException(e);
+                    }
+                    Log.i("Post req response", "makeLoginPostReq: " + response);
+                },
+                error -> Log.i("Login error", "error message: " + error)) { };
 
         // Adding request to request queue
         VolleySingleton.getInstance(context.getApplicationContext()).addToRequestQueue(request);
