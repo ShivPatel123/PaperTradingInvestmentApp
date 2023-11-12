@@ -102,7 +102,7 @@ public class AdminDashboardPage extends AppCompatActivity {
                             //User userIN = new User();
 
                             //parse relevant info
-                            String username = object.getString("username");
+                            String username = object.getString("name");
                             long id = object.getLong("id");
                             char priv = object.getString("privilege").toCharArray()[0];
 

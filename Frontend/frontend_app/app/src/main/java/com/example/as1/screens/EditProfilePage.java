@@ -53,7 +53,6 @@ public class EditProfilePage extends AppCompatActivity {
         dob_display.setText(getGlobal.get().getDob().toString());
         double money1 = (double) getGlobal.get().getMoney();
         money_display.setText(String.valueOf(money1));
-        //TODO: stock_display.setText(getGlobal.getNumStocksPurchased());
 
         // save changes button
         saveProfile_btn.setOnClickListener(view -> {
