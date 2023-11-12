@@ -18,6 +18,7 @@ import com.example.as1.Controllers.User;
 import com.example.as1.ExternalControllers.VolleySingleton;
 import com.example.as1.R;
 
+
 import java.util.ArrayList;
 
 public class StockPreviewScrollAdapter extends RecyclerView.Adapter<StockPreviewScrollAdapter.ScrollViewHolder> {

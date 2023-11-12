@@ -54,6 +54,9 @@
         <activity
             android:name=".screens.AdminDashboardPage"
             android:exported="true" />
+        <activity
+            android:name=".screens.CreateStock"
+            android:exported="true" />
 
     </application>
 
