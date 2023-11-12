@@ -14,11 +14,11 @@ maven-build:
 android-build:
  image: gjandres/android-ci:latest
  stage: androidbuild
+ tags:
+  - android_tag
  before_script:
   - export GRADLE_USER_HOME='pwd'/.gradle
   - chmod +x ./Frontend/frontend_app/gradlew
- tags:
-  - android_tag
  script:
   - cd Frontend/frontend_app
   - ./gradlew build
