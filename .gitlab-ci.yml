@@ -11,6 +11,18 @@ maven-build:
   - cd Backend/kokottni/Data
   - mvn package
 
+maven-test:
+  stage: maventest
+  tags:
+    - springboot_tag
+  script:
+    - cd Backend/kokottni/Data
+    - mvn test
+  artifacts:
+    paths:
+      - Backend/kokottni/Data/target/*.jar
+
+
 android-build:
  image: gjandres/android-ci:latest
  stage: androidbuild
