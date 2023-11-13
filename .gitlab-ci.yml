@@ -12,13 +12,13 @@ maven-build:
   - mvn package
 
 android-build:
- image: gjandres/android-ci:latest
+ image: alpine:latest
  stage: androidbuild
  tags:
   - android_tag
  before_script:
   - export GRADLE_USER_HOME='pwd'/.gradle
-  - chmod +x ./Frontend/frontend_app
+  - chmod +x ./Frontend/frontend_app/gradlew
  script:
   - cd Frontend/frontend_app
   - ./gradlew build
@@ -27,11 +27,11 @@ android-build:
     - Android_test/app/build/outputs/
 
 android-test:
-  image: gjandres/android-ci:latest
+  image: alpine:latest
   stage: androidtest
   before_script:
   - export GRADLE_USER_HOME='pwd'/.gradle
-  - chmod +x ./Frontend/frontend_app
+  - chmod +x ./Frontend/frontend_app/gradlew
   tags:
   - android_tag
   script:

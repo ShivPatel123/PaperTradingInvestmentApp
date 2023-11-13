@@ -4,9 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * User object
+ * Mirrors backend User class
+ */
 public class User {
 
-    //Global User
+    /**
+     * User singleton for global user instance
+     */
     private static User instance = null;
     public static User getInstance(){
         if (instance == null){
@@ -15,6 +21,9 @@ public class User {
         return instance;
     }
 
+    /**
+     * List of purchased stocks
+     */
     private List<StockPurchased> stocks = new ArrayList<>();
     //Params
     private long id;
@@ -25,7 +34,16 @@ public class User {
     private String username;
     private String password;
 
-//Constructors
+    /**
+     * User constructor
+     * @param id User ID
+     * @param money Amount of money User has
+     * @param name User's name
+     * @param email User's email
+     * @param dob User's DOB
+     * @param username Login Username
+     * @param password Login Password
+     */
     public User(long id, double money, String name, String email, String dob, String username, String password){
         this.id = id;
         this.money = money;
@@ -37,54 +55,117 @@ public class User {
     }
     public User(){}
 
-    //Global user instance
-
-
     //Getters and Setters
+
+    /**
+     * ID Getter
+     * @return long id
+     */
     public long getId(){
         return id;
     }
 
+    /**
+     * ID Setter
+     * @param id long id
+     */
     public void setId(long id){
         this.id = id;
     }
+
+    /**
+     * Money Getter
+     * @return double money
+     */
     public double getMoney(){  return money; }
+
+    /**
+     * Money Setter
+     * @param money double money
+     */
     public void setMoney(double money){   this.money = money; }
 
+    /**
+     * Name Getter
+     * @return String name
+     */
     public String getName(){
         return name;
     }
 
+    /**
+     * Name Setter
+     * @param name String name
+     */
     public void setName(String name){
         this.name = name;
     }
 
+    /**
+     * Email Getter
+     * @return String email
+     */
     public String getEmail(){
         return email;
     }
 
+    /**
+     * Email Setter
+     * @param email String email
+     */
     public void setEmail(String email){
         this.email = email;
     }
 
+    /**
+     * Username Getter
+     * @return String username
+     */
     public String getUsername() {   return username; }
 
     public void setUsername(String user){
         this.username = user;
     }
 
+    /**
+     * Password Setter
+     * @return String password
+     */
     public String getPassword() {   return password; }
 
+    /**
+     * Password Setter
+      * @param pass String password
+     */
     public void setPassword(String pass){
         this.password = pass;
     }
 
+    /**
+     * DOB Getter
+     * @return String DOB
+     */
     public String getDob(){ return dob; }
 
+    /**
+     * DOB Setter
+     * @param dob String dob
+     */
     public void setDob(String dob){ this.dob = dob; }
 
+    /**
+     * Num Stocks Getter
+     * @return Size of Stocks Purchased array (-1)
+     */
     public int getNumStocksPurchased(){return stocks.size() - 1;}
 
+    /**
+     * Function to buy stock
+     * @param stock Stock
+     * @param numPurchase Number of stocks to purchase
+     * @param id ID of stock being purchased
+     * @return StockPurchased
+     */
     public StockPurchased setStock(Stock stock, int numPurchase, Long id){
         for(int i = 0; i <  stocks.size(); ++i){
             if(stock.getId().equals(stocks.get(i).getStock().getId()) && money >= numPurchase * stock.getCurrValue()){
@@ -109,6 +190,12 @@ public class User {
         return curr;
     }
 
+    /**
+     * Remove a stock from user's stockPurchased list
+     * @param numStocks Number of stocks to be removed
+     * @param stock Stock to be removed
+     * @return null
+     */
     public StockPurchased removeStocks(int numStocks, Stock stock){
         StockPurchased potentiallyRemoved;
         for(int i = 0; i < stocks.size(); ++i){
