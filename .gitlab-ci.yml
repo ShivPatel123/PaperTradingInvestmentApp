@@ -1,6 +1,11 @@
 stages:
  - maventry
+<<<<<<< HEAD
  - androidtry 
+=======
+ - maventest
+ - mavenDeploy
+>>>>>>> 191389b4fb0d629af4bb8dd5922a41e6df9f8564
  - androidbuild
  - androidtest
 
@@ -12,6 +17,7 @@ maven-build:
   - cd Backend/kokottni/Data
   - mvn package
 
+<<<<<<< HEAD
 androidtry:
  image: alpine:latest
  stage: androidtry
@@ -23,6 +29,29 @@ androidtry:
  script:
   - cd Frontend/frontend_app
   - ./gradlew assemble
+=======
+maven-test:
+  stage: maventest
+  tags:
+    - springboot_tag
+  script:
+    - cd Backend/kokottni/Data
+    - mvn test
+  artifacts:
+    paths:
+      - Backend/kokottni/Data/target/*.jar
+
+autoDeploy:
+  stage: mavenDeploy
+  tags:
+    - springboot_tag
+  script:
+    - cd Backend/kokottni/Data
+    - mvn package
+    - sudo mv target/*.jar /target/web-demo.jar
+    - sudo systemctl stop system-web-demo
+    - sudo systemctl start system-web-demo
+>>>>>>> 191389b4fb0d629af4bb8dd5922a41e6df9f8564
 
 android-build:
  image: alpine:latest
