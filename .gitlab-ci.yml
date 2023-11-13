@@ -1,6 +1,7 @@
 stages:
  - maventry
  - maventest
+ - mavenDeploy
  - androidbuild
  - androidtest
 
@@ -23,6 +24,16 @@ maven-test:
     paths:
       - Backend/kokottni/Data/target/*.jar
 
+autoDeploy:
+  stage: mavenDeploy
+  tags:
+    - springboot_tag
+  script:
+    - cd Backend/kokottni/Data
+    - mvn package
+    - sudo mv target/*.jar /target/web-demo.jar
+    - sudo systemctl stop system-web-demo
+    - sudo systemctl start system-web-demo
 
 android-build:
  image: gjandres/android-ci:latest
