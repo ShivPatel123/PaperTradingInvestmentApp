@@ -268,7 +268,8 @@ public class UserController {
 
     @ApiOperation(value = "Remove User {userId} from friend group {groupName}", response = String.class, tags = "friendgroup")
     @DeleteMapping(path = "/friendgroup/{groupName}/{userID}")
-    String removeUserFromGroup(@PathVariable String groupName, @PathVariable int userID){
+    String removeUserFromGroup(@PathVariable String groupName, @PathVariable long userID){
+        if(userRepository.getOne(userID).getPrivilege() == 'g') return failure;
         friendGroupRepository.findBygroupName(groupName).removeUser(userRepository.findById(userID));
         friendGroupRepository.save(friendGroupRepository.findBygroupName(groupName));
         return success;
