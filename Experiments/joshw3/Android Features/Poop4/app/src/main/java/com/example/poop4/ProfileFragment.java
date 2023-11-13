@@ -176,7 +176,8 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
 
 
 
-        for(int i=1;i<5;i++) {
+        for(int i=1;i<7;i++) {
+            if (i == 5) continue;
 //            URL_JSON_OBJECT = new String ("https://jsonplaceholder.typicode.com/users/" + i);
             URL_JSON_OBJECT = new String ("http://coms-309-051.class.las.iastate.edu:8080/stocks/" + i);
 

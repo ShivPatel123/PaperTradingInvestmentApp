@@ -165,7 +165,7 @@ public class GroupsFragment extends Fragment implements View.OnClickListener, We
         super.onViewCreated(view, savedInstanceState);
 //        view.findViewById(R.id.connectButton).setOnClickListener(this);
 //I HATE THIS
-        
+
     }
 
 

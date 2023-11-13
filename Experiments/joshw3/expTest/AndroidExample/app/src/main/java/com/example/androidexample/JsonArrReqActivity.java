@@ -27,7 +27,10 @@ public class JsonArrReqActivity extends AppCompatActivity {
 
 
     //private static final String URL_JSON_ARRAY = "https://jsonplaceholder.typicode.com/users";
-    private static final String URL_JSON_ARRAY = "http://10.90.75.130:8080/stocks";
+//    private static final String URL_JSON_ARRAY = "http://10.90.75.130:8080/stocks";
+
+    private static final String URL_JSON_ARRAY = "http://coms-309-051.class.las.iastate.edu:8080/stock/";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
