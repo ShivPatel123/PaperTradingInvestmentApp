@@ -177,11 +177,15 @@ public class UserController {
     }
     //creates a new friend group using the name in the requestbody
     @ApiOperation(value = "create new friend group named {groupName}", response = String.class, tags = "friendgroup")
-    @PostMapping(path = "/friendgroup/{groupName}")
-    String createFriendGroup(@PathVariable String groupName){
+    @PostMapping(path = "/friendgroup/{groupName}/{uid}")
+    String createFriendGroup(@PathVariable String groupName, @PathVariable long uid){
         if(friendGroupRepository.findBygroupName(groupName) == null) {
             FriendGroup friendGroup = new FriendGroup();
+            User groupLeader = userRepository.getOne(uid);
+            groupLeader.setPrivilege('g');
             friendGroup.setGroupName(groupName);
+            groupLeader.setFriendGroup(friendGroup);
+            userRepository.save(groupLeader);
             friendGroupRepository.save(friendGroup);
             return success;
         }
