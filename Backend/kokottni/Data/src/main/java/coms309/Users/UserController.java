@@ -257,6 +257,7 @@ public class UserController {
     @DeleteMapping("/friendgroup/{groupName}/{userID}")
     String removeUserFromGroup(@PathVariable String groupName, @PathVariable int userID){
         friendGroupRepository.findBygroupName(groupName).removeUser(userRepository.findById(userID));
+        friendGroupRepository.save(friendGroupRepository.findBygroupName(groupName));
         return success;
     }
 
