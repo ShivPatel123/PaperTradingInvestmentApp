@@ -16,6 +16,7 @@ public class NavPage extends AppCompatActivity {
     Button toGroup_btn;
     Button toPortfolio_btn;
     Button toSingleStock_btn;
+    Button toAdminDash_btn;
 
 
     @Override
@@ -85,6 +86,17 @@ public class NavPage extends AppCompatActivity {
             public void onClick(View v)
             {
                 Intent intent = new Intent(NavPage.this, StockPage.class);
+                startActivity(intent);
+            }
+        });
+
+        //button to admin page
+        toAdminDash_btn = findViewById(R.id.admin_main_btn);
+        toAdminDash_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v)
+            {
+                Intent intent = new Intent(NavPage.this, AdminDashboardPage.class);
                 startActivity(intent);
             }
         });

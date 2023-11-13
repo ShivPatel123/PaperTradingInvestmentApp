@@ -44,8 +44,8 @@
 
     <EditText
         android:id="@+id/editTextText2"
-        android:layout_width="411dp"
-        android:layout_height="119dp"
+        android:layout_width="match_parent"
+        android:layout_height="115dp"
         android:background="@color/darkBack"
         android:ems="10"
         android:fontFamily="@font/advent_pro_medium"
@@ -72,6 +72,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.243" />
+
+    <Button
+        android:id="@+id/admin_main_btn"
+        android:layout_width="122dp"
+        android:layout_height="82dp"
+        android:text="Admin"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.124"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.764" />
 
     <Button
         android:id="@+id/group_Main_btn"
