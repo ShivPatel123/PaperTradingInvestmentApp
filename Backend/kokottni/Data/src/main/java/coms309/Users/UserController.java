@@ -158,7 +158,7 @@ public class UserController {
     }
 
     @ApiOperation(value = "create a new login request with the request body", response = LoginAttempt.class, tags = "user")
-    @PostMapping("/login")
+    @PostMapping(path = "/login")
     LoginAttempt login(@RequestBody LoginAttempt login){
         User user = userRepository.findByUsername(login.getUsername());
         if(user.getPrivilege() == 'b') return null;
@@ -187,6 +187,13 @@ public class UserController {
         }
         return failure;
     }
+
+    @GetMapping(path = "/friendgroup/get/{uid}")
+    FriendGroup getFriendGroup(@PathVariable long uid){
+        return userRepository.getOne(uid).getFriendGroup();
+    }
+
+
 //
 //    //creates a new friend group using the name in the requestbody and adds the user from the path variable into the group
 //    @PostMapping(path = "/friendgroup/{userID}")
@@ -200,14 +207,14 @@ public class UserController {
 
     //adds user userID to FriendGroup groupName
 
-    @GetMapping("/friendgroup/getall/{groupName}")
+    @GetMapping(path = "/friendgroup/getall/{groupName}")
     List<User> getUsersFromGroup(@PathVariable String groupName){
         FriendGroup group = friendGroupRepository.findBygroupName(groupName);
         return group.getGroupMembers();
     }
-    
+
     @ApiOperation(value = "Add User {userId} to friend group {groupName}", response = String.class, tags = "friendgroup")
-    @PutMapping("/friendgroup/{groupName}/{userID}")
+    @PutMapping(path = "/friendgroup/{groupName}/{userID}")
     @Transactional
     String addUserToGroup(@PathVariable String groupName, @PathVariable int userID) {
         FriendGroup group = friendGroupRepository.findBygroupName(groupName);
@@ -228,7 +235,7 @@ public class UserController {
 
 
     @ApiOperation(value = "Update the user {id} with information from request body", response = User.class, tags = "user")
-    @PutMapping("/users/{id}")
+    @PutMapping(path = "/users/{id}")
     User updateUser(@PathVariable long id, @RequestBody User request){
         User user = userRepository.findById(id);
         if(user.getPrivilege() == 'b') return null;
@@ -237,7 +244,7 @@ public class UserController {
     }
 
     @ApiOperation(value = "Assigns a stock to the user, essentially having them purchase it just a little different", response = String.class, tags = "userbuyandsell")
-    @PutMapping("/users/{userId}/stocks/{stockId}/{numPurchasing}")
+    @PutMapping(path = "/users/{userId}/stocks/{stockId}/{numPurchasing}")
     String assignStockToUser(@PathVariable long userId, @PathVariable long stockId, @PathVariable int numPurchasing){
         User user = userRepository.findById(userId);
         if(user.getPrivilege() == 'b') return failure;
@@ -260,7 +267,7 @@ public class UserController {
     //removes user userID from FriendGroup groupName
 
     @ApiOperation(value = "Remove User {userId} from friend group {groupName}", response = String.class, tags = "friendgroup")
-    @DeleteMapping("/friendgroup/{groupName}/{userID}")
+    @DeleteMapping(path = "/friendgroup/{groupName}/{userID}")
     String removeUserFromGroup(@PathVariable String groupName, @PathVariable int userID){
         friendGroupRepository.findBygroupName(groupName).removeUser(userRepository.findById(userID));
         friendGroupRepository.save(friendGroupRepository.findBygroupName(groupName));
