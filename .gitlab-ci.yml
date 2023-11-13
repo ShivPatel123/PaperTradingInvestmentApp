@@ -18,7 +18,7 @@ android-build:
   - android_tag
  before_script:
   - export GRADLE_USER_HOME='pwd'/.gradle
-  - chmod +x ./Frontend/frontend_app/gradlew
+  - chmod +x ./Frontend/frontend_app
  script:
   - cd Frontend/frontend_app
   - ./gradlew build
@@ -31,7 +31,7 @@ android-test:
   stage: androidtest
   before_script:
   - export GRADLE_USER_HOME='pwd'/.gradle
-  - chmod +x ./Frontend/frontend_app/gradlew
+  - chmod +x ./Frontend/frontend_app
   tags:
   - android_tag
   script:
