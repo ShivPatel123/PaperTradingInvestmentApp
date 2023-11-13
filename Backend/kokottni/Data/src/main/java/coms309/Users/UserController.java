@@ -200,6 +200,12 @@ public class UserController {
 
     //adds user userID to FriendGroup groupName
 
+    @GetMapping("/friendgroup/getall/{groupName}")
+    List<User> getUsersFromGroup(@PathVariable String groupName){
+        FriendGroup group = friendGroupRepository.findBygroupName(groupName);
+        return group.getGroupMembers();
+    }
+    
     @ApiOperation(value = "Add User {userId} to friend group {groupName}", response = String.class, tags = "friendgroup")
     @PutMapping("/friendgroup/{groupName}/{userID}")
     @Transactional
