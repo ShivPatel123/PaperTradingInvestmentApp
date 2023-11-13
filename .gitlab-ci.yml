@@ -1,5 +1,6 @@
 stages:
  - maventry
+ - androidtry 
  - androidbuild
  - androidtest
 
@@ -10,6 +11,18 @@ maven-build:
  script:
   - cd Backend/kokottni/Data
   - mvn package
+
+androidtry:
+ image: alpine:latest
+ stage: androidtry
+ tags:
+  - android_tag
+ before_script:
+  - export GRADLE_USER_HOME='pwd'/.gradle
+  - chmod +x ./Frontend/frontend_app/gradlew
+ script:
+  - cd Frontend/frontend_app
+  - ./gradlew assemble
 
 android-build:
  image: alpine:latest
