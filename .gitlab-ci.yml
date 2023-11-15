@@ -3,7 +3,7 @@ stages:
  - androidtest
 
 android-build:
- image: alpine:java17
+ image: alpine:latest
  stage: androidbuild
  tags:
   - skutsch_tag
@@ -15,7 +15,7 @@ android-build:
   - ./gradlew build
 
 android-test:
-  image: alpine:java17
+  image: alpine:latest
   stage: androidtest
   tags:
   - skutsch_tag
