@@ -1,78 +1,27 @@
 stages:
- - maventry
- - maventest
- - mavenDeploy
-  - androidtry 
  - androidbuild
  - androidtest
-
-maven-build:
- stage: maventry
- tags:
-  - springboot_tag
- script:
-  - cd Backend/kokottni/Data
-  - mvn package
-
-
-maven-test:
-  stage: maventest
-  tags:
-    - springboot_tag
-  script:
-    - cd Backend/kokottni/Data
-    - mvn test
-  artifacts:
-    paths:
-      - Backend/kokottni/Data/target/*.jar
-
-autoDeploy:
-  stage: mavenDeploy
-  tags:
-    - springboot_tag
-  script:
-    - cd Backend/kokottni/Data
-    - mvn package
-    - sudo mv target/*.jar /target/web-demo.jar
-    - sudo systemctl stop system-web-demo
-    - sudo systemctl start system-web-demo
-
-androidtry:
- image: alpine:latest
- stage: androidtry
- tags:
-  - android_tag
- before_script:
-  - export GRADLE_USER_HOME='pwd'/.gradle
-  - chmod +x ./Frontend/frontend_app/gradlew
- script:
-  - cd Frontend/frontend_app
-  - ./gradlew assemble
 
 android-build:
  image: alpine:java17
  stage: androidbuild
  tags:
-  - android_tag
+  - skutsch_tag
  before_script:
   - export GRADLE_USER_HOME='pwd'/.gradle
   - chmod +x ./Frontend/frontend_app/gradlew
  script:
-  - cd Frontend/frontend_app
-  - chmod +x ./gradlew
+  - cd Frontend/frontend_app/gradlew
   - ./gradlew build
- artifacts:
-    paths:
-    - Android_test/app/build/outputs/
 
 android-test:
   image: alpine:java17
   stage: androidtest
+  tags:
+  - skutsch_tag
   before_script:
   - export GRADLE_USER_HOME='pwd'/.gradle
   - chmod +x ./Frontend/frontend_app/gradlew
-  tags:
-  - android_tag
   script:
   - cd Frontend/frontend_app
   - ./gradlew test
