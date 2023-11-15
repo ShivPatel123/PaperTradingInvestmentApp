@@ -1,11 +1,8 @@
 stages:
  - maventry
-<<<<<<< HEAD
- - androidtry 
-=======
  - maventest
  - mavenDeploy
->>>>>>> 191389b4fb0d629af4bb8dd5922a41e6df9f8564
+  - androidtry 
  - androidbuild
  - androidtest
 
@@ -17,19 +14,7 @@ maven-build:
   - cd Backend/kokottni/Data
   - mvn package
 
-<<<<<<< HEAD
-androidtry:
- image: alpine:latest
- stage: androidtry
- tags:
-  - android_tag
- before_script:
-  - export GRADLE_USER_HOME='pwd'/.gradle
-  - chmod +x ./Frontend/frontend_app/gradlew
- script:
-  - cd Frontend/frontend_app
-  - ./gradlew assemble
-=======
+
 maven-test:
   stage: maventest
   tags:
@@ -51,10 +36,21 @@ autoDeploy:
     - sudo mv target/*.jar /target/web-demo.jar
     - sudo systemctl stop system-web-demo
     - sudo systemctl start system-web-demo
->>>>>>> 191389b4fb0d629af4bb8dd5922a41e6df9f8564
+
+androidtry:
+ image: alpine:latest
+ stage: androidtry
+ tags:
+  - android_tag
+ before_script:
+  - export GRADLE_USER_HOME='pwd'/.gradle
+  - chmod +x ./Frontend/frontend_app/gradlew
+ script:
+  - cd Frontend/frontend_app
+  - ./gradlew assemble
 
 android-build:
- image: alpine:latest
+ image: alpine:java17
  stage: androidbuild
  tags:
   - android_tag
@@ -70,7 +66,7 @@ android-build:
     - Android_test/app/build/outputs/
 
 android-test:
-  image: alpine:latest
+  image: alpine:java17
   stage: androidtest
   before_script:
   - export GRADLE_USER_HOME='pwd'/.gradle
