@@ -1,8 +1,6 @@
 package coms309.Users;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import coms309.Stocks.*;
 import io.swagger.annotations.Api;
@@ -148,7 +146,7 @@ public class UserController {
     @ApiOperation(value = "create new user based on request body", response = String.class, tags = "user")
     @PostMapping(path = "/users")
     String createUser(@RequestBody User user, @PathVariable Long id){
-        //if there is no body or the username already exists
+        //if there is nobody or the username already exists
         if (user == null)
             return "no user input";
         if (userRepository.getOne(id).getUsername() !=null)
@@ -165,15 +163,13 @@ public class UserController {
         if (user != null) {
             if (user.getPassword().equals(login.getPassword())) {
                 login.setSuccess("Success!");
-                return login;
             } else {
                 login.setSuccess("Wrong Password");
-                return login;
             }
         } else {
             login.setSuccess("Username Not Found");
-            return login;
         }
+        return login;
     }
     //creates a new friend group using the name in the requestbody
     @ApiOperation(value = "create new friend group named {groupName}", response = String.class, tags = "friendgroup")
@@ -225,7 +221,7 @@ public class UserController {
         FriendGroup group = friendGroupRepository.findBygroupName(groupName);
         User user = userRepository.findById(userID);
 
-        if (group != null && user != null && user.getPrivilege() == 'g' && group.getGroupLeader().equals(user)) {
+        if (group != null && user != null && user.getPrivilege() == 'g' && group.getGroupLeader() == userID) {
             user.setFriendGroup(group);
             userRepository.save(user);
 
@@ -244,7 +240,7 @@ public class UserController {
         FriendGroup group = friendGroupRepository.findBygroupName(gname);
         User user = userRepository.findById(gid);
 
-        if(group != null && user != null && user.getPrivilege() == 'g' && group.getGroupLeader().equals(user) && group.findUser(userRepository.getOne(uid))){
+        if(group != null && user != null && user.getPrivilege() == 'g' && group.getGroupLeader() == gid && group.findUser(userRepository.getOne(uid))){
             group.removeUser(userRepository.getOne(uid));
             userRepository.getOne(uid).setFriendGroup(null);
             friendGroupRepository.save(group);
@@ -254,12 +250,12 @@ public class UserController {
         }
     }
 
-    @PutMapping(path = '/friendgroup/setnewleader/{gname}/{gid}/{uid}')
+    @PutMapping(path = "/friendgroup/setnewleader/{gname}/{gid}/{uid}")
     String setNewLeader(@PathVariable String gname, @PathVariable long gid, @PathVariable long uid){
         FriendGroup group = friendGroupRepository.findBygroupName(gname);
         User currLeader = userRepository.findById(gid);
         User pnewLeader = userRepository.findById(uid);
-        if(currLeader.getPrivilege() == 'g' && group.getGroupLeader().equals(currLeader)){
+        if(currLeader.getPrivilege() == 'g' && group.getGroupLeader() == gid){
             pnewLeader.setPrivilege('g');
             group.setGroupLeader(pnewLeader);
             currLeader.setPrivilege('u');
