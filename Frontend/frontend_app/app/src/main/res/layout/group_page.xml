@@ -40,98 +40,89 @@
         app:layout_constraintTop_toTopOf="@+id/FriendGroup_title"
         app:layout_constraintVertical_bias="0.432" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/yourGroupCard"
-        android:layout_width="368dp"
-        android:layout_height="290dp"
-        app:cardBackgroundColor="@color/navy_bg"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="20dp"
-        app:cardMaxElevation="12dp"
-        app:cardPreventCornerOverlap="true"
-        app:cardUseCompatPadding="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.485"
+
+    <TextView
+        android:id="@+id/yourGroup_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20dp"
+        android:layout_marginTop="16dp"
+        android:text="Your Group"
+        android:textColor="@color/txtclr"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/yourGroup_recyc"
+        app:layout_constraintEnd_toStartOf="@+id/toChat_friendGroupBtn"
+        app:layout_constraintHorizontal_bias="0.075"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.267">
+        app:layout_constraintVertical_bias="1.0" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/yourGroup_recyc"
+        android:layout_width="340dp"
+        android:layout_height="214dp"
+        app:layoutManager="LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.225"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.323" />
 
-            <TextView
-                android:id="@+id/yourGroup_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+    <Button
+        android:id="@+id/toChat_friendGroupBtn"
+        android:layout_width="115dp"
+        android:layout_height="60dp"
+        android:layout_margin="10dp"
+        android:layout_marginBottom="38dp"
+        android:text="Chat"
+        app:layout_constraintBottom_toTopOf="@+id/yourGroup_recyc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.814"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+                android:id="@+id/Groups_title"
+                android:layout_width="99dp"
+                android:layout_height="25dp"
                 android:layout_margin="20dp"
-                android:text="Your Group"
+                android:text="Other Groups"
                 android:textColor="@color/txtclr"
+                android:textSize="15sp"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/groupDisplay"
-                app:layout_constraintEnd_toStartOf="@+id/toChat_friendGroupBtn"
-                app:layout_constraintHorizontal_bias="0.087"
+                app:layout_constraintBottom_toTopOf="@+id/otherGroups_recyc"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.051"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.179" />
+                app:layout_constraintVertical_bias="1.0" />
 
-            <TextView
-                android:id="@+id/groupDisplay"
-                android:layout_width="330dp"
-                android:layout_height="171dp"
-                android:layout_gravity="center_vertical"
-                android:text="TextView"
-                android:textColor="@color/txtclr"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/otherGroups_recyc"
+                android:layout_width="355dp"
+                android:layout_height="247dp"
+                app:layoutManager="LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.493"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.697" />
+                app:layout_constraintVertical_bias="1.0" />
 
-            <Button
-                android:id="@+id/toChat_friendGroupBtn"
-                android:layout_width="98dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_marginBottom="38dp"
-                android:text="Chat"
-                app:layout_constraintBottom_toTopOf="@+id/groupDisplay"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.988"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/groupCard"
-        android:layout_width="382dp"
-        android:layout_height="206dp"
-        app:cardBackgroundColor="@color/navy_bg"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="20dp"
-        app:cardMaxElevation="12dp"
-        app:cardPreventCornerOverlap="true"
-        app:cardUseCompatPadding="false"
+    <Button
+        android:id="@+id/button"
+        android:layout_width="86dp"
+        android:layout_height="64dp"
+        android:layout_marginBottom="37dp"
+        android:text="Admin"
+        android:textColor="@color/txtclr"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.551"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.905"
+        app:layout_constraintStart_toEndOf="@+id/backHome_FriendGroupBtn"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.86">
-
-        <TextView
-            android:id="@+id/Groups_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:text="Other Groups"
-            android:textColor="@color/txtclr"
-            android:textStyle="bold" />
-    </androidx.cardview.widget.CardView>
-
+        app:layout_constraintVertical_bias="0.025" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
