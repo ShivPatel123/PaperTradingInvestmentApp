@@ -104,7 +104,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         view = inflater.inflate(R.layout.stock_list_page, container, false);
-        replacement = view.findViewById(R.id.fragList);
+//        replacement = view.findViewById(R.id.fragList);
 
         allStocks = (Button) view.findViewById(R.id.renderStocks);
         allStocks.setOnClickListener(this);
@@ -149,7 +149,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
 
-        replacement2 = view.findViewById(R.id.fragList);
+        //replacement2 = view.findViewById(R.id.fragList);
 
         //added Array
         ArrayList<String> list = new ArrayList<>();

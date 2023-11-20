@@ -35,7 +35,7 @@ public class GroupScrollAdapter extends RecyclerView.Adapter<GroupScrollAdapter.
 
         TextView memName,memUsername, memPerm, memID, memMoney, memNumStocks;
         CardView card;
-//        Note: add if statement to set visibility based on user priv -- Button ban,unban;
+
         public ScrollViewHolder(@NonNull View itemView) {
             super(itemView);
               card = itemView.findViewById(R.id.memCard1);
@@ -57,17 +57,6 @@ public class GroupScrollAdapter extends RecyclerView.Adapter<GroupScrollAdapter.
         holder.memPerm.setText("Permission: " + model.getPermission());
         holder.memMoney.setText("" + model.getMoney());
         holder.memNumStocks.setText("" + model.getNumStocks());
-
-        User Global = User.getInstance();
-        //Set ID to 1 if its not instantiated yet
-//        if(Global.getId() <= 0)        Global.setId(1);
-//        int modelID = (int) model.getId();
-
-//        //Ban and Unban buttons
-//        holder.ban.setOnClickListener(v -> {
-//            holder.permV.setText("Permission: " + "b");
-//            postBan(context.getApplicationContext(), Global, modelID);
-//        });
 
     }
 
