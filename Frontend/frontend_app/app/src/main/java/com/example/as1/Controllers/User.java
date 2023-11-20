@@ -10,7 +10,7 @@ public class User {
     private static User instance = null;
     public static User getInstance(){
         if (instance == null){
-            instance = new User(-1,-1,"NoInputs", "NoInputs", "NoInputs", "NoInputs", "NoInputs");
+            instance = new User(-1,-1,"NoInputs", "NoInputs", "NoInputs", "NoInputs", "NoInputs", 'u');
         }
         return instance;
     }
@@ -24,9 +24,10 @@ public class User {
     private String dob;
     private String username;
     private String password;
+    protected char priv;
 
 //Constructors
-    public User(long id, double money, String name, String email, String dob, String username, String password){
+    public User(long id, double money, String name, String email, String dob, String username, String password, char priv){
         this.id = id;
         this.money = money;
         this.name = name;
@@ -34,11 +35,9 @@ public class User {
         this.dob = dob;
         this.username = username;
         this.password = password;
+        this.priv = priv;
     }
     public User(){}
-
-    //Global user instance
-
 
     //Getters and Setters
     public long getId(){
@@ -84,6 +83,12 @@ public class User {
     public void setDob(String dob){ this.dob = dob; }
 
     public int getNumStocksPurchased(){return stocks.size() - 1;}
+
+    public char getPrivilege(){return this.priv;}
+
+    public void setPrivilege(char privilege){this.priv = privilege;}
+
+
 
     public StockPurchased setStock(Stock stock, int numPurchase, Long id){
         for(int i = 0; i <  stocks.size(); ++i){
