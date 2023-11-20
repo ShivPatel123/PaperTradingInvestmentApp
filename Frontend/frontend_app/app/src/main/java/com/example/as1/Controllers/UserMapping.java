@@ -83,6 +83,13 @@ public interface UserMapping {
     @GET("/friendgroup")
     Call<List<FriendGroup>> getFriendGroups();
 
+    //return a friend group from the server
+    @GET("/friendgroup/get/{uid}")
+    Call<FriendGroup> getFriendGroup(@Path("uid") long uid);
+
+    //Get list of users that are group members
+    @GET("/friendgroup/getall/{groupName}")
+    Call<List<User>> getUsersFromGroup(@Path("groupName") String groupName);
 
 
     /*

@@ -11,13 +11,8 @@ public class FriendGroup {
             return groupName;
         }
 
-        public List<String> getGroupMembers() {
-            List<String> groupMembersNames = new ArrayList<>();
-            for(User user : groupMembers){
-                groupMembersNames.add(user.getName());
-            }
-
-            return groupMembersNames;
+        public List<User> getGroupMembers() {
+           return groupMembers;
         }
 
         public void setGroupName(String groupName){

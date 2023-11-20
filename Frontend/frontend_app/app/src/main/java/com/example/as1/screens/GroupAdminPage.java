@@ -3,9 +3,9 @@ package com.example.as1.screens;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.GetChars;
 import android.util.Log;
 import android.widget.Button;
-import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -16,6 +16,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.example.as1.Controllers.RecycleViews.GroupMemScrollCard;
 import com.example.as1.Controllers.RecycleViews.GroupScrollAdapter;
 import com.example.as1.Controllers.StockPurchased;
+import com.example.as1.Controllers.User;
 import com.example.as1.ExternalControllers.VolleySingleton;
 import com.example.as1.R;
 
@@ -25,56 +26,46 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GroupPage extends AppCompatActivity {
-
+public class GroupAdminPage extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.group_page);
+        setContentView(R.layout.group_admin_page);
 
-        //back to main button
-        Button backHome_btn = findViewById(R.id.backHome_FriendGroupBtn);
-        backHome_btn.setOnClickListener(view -> {
-            Intent intent = new Intent(GroupPage.this, NavPage.class);
+        //Back
+        Button back = findViewById(R.id.back_groupAdminBtn);
+        back.setOnClickListener(view -> {
+            Intent intent = new Intent(GroupAdminPage.this, GroupPage.class);
             startActivity(intent);
         });
 
-        //to friends chat button
-        Button toChat_btn = findViewById(R.id.toChat_friendGroupBtn);
-        toChat_btn.setOnClickListener(view -> {
-            Intent intent = new Intent(GroupPage.this, GroupChatPage.class);
+        //Create new Group
+        Button createGroup = findViewById(R.id.createGroup_Adminbtn);
+        createGroup.setOnClickListener(view -> {
+            Intent intent = new Intent(GroupAdminPage.this, CreateStock.class);
             startActivity(intent);
         });
-
-        //to friends chat button
-        Button toAdmin_btn = findViewById(R.id.toAdmin_GroupBtn);
-        toAdmin_btn.setOnClickListener(view -> {
-            Intent intent = new Intent(GroupPage.this, GroupAdminPage.class);
-            startActivity(intent);
-        });
-
 
         //Initialize recycler view (user)
-        RecyclerView recyclerView = findViewById(R.id.yourGroup_recyc);
-        ArrayList<GroupMemScrollCard> GroupMemCardArrayList = new ArrayList<>();
-        GroupMemCardArrayList.add(new GroupMemScrollCard("NoInputs", "NoInputs", 0, 'u', 0, 0));
-        GroupScrollAdapter groupScrollAdapter = new GroupScrollAdapter(this, GroupMemCardArrayList);
+        RecyclerView recyclerView = findViewById(R.id.groupUser_scroll);
+        ArrayList<GroupMemScrollCard> GroupCardArray = new ArrayList<>();
+        GroupCardArray.add(new GroupMemScrollCard("noname", "noInputs", 0,'u', 0.0, 0 ));
+        GroupScrollAdapter groupScrollAdapter = new GroupScrollAdapter(this, GroupCardArray);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 
-        //Set recycler view
+        //set recycler view
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(groupScrollAdapter);
         getGroupMembers(this.getApplicationContext(), "StockGroup1");
+    }
 
-
-    }//onCreate
-
+//TODO: Fix "no adapter connected error and add recycler view cards for groups"
     public void getGroupMembers(Context context, String groupName) {
         String URL_JSON_OBJECT = "http://coms-309-051.class.las.iastate.edu:8080/friendgroup/" + groupName;
 
         ArrayList<GroupMemScrollCard> GroupMemCardArrayList= new ArrayList<>();
-        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.yourGroup_recyc);
+        RecyclerView recyclerView = findViewById(R.id.groupUser_scroll);
 
         //Create new request
         JsonArrayRequest request = new JsonArrayRequest(
@@ -89,8 +80,6 @@ public class GroupPage extends AppCompatActivity {
                     for(int i = 0; i < response.length(); i++) {
                         try {
                             object = (JSONObject) response.get(i);
-                            // JSONObject stockObj = (JSONObject) object.get("user");
-                            //User userIN = new User();
 
                             //parse relevant info
                             String username = object.getString("username");
@@ -99,8 +88,7 @@ public class GroupPage extends AppCompatActivity {
                             char priv = object.getString("privilege").toCharArray()[0];
                             int money = object.getInt("money");
 
-                            List<StockPurchased> stocks = new ArrayList<>();
-                            stocks = (List<StockPurchased>) object.get("stocks");
+                            List<StockPurchased> stocks = (List<StockPurchased>) object.get("stocks");
                             int numStocks = stocks.size() - 1;
                             //add to arraylist to be displayed in recycle view
                             GroupMemCardArrayList.add(new GroupMemScrollCard(name,username, id, priv, money, numStocks));
@@ -124,5 +112,4 @@ public class GroupPage extends AppCompatActivity {
         // Adding request to request queue
         VolleySingleton.getInstance(context.getApplicationContext()).addToRequestQueue(request);
     }
-
-}//end
+}
