@@ -22,6 +22,8 @@ public class FriendGroup {
 
     private String groupName;
 
+    private User groupLeader;
+
 
 
 
@@ -48,6 +50,10 @@ public class FriendGroup {
     public void setGroupName(String groupName){
         this.groupName = groupName;
     }
+
+    public void setGroupLeader(User user){this.groupLeader = user;}
+
+    public User getGroupLeader(){return groupLeader;}
 
     public void addUser(User user){
         groupMembers.add(user);
