@@ -224,7 +224,7 @@ public class UserController {
         FriendGroup group = friendGroupRepository.findBygroupName(groupName);
         User user = userRepository.findById(userID);
 
-        if (group != null && user != null) {
+        if (group != null && user != null && user.getPrivilege() == 'g') {
             user.setFriendGroup(group);
             userRepository.save(user);
 
