@@ -2,18 +2,14 @@ package coms309.Users;
 
 import java.util.List;
 import java.util.ArrayList;
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+
+import net.bytebuddy.implementation.bind.annotation.IgnoreForBinding;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 @Entity
+@Table(name = "friendgroup")
 public class FriendGroup {
 
     @Id
@@ -22,6 +18,9 @@ public class FriendGroup {
 
     private String groupName;
 
+    @Column(name = "groupLeaderID")
+    private long groupLeaderID;
+
 
 
 
@@ -29,7 +28,6 @@ public class FriendGroup {
     private List<User> groupMembers;
 
 
-    //private MessageRepository MessageRepository;
     public String getGroupName(){
         return groupName;
     }
@@ -49,6 +47,10 @@ public class FriendGroup {
         this.groupName = groupName;
     }
 
+    public void setGroupLeader(User user){this.groupLeaderID = user.getId();}
+
+    public long getGroupLeader(){return groupLeaderID;}
+
     public void addUser(User user){
         groupMembers.add(user);
     }
@@ -61,5 +63,7 @@ public class FriendGroup {
     //getAllMessages(){
     //return message log from repo
     //}
+
+    public boolean findUser(User user){return groupMembers.contains(user);}
 
 }
