@@ -1,4 +1,6 @@
 package com.example.as1.screens;
 
-public class TutorialsPage {
+import androidx.appcompat.app.AppCompatActivity;
+
+public class TutorialsPage extends AppCompatActivity {
 }
