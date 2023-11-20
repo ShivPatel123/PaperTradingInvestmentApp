@@ -45,6 +45,7 @@ android-build:
   - chmod +x ./Frontend/frontend_app
  script:
   - cd Frontend/frontend_app
+  - chmod +x ./gradlew
   - ./gradlew build
  artifacts:
     paths:
