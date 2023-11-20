@@ -184,6 +184,7 @@ public class UserController {
             User groupLeader = userRepository.getOne(uid);
             groupLeader.setPrivilege('g');
             friendGroup.setGroupName(groupName);
+            friendGroup.setGroupLeader(groupLeader);
             groupLeader.setFriendGroup(friendGroup);
             userRepository.save(groupLeader);
             friendGroupRepository.save(friendGroup);
@@ -224,7 +225,7 @@ public class UserController {
         FriendGroup group = friendGroupRepository.findBygroupName(groupName);
         User user = userRepository.findById(userID);
 
-        if (group != null && user != null && user.getPrivilege() == 'g') {
+        if (group != null && user != null && user.getPrivilege() == 'g' && group.getGroupLeader().equals(user)) {
             user.setFriendGroup(group);
             userRepository.save(user);
 
@@ -243,10 +244,28 @@ public class UserController {
         FriendGroup group = friendGroupRepository.findBygroupName(gname);
         User user = userRepository.findById(gid);
 
-        if(group != null && user != null && user.getPrivilege() == 'g' && group.findUser(userRepository.getOne(uid))){
+        if(group != null && user != null && user.getPrivilege() == 'g' && group.getGroupLeader().equals(user) && group.findUser(userRepository.getOne(uid))){
             group.removeUser(userRepository.getOne(uid));
             userRepository.getOne(uid).setFriendGroup(null);
             friendGroupRepository.save(group);
+            return success;
+        }else{
+            return failure;
+        }
+    }
+
+    @PutMapping(path = '/friendgroup/setnewleader/{gname}/{gid}/{uid}')
+    String setNewLeader(@PathVariable String gname, @PathVariable long gid, @PathVariable long uid){
+        FriendGroup group = friendGroupRepository.findBygroupName(gname);
+        User currLeader = userRepository.findById(gid);
+        User pnewLeader = userRepository.findById(uid);
+        if(currLeader.getPrivilege() == 'g' && group.getGroupLeader().equals(currLeader)){
+            pnewLeader.setPrivilege('g');
+            group.setGroupLeader(pnewLeader);
+            currLeader.setPrivilege('u');
+            friendGroupRepository.save(group);
+            userRepository.save(currLeader);
+            userRepository.save(pnewLeader);
             return success;
         }else{
             return failure;
