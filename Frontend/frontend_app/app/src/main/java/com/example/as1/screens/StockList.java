@@ -62,16 +62,6 @@ public class StockList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.stock_list_page);
-//        //Initialize recycler view
-//        RecyclerView recyclerView = findViewById(R.id.stockList_scroll);
-//        ArrayList<StockScrollCard> stockCardArrayList= new ArrayList<>();
-//        stockCardArrayList.add(new StockScrollCard("noname", -1, -1));
-//        StockScrollAdapter stockScrollAdapter = new StockScrollAdapter(this, stockCardArrayList);
-//        LinearLayoutManager linearLayoutManager5 = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-//
-//        //Set recycler view
-//        recyclerView.setLayoutManager(linearLayoutManager5);
-//        recyclerView.setAdapter(stockScrollAdapter);
 
         //get user stocks from server
         getAllStocks(this.getApplicationContext());
