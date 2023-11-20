@@ -279,8 +279,3 @@ public class StockPage extends AppCompatActivity {
     }
 }
 
-
-
-
-
-
