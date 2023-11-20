@@ -61,6 +61,7 @@
         android:id="@+id/yourGroup_recyc"
         android:layout_width="340dp"
         android:layout_height="214dp"
+        android:background="@drawable/border"
         app:layoutManager="LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -84,35 +85,36 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <TextView
-                android:id="@+id/Groups_title"
-                android:layout_width="99dp"
-                android:layout_height="25dp"
-                android:layout_margin="20dp"
-                android:text="Other Groups"
-                android:textColor="@color/txtclr"
-                android:textSize="15sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toTopOf="@+id/otherGroups_recyc"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.051"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0" />
+        android:id="@+id/Groups_title"
+        android:layout_width="99dp"
+        android:layout_height="25dp"
+        android:layout_margin="20dp"
+        android:text="Other Groups"
+        android:textColor="@color/txtclr"
+        android:textSize="15sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/otherGroups_recyc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/otherGroups_recyc"
-                android:layout_width="355dp"
-                android:layout_height="247dp"
-                app:layoutManager="LinearLayoutManager"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.493"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="1.0" />
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/otherGroups_recyc"
+        android:layout_width="355dp"
+        android:layout_height="247dp"
+        android:background="@drawable/border"
+        app:layoutManager="LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.285"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.907" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/toAdmin_GroupBtn"
         android:layout_width="86dp"
         android:layout_height="64dp"
         android:layout_marginBottom="37dp"

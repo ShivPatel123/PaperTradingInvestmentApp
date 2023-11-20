@@ -34,6 +34,9 @@
             android:name=".screens.EditProfilePage"
             android:exported="true" />
         <activity
+            android:name=".screens.GroupAdminPage"
+            android:exported="true" />
+        <activity
             android:name=".screens.GroupChatPage"
             android:exported="true" />
         <activity
