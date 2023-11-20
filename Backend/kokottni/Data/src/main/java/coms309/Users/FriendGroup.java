@@ -62,4 +62,6 @@ public class FriendGroup {
     //return message log from repo
     //}
 
+    public boolean findUser(User user){return groupMembers.contains(user);}
+
 }
