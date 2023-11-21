@@ -15,6 +15,7 @@
         android:backgroundTint="@color/darkBack"
         android:ems="10"
         android:hint="Password"
+        android:textAlignment="center"
         android:inputType="textPassword"
         android:textColorHint="@color/darkBack"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -30,6 +31,7 @@
         android:backgroundTint="@color/darkBack"
         android:hint="Username"
         android:inputType="text"
+        android:textAlignment="center"
         android:textColorHint="@color/darkBack"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -53,20 +55,20 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.593" />
 
+
     <Button
         android:id="@+id/toHome_loginPagebtn"
-        android:layout_width="131dp"
-        android:layout_height="48dp"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
         android:backgroundTint="@color/background"
-        android:text="Back Home"
+        android:text="Back"
         android:textColor="@color/txtclr"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.057"
+        app:layout_constraintHorizontal_bias="0.034"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.023" />
-
 
     <Button
         android:id="@+id/toSignupBtn"
