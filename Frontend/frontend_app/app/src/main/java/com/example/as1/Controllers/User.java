@@ -14,6 +14,10 @@ public class User {
         }
         return instance;
     }
+    public static User updateInstance(User user){
+        instance = user;
+        return instance;
+    }
 
     private List<StockPurchased> stocks = new ArrayList<>();
     //Params
