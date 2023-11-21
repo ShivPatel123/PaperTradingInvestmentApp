@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8826602c-dd7b-42c8-af7c-b59c9d018776" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/coms309/Users/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coms309/Users/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/coms309/Users/FriendGroup.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coms309/Users/FriendGroup.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/coms309/Users/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/coms309/Users/UserController.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -38,7 +38,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "59-create-a-group-leader-user-type",
     "last_opened_file_path": "C:/Users/Nick Kokott/cs309/Data",
     "project.structure.last.edited": "SDKs",
     "project.structure.proportion": "0.15",
@@ -89,7 +89,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/coms309/Users/UserController.java</url>
-          <line>20</line>
+          <line>18</line>
           <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
