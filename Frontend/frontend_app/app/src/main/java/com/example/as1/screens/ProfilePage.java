@@ -138,7 +138,7 @@ public class ProfilePage extends AppCompatActivity {
                 null,
                 response -> {
                     Log.i(" full response", "getNumStocks: " + response.length());
-                    stock_display.setText(response.length());
+                    stock_display.setText("" + response.length());
                 },
 
                 error -> Log.i("error ", "getNumStocks: "+ error.getMessage())) {};

@@ -188,7 +188,7 @@ public class NavPage extends AppCompatActivity {
                         String money = response.getString("money");
                         String username = response.getString("username");
                         String password = response.getString("password");
-                        char priv = (char) response.get("privilege");
+                        char priv = response.getString("privilege").toCharArray()[0];
 
                         // Populate text views with the parsed data
                         user.setName(name);
