@@ -1,5 +1,7 @@
 package com.example.as1.screens;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -10,91 +12,270 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.as1.Controllers.RecycleViews.StockPreviewScrollAdapter;
+import com.example.as1.Controllers.RecycleViews.StockPreviewScrollCard;
+import com.example.as1.Controllers.Stock;
+import com.example.as1.Controllers.User;
 import com.example.as1.ExternalControllers.VolleySingleton;
 import com.example.as1.R;
 
 import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 
-public class StockPage extends AppCompatActivity{
+public class StockPage extends AppCompatActivity {
 
-    private TextView stockName;
-    private String URL_JSON_OBJECT = "http://coms-309-051.class.las.iastate.edu:8080/stock/";
-    private TextView testName;
-    private TextView testPhone;
-    private TextView testLow;
-    private TextView testHigh;
-    private ListView stockListView;
+    protected Button back_btn, newStock_btn, pageLeft, pageRight, buy_btn, sell_btn, delete_btn;
+    protected TextView stockName, stockSymbol, serverNotes;
+    protected EditText id_display, prev_display, curr_display;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.stock_page);
+        final int[] index = {0};
 
-        /* initialize UI elements for Home */
-        Button add_remove = findViewById(R.id.addRemoveButton);
-        stockName = findViewById(R.id.stockNameTextView);
-        testName = findViewById(R.id.testEmail);
-        testPhone = findViewById(R.id.testPrice);
-        testLow = findViewById(R.id.stockLow);
-        testHigh = findViewById(R.id.stockHigh);
+        //get all stocks in an array
+        ArrayList<Stock> stockArrayList = new ArrayList<>();
+        stockArrayList = getAllStocks(this.getApplicationContext());
 
+        //Back Button
+        back_btn = findViewById(R.id.back_StockPageBtn);
+        back_btn.setOnClickListener(view -> {
+            Intent intent = new Intent(StockPage.this, NavPage.class);
+            startActivity(intent);
+        });
 
-//        /* initialize UI elements for portfolio */
-        stockListView = (ListView) findViewById(R.id.stockListView);
-        //TODO : replace test stock with stocks from server
-        String[] testStock = new String[0];
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this, R.layout.activity_list_view, R.id.test123, testStock);
-        stockListView.setAdapter(arrayAdapter);
+        //Create Stock Button
+        newStock_btn = findViewById(R.id.createStock_StockPageBtn);
+        serverNotes = findViewById(R.id.notesEditText);
+        User getGlobal = User.getInstance();
+        newStock_btn.setOnClickListener(view -> {
+            if(getGlobal.getPrivilege() != 'a'){
+                serverNotes.setText("Only Admins can create Stocks");
+            }
+            else {
+                Intent intent = new Intent(StockPage.this, CreateStock.class);
+                startActivity(intent);
+            }
+        });
 
-        add_remove.setOnClickListener(v -> {
-            makeJsonObjReq();
+        //Buy Button
+        buy_btn = findViewById(R.id.buy_StockPagebtn);
+        ArrayList<Stock> finalStockArrayList = stockArrayList;
+        buy_btn.setOnClickListener(view -> {
+            Stock object;
+            object = finalStockArrayList.get(index[0]);
+            long id = object.getId();
+            BuyStock(this.getApplicationContext(), getGlobal, (int) id);
+        });
+
+        //Sell Button
+        sell_btn = findViewById(R.id.sell_StockPagebtn);
+        ArrayList<Stock> finalStockArrayList4 = stockArrayList;
+        sell_btn.setOnClickListener(view -> {
+            Stock object;
+            object = finalStockArrayList4.get(index[0]);
+            long id2 = object.getId();
+            SellStock(this.getApplicationContext(), getGlobal, (int) id2);
+        });
+
+        //Delete Stock Button
+        delete_btn = findViewById(R.id.delete_StockPagebtn);
+        serverNotes = findViewById(R.id.notesEditText);
+        ArrayList<Stock> finalStockArrayList3 = stockArrayList;
+        newStock_btn.setOnClickListener(view -> {
+            if(getGlobal.getPrivilege() != 'a'){
+                serverNotes.setText("Only Admins can delete Stocks");
+            }
+            else {
+                //delete stock
+                Stock object;
+                object = finalStockArrayList3.get(index[0]);
+                long id3 = object.getId();
+                deleteStock(this.getApplicationContext(), getGlobal, (int) id3);
+                //remove from arraylist
+                finalStockArrayList3.remove(index[0]);
+                index[0] -= 1;
+                //reset view to stock at previous index
+                object = finalStockArrayList3.get(index[0]);
+                stockName.setText(object.getCompany());
+                stockSymbol.setText(object.getSymbol());
+                id_display.setText("" + Math.toIntExact(object.getId()));
+                prev_display.setText("" + (int) object.getPrevDayChange());
+                curr_display.setText("" + (int) object.getCurrValue());
+            }
+        });
+
+        //Page Left Button
+        pageLeft = findViewById(R.id.prev_StockPageBtn);
+        ArrayList<Stock> finalStockArrayList2 = stockArrayList;
+        final int[] nextIndex2 = new int[1];
+        pageLeft.setOnClickListener(view -> {
+            if(finalStockArrayList2 == null){
+                serverNotes.setText("Stock List is null, please try again later");
+            }
+            else {
+                int size = finalStockArrayList2.size()-1;
+                if(index[0] == 0){
+                    index[0] = size;
+                    nextIndex2[0] = size;
+                }
+                else {
+                    nextIndex2[0] = index[0] - 1;
+                    index[0] = nextIndex2[0];
+                }
+                Stock object;
+                object = finalStockArrayList2.get(nextIndex2[0]);
+                stockName.setText(object.getCompany());
+                stockSymbol.setText(object.getSymbol());
+                id_display.setText("" + Math.toIntExact(object.getId()));
+                prev_display.setText("" + (int) object.getPrevDayChange());
+                curr_display.setText("" + (int) object.getCurrValue());
+            }
+        });
+
+        //Page Right Button
+        pageRight = findViewById(R.id.next_StockPageBtn);
+        ArrayList<Stock> finalStockArrayList1 = stockArrayList;
+        final int[] nextIndex = new int[1];
+        pageRight.setOnClickListener(view -> {
+            if(finalStockArrayList1 == null){
+                serverNotes.setText("Stock List is null, please try again later");
+            }
+            else {
+                int size = finalStockArrayList1.size()-1;
+                if(index[0] >= size){
+                    index[0] = 0;
+                    nextIndex[0] = 0;
+                }
+                else {
+                    nextIndex[0] = index[0] + 1;
+                    index[0] = nextIndex[0];
+                }
+                Stock object;
+                object = finalStockArrayList1.get(nextIndex[0]);
+                stockName.setText(object.getCompany());
+                stockSymbol.setText(object.getSymbol());
+                id_display.setText("" + Math.toIntExact(object.getId()));
+                prev_display.setText("" + (int) object.getPrevDayChange());
+                curr_display.setText("" + (int) object.getCurrValue());
+            }
         });
     }
 
-    private void makeJsonObjReq() {
-        JsonObjectRequest jsonObjReq = new JsonObjectRequest(
+    public ArrayList<Stock> getAllStocks(Context context) {
+        String URL_JSON_OBJECT = "http://10.90.75.130:8080/stocks";
+        ArrayList<Stock> stockArrayList = new ArrayList<>();
+        stockName = findViewById(R.id.stockNameTextView);
+        stockSymbol = findViewById(R.id.symbol_StockPage);
+        id_display  = findViewById(R.id.stockID_Display);
+        prev_display  = findViewById(R.id.prevDay_Display);
+        curr_display  = findViewById(R.id.stockPrice_Display);
+
+        //Create new request
+        JsonArrayRequest request = new JsonArrayRequest(
                 Request.Method.GET,
                 URL_JSON_OBJECT,
-                null, // Pass null as the request body since it's a GET request
+                null,
                 response -> {
-                    Log.i("Volley Response", response.toString());
-                    stockName.setText(response.toString());
+                    Log.i(" full response", "getAllStocks: " + response.toString());
 
-                    try {
-                        // Parse JSON object data
-                        String name = response.getString("name");
-                        String email = response.getString("email");
-                        String phone = response.getString("phone");
+                    JSONObject object;
+                    Stock stockObject;
+                    for (int i = 0; i < response.length(); i++) {
+                        try {
+                            object = (JSONObject) response.get(i);
+                            stockObject = new Stock();
+                            stockObject.setCurrValue(object.getDouble("currValue"));
+                            stockObject.setId(object.getLong("id"));
+                            stockObject.setPrevDayChange(object.getDouble("prevDayChange"));
+                            stockObject.setSymbol(object.getString("symbol"));
+                            stockObject.setCompany(object.getString("company"));
+                            stockArrayList.add(stockObject);
 
-                        // Populate text views with the parsed data
-                        stockName.setText(name);
-                        testName.setText("200");
-                        testPhone.setText("195");
-
-                        testLow.setText(phone);
-                        testHigh.setText(name);
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
                     }
+                    //parse first object
+                    stockObject = stockArrayList.get(0);
+                    stockName.setText(stockObject.getCompany());
+                    stockSymbol.setText(stockObject.getSymbol());
+                    id_display.setText("" + Math.toIntExact(stockObject.getId()));
+                    prev_display.setText("" + (int) stockObject.getPrevDayChange());
+                    curr_display.setText("" + (int) stockObject.getCurrValue());
                 },
-                error -> Log.i("Volley Error", error.toString()));
+
+                error -> Log.i("Error ", "getAllStocks: " + error.getMessage())) {
+        };
 
         // Adding request to request queue
-        VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(jsonObjReq);
+        VolleySingleton.getInstance(context.getApplicationContext()).addToRequestQueue(request);
+        return stockArrayList;
     }
 
+    public void SellStock(Context context, User user, int modelID) {
+        String URL_JSON_OBJECT = "http://coms-309-051.class.las.iastate.edu:8080/sell/" + modelID + "/user/" + user.getId() + "/1";
+
+        //Create new request
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.GET,
+                URL_JSON_OBJECT,
+                null,
+                response -> {
+                    Log.i("Sell Stock response", "response: " + response);
+                    //update user money
+                },
+                error -> Log.i("Sell Stock error", "error: " + error)) { };
+
+        // Adding request to request queue
+        VolleySingleton.getInstance(context.getApplicationContext()).addToRequestQueue(request);
+    }
+
+    public void BuyStock(Context context, User user, int modelID) {
+        String URL_JSON_OBJECT = "http://coms-309-051.class.las.iastate.edu:8080/buy/" + modelID + "/user/" + user.getId() + "amt/1";
+
+        //Create new request
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.GET,
+                URL_JSON_OBJECT,
+                null,
+                response -> {
+                    Log.i("Buy Stock response", "response: " + response);
+
+                },
+                error -> Log.i("Buy Stock error", "error: " + error)) { };
+
+        // Adding request to request queue
+        VolleySingleton.getInstance(context.getApplicationContext()).addToRequestQueue(request);
+    }
+
+    public void deleteStock(Context context, User user, int modelID) {
+        String URL_JSON_OBJECT = "http://coms-309-051.class.las.iastate.edu:8080/stocks/" + modelID + "/" + user.getId();
+
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.DELETE,
+                URL_JSON_OBJECT,
+                null,
+                response -> {
+                    Log.i("Delete stock response", "response: " + response);
+                },
+                error -> Log.i("Delete stock error", "error: " + error)) { };
+
+        // Adding request to request queue
+        VolleySingleton.getInstance(context.getApplicationContext()).addToRequestQueue(request);
+    }
 }
-
-
-
-
-
 

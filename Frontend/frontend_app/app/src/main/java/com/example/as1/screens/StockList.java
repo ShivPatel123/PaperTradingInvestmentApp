@@ -2,6 +2,9 @@ package com.example.as1.screens;
 
 import static android.app.PendingIntent.getActivity;
 
+import static com.example.as1.Controllers.User.getInstance;
+
+import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,12 +17,22 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.as1.Controllers.RecycleViews.StockPreviewScrollAdapter;
+import com.example.as1.Controllers.RecycleViews.StockPreviewScrollCard;
+import com.example.as1.Controllers.RecycleViews.StockScrollAdapter;
+import com.example.as1.Controllers.RecycleViews.StockScrollCard;
+import com.example.as1.Controllers.StockPurchased;
+import com.example.as1.Controllers.User;
 import com.example.as1.ExternalControllers.VolleySingleton;
 import com.example.as1.R;
 
@@ -49,152 +62,62 @@ public class StockList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.stock_list_page);
-            // Inflate the layout for this fragment
-            LayoutInflater inflater = null;
-            ViewGroup container = null;
-            view = inflater.inflate(R.layout.stock_list_page, container, false);
-            replacement = view.findViewById(R.id.fragList);
 
-            view.findViewById(R.id.renderStocks).setOnClickListener((View.OnClickListener) this);
+        //get user stocks from server
+        getAllStocks(this.getApplicationContext());
+    }
 
-            allStocks = (Button) view.findViewById(R.id.renderStocks);
-            allStocks.setOnClickListener((View.OnClickListener) this);
-            t = (TextView) view.findViewById(R.id.testBox);
+    public void getAllStocks(Context context) {
+        String URL_JSON_OBJECT = "http://10.90.75.130:8080/stocks";
+        //http://coms-309-051.class.las.iastate.edu:8080/user/
 
+        ArrayList<StockScrollCard> stockCardArrayList= new ArrayList<>();
+        RecyclerView recyclerView = findViewById(R.id.stockList_scroll);
 
-            for (int i = 1; i < 5; i++) {
-//            URL_JSON_OBJECT = new String ("https://jsonplaceholder.typicode.com/users/" + i);
-                URL_JSON_OBJECT = new String("http://coms-309-051.class.las.iastate.edu:8080/stocks/" + i);
+        //Create new request
+        JsonArrayRequest request = new JsonArrayRequest(
+                Request.Method.GET,
+                URL_JSON_OBJECT,
+                null,
+                response -> {
+                    Log.i(" full response", "getAllStocks: " + response.toString());
 
-                makeJsonObjReq();
-            }
+                    JSONObject object;
 
-            ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getApplicationContext(), android.R.layout.simple_list_item_1, adapList);
-            replacement.setAdapter(adapter);
+                    for(int i = 0; i < response.length(); i++) {
+                        try {
+                            object = (JSONObject) response.get(i);
+                            // JSONObject stockObj = (JSONObject) object.get("user");
+                            //User userIN = new User();
 
-            replacement.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                            //parse relevant info
+                            String name = object.getString("company");
+                            name += " " + object.getString("symbol");
+                            int prevDay = (int) object.getDouble("prevDayChange");
+                            int stockPrice = (int) object.getDouble("currValue");
 
-                    String temp = stockListNames.get(position);
-                    Integer stockPriceTest = mainStockPrice.get(position);
-                    Integer stockIdTest = mainStockID.get(position);
-                    String tempSymbol = mainStockSymbol.get(position);
+                            //add to arraylist to be displayed in recycle view
+                            //TODO
+                            stockCardArrayList.add(new StockScrollCard(name, prevDay, stockPrice, 0, "none"));
 
-                    t.setText(temp);
-
-                    Log.i(temp, "getting somewhere");
-                    Log.i(String.valueOf(stockPriceTest), "gett");
-
-                }
-            });
-        }
-
-        public void onClick(View v) {
-
-            replacement2 = view.findViewById(R.id.fragList);
-
-            //added Array
-            ArrayList<String> list = new ArrayList<>();
-            CustomAdapter listAdapter = new CustomAdapter(list);
-            replacement2.setAdapter(listAdapter);
-
-            for (int i = 0; i < stockListNames.size(); i++) {
-                list.add(stockListNames.get(i) + " - " + mainStockSymbol.get(i));
-            }
-        }
-
-
-        class CustomAdapter extends BaseAdapter {
-            List<String> items;
-            List[] fruits;
-
-            public CustomAdapter(List<String> items) {
-                super();
-                this.items = items;
-            }
-
-            @Override
-            public int getCount() {
-                return items.size();
-            }
-
-            @Override
-            public Object getItem(int i) {
-                return items.get(i);
-            }
-
-            @Override
-            public long getItemId(int i) {
-                return items.get(i).hashCode();
-            }
-
-            @Override
-            public View getView(int i, View view, ViewGroup viewGroup) {
-                TextView textView = new TextView(getApplicationContext());
-                textView.setMinHeight(35);
-                textView.setTextSize(35);
-                textView.setText(items.get(i));
-                return textView;
-            }
-        }
-
-
-        private void makeJsonObjReq() {
-            JsonObjectRequest jsonObjReq = new JsonObjectRequest(
-                    Request.Method.GET,
-                    URL_JSON_OBJECT,
-                    null, // Pass null as the request body since it's a GET request
-                    new Response.Listener<JSONObject>() {
-                        @Override
-                        public void onResponse(JSONObject response) {
-                            Log.d("Volley Response", response.toString());
-//                        stockName.setText(response.toString());
-
-                            try {
-                                // Parse JSON object data
-
-                                //changed from name
-                                String name = response.getString("company");
-                                Integer id = response.getInt("id");
-                                Integer stockValue = response.getInt("currValue");
-                                String symbol = response.getString("symbol");
-//                            String email = response.getString("email");
-//                            String phone = response.getString("phone");
-
-                                // Populate text views with the parsed data
-//                            stockName.setText(name);
-//                            testName.setText("200");
-//                            testPhone.setText("195");
-//                            t = (TextView) view.findViewById(R.id.testBox);
-//
-                                t.setText(name);
-                                stockListNames.add(t.getText().toString());
-                                mainStockPrice.add(stockValue);
-                                mainStockID.add(id);
-                                mainStockSymbol.add(symbol);
-                                mainStockList.add(t.getText().toString());
-
-                                Log.d(t.getText().toString(), "test");
-
-//                            testLow.setText(phone);
-//                            testHigh.setText(name);
-
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
                         }
-                    },
-                    new Response.ErrorListener() {
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            Log.e("Volley Error", error.toString());
-                        }
-                    }) {};
 
-            // Adding request to request queue
-            VolleySingleton.getInstance(this.getApplicationContext()).addToRequestQueue(jsonObjReq);
-        }
+                    }
+                    //Initialize recycler view
+                    StockScrollAdapter stockScrollAdapter = new StockScrollAdapter(this, stockCardArrayList);
+                    LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 
+                    //Set recycler view
+                    recyclerView.setLayoutManager(linearLayoutManager);
+                    recyclerView.setAdapter(stockScrollAdapter);
+                },
+
+                error -> Log.i("Error ", "getAllStocks: "+ error.getMessage())) {};
+
+        // Adding request to request queue
+        VolleySingleton.getInstance(context.getApplicationContext()).addToRequestQueue(request);
+    }
 
     }

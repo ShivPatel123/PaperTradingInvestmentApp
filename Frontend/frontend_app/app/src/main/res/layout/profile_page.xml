@@ -4,20 +4,19 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@color/background">
+    android:background="@drawable/background_gradient">
 
     <TextView
         android:id="@+id/Profile_title"
-        android:layout_width="416dp"
-        android:layout_height="97dp"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
         android:background="@color/darkBack"
         android:ems="10"
-        android:fontFamily="@font/advent_pro_medium"
+        android:padding="10dp"
         android:text="Profile"
         android:textAlignment="center"
-        android:padding="20dp"
         android:textColor="@color/txtclr"
-        android:textSize="48sp"
+        android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -28,16 +27,18 @@
 
     <Button
         android:id="@+id/backHome_mainBtn"
-        android:layout_width="81dp"
-        android:layout_height="60dp"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:backgroundTint="@color/background"
         android:text="Back"
         android:textColor="@color/txtclr"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/Profile_title"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.047"
+        app:layout_constraintHorizontal_bias="0.034"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.372" />
+        app:layout_constraintVertical_bias="0.382" />
 
     <com.google.android.material.imageview.ShapeableImageView
         android:id="@+id/picSample"
@@ -228,15 +229,18 @@
 
     <Button
         android:id="@+id/editProfile_btn"
-        android:layout_width="77dp"
-        android:layout_height="54dp"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:backgroundTint="@color/background"
         android:text="EDIT"
+        android:textColor="@color/txtclr"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/Profile_title"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.934"
+        app:layout_constraintHorizontal_bias="0.944"
         app:layout_constraintStart_toEndOf="@+id/backHome_mainBtn"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.372" />
+        app:layout_constraintVertical_bias="0.382" />
 
     <TextView
         android:id="@+id/welcome_txtView"
@@ -346,15 +350,15 @@
 
     <Button
         android:id="@+id/toStockPage_btn"
-        android:layout_width="110dp"
-        android:layout_height="65dp"
+        android:layout_width="108dp"
+        android:layout_height="81dp"
         android:padding="10dp"
         android:text="View Portfolio"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.946"
+        app:layout_constraintHorizontal_bias="0.947"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.873" />
+        app:layout_constraintVertical_bias="0.883" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
