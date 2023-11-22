@@ -29,6 +29,7 @@ public class User {
     private String username;
     private String password;
     protected char priv;
+    private FriendGroup friendGroup;
 
 //Constructors
     public User(long id, double money, String name, String email, String dob, String username, String password, char priv){
@@ -91,6 +92,14 @@ public class User {
     public char getPrivilege(){return this.priv;}
 
     public void setPrivilege(char privilege){this.priv = privilege;}
+
+    public FriendGroup getFriendGroup() {
+        return friendGroup;
+    }
+
+    public void setFriendGroup(FriendGroup friendGroup) {
+        this.friendGroup = friendGroup;
+    }
 
 
 

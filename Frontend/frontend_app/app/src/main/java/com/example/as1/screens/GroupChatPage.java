@@ -1,6 +1,7 @@
 package com.example.as1.screens;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
@@ -11,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.as1.Controllers.FriendGroup;
 import com.example.as1.Controllers.User;
 import com.example.as1.ExternalControllers.VolleySingleton;
 import com.example.as1.ExternalControllers.WebSocketListener;
@@ -18,7 +20,12 @@ import com.example.as1.ExternalControllers.WebSocketManager;
 import com.example.as1.R;
 
 import org.java_websocket.handshake.ServerHandshake;
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GroupChatPage extends AppCompatActivity implements WebSocketListener {
 
@@ -27,15 +34,10 @@ public class GroupChatPage extends AppCompatActivity implements WebSocketListene
         super.onCreate(savedInstanceState);
         setContentView(R.layout.group_chat_page);
 
-        //URL from springboot endpoint, DOES IT NEED TO BE WS OR HTTP??
-        //what is {target}: /chat/{username}/{target} target is message reciever
-        //message reciever should be groupname or user id
          String BASE_URL = "ws://coms-309-051.class.las.iastate.edu:8080/chat/";
          EditText usernameEtx;
          TextView msgTv;
 
-        Button connectBtn = findViewById(R.id.bt1);
-        Button connect2Btn = findViewById(R.id.group2_btn);
         Button sendBtn =  findViewById(R.id.bt2);
         EditText msgEtx =  findViewById(R.id.et2);
         TextView welcome = findViewById(R.id.welcome_display);
@@ -44,32 +46,21 @@ public class GroupChatPage extends AppCompatActivity implements WebSocketListene
 
         //Get global user data for get request (just need id for get req)
         User getGlobal = User.getInstance();
-        //Get req for user data, need to be sure global user has id set after logging in
-        //TODO: make get and post reqs generic then call this from generic
-        getGlobal = getUserData(this.getApplicationContext(),getGlobal);
+        getFriendGroup(this.getApplicationContext(),getGlobal);
 
         welcome.setText("Welcome " + getGlobal.getName() + "!");
 
-
-        /* connect button listener */
-        User finalGetGlobal = getGlobal;
-        connectBtn.setOnClickListener(view -> {
-            //set server url with url + username (may need changed)
-            String serverUrl = BASE_URL + finalGetGlobal.getName().toString() + "/StockGroup1";
-
-            // Establish WebSocket connection and set listener
-            WebSocketManager.getInstance().connectWebSocket(serverUrl);
-            WebSocketManager.getInstance().setWebSocketListener(GroupChatPage.this);
-        });
-
-        connect2Btn.setOnClickListener(view -> {
-            //set server url with url + username (may need changed)
-            String serverUrl = BASE_URL + finalGetGlobal.getName().toString() + "/StockGroup2";
+            String groupURL;
+        if(getGlobal.getFriendGroup() != null){
+            groupURL = getGlobal.getFriendGroup().getGroupName();
+        } else {
+            groupURL = "StockGroup1";
+        }
+        String serverUrl = BASE_URL + getGlobal.getName().toString() + "/" + groupURL;
 
             // Establish WebSocket connection and set listener
             WebSocketManager.getInstance().connectWebSocket(serverUrl);
             WebSocketManager.getInstance().setWebSocketListener(GroupChatPage.this);
-        });
 
         /* send button listener */
         sendBtn.setOnClickListener(v -> {
@@ -81,17 +72,19 @@ public class GroupChatPage extends AppCompatActivity implements WebSocketListene
             }
         });
 
+        //back to main button
+        Button backHome_btn = findViewById(R.id.backHome_FriendsBtn);
+        backHome_btn.setOnClickListener(view -> {
+            Intent intent = new Intent(GroupChatPage.this, NavPage.class);
+            startActivity(intent);
+        });
+
 
     }
 
+    //Websocket Functions
     @Override
     public void onWebSocketMessage(String message) {
-        /**
-         * In Android, all UI-related operations must be performed on the main UI thread
-         * to ensure smooth and responsive user interfaces. The 'runOnUiThread' method
-         * is used to post a runnable to the UI thread's message queue, allowing UI updates
-         * to occur safely from a background or non-UI thread.
-         */
         TextView msgTv =  findViewById(R.id.tx1);
         runOnUiThread(() -> {
             String s = msgTv.getText().toString();
@@ -111,13 +104,13 @@ public class GroupChatPage extends AppCompatActivity implements WebSocketListene
 
     @Override
     public void onWebSocketOpen(ServerHandshake handshakedata) {}
-
     @Override
     public void onWebSocketError(Exception ex) {}
 
-    public User getUserData(Context context, User user) {
-        String URL_JSON_OBJECT = "http://coms-309-051.class.las.iastate.edu:8080/userByName/" + user.getUsername();
-
+    //JSON Request
+    public FriendGroup getFriendGroup(Context context, User user) {
+        String URL_JSON_OBJECT = "http://coms-309-051.class.las.iastate.edu:8080/friendgroup/get/" + user.getId();
+        FriendGroup friendGroup = new FriendGroup();
         //Create new request
         JsonObjectRequest request = new JsonObjectRequest(
                 Request.Method.GET,
@@ -125,24 +118,24 @@ public class GroupChatPage extends AppCompatActivity implements WebSocketListene
                 null,
                 response -> {
                     try {
-                        // Parse JSON object data
-                        String name = response.getString("name");
-                        String email = response.getString("email");
-                        String id = response.getString("id");
-                        String dob = response.getString("dob");
-                        String money = response.getString("money");
-                        String username = response.getString("username");
-                        String password = response.getString("password");
-                        //TODO parse arraylist to get stock list
 
-                        // Populate text views with the parsed data
-                        user.setName(name);
-                        user.setEmail(email);
-                        user.setId(Integer.parseInt(id));
-                        user.setDob(dob);
-                        user.setMoney(Double.parseDouble(money));
-                        user.setUsername(username);
-                        user.setPassword(password);
+                        if(response.get("friendGroup") == null){
+                            return;
+                        }
+                        JSONObject group;
+                        group = (JSONObject) response.get("friendGroup");
+
+                        friendGroup.setGroupName((group.getString("groupName")));
+                        friendGroup.setGroupLeaderID(group.getLong("groupLeaderID"));
+
+                        JSONArray groupMembers = response.getJSONArray("groupMembers");
+                        User holder = new User();
+                        List<User> groupUsers = new ArrayList<>();
+                        for(int i = 0; i < groupMembers.length(); i++){
+                            holder = (User)groupMembers.get(i);
+                            groupUsers.set(i, holder);
+                        }
+                        friendGroup.setGroupMembers(groupUsers);
 
                     } catch (JSONException e) {
                         e.printStackTrace();
@@ -153,6 +146,6 @@ public class GroupChatPage extends AppCompatActivity implements WebSocketListene
 
         // Adding request to request queue
         VolleySingleton.getInstance(context.getApplicationContext()).addToRequestQueue(request);
-        return user;
+        return friendGroup;
     }
 }
