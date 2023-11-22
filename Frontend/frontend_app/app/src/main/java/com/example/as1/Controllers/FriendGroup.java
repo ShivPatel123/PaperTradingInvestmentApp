@@ -9,6 +9,8 @@ public class FriendGroup {
 
         private List<User> groupMembers;
         private long groupLeaderID;
+
+
         public String getGroupName(){
             return groupName;
         }

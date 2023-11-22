@@ -58,6 +58,16 @@ public class GroupScrollAdapter extends RecyclerView.Adapter<GroupScrollAdapter.
         holder.memMoney.setText("" + model.getMoney());
         holder.memNumStocks.setText("" + model.getNumStocks());
 
+        if(model.getPermission() == 'i'){
+            holder.memPerm.setVisibility(View.INVISIBLE);
+        }
+        if(model.getUsername().equals("invs")){
+            holder.memUsername.setVisibility(View.INVISIBLE);
+        }
+        if(model.getMoney() == -2){
+            holder.memUsername.setText("# Users: ");
+        }
+
     }
 
     @Override
