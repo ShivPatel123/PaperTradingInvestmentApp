@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background">
+    android:background="@drawable/background_gradient">
 
 
     <androidx.recyclerview.widget.RecyclerView
@@ -27,29 +27,29 @@
 
     <Button
         android:id="@+id/createStock_Adminbtn"
-        android:layout_width="144dp"
-        android:layout_height="48dp"
+        android:layout_width="147dp"
+        android:layout_height="59dp"
         android:text="Create Stock"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.378"
+        app:layout_constraintHorizontal_bias="0.299"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.597" />
+        app:layout_constraintVertical_bias="0.526" />
 
     <Button
         android:id="@+id/updateStocks_Adminbtn"
-        android:layout_width="144dp"
-        android:layout_height="48dp"
+        android:layout_width="147dp"
+        android:layout_height="59dp"
         android:text="Update Stocks"
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.966"
+        app:layout_constraintHorizontal_bias="0.939"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.597" />
+        app:layout_constraintVertical_bias="0.526" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/stockPreview_scroll"
@@ -73,15 +73,14 @@
     <TextView
         android:id="@+id/Admin_dash_title"
         android:layout_width="411dp"
-        android:layout_height="99dp"
+        android:layout_height="65dp"
         android:background="@color/darkBack"
         android:ems="10"
-        android:fontFamily="@font/advent_pro_medium"
         android:gravity="right|center_vertical"
         android:inputType="text"
         android:text="Admin Dashboard\t\t\t\t"
         android:textColor="@color/txtclr"
-        android:textSize="40sp"
+        android:textSize="30sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -101,7 +100,7 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/user_scroll"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.03"
+        app:layout_constraintHorizontal_bias="0.069"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Admin_dash_title"
         app:layout_constraintVertical_bias="1.0" />
@@ -119,21 +118,23 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/stockPreview_scroll"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.03"
+        app:layout_constraintHorizontal_bias="0.069"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/user_scroll"
         app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/button3"
-        android:layout_width="74dp"
-        android:layout_height="53dp"
-        android:gravity="left|center_vertical"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:backgroundTint="@color/background"
         android:text="Back"
+        android:textColor="@color/txtclr"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/Admin_dash_title"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.053"
+        app:layout_constraintHorizontal_bias="0.034"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.333" />
+        app:layout_constraintVertical_bias="0.382" />
 </androidx.constraintlayout.widget.ConstraintLayout>

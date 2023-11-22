@@ -37,7 +37,7 @@ public class PortfolioPage extends AppCompatActivity {
         //Initialize recycler view
         RecyclerView recyclerView = findViewById(R.id.stock_scroll);
         ArrayList<StockScrollCard> stockCardArrayList= new ArrayList<>();
-        stockCardArrayList.add(new StockScrollCard("noname", -1, -1));
+        stockCardArrayList.add(new StockScrollCard("noname", -1, -1, -1, "none"));
         StockScrollAdapter stockScrollAdapter = new StockScrollAdapter(this, stockCardArrayList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 
@@ -102,9 +102,11 @@ public class PortfolioPage extends AppCompatActivity {
                                 String stockName = stockObj.getString("company");
                                 int numP = object.getInt("numPurchased");
                                 int price = (int) object.getDouble("singlePrice");
+                                String stockSymbol = stockObj.getString("symbol");
+                                int id = stockObj.getInt("id");
 
                                 //add to arraylist to be displayed in recycle view
-                                stockCardArrayList.add(new StockScrollCard(stockName, numP, price));
+                                stockCardArrayList.add(new StockScrollCard(stockName, numP, price, id, stockSymbol));
 
                             } catch (JSONException e) {
                                 throw new RuntimeException(e);

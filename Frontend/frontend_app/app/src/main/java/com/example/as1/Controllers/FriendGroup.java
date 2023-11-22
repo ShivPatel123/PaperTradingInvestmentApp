@@ -6,10 +6,33 @@ import java.util.List;
 public class FriendGroup {
         private int id;
         private String groupName;
+
         private List<User> groupMembers;
+        private long groupLeaderID;
+
+
         public String getGroupName(){
             return groupName;
         }
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setGroupMembers(List<User> groupMembers) {
+        this.groupMembers = groupMembers;
+    }
+
+    public long getGroupLeaderID() {
+        return groupLeaderID;
+    }
+
+    public void setGroupLeaderID(long groupLeaderID) {
+        this.groupLeaderID = groupLeaderID;
+    }
 
         public List<User> getGroupMembers() {
            return groupMembers;
