@@ -106,7 +106,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
         view = inflater.inflate(R.layout.stock_list_page, container, false);
 //        replacement = view.findViewById(R.id.fragList);
 
-        allStocks = (Button) view.findViewById(R.id.renderStocks);
+        //allStocks = (Button) view.findViewById(R.id.renderStocks);
         allStocks.setOnClickListener(this);
         t = (TextView) view.findViewById(R.id.testBox);
 
@@ -165,7 +165,7 @@ public class ProfileFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        view.findViewById(R.id.renderStocks).setOnClickListener(this);
+        //view.findViewById(R.id.renderStocks).setOnClickListener(this);
     }
 
     class CustomAdapter extends BaseAdapter {
