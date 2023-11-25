@@ -47,6 +47,12 @@ public class GroupAdminPage extends AppCompatActivity {
             startActivity(intent);
         });
 
+        Button createGroup_Adminbtn = findViewById(R.id.createGroup_Adminbtn);
+        createGroup_Adminbtn.setOnClickListener(view -> {
+            Intent intent = new Intent(GroupAdminPage.this, CreateGroup.class);
+            startActivity(intent);
+        });
+
         //Initialize recycler view (user)
         RecyclerView recyclerView = findViewById(R.id.groupUser_scroll);
         ArrayList<GroupMemScrollCard> GroupCardArray = new ArrayList<>();

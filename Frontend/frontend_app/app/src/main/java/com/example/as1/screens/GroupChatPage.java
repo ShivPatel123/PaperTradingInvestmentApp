@@ -75,7 +75,7 @@ public class GroupChatPage extends AppCompatActivity implements WebSocketListene
         //back to main button
         Button backHome_btn = findViewById(R.id.backHome_FriendsBtn);
         backHome_btn.setOnClickListener(view -> {
-            Intent intent = new Intent(GroupChatPage.this, NavPage.class);
+            Intent intent = new Intent(GroupChatPage.this, GroupPage.class);
             startActivity(intent);
         });
 
