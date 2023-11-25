@@ -184,10 +184,10 @@
         android:text="New Stock"
         android:textColor="@color/txtclr"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/Profile_title"
+        app:layout_constraintBottom_toBottomOf="@+id/stockPage_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.944"
-        app:layout_constraintStart_toEndOf="@+id/backHome_mainBtn"
+        app:layout_constraintStart_toEndOf="@+id/back_StockPageBtn"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.382" />
 
