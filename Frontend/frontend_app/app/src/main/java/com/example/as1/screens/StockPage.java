@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -38,7 +39,10 @@ public class StockPage extends AppCompatActivity {
 
     protected Button back_btn, newStock_btn, pageLeft, pageRight, buy_btn, sell_btn, delete_btn;
     protected TextView stockName, stockSymbol, serverNotes;
-    protected EditText id_display, prev_display, curr_display;
+    protected EditText curr_display;
+
+   protected TextView id_display, stockChange;
+   ImageView stockImage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -94,6 +98,8 @@ public class StockPage extends AppCompatActivity {
         //Delete Stock Button
         delete_btn = findViewById(R.id.delete_StockPagebtn);
         serverNotes = findViewById(R.id.notesEditText);
+        id_display = findViewById(R.id.stockID_view);
+        curr_display  = findViewById(R.id.stockPrice_Display);
         ArrayList<Stock> finalStockArrayList3 = stockArrayList;
         newStock_btn.setOnClickListener(view -> {
             if(getGlobal.getPrivilege() != 'a'){
@@ -112,9 +118,18 @@ public class StockPage extends AppCompatActivity {
                 object = finalStockArrayList3.get(index[0]);
                 stockName.setText(object.getCompany());
                 stockSymbol.setText(object.getSymbol());
-                id_display.setText("" + Math.toIntExact(object.getId()));
-                prev_display.setText("" + (int) object.getPrevDayChange());
+                id_display.setText("ID: " + Math.toIntExact(object.getId()));
                 curr_display.setText("" + (int) object.getCurrValue());
+
+                double stockPercentNum = (object.getPrevDayChange() / object.getCurrValue()) * 100;
+                String stockPercent = String.format("%.3f", stockPercentNum);
+                stockChange.setText("" + object.getPrevDayChange() + " || " + stockPercent + "%");
+                if(object.getPrevDayChange() < 0){
+                    stockImage.setImageResource(R.drawable.stockredarrow);
+                }
+                else{
+                    stockImage.setImageResource(R.drawable.greenarrow);
+                }
             }
         });
 
@@ -140,9 +155,18 @@ public class StockPage extends AppCompatActivity {
                 object = finalStockArrayList2.get(nextIndex2[0]);
                 stockName.setText(object.getCompany());
                 stockSymbol.setText(object.getSymbol());
-                id_display.setText("" + Math.toIntExact(object.getId()));
-                prev_display.setText("" + (int) object.getPrevDayChange());
+                id_display.setText("ID: " + Math.toIntExact(object.getId()));
                 curr_display.setText("" + (int) object.getCurrValue());
+
+                double stockPercentNum = (object.getPrevDayChange() / object.getCurrValue()) * 100;
+                String stockPercent = String.format("%.3f", stockPercentNum);
+                stockChange.setText("" + object.getPrevDayChange() + " || " + stockPercent + "%");
+                if(object.getPrevDayChange() < 0){
+                    stockImage.setImageResource(R.drawable.stockredarrow);
+                }
+                else{
+                    stockImage.setImageResource(R.drawable.greenarrow);
+                }
             }
         });
 
@@ -168,9 +192,18 @@ public class StockPage extends AppCompatActivity {
                 object = finalStockArrayList1.get(nextIndex[0]);
                 stockName.setText(object.getCompany());
                 stockSymbol.setText(object.getSymbol());
-                id_display.setText("" + Math.toIntExact(object.getId()));
-                prev_display.setText("" + (int) object.getPrevDayChange());
+                id_display.setText("ID: " + Math.toIntExact(object.getId()));
                 curr_display.setText("" + (int) object.getCurrValue());
+
+                double stockPercentNum = (object.getPrevDayChange() / object.getCurrValue()) * 100;
+                String stockPercent = String.format("%.3f", stockPercentNum);
+                stockChange.setText("" + object.getPrevDayChange() + " || " + stockPercent + "%");
+                if(object.getPrevDayChange() < 0){
+                    stockImage.setImageResource(R.drawable.stockredarrow);
+                }
+                else{
+                    stockImage.setImageResource(R.drawable.greenarrow);
+                }
             }
         });
     }
@@ -180,9 +213,10 @@ public class StockPage extends AppCompatActivity {
         ArrayList<Stock> stockArrayList = new ArrayList<>();
         stockName = findViewById(R.id.stockNameTextView);
         stockSymbol = findViewById(R.id.symbol_StockPage);
-        id_display  = findViewById(R.id.stockID_Display);
-        prev_display  = findViewById(R.id.prevDay_Display);
+        id_display  = findViewById(R.id.stockID_view);
         curr_display  = findViewById(R.id.stockPrice_Display);
+        stockChange = findViewById(R.id.stockChange_txt);
+        stockImage = findViewById(R.id.stock_ImageView);
 
         //Create new request
         JsonArrayRequest request = new JsonArrayRequest(
@@ -213,9 +247,18 @@ public class StockPage extends AppCompatActivity {
                     stockObject = stockArrayList.get(0);
                     stockName.setText(stockObject.getCompany());
                     stockSymbol.setText(stockObject.getSymbol());
-                    id_display.setText("" + Math.toIntExact(stockObject.getId()));
-                    prev_display.setText("" + (int) stockObject.getPrevDayChange());
+                    id_display.setText("ID: " + Math.toIntExact(stockObject.getId()));
                     curr_display.setText("" + (int) stockObject.getCurrValue());
+
+                    double stockPercentNum = (stockObject.getPrevDayChange() / stockObject.getCurrValue()) * 100;
+                    String stockPercent = String.format("%.3f", stockPercentNum);
+                    stockChange.setText("" + stockObject.getPrevDayChange() + " || " +  stockPercent + "%");
+                    if(stockObject.getPrevDayChange() < 0){
+                        stockImage.setImageResource(R.drawable.stockredarrow);
+                    }
+                    else{
+                        stockImage.setImageResource(R.drawable.greenarrow);
+                    }
                 },
 
                 error -> Log.i("Error ", "getAllStocks: " + error.getMessage())) {
