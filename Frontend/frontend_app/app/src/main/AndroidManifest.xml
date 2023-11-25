@@ -28,6 +28,9 @@
             android:name=".screens.CreateAccountPage"
             android:exported="true" />
         <activity
+            android:name=".screens.CreateGroup"
+            android:exported="true" />
+        <activity
             android:name=".screens.CreateStock"
             android:exported="true" />
         <activity
