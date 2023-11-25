@@ -25,7 +25,9 @@ import com.example.as1.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.sql.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class PortfolioPage extends AppCompatActivity {
 
@@ -53,9 +55,6 @@ public class PortfolioPage extends AppCompatActivity {
 
         //get user stocks from server
         getAllUserStocks(this.getApplicationContext(), getGlobal);
-
-        //TODO: update local/global? Is stockPurchasedList needed locally?
-        //getGlobal.setStocks(stockPurchasedList);
 
         //back to main button
         Button backHome_btn = findViewById(R.id.backHome_PortfolioBtn);
@@ -91,27 +90,60 @@ public class PortfolioPage extends AppCompatActivity {
                         StockPurchased stockPurchased = new StockPurchased();
                         JSONObject object;
 
+                        //remove dups
+//                    JSONObject tempObject = null;
+//                    JSONObject tempStockObj = null;
+//                    try {
+//                        tempObject = (JSONObject) response.get(0);
+//                        tempStockObj = (JSONObject) tempObject.get("stock");
+//                    } catch (JSONException e) {
+//                        throw new RuntimeException(e);
+//                    }
+//
+//                        JSONObject rObject;
+//                        JSONObject rStockObj;
+//                        for (int i = 1; i < response.length(); i++) {
+//                            try {
+//                                rObject = (JSONObject) response.get(i);
+//                                rStockObj = (JSONObject) rObject.get("stock");
+//                            } catch (JSONException e) {
+//                                throw new RuntimeException(e);
+//                            }
+//
+//                            if (rStockObj.equals(tempStockObj)) {
+//                                response.remove(i);
+//                            }
+//                            try {
+//                                tempObject = (JSONObject) response.get(i);
+//                                tempStockObj = (JSONObject) tempObject.get("stock");
+//                            } catch (JSONException e) {
+//                                throw new RuntimeException(e);
+//                            }
+//                        }
+
+
+                        //parse array
                         for(int i = 0; i < response.length(); i++) {
                             try {
                                 //Get next stock from response JSON array
                                 object = (JSONObject) response.get(i);
-                                JSONObject stockObj = (JSONObject) object.get("stock");
-                                Stock stockIN = new Stock();
 
                                 //parse relevant info
+                                JSONObject stockObj = (JSONObject) object.get("stock");
+                                Log.i("portfolio", "next Stock object: " + stockObj);
+
                                 String stockName = stockObj.getString("company");
                                 int numP = object.getInt("numPurchased");
                                 int price = (int) object.getDouble("singlePrice");
                                 String stockSymbol = stockObj.getString("symbol");
                                 int id = stockObj.getInt("id");
 
-                                //add to arraylist to be displayed in recycle view
-                                stockCardArrayList.add(new StockScrollCard(stockName, numP, price, id, stockSymbol));
+                                StockScrollCard scrollCard = new StockScrollCard(stockName, numP, price, id, stockSymbol);
+                                stockCardArrayList.add(scrollCard);
 
-                            } catch (JSONException e) {
-                                throw new RuntimeException(e);
-                            }
-
+                                } catch(JSONException e){
+                                    throw new RuntimeException(e);
+                                }
                         }
                         //Initialize recycler view
                         StockScrollAdapter stockScrollAdapter = new StockScrollAdapter(this, stockCardArrayList);

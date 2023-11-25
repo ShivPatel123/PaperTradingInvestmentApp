@@ -26,6 +26,7 @@ import com.example.as1.Controllers.StockPurchased;
 import com.example.as1.R;
 import com.example.as1.Controllers.User;
 import com.example.as1.ExternalControllers.VolleySingleton;
+import com.google.android.material.imageview.ShapeableImageView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -49,6 +50,7 @@ public class ProfilePage extends AppCompatActivity {
         TextView email_display = findViewById(R.id.email_Display);
         TextView dob_display = findViewById(R.id.dob_Display);
         TextView money_display = findViewById(R.id.money_Display);
+        ShapeableImageView defaultPic = findViewById(R.id.picSample);
 
         //Get global user data for get request (just need id for get req)
         User getGlobal = User.getInstance();
@@ -65,7 +67,8 @@ public class ProfilePage extends AppCompatActivity {
         email_display.setText(getGlobal.getEmail());
         dob_display.setText(getGlobal.getDob());
         double money1 = getGlobal.getMoney();
-        money_display.setText(String.valueOf(money1));
+        money_display.setText("$" + String.valueOf(money1));
+
 
         //Back to Home page button
         backHome_btn.setOnClickListener(view -> {
@@ -138,7 +141,7 @@ public class ProfilePage extends AppCompatActivity {
                 null,
                 response -> {
                     Log.i(" full response", "getNumStocks: " + response.length());
-                    stock_display.setText("" + response.length());
+                    stock_display.setText("#" + response.length());
                 },
 
                 error -> Log.i("error ", "getNumStocks: "+ error.getMessage())) {};
