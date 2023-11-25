@@ -278,18 +278,18 @@ public class UserController {
         return userRepository.findById(id);
     }
 
-    @ApiOperation(value = "Assigns a stock to the user, essentially having them purchase it just a little different", response = String.class, tags = "userbuyandsell")
-    @PutMapping(path = "/users/{userId}/stocks/{stockId}/{numPurchasing}")
-    String assignStockToUser(@PathVariable long userId, @PathVariable long stockId, @PathVariable int numPurchasing){
-        User user = userRepository.findById(userId);
-        if(user.getPrivilege() == 'b') return failure;
-        Stock stock = stockRepository.findById(stockId);
-        stock.setUser(user, numPurchasing, userId);
-        user.setStock(stock, numPurchasing, stockId);
-        userRepository.save(user);
-        stockRepository.save(stock);
-        return success;
-    }
+//    @ApiOperation(value = "Assigns a stock to the user, essentially having them purchase it just a little different", response = String.class, tags = "userbuyandsell")
+//    @PutMapping(path = "/users/{userId}/stocks/{stockId}/{numPurchasing}")
+//    String assignStockToUser(@PathVariable long userId, @PathVariable long stockId, @PathVariable int numPurchasing){
+//        User user = userRepository.findById(userId);
+//        if(user.getPrivilege() == 'b') return failure;
+//        Stock stock = stockRepository.findById(stockId);
+//        stock.setUser(user, numPurchasing, userId);
+//        user.setStock(stock, numPurchasing, stockId);
+//        userRepository.save(user);
+//        stockRepository.save(stock);
+//        return success;
+//    }
 
     @ApiOperation(value = "Remove User {id}", response = String.class, tags = "user")
     @DeleteMapping(path = "/users/{id}")
