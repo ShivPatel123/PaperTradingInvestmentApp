@@ -24,32 +24,17 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:id="@+id/editTextText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_marginTop="52dp"
-        android:padding="10dp"
-        android:text="Welcome! Find Pages to Navigate Here"
-        android:textColor="@color/txtclr"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.531"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/nav_title" />
 
     <ScrollView
         android:id="@+id/scrollContent"
-        android:layout_width="match_parent"
-        android:layout_height="572dp"
+        android:layout_width="418dp"
+        android:layout_height="650dp"
         android:layout_below="@+id/nav_title"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextText"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintTop_toBottomOf="@+id/nav_title"
+        app:layout_constraintVertical_bias="0.944">
 
         <LinearLayout
             android:id="@+id/content"
@@ -61,12 +46,12 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/profileCard"
                 android:layout_width="380dp"
-                android:layout_height="140dp"
+                android:layout_height="211dp"
+                android:layout_gravity="center"
                 android:layout_margin="10dp"
                 android:paddingBottom="10dp"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="20dp"
-                android:layout_gravity="center"
                 app:cardElevation="10dp"
                 app:cardMaxElevation="12dp"
                 app:cardPreventCornerOverlap="true"
@@ -82,240 +67,121 @@
                     android:layout_height="match_parent">
 
                     <TextView
-                        android:id="@+id/profile_txtView"
-                        android:layout_width="99dp"
+                        android:id="@+id/editTextText"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginRight="1dp"
-                        android:layout_marginBottom="1dp"
-                        android:text="Profile"
-                        android:textSize="20sp"
-                        android:textStyle="italic|bold"
-                        app:layout_constraintBottom_toTopOf="@+id/profile_Display"
+                        android:layout_margin="20dp"
+                        android:text="Welcome! Find Pages to Navigate Here"
+                        android:textColor="@color/darkBack"
+                        android:textSize="20dp"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.088"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.615"></TextView>
+                        app:layout_constraintVertical_bias="0.0" />
 
                     <TextView
-                        android:id="@+id/profile_Display"
-                        android:layout_width="286dp"
-                        android:layout_height="34dp"
-                        android:layout_gravity="left|center_vertical"
-                        android:text="View or edit your personal info"
-                        android:textSize="17sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.265"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.396" />
-
-                    <Button
-                        android:id="@+id/viewProfile_navBtn"
-                        android:layout_width="109dp"
+                        android:id="@+id/admin_txtView"
+                        android:layout_width="99dp"
                         android:layout_height="wrap_content"
-                        android:backgroundTint="@color/darkBack"
-                        android:text="View"
+                        android:layout_marginRight="15dp"
+                        android:text="Admin"
+                        android:textAlignment="center"
+                        android:textSize="20sp"
+                        android:textStyle="italic|bold"
+                        app:layout_constraintBottom_toTopOf="@+id/admin_main_btn"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.609"
+                        app:layout_constraintStart_toEndOf="@+id/group_txtView"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="1.0" />
+
+                    <ImageButton
+                        android:id="@+id/admin_main_btn"
+                        android:layout_width="99dp"
+                        android:layout_height="80dp"
+                        android:layout_marginRight="15dp"
+                        android:backgroundTint="@color/red"
+                        android:contentDescription="admin button"
+                        android:scaleType="fitCenter"
+                        android:text="Admin Dashboard"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.091"
+                        app:layout_constraintHorizontal_bias="0.956"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.824" />
-
-                    <Button
-                        android:id="@+id/Editprofile_Main_btn"
-                        android:layout_width="109dp"
-                        android:layout_height="wrap_content"
-                        android:backgroundTint="@color/darkBack"
-                        android:text="Edit"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.876"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.824" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/groupCard"
-                android:layout_width="380dp"
-                android:layout_height="140dp"
-                android:layout_margin="10dp"
-                android:paddingBottom="10dp"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="10dp"
-                app:cardMaxElevation="12dp"
-                android:layout_gravity="center"
-                app:cardPreventCornerOverlap="true"
-                app:cardUseCompatPadding="false"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.567"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/userCard"
-                app:layout_constraintVertical_bias="0.0">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                        app:layout_constraintVertical_bias="0.732"
+                        app:srcCompat="@android:drawable/btn_star_big_on" />
 
                     <TextView
                         android:id="@+id/group_txtView"
                         android:layout_width="99dp"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginRight="1dp"
-                        android:layout_marginBottom="1dp"
                         android:text="Group"
+                        android:textAlignment="center"
                         android:textSize="20sp"
                         android:textStyle="italic|bold"
-                        app:layout_constraintBottom_toTopOf="@+id/grouptxt_Display"
+                        app:layout_constraintBottom_toTopOf="@+id/group_Main_btn"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.088"
-                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintHorizontal_bias="0.084"
+                        app:layout_constraintStart_toEndOf="@+id/profile_txtView"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.615"></TextView>
+                        app:layout_constraintVertical_bias="1.0" />
 
-                    <TextView
-                        android:id="@+id/grouptxt_Display"
-                        android:layout_width="286dp"
-                        android:layout_height="34dp"
-                        android:layout_gravity="left|center_vertical"
-                        android:text="Join a group to chat!"
-                        android:textSize="17sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.265"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.396" />
-
-                    <Button
+                    <ImageButton
                         android:id="@+id/group_Main_btn"
-                        android:layout_width="109dp"
-                        android:layout_height="wrap_content"
+                        android:layout_width="99dp"
+                        android:layout_height="80dp"
+                        android:backgroundTint="@color/purple_500"
+                        android:contentDescription="group button"
+                        android:scaleType="fitCenter"
                         android:text="View"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.091"
+                        app:layout_constraintHorizontal_bias="0.501"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.824" />
-
-                    <Button
-                        android:id="@+id/group_chat_btn"
-                        android:layout_width="109dp"
-                        android:layout_height="wrap_content"
-                        android:text="Chat"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.876"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.824" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
-                android:id="@+id/portfolioCard"
-                android:layout_width="380dp"
-                android:layout_height="140dp"
-                android:layout_margin="10dp"
-                android:paddingBottom="10dp"
-                android:layout_gravity="center"
-                app:cardBackgroundColor="@color/white"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="10dp"
-                app:cardMaxElevation="12dp"
-                app:cardPreventCornerOverlap="true"
-                app:cardUseCompatPadding="false"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.375"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/nav_title"
-                app:layout_constraintVertical_bias="0.357">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                        app:layout_constraintVertical_bias="0.732"
+                        app:srcCompat="@drawable/baseline_groups_24" />
 
                     <TextView
-                        android:id="@+id/portfolio_txtView"
+                        android:id="@+id/profile_txtView"
                         android:layout_width="99dp"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginRight="1dp"
-                        android:layout_marginBottom="1dp"
-                        android:text="Portfolio"
+                        android:layout_marginLeft="15dp"
+                        android:text="Profile"
+                        android:textAlignment="center"
                         android:textSize="20sp"
                         android:textStyle="italic|bold"
-                        app:layout_constraintBottom_toTopOf="@+id/portfoliotxt_Display"
+                        app:layout_constraintBottom_toTopOf="@+id/viewProfile_navBtn"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.088"
+                        app:layout_constraintHorizontal_bias="0.053"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.615"></TextView>
+                        app:layout_constraintVertical_bias="1.0"></TextView>
 
-                    <TextView
-                        android:id="@+id/portfoliotxt_Display"
-                        android:layout_width="286dp"
-                        android:layout_height="34dp"
-                        android:layout_gravity="left|center_vertical"
-                        android:text="Buy and sell stocks in Stock Listing"
-                        android:textSize="17sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.265"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.396" />
-
-                    <Button
-                        android:id="@+id/portfolio_navBtn"
-                        android:layout_width="109dp"
-                        android:layout_height="54dp"
-                        android:backgroundTint="@color/yellow"
+                    <ImageButton
+                        android:id="@+id/viewProfile_navBtn"
+                        android:layout_width="99dp"
+                        android:layout_height="80dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="20dp"
+                        android:backgroundTint="@color/background"
+                        android:contentDescription="profile button"
+                        android:scaleType="fitCenter"
                         android:text="View"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.876"
+                        app:layout_constraintHorizontal_bias="0.053"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.824" />
+                        app:layout_constraintVertical_bias="0.732"
+                        app:srcCompat="@drawable/baseline_account_box_24" />
 
-                    <Button
-                        android:id="@+id/stockList2_navBtn"
-                        android:layout_width="109dp"
-                        android:layout_height="54dp"
-                        android:backgroundTint="@color/yellow"
-                        android:text="Stock List"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.091"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.824" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -325,11 +191,11 @@
                 android:id="@+id/stockCard"
                 android:layout_width="380dp"
                 android:layout_height="140dp"
+                android:layout_gravity="center"
                 android:layout_margin="10dp"
                 android:paddingBottom="10dp"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="20dp"
-                android:layout_gravity="center"
                 app:cardElevation="10dp"
                 app:cardMaxElevation="12dp"
                 app:cardPreventCornerOverlap="true"
@@ -341,6 +207,21 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
+
+                    <Button
+                        android:id="@+id/portfolio_navBtn"
+                        android:layout_width="109dp"
+                        android:layout_height="54dp"
+                        android:backgroundTint="@color/yellow"
+                        android:text="View"
+                        android:textStyle="bold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.487"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.825" />
+
                     <TextView
                         android:id="@+id/stock_txtView"
                         android:layout_width="99dp"
@@ -349,30 +230,16 @@
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="20dp"
                         android:layout_marginRight="1dp"
-                        android:layout_marginBottom="1dp"
+                        android:layout_marginBottom="23dp"
                         android:text="Stocks"
                         android:textSize="20sp"
                         android:textStyle="italic|bold"
-                        app:layout_constraintBottom_toTopOf="@+id/stocktxt2_Display"
+                        app:layout_constraintBottom_toTopOf="@+id/singleStock_navBtn"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.088"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintVertical_bias="0.615"></TextView>
-
-                    <TextView
-                        android:id="@+id/stocktxt2_Display"
-                        android:layout_width="286dp"
-                        android:layout_height="34dp"
-                        android:layout_gravity="left|center_vertical"
-                        android:text="Buy and sell stocks in Stock Listing"
-                        android:textSize="17sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.265"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.396" />
 
                     <Button
                         android:id="@+id/singleStock_navBtn"
@@ -383,10 +250,10 @@
                         android:textStyle="bold"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.091"
+                        app:layout_constraintHorizontal_bias="0.088"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.824" />
+                        app:layout_constraintVertical_bias="0.813" />
 
                     <Button
                         android:id="@+id/stockList_navBtn"
@@ -406,84 +273,15 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/adminCard"
-                android:layout_width="380dp"
-                android:layout_height="140dp"
-                android:layout_margin="10dp"
-                android:paddingBottom="10dp"
-                app:cardBackgroundColor="@color/white"
-                android:layout_gravity="center"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="10dp"
-                app:cardMaxElevation="12dp"
-                app:cardPreventCornerOverlap="true"
-                app:cardUseCompatPadding="false"
-                tools:layout_editor_absoluteX="20dp"
-                tools:layout_editor_absoluteY="364dp">
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                    <TextView
-                        android:id="@+id/admin_txtView"
-                        android:layout_width="99dp"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginRight="1dp"
-                        android:text="Admin"
-                        android:textSize="20sp"
-                        android:textStyle="italic|bold"
-                        app:layout_constraintBottom_toTopOf="@+id/admin_Display"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.088"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.615"></TextView>
-
-                    <TextView
-                        android:id="@+id/admin_Display"
-                        android:layout_width="286dp"
-                        android:layout_height="34dp"
-                        android:layout_gravity="left|center_vertical"
-                        android:text="Check permissions in your profile"
-                        android:textSize="17sp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.265"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.396" />
-
-                    <Button
-                        android:id="@+id/admin_main_btn"
-                        android:layout_width="169dp"
-                        android:layout_height="54dp"
-                        android:backgroundTint="@color/red"
-                        android:text="Admin Dashboard"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.876"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.824" />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-            </androidx.cardview.widget.CardView>
-
-            <androidx.cardview.widget.CardView
                 android:id="@+id/tutorialCard"
                 android:layout_width="380dp"
                 android:layout_height="140dp"
+                android:layout_gravity="center"
                 android:layout_margin="10dp"
                 android:paddingBottom="10dp"
                 app:cardBackgroundColor="@color/white"
                 app:cardCornerRadius="20dp"
                 app:cardElevation="10dp"
-                android:layout_gravity="center"
                 app:cardMaxElevation="12dp"
                 app:cardPreventCornerOverlap="true"
                 app:cardUseCompatPadding="false"
@@ -492,7 +290,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content">
 
                     <TextView
                         android:id="@+id/tut_txtView"
