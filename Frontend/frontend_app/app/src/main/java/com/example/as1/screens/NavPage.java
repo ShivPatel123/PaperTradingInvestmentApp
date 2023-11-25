@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -22,8 +23,8 @@ import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicReference;
 
 public class NavPage extends AppCompatActivity {
-    Button toStockList_btn, toProfile_btn, toTutorials_btn, toGroup_btn, toPortfolio_btn, toSingleStock_btn, toAdminDash_btn,
-    editProfile_btn, groupChat_btn, toStockListP_btn;
+    Button toStockList_btn, toTutorials_btn, toPortfolio_btn, toSingleStock_btn;
+    ImageButton toProfile_btn,toGroup_btn,toAdminDash_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,10 +34,6 @@ public class NavPage extends AppCompatActivity {
         //Get global user data for get request
         User getGlobal = User.getInstance();
         User.updateInstance(getUserData(this.getApplicationContext(), getGlobal));
-
-        /*
-            Card 1 -- Profile
-         */
 
         //View Profile Page
         toProfile_btn = findViewById(R.id.viewProfile_navBtn);
@@ -49,21 +46,6 @@ public class NavPage extends AppCompatActivity {
             }
         });
 
-        //To Edit Profile Page
-        editProfile_btn = findViewById(R.id.Editprofile_Main_btn);
-        editProfile_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                Intent intent = new Intent(NavPage.this, EditProfilePage.class);
-                startActivity(intent);
-            }
-        });
-
-        /*
-            Card 2 -- Group
-         */
-
         //button to group page
         toGroup_btn = findViewById(R.id.group_Main_btn);
         toGroup_btn.setOnClickListener(new View.OnClickListener() {
@@ -75,21 +57,6 @@ public class NavPage extends AppCompatActivity {
             }
         });
 
-        //button to group chat page
-        groupChat_btn = findViewById(R.id.group_chat_btn);
-        groupChat_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                Intent intent = new Intent(NavPage.this, GroupChatPage.class);
-                startActivity(intent);
-            }
-        });
-
-        /*
-            Card 3 -- Portfolio
-         */
-
         //button to portfolio page
         toPortfolio_btn = findViewById(R.id.portfolio_navBtn);
         toPortfolio_btn.setOnClickListener(new View.OnClickListener() {
@@ -100,21 +67,6 @@ public class NavPage extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        //button to Stock List page from portfolio
-        toStockListP_btn = findViewById(R.id.stockList2_navBtn);
-        toStockListP_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v)
-            {
-                Intent intent = new Intent(NavPage.this, StockList.class);
-                startActivity(intent);
-            }
-        });
-
-        /*
-            Card 4 -- Stocks
-         */
 
         //button to stock list page
         toStockList_btn = findViewById(R.id.stockList_navBtn);
@@ -138,10 +90,6 @@ public class NavPage extends AppCompatActivity {
             }
         });
 
-        /*
-            Card 4 -- Admin
-         */
-
         //button to admin page
         toAdminDash_btn = findViewById(R.id.admin_main_btn);
         toAdminDash_btn.setOnClickListener(new View.OnClickListener() {
@@ -153,9 +101,6 @@ public class NavPage extends AppCompatActivity {
             }
         });
 
-        /*
-            Card 5 -- Tutorial
-         */
 
         //button to tutorials page
         toTutorials_btn = findViewById(R.id.tutorial_Main_btn);
