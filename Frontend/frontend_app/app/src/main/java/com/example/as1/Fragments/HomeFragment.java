@@ -102,15 +102,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 //        homeListView = homeView.findViewById(R.id.fragList);
 
 
-        addRemove = (Button) homeView.findViewById(R.id.addRemoveButton);
+        //addRemove = (Button) homeView.findViewById(R.id.addRemoveButton);
         addRemove.setOnClickListener(this);
 
 
-        blankStockName = homeView.findViewById(R.id.stockNameTextView);
-        blankCurrentPrice = homeView.findViewById(R.id.testEmail);
-        blankPreviousPrice = homeView.findViewById(R.id.testPrice);
-        blankStockHigh = homeView.findViewById(R.id.stockHigh);
-        blankStockLow = homeView.findViewById(R.id.stockLow);
+//        blankStockName = homeView.findViewById(R.id.stockNameTextView);
+//        blankCurrentPrice = homeView.findViewById(R.id.testEmail);
+//        blankPreviousPrice = homeView.findViewById(R.id.testPrice);
+//        blankStockHigh = homeView.findViewById(R.id.stockHigh);
+//        blankStockLow = homeView.findViewById(R.id.stockLow);
 
         blankStockName.setText(actualStockName);
         blankCurrentPrice.setText(String.valueOf(actualCurrentPrice));
@@ -130,7 +130,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        view.findViewById(R.id.addRemoveButton).setOnClickListener(this);
+        //view.findViewById(R.id.addRemoveButton).setOnClickListener(this);
 
     }
 
