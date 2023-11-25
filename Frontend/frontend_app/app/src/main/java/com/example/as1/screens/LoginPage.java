@@ -23,8 +23,6 @@ import org.json.*;
 
 public class LoginPage extends AppCompatActivity {
 
-    //TODO: make javadoc for frontend layout files and all files
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
