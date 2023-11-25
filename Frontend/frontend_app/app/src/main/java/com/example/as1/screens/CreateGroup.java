@@ -59,7 +59,7 @@ public class CreateGroup extends AppCompatActivity {
             String groupName = groupName_Display.getText().toString();
             String leader = groupLeader_Display.getText().toString();
             int leaderID = Integer.parseInt(leader);
-            User global = User.getInstance
+            User global = User.getInstance();
             setLeader(this.getApplicationContext(), groupName, global.getId(), (long) leaderID);
         });
 

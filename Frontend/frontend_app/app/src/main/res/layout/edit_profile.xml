@@ -267,8 +267,8 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/EmoneyCard"
-        android:layout_width="135dp"
-        android:layout_height="130dp"
+        android:layout_width="192dp"
+        android:layout_height="104dp"
         android:layout_margin="10dp"
         android:padding="10dp"
         app:cardBackgroundColor="@color/material_dynamic_primary30"
@@ -279,10 +279,10 @@
         app:cardUseCompatPadding="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/EstockCard"
-        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintHorizontal_bias="0.41"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.923">
+        app:layout_constraintVertical_bias="0.858">
 
         <TextView
             android:id="@+id/Emoney_view"
@@ -315,21 +315,20 @@
 
     <Button
         android:id="@+id/toStockPage_btn"
-        android:layout_width="107dp"
-        android:layout_height="79dp"
+        android:layout_width="129dp"
+        android:layout_height="64dp"
         android:padding="10dp"
         android:text="My Stocks"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.97"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.892" />
+        app:layout_constraintVertical_bias="0.976" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/EstockCard"
-        android:layout_width="135dp"
-        android:layout_height="130dp"
+        android:layout_width="130dp"
+        android:layout_height="104dp"
         android:layout_margin="10dp"
         android:padding="10dp"
         app:cardBackgroundColor="@color/material_dynamic_primary30"
@@ -340,10 +339,10 @@
         app:cardUseCompatPadding="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.556"
+        app:layout_constraintHorizontal_bias="0.861"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.924">
+        app:layout_constraintVertical_bias="0.861">
 
         <TextView
             android:id="@+id/Estock_view"
