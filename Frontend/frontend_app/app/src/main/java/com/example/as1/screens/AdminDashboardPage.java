@@ -37,6 +37,8 @@ public class AdminDashboardPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.admin_dash_page);
 
+        //if admin perms setImageResource to not lock
+
         //Update Stocks
         Button updateStocks = findViewById(R.id.updateStocks_Adminbtn);
         updateStocks.setOnClickListener(view -> {

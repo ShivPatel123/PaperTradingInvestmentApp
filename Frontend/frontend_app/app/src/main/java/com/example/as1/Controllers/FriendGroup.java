@@ -9,6 +9,7 @@ import java.util.List;
  *
  */
 public class FriendGroup {
+<<<<<<< HEAD
 
     /**
      * Group ID
@@ -28,9 +29,23 @@ public class FriendGroup {
      * @return  String groupName
      */
     public String getGroupName(){
+=======
+        private int id;
+        private String groupName;
+
+        private List<User> groupMembers;
+        private long groupLeaderID;
+
+
+        public String getGroupName(){
+>>>>>>> 52489c237ccaf33b89db9472694445c088e5935c
             return groupName;
         }
+    public int getId() {
+        return id;
+    }
 
+<<<<<<< HEAD
 
     /**
      * Group constructor to create a new instance of a group. Can be sent back to server to create a new group.
@@ -53,8 +68,26 @@ public class FriendGroup {
             for(User user : groupMembers){
                 groupMembersNames.add(user.getName());
             }
+=======
+    public void setId(int id) {
+        this.id = id;
+    }
+>>>>>>> 52489c237ccaf33b89db9472694445c088e5935c
 
-            return groupMembersNames;
+    public void setGroupMembers(List<User> groupMembers) {
+        this.groupMembers = groupMembers;
+    }
+
+    public long getGroupLeaderID() {
+        return groupLeaderID;
+    }
+
+    public void setGroupLeaderID(long groupLeaderID) {
+        this.groupLeaderID = groupLeaderID;
+    }
+
+        public List<User> getGroupMembers() {
+           return groupMembers;
         }
 
     /**

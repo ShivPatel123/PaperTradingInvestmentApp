@@ -16,8 +16,12 @@ public class User {
     private static User instance = null;
     public static User getInstance(){
         if (instance == null){
-            instance = new User(-1,-1,"NoInputs", "NoInputs", "NoInputs", "NoInputs", "NoInputs");
+            instance = new User(-1,-1,"NoInputs", "NoInputs", "NoInputs", "NoInputs", "NoInputs", 'u');
         }
+        return instance;
+    }
+    public static User updateInstance(User user){
+        instance = user;
         return instance;
     }
 
@@ -33,7 +37,10 @@ public class User {
     private String dob;
     private String username;
     private String password;
+    protected char priv;
+    private FriendGroup friendGroup;
 
+<<<<<<< HEAD
     /**
      * User constructor
      * @param id User ID
@@ -45,6 +52,10 @@ public class User {
      * @param password Login Password
      */
     public User(long id, double money, String name, String email, String dob, String username, String password){
+=======
+//Constructors
+    public User(long id, double money, String name, String email, String dob, String username, String password, char priv){
+>>>>>>> 52489c237ccaf33b89db9472694445c088e5935c
         this.id = id;
         this.money = money;
         this.name = name;
@@ -52,6 +63,7 @@ public class User {
         this.dob = dob;
         this.username = username;
         this.password = password;
+        this.priv = priv;
     }
     public User(){}
 
@@ -159,6 +171,7 @@ public class User {
      */
     public int getNumStocksPurchased(){return stocks.size() - 1;}
 
+<<<<<<< HEAD
     /**
      * Function to buy stock
      * @param stock Stock
@@ -166,6 +179,22 @@ public class User {
      * @param id ID of stock being purchased
      * @return StockPurchased
      */
+=======
+    public char getPrivilege(){return this.priv;}
+
+    public void setPrivilege(char privilege){this.priv = privilege;}
+
+    public FriendGroup getFriendGroup() {
+        return friendGroup;
+    }
+
+    public void setFriendGroup(FriendGroup friendGroup) {
+        this.friendGroup = friendGroup;
+    }
+
+
+
+>>>>>>> 52489c237ccaf33b89db9472694445c088e5935c
     public StockPurchased setStock(Stock stock, int numPurchase, Long id){
         for(int i = 0; i <  stocks.size(); ++i){
             if(stock.getId().equals(stocks.get(i).getStock().getId()) && money >= numPurchase * stock.getCurrValue()){
