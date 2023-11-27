@@ -17,7 +17,5 @@ public class AndroidTest {
     @Rule   // needed to launch the activity
     public ActivityTestRule<AndroidTest> activityRule = new ActivityTestRule<>(StartPage.class);
 
-    @Test
-
 
 }

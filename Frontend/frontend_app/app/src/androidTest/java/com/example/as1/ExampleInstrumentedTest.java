@@ -1,4 +1,4 @@
-package com.example.as1;
+package androidTest.java.com.example.as1;
 
 import android.content.Context;
 
