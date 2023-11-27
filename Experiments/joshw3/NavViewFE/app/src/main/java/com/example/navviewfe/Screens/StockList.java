@@ -43,6 +43,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
+
+
 public class StockList extends AppCompatActivity {
     private String URL_JSON_OBJECT = "http://coms-309-051.class.las.iastate.edu:8080/stock/";
     public String adapList[] = {"Please Load Stocks:"};
@@ -75,7 +77,10 @@ public class StockList extends AppCompatActivity {
                 intent = new Intent(StockList.this, StartPage.class);
             }
             else{
-                intent = new Intent(StockList.this, NavPage.class);
+//                intent = new Intent(StockList.this, NavPage.class);
+                intent = new Intent(StockList.this, LoggedInPage.class);
+
+
             }
             startActivity(intent);
 

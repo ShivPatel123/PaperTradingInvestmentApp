@@ -27,10 +27,11 @@ import android.util.Log;
 
 import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class LoggedInPage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     DrawerLayout drawerLayout;
     NavigationView navigationView;
+
 //    Toolbar toolbar;
 
     Menu menu;
@@ -45,9 +46,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         super.onCreate(savedInstanceState);
 //        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 //        setSupportActionBar(toolbar);
-
-        setContentView(R.layout.activity_main);
-
+        setContentView(R.layout.logged_in_page);
 
 
         drawerLayout = findViewById(R.id.drawer_layout);
@@ -59,10 +58,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         setSupportActionBar(toolbar);
 
         menu = navigationView.getMenu();
-        menu.findItem(R.id.nav_logout).setVisible(false);
-        menu.findItem(R.id.nav_profile).setVisible(false);
-        menu.findItem(R.id.nav_group).setVisible(false);
-        menu.findItem(R.id.nav_group_edit).setVisible(false);
+//        menu.findItem(R.id.nav_logout).setVisible(false);
+        menu.findItem(R.id.nav_login).setVisible(false);
 
 
 
@@ -82,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         RelativeLayout tutorialLayout = findViewById(R.id.tutorialRL);
         RelativeLayout logoutLayout = findViewById(R.id.logoutRL);
 
-        RelativeLayout tempLoginLayout = findViewById(R.id.tempLogin);
+//        RelativeLayout tempLoginLayout = findViewById(R.id.tempLogin);
 
 
 
@@ -90,54 +87,55 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             public void onClick(View v) {
 //                setContentView(R.layout.activity_profile);
 //                setContentView(R.layout.stock_list_page);
-                Intent intent = new Intent(MainActivity.this, StockList.class);
+                Intent intent = new Intent(LoggedInPage.this, StockList.class);
                 startActivity(intent);
-
             }
         });
 
         stocksLayout.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
-//                Intent intent = new Intent(MainActivity.this, StockList.class);
-//                startActivity(intent);
-                setContentView(R.layout.stock_list_page);
-
+                Intent intent = new Intent(LoggedInPage.this, StockPage.class);
+                startActivity(intent);
             }
         });
 
         profileLayout.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
-
+                Intent intent = new Intent(LoggedInPage.this, ProfilePage.class);
+                startActivity(intent);
             }
         });
 
         groupsLayout.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
-
+                Intent intent = new Intent(LoggedInPage.this, GroupPage.class);
+                startActivity(intent);
             }
         });
 
         tutorialLayout.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, TutorialsPage.class);
+                Intent intent = new Intent(LoggedInPage.this, TutorialsPage.class);
                 startActivity(intent);
             }
         });
 
         logoutLayout.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
-                setContentView(R.layout.login_page);
-            }
-        });
-
-        tempLoginLayout.setOnClickListener(new View.OnClickListener(){
-            public void onClick(View v) {
-//                setContentView(R.layout.login_page);
-
-                Intent intent = new Intent(MainActivity.this, StartPage.class);
+                Intent intent = new Intent(LoggedInPage.this, StartPage.class);
                 startActivity(intent);
+//                setContentView(R.layout.login_page);
             }
         });
+
+//        tempLoginLayout.setOnClickListener(new View.OnClickListener(){
+//            public void onClick(View v) {
+////                setContentView(R.layout.login_page);
+//
+//                Intent intent = new Intent(LoggedInPage.this, StartPage.class);
+//                startActivity(intent);
+//            }
+//        });
 
 
     }
@@ -156,15 +154,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         if (menuItem.getItemId() == R.id.nav_home){
 
-        } else if (menuItem.getItemId() == R.id.nav_stock){
-            Intent intent = new Intent(MainActivity.this, StockList.class);
+        } else if (menuItem.getItemId() == R.id.nav_profile){
+            Intent intent = new Intent(LoggedInPage.this, ProfilePage.class);
             startActivity(intent);
-        } else if (menuItem.getItemId() == R.id.nav_stock_list) {
-            Intent intent = new Intent(MainActivity.this, StockList.class);
-            startActivity(intent);
-        } else if (menuItem.getItemId() == R.id.nav_login) {
-            Intent intent = new Intent(MainActivity.this, StartPage.class);
-            startActivity(intent);
+        } else if (menuItem.getItemId() == R.id.nav_group) {
+        } else if (menuItem.getItemId() == R.id.nav_group_edit) {
         }
 
         drawerLayout.closeDrawer(GravityCompat.START);
