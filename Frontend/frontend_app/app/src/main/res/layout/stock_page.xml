@@ -7,6 +7,22 @@
     android:background= "@drawable/background_gradient"
     tools:context=".screens.StockPage">
 
+
+    <TextView
+        android:id="@+id/stockID_view"
+        android:layout_width="70dp"
+        android:layout_height="35dp"
+        android:gravity="center"
+        android:text="ID: 0"
+        android:textColor="@color/darkBack"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toTopOf="@+id/stockImageImageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.639"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/stockNameTextView"
+        app:layout_constraintVertical_bias="0.466" />
+
     <TextView
         android:id="@+id/stockPage_title"
         android:layout_width="match_parent"
@@ -27,21 +43,19 @@
 
     <TextView
         android:id="@+id/stockNameTextView"
-        android:layout_width="0sp"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15sp"
-        android:layout_marginRight="175sp"
-        android:layout_marginBottom="500dp"
-        android:maxLines="1"
-        android:textStyle="bold"
+        android:layout_width="219dp"
+        android:layout_height="41dp"
+        android:layout_margin="10dp"
         android:text="Current Stock Name"
+        android:textAlignment="center"
         android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/stockImageImageView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.084"
+        app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.748" />
+        app:layout_constraintTop_toBottomOf="@+id/stockPage_title"
+        app:layout_constraintVertical_bias="0.149" />
 
     <Button
         android:id="@+id/delete_StockPagebtn"
@@ -50,12 +64,13 @@
         android:backgroundTint="@color/red"
         android:text="Delete"
         android:textColor="@color/txtclr"
-        app:layout_constraintBottom_toTopOf="@+id/StockPriceCard"
+
+        app:layout_constraintBottom_toTopOf="@+id/priceChangeCard"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.855"
+        app:layout_constraintHorizontal_bias="0.838"
         app:layout_constraintStart_toEndOf="@+id/sell_StockPagebtn"
         app:layout_constraintTop_toBottomOf="@+id/stockImageImageView"
-        app:layout_constraintVertical_bias="0.375" />
+        app:layout_constraintVertical_bias="0.129" />
 
     <ImageView
         android:id="@+id/stockImageImageView"
@@ -67,16 +82,16 @@
         android:background="#FFFDFD"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.578"
+        app:layout_constraintHorizontal_bias="0.491"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.541"
+        app:layout_constraintVertical_bias="0.462"
         app:srcCompat="@android:drawable/ic_menu_gallery" />
 
     <TextView
         android:id="@+id/notesEditText"
-        android:layout_width="341dp"
-        android:layout_height="76dp"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
         android:ems="10"
         android:inputType="text"
         android:lineSpacingExtra="8sp"
@@ -92,16 +107,16 @@
 
     <TextView
         android:id="@+id/symbol_StockPage"
-        android:layout_width="123dp"
-        android:layout_height="32dp"
+        android:layout_width="92dp"
+        android:layout_height="35dp"
+        android:gravity="center"
         android:text="Symbol"
-        android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/stockImageImageView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.705"
-        app:layout_constraintStart_toEndOf="@+id/stockNameTextView"
-        app:layout_constraintTop_toBottomOf="@+id/stockPage_title"
-        app:layout_constraintVertical_bias="0.792" />
+        app:layout_constraintHorizontal_bias="0.297"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.186" />
 
     <Button
         android:id="@+id/sell_StockPagebtn"
@@ -112,52 +127,54 @@
         android:textColor="@color/txtclr"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.353"
+        app:layout_constraintHorizontal_bias="0.371"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/stockPage_title"
-        app:layout_constraintVertical_bias="0.548" />
+        app:layout_constraintVertical_bias="0.48" />
 
     <Button
         android:id="@+id/buy_StockPagebtn"
         android:layout_width="80dp"
         android:layout_height="48dp"
-        android:text="Buy"
         android:backgroundTint="@color/navy_bg"
+        android:text="Buy"
         android:textColor="@color/txtclr"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.049"
+        app:layout_constraintHorizontal_bias="0.048"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.591" />
+        app:layout_constraintVertical_bias="0.53" />
 
     <Button
         android:id="@+id/prev_StockPageBtn"
         android:layout_width="80dp"
         android:layout_height="48dp"
-        android:text="Prev"
+        android:layout_margin="10dp"
         android:backgroundTint="@color/navy_bg"
+        android:text="Prev"
         android:textColor="@color/txtclr"
-        app:layout_constraintBottom_toTopOf="@+id/stockNameTextView"
-        app:layout_constraintEnd_toStartOf="@+id/next_StockPageBtn"
-        app:layout_constraintHorizontal_bias="0.056"
+        app:layout_constraintBottom_toTopOf="@+id/stockImageImageView"
+        app:layout_constraintEnd_toStartOf="@+id/stockNameTextView"
+        app:layout_constraintHorizontal_bias="0.625"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/stockPage_title"
-        app:layout_constraintVertical_bias="0.437" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/next_StockPageBtn"
         android:layout_width="80dp"
         android:layout_height="48dp"
-        android:text="Next"
+        android:layout_margin="10dp"
         android:backgroundTint="@color/navy_bg"
+        android:text="Next"
         android:textColor="@color/txtclr"
-        app:layout_constraintBottom_toTopOf="@+id/symbol_StockPage"
+        app:layout_constraintBottom_toTopOf="@+id/stockImageImageView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.954"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/stockNameTextView"
         app:layout_constraintTop_toBottomOf="@+id/stockPage_title"
-        app:layout_constraintVertical_bias="0.437" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/back_StockPageBtn"
@@ -177,26 +194,27 @@
     <Button
         android:id="@+id/createStock_StockPageBtn"
         android:layout_width="123dp"
-        android:layout_height="51dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="12dp"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
         android:backgroundTint="@color/background"
         android:text="New Stock"
         android:textColor="@color/txtclr"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/Profile_title"
+        app:layout_constraintBottom_toBottomOf="@+id/stockPage_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.944"
-        app:layout_constraintStart_toEndOf="@+id/backHome_mainBtn"
+        app:layout_constraintStart_toEndOf="@+id/back_StockPageBtn"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.382" />
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/StockIDCard"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:id="@+id/priceChangeCard"
+        android:layout_width="370dp"
+        android:layout_height="140dp"
         android:layout_margin="10dp"
-        android:layout_marginTop="60dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"
         android:padding="10dp"
         app:cardBackgroundColor="@color/material_dynamic_primary30"
         app:cardCornerRadius="20dp"
@@ -204,134 +222,98 @@
         app:cardMaxElevation="12dp"
         app:cardPreventCornerOverlap="true"
         app:cardUseCompatPadding="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/PrevDayStockCard"
-        app:layout_constraintHorizontal_bias="0.416"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buy_StockPagebtn"
-        app:layout_constraintVertical_bias="0.201">
 
-        <TextView
-            android:id="@+id/stockID_view"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_gravity="top|center"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
-            android:text="ID"
-            android:textAlignment="center"
-            android:textColor="@color/txtclr"
-            android:textSize="17sp"
-            android:textStyle="bold"></TextView>
-
-        <EditText
-            android:id="@+id/stockID_Display"
-            android:layout_width="62dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center|bottom"
-            android:layout_margin="25dp"
-            android:inputType="text"
-            android:text="-1"
-            android:textAlignment="center"
-            android:textColor="@color/txtclr"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/PrevDayStockCard"
-        android:layout_width="125dp"
-        android:layout_height="125dp"
-        android:layout_margin="10dp"
-        android:padding="10dp"
-        app:cardBackgroundColor="@color/material_dynamic_primary30"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="10dp"
-        app:cardMaxElevation="12dp"
-        app:cardPreventCornerOverlap="true"
-        app:cardUseCompatPadding="false"
-        app:layout_constraintBottom_toTopOf="@+id/notesEditText"
-        app:layout_constraintEnd_toEndOf="@+id/StockPriceCard"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sell_StockPagebtn">
-
-        <TextView
-            android:id="@+id/prevDay_view"
-            android:layout_width="101dp"
-            android:layout_height="38dp"
-            android:layout_gravity="top|center"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
-            android:text="Yesterday's Price"
-            android:textAlignment="center"
-            android:textColor="@color/txtclr"
-            android:textSize="17sp"
-            android:textStyle="bold"></TextView>
-
-        <EditText
-            android:id="@+id/prevDay_Display"
-            android:layout_width="62dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center|bottom"
-            android:layout_margin="25dp"
-            android:inputType="text"
-            android:text="10"
-            android:textAlignment="center"
-            android:textColor="@color/txtclr"
-            android:textSize="20sp"
-            android:textStyle="bold" />
-
-    </androidx.cardview.widget.CardView>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/StockPriceCard"
-        android:layout_width="125dp"
-        android:layout_height="125dp"
-        android:layout_margin="10dp"
-        android:padding="10dp"
-        app:cardBackgroundColor="@color/material_dynamic_primary30"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="10dp"
-        app:cardMaxElevation="12dp"
-        app:cardPreventCornerOverlap="true"
-        app:cardUseCompatPadding="false"
         app:layout_constraintBottom_toTopOf="@+id/notesEditText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.985"
+        app:layout_constraintHorizontal_bias="0.476"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sell_StockPagebtn"
-        app:layout_constraintVertical_bias="0.518">
+        app:layout_constraintTop_toBottomOf="@+id/stockImageImageView"
+        app:layout_constraintVertical_bias="0.651">
 
-        <TextView
-            android:id="@+id/stockPrice_view"
-            android:layout_width="wrap_content"
-            android:layout_height="30dp"
-            android:layout_gravity="top|center"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="10dp"
-            android:text="Current Price"
-            android:textAlignment="center"
-            android:textColor="@color/txtclr"
-            android:textSize="17sp"
-            android:textStyle="bold"></TextView>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-        <EditText
-            android:id="@+id/stockPrice_Display"
-            android:layout_width="62dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center|bottom"
-            android:layout_margin="25dp"
-            android:inputType="text"
-            android:text="10"
-            android:textAlignment="center"
-            android:textColor="@color/txtclr"
-            android:textSize="20sp"
-            android:textStyle="bold" />
+            <TextView
+                android:id="@+id/stockPrice_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="Current Price"
+                android:textAlignment="center"
+                android:textColor="@color/txtclr"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/stockPrice_Display"
+                app:layout_constraintEnd_toStartOf="@+id/stockChange_title"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.8" />
 
+            <EditText
+                android:id="@+id/stockPrice_Display"
+                android:layout_width="76dp"
+                android:layout_height="55dp"
+                android:layout_marginBottom="32dp"
+                android:inputType="text"
+                android:text="10"
+                android:textAlignment="center"
+                android:textColor="@color/txtclr"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/stockChange_txt"
+                app:layout_constraintHorizontal_bias="0.553"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/stockChange_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|center"
+                android:layout_marginTop="20dp"
+                android:text="Price Change"
+                android:textAlignment="center"
+                android:textColor="@color/txtclr"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/stockChange_txt"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.511"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.173"></TextView>
+
+            <TextView
+                android:id="@+id/stockChange_txt"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:text="-$0.67 || -%20"
+                android:textAlignment="center"
+                android:textColor="@color/txtclr"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.501"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.6"></TextView>
+
+            <ImageView
+                android:id="@+id/stock_ImageView"
+                android:layout_width="78dp"
+                android:layout_height="73dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.945"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.358"
+                app:srcCompat="@drawable/greenarrow" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

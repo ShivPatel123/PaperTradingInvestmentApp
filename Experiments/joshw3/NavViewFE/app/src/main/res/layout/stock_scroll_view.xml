@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/stockCard1"
+        android:layout_width="385dp"
+        android:layout_height="79dp"
+        android:layout_margin="10dp"
+        app:cardBackgroundColor="@color/navy_bg"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="20dp"
+        app:cardMaxElevation="12dp"
+        app:cardPreventCornerOverlap="true"
+        app:cardUseCompatPadding="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.638"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="54dp"
+            android:layout_margin="20dp">
+
+            <TextView
+                android:id="@+id/stock1_id"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:text="ID: 1"
+                android:textColor="@color/txtclr"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/stock1_num"
+                android:layout_width="40dp"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/stock1_id"
+                android:layout_alignTop="@id/stock1_id"
+                android:text="x0"
+                android:textAlignment="center"
+                android:textColor="@color/txtclr"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/stock1_price"
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@id/stock1_num"
+                android:layout_toEndOf="@+id/stock1_num"
+                android:text="$0"
+                android:textAlignment="center"
+                android:textColor="@color/txtclr"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/stock1_symbol"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/stock1_num"
+                android:layout_toEndOf="@+id/stock1_name"
+                android:layout_gravity="left|center_vertical"
+                android:text="NASDAQ"
+                android:textColor="@color/white"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/stock1_name"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/stock1_id"
+                android:layout_gravity="left|center_vertical"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="10dp"
+                android:text="Stock 1"
+                android:textColor="@color/white"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/sellStock_btn"
+                android:layout_width="63dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="25dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="0dp"
+                android:layout_toEndOf="@+id/stock1_symbol"
+                android:padding="10dp"
+                android:text="Sell"
+                android:textColor="@color/txtclr"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.124"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.243" />
+
+            <Button
+                android:id="@+id/buyStock_btn"
+                android:layout_width="71dp"
+                android:layout_height="match_parent"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="0dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginBottom="0dp"
+                android:layout_toEndOf="@+id/sellStock_btn"
+                android:padding="10dp"
+                android:text="Buy"
+                android:textColor="@color/txtclr"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.124"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.243" />
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -50,6 +50,13 @@ public class AdminDashboardPage extends AppCompatActivity {
                         startActivity(intent);
         });
 
+        //Back Button
+        Button back = findViewById(R.id.back_AdminDash);
+        back.setOnClickListener(view -> {
+            Intent intent = new Intent(AdminDashboardPage.this, NavPage.class);
+            startActivity(intent);
+        });
+
         //Initialize recycler view (user)
         RecyclerView recyclerView = findViewById(R.id.user_scroll);
         ArrayList<UserScrollCard> userCardArrayList = new ArrayList<>();
