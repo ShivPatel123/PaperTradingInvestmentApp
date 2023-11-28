@@ -8,7 +8,7 @@ stages:
 maven-build:
  stage: maventry
  tags:
-  - springboot_tag
+  - shivansh_tag
  script:
   - cd Backend/kokottni/Data
   - mvn package
@@ -16,7 +16,7 @@ maven-build:
 maven-test:
   stage: maventest
   tags:
-    - springboot_tag
+    - shivansh_tag
   script:
     - cd Backend/kokottni/Data
     - mvn test
@@ -27,7 +27,7 @@ maven-test:
 autoDeploy:
   stage: mavenDeploy
   tags:
-    - springboot_tag
+    - shivansh_tag
   script:
     - cd Backend/kokottni/Data
     - mvn package
