@@ -1,21 +1,16 @@
 package com.example.as1;
-
-
-import androidx.test.filters.LargeTest;
-
-import org.junit.Rule;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner;
 
-import com.example.as1.screens.StartPage;
+import static org.junit.Assert.*;
 
-@RunWith(AndroidJUnit4ClassRunner.class)
-@LargeTest
-public class AndroidTest {
-
-    @Rule   // needed to launch the activity
-    public ActivityTestRule<AndroidTest> activityRule = new ActivityTestRule<>(StartPage.class);
-
-
+/**
+ * Example local unit test, which will execute on the development machine (host).
+ *
+ * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
+ */
+public class ExampleUnitTest {
+    @Test
+    public void addition_isCorrect() {
+        assertEquals(4, 2 + 2);
+    }
 }
