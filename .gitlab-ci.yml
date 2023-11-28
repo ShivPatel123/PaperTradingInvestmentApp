@@ -1,0 +1,64 @@
+stages:
+ - maventry
+ - maventest
+ - mavenDeploy
+ - androidbuild
+ - androidtest
+
+maven-build:
+ stage: maventry
+ tags:
+  - springboot_tag
+ script:
+  - cd Backend/kokottni/Data
+  - mvn package
+
+maven-test:
+  stage: maventest
+  tags:
+    - springboot_tag
+  script:
+    - cd Backend/kokottni/Data
+    - mvn test
+  artifacts:
+    paths:
+      - Backend/kokottni/Data/target/*.jar
+
+autoDeploy:
+  stage: mavenDeploy
+  tags:
+    - springboot_tag
+  script:
+    - cd Backend/kokottni/Data
+    - mvn package
+    - sudo mv target/*.jar /target/web-demo.jar
+    - sudo systemctl stop system-web-demo
+    - sudo systemctl start system-web-demo
+
+android-build:
+ image: gjandres/android-ci:latest
+ stage: androidbuild
+ tags:
+  - android_tag
+ before_script:
+  - export GRADLE_USER_HOME='pwd'/.gradle
+  - chmod +x ./Frontend/frontend_app
+ script:
+  - cd Frontend/frontend_app
+  - chmod +x ./gradlew
+  - ./gradlew build
+ artifacts:
+    paths:
+    - Android_test/app/build/outputs/
+
+android-test:
+  image: gjandres/android-ci:latest
+  stage: androidtest
+  before_script:
+  - export GRADLE_USER_HOME='pwd'/.gradle
+  - chmod +x ./Frontend/frontend_app
+  tags:
+  - android_tag
+  script:
+  - cd Frontend/frontend_app
+  - ./gradlew test

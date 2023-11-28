@@ -13,4 +13,8 @@
     <color name="btn_bg">#FF3700B3</color>
     <color name="greenConfirm">#00e600</color>
     <color name="navy_bg">#000053</color>
+    <color name="red">#ff0000</color>
+    <color name="gray">#D3D3D3</color>
+    <color name="yellow">#FFBF00</color>
+
 </resources>
