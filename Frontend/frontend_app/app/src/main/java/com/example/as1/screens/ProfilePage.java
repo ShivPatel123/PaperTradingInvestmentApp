@@ -11,19 +11,27 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.toolbox.ImageRequest;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.example.as1.Controllers.RecycleViews.StockScrollAdapter;
+import com.example.as1.Controllers.RecycleViews.StockScrollCard;
+import com.example.as1.Controllers.Stock;
 import com.example.as1.Controllers.StockPurchased;
 import com.example.as1.R;
 import com.example.as1.Controllers.User;
 import com.example.as1.ExternalControllers.VolleySingleton;
+import com.google.android.material.imageview.ShapeableImageView;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class ProfilePage extends AppCompatActivity {
 
@@ -42,12 +50,15 @@ public class ProfilePage extends AppCompatActivity {
         TextView email_display = findViewById(R.id.email_Display);
         TextView dob_display = findViewById(R.id.dob_Display);
         TextView money_display = findViewById(R.id.money_Display);
-        TextView stock_display = findViewById(R.id.stock_Display);
+        ShapeableImageView defaultPic = findViewById(R.id.picSample);
 
         //Get global user data for get request (just need id for get req)
         User getGlobal = User.getInstance();
         //Get req for user data, need to be sure global user has id set after logging in
         getGlobal = getUserData(this.getApplicationContext(),getGlobal);
+
+        //Set numStocks card
+        getNumStocks(this.getApplicationContext(), getGlobal);
 
         //set display to user data
         welcomeTxt.setText("Welcome, " + getGlobal.getName() + "!");
@@ -56,12 +67,12 @@ public class ProfilePage extends AppCompatActivity {
         email_display.setText(getGlobal.getEmail());
         dob_display.setText(getGlobal.getDob());
         double money1 = getGlobal.getMoney();
-        money_display.setText(String.valueOf(money1));
-        //stock_display.setText(getGlobal.getNumStocksPurchased());
+        money_display.setText("$" + String.valueOf(money1));
+
 
         //Back to Home page button
         backHome_btn.setOnClickListener(view -> {
-            Intent intent = new Intent(ProfilePage.this, MainPage.class);
+            Intent intent = new Intent(ProfilePage.this, NavPage.class);
             startActivity(intent);
         });
 
@@ -97,7 +108,6 @@ public class ProfilePage extends AppCompatActivity {
                         String money = response.getString("money");
                         String username = response.getString("username");
                         String password = response.getString("password");
-                        //TODO parse arraylist to get stock list
 
                         // Populate text views with the parsed data
                         user.setName(name);
@@ -120,7 +130,25 @@ public class ProfilePage extends AppCompatActivity {
         return user;
     }
 
+    public void getNumStocks(Context context, User user) {
+        String URL_JSON_OBJECT = "http://10.90.75.130:8080/user/" + user.getId();
+        TextView stock_display = findViewById(R.id.stock_Display);
 
+        //Create new request
+        JsonArrayRequest request = new JsonArrayRequest(
+                Request.Method.GET,
+                URL_JSON_OBJECT,
+                null,
+                response -> {
+                    Log.i(" full response", "getNumStocks: " + response.length());
+                    stock_display.setText("#" + response.length());
+                },
+
+                error -> Log.i("error ", "getNumStocks: "+ error.getMessage())) {};
+
+        // Adding request to request queue
+        VolleySingleton.getInstance(context.getApplicationContext()).addToRequestQueue(request);
+    }
 
 
 

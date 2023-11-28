@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AS1">
         <activity
-            android:name=".screens.HomePage"
+            android:name=".screens.StartPage"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,28 +22,49 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".screens.StockPage"
-            android:exported="true" />
-        <activity
-            android:name=".screens.ProfilePage"
-            android:exported="true" />
-        <activity
-            android:name=".screens.MainPage"
+            android:name=".screens.AdminDashboardPage"
             android:exported="true" />
         <activity
             android:name=".screens.CreateAccountPage"
             android:exported="true" />
         <activity
-            android:name=".screens.LoginPage"
+            android:name=".screens.CreateGroup"
+            android:exported="true" />
+        <activity
+            android:name=".screens.CreateStock"
             android:exported="true" />
         <activity
             android:name=".screens.EditProfilePage"
             android:exported="true" />
         <activity
+            android:name=".screens.GroupAdminPage"
+            android:exported="true" />
+        <activity
+            android:name=".screens.GroupChatPage"
+            android:exported="true" />
+        <activity
+            android:name=".screens.GroupPage"
+            android:exported="true" />
+        <activity
+            android:name=".screens.LoginPage"
+            android:exported="true" />
+        <activity
+            android:name=".screens.NavPage"
+            android:exported="true" />
+        <activity
             android:name=".screens.PortfolioPage"
             android:exported="true" />
         <activity
-            android:name=".screens.FriendsPage"
+            android:name=".screens.ProfilePage"
+            android:exported="true" />
+        <activity
+            android:name=".screens.StockList"
+            android:exported="true" />
+        <activity
+            android:name=".screens.StockPage"
+            android:exported="true" />
+        <activity
+            android:name=".screens.TutorialsPage"
             android:exported="true" />
 
     </application>

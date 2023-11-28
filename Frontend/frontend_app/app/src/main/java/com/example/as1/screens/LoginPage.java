@@ -1,7 +1,6 @@
 package com.example.as1.screens;
 
 import static com.example.as1.Controllers.User.getInstance;
-import static com.example.as1.Controllers.UserSingleton.getGlobalUser;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,23 +11,17 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.JsonObjectRequest;
 
-import com.android.volley.toolbox.Volley;
 import com.example.as1.Controllers.LoginAttempt;
-import com.example.as1.Controllers.User;
 import com.example.as1.R;
 import com.example.as1.ExternalControllers.VolleySingleton;
 
 import android.util.Log;
-import android.widget.TextView;
 
 import org.json.*;
 
 public class LoginPage extends AppCompatActivity {
-
-    //TODO:make javadoc for frontend layout files and all files
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,7 +39,7 @@ public class LoginPage extends AppCompatActivity {
 
         //button back to home page
         toHome_btn.setOnClickListener(view -> {
-            Intent intent = new Intent(LoginPage.this, HomePage.class);
+            Intent intent = new Intent(LoginPage.this, StartPage.class);
             startActivity(intent);
         });
 
@@ -72,7 +65,7 @@ public class LoginPage extends AppCompatActivity {
                getInstance().setUsername(usernameInput);
                getInstance().setPassword(passwordInput);
                //go to MainPage
-               Intent intent = new Intent(LoginPage.this, MainPage.class);
+               Intent intent = new Intent(LoginPage.this, NavPage.class);
                startActivity(intent);
            }
         });
@@ -80,6 +73,8 @@ public class LoginPage extends AppCompatActivity {
 
     public void makeLoginPostReq(Context context, LoginAttempt loginA) {
         String URL_JSON_OBJECT = "http://coms-309-051.class.las.iastate.edu:8080/login";
+                //"http://coms-309-051.class.las.iastate.edu:8080/login";
+        //http://10.90.75.130:8080/login
         EditText volleyOutput_txt = findViewById(R.id.loginReqResponse_txt);
         JSONObject objectBody = new JSONObject();
 
@@ -110,48 +105,6 @@ public class LoginPage extends AppCompatActivity {
 
         // Adding request to request queue
         VolleySingleton.getInstance(context.getApplicationContext()).addToRequestQueue(request);
-    }
-
-    public User getUserData(Context context, User user) {
-        String URL_JSON_OBJECT = "http://coms-309-051.class.las.iastate.edu:8080/user/".concat(String.valueOf(user.getId())); //TODO: no user id after login
-
-        //Create new request
-        JsonObjectRequest request = new JsonObjectRequest(
-                Request.Method.GET,
-                URL_JSON_OBJECT,
-                null,
-                response -> {
-                    try {
-                        // Parse JSON object data
-                        String name = response.getString("name");
-                        String email = response.getString("email");
-                        String id = response.getString("id");
-                        String dob = response.getString("dob");
-                        String money = response.getString("money");
-                        String numStocks = response.getString("numStocks");
-                        String username = response.getString("username");
-                        String password = response.getString("password");
-
-                        // Populate text views with the parsed data
-                        user.setName(name);
-                        user.setEmail(email);
-                        user.setId(Integer.parseInt(id));
-                        user.setDob(dob);
-                        user.setMoney(Double.parseDouble(money));
-                        // user.setNumStocks(Integer.parseInt(numStocks));
-                        user.setUsername(username);
-                        user.setPassword(password);
-
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                },
-                error -> Log.e("Error Message for ", "getUserData: " + error.getMessage().toString())) {
-        };
-
-        // Adding request to request queue
-        VolleySingleton.getInstance(context.getApplicationContext()).addToRequestQueue(request);
-        return user;
     }
 
 }

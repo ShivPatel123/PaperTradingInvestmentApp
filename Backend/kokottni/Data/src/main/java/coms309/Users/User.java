@@ -84,6 +84,8 @@ public class User {
         this.friendGroup = group;
     }
 
+    public FriendGroup getFriendGroup(){return friendGroup;}
+
     public double getMoney(){return money;}
 
     public int getNumStocksPurchased(){return stocks.size() - 1;}
