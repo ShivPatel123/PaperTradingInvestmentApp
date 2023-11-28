@@ -72,7 +72,7 @@ public class ProfilePage extends AppCompatActivity {
 
         //Back to Home page button
         backHome_btn.setOnClickListener(view -> {
-            Intent intent = new Intent(ProfilePage.this, MainActivity.class);
+            Intent intent = new Intent(ProfilePage.this, LoggedInPage.class);
             startActivity(intent);
         });
 
