@@ -27,7 +27,7 @@ maven-test:
 autoDeploy:
   stage: mavenDeploy
   tags:
-    - shivansh_tag
+    - springboot_tag
   script:
     - cd Backend/kokottni/Data
     - mvn package
