@@ -177,7 +177,8 @@ public class GroupPage extends AppCompatActivity implements NavigationView.OnNav
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         if (menuItem.getItemId() == R.id.nav_home){
-
+            Intent intent = new Intent(GroupPage.this, NavPage.class);
+            startActivity(intent);
         } else if (menuItem.getItemId() == R.id.nav_stock){
             Intent intent = new Intent(GroupPage.this, StockPage.class);
             startActivity(intent);

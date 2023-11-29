@@ -252,7 +252,8 @@ public class ProfilePage extends AppCompatActivity implements NavigationView.OnN
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         if (menuItem.getItemId() == R.id.nav_home){
-
+            Intent intent = new Intent(ProfilePage.this, NavPage.class);
+            startActivity(intent);
         } else if (menuItem.getItemId() == R.id.nav_stock){
             Intent intent = new Intent(ProfilePage.this, StockPage.class);
             startActivity(intent);

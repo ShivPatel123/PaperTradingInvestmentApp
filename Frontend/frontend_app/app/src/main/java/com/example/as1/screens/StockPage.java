@@ -373,7 +373,8 @@ public class StockPage extends AppCompatActivity implements NavigationView.OnNav
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         if (menuItem.getItemId() == R.id.nav_home){
-
+            Intent intent = new Intent(StockPage.this, NavPage.class);
+            startActivity(intent);
         } else if (menuItem.getItemId() == R.id.nav_stock){
             Intent intent = new Intent(StockPage.this, StockPage.class);
             startActivity(intent);
