@@ -1,4 +1,5 @@
 <resources>
-    <string name="app_name">AS1</string>
-    <string name="ConfirmationBird">\u1F423</string>
+    <string name="app_name">BirdieBucks</string>
+    <string name="nav_open">Open Navigation Drawer</string>
+    <string name="nav_close">Close Navigation Drawer</string>
 </resources>
