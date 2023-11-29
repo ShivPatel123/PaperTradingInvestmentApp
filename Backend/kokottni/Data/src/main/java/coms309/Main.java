@@ -49,52 +49,48 @@ public class Main {
             Stock stock2 = new Stock(2L, "INTC", "Intel", 67.12, 1.34);
             Stock stock3 = new Stock(3L, "GGL", "Google", 213.56, 3.14);
             Stock stock4 = new Stock(4L, "EXAS", "Exact Sciences", 67.34, -2.13);
-
-            "NVDA"	"NVIDIA Corporation" 	478.21	-4.21
-            "META"	"Meta Platforms, Inc". Class A Common Stock	$338.99	4.29	1.282%	871,157,767,521
-            BRK/A	Berkshire Hathaway Inc.	$546,868.98999999999	-576.06	-0.105%	804,375,378,797
-            BRK/B	Berkshire Hathaway Inc.	$360.05	-1.29	-0.357%	794,382,409,129
-            TSLA	Tesla, Inc. Common Stock	$246.72	10.64	4.507%	784,303,485,588
-            HSBC	HSBC Holdings, plc. Common Stock	$38.59	-0.02	-0.052%	759,952,870,000
-            LLY	Eli Lilly and Company Common Stock	$591.60	0.07	0.012%	561,610,161,409
-            TSM	Taiwan Semiconductor Manufacturing Company Ltd.	$97.98	0.77	0.792%	508,131,735,494
-            UNH	UnitedHealth Group Incorporated Common Stock (DE)	$540.53	-3.06	-0.563%	499,949,868,625
-            V	Visa Inc.	$252.94	-1.20	-0.472%	464,308,388,528
-            NVO	Novo Nordisk A/S Common Stock	$101.43	-2.44	-2.349%	454,199,652,797
-            JPM	JP Morgan Chase & Co. Common Stock	$153.54	0.35	0.228%	443,885,420,677
-            SHEL	Shell PLC American Depositary Shares (each representing two (2) Ordinary Shares)	$66.00	0.19	0.289%	441,580,326,000
-            WMT	Walmart Inc. Common Stock	$158.64	1.87	1.193%	426,989,689,164
-            XOM	Exxon Mobil Corporation Common Stock	$103.90	-0.06	-0.058%	411,747,168,355
-            AVGO	Broadcom Inc. Common Stock	$946.35	-3.89	-0.409%	390,592,244,210
-            MA	Mastercard Incorporated Common Stock	$409.01	0.04	0.01%	383,559,786,710
-            JNJ	Johnson & Johnson Common Stock	$151.63	0.35	0.231%	365,015,657,151
-            PG	Procter & Gamble Company (The) Common Stock	$152.29	1.05	0.694%	358,930,201,073
-            ORCL	Oracle Corporation Common Stock	$116.24	-0.23	-0.197%	318,476,793,040
-            BHP	BHP Group Limited American Depositary Shares (Each representing two Ordinary Shares)	$61.64	0.33	0.538%	312,170,157,322
-            HD	Home Depot, Inc. (The) Common Stock	$313.34	2.42	0.778%	311,855,346,199
-            ADBE	Adobe Inc. Common Stock	$623.32	4.05	0.654%	283,797,596,000
-            CVX	Chevron Corporation Common Stock	$145.51	1.15	0.797%	274,686,308,244
-            ASML	ASML Holding N.V. New York Registry Shares	$675.99	-12.39	-1.80%	266,738,495,942
-            COST	Costco Wholesale Corporation Common Stock	$594.00	-0.90	-0.151%	262,987,899,768
-            TM	Toyota Motor Corporation Common Stock	$187.16	0.55	0.295%	257,874,691,623
-            MRK	Merck & Company, Inc. Common Stock (new)	$100.18	-1.25	-1.232%	253,858,432,555
-            KO	Coca-Cola Company (The) Common Stock	$58.58	0.12	0.205%	253,265,580,990
-            ABBV	AbbVie Inc. Common Stock	$138.08	-1.01	-0.726%	243,785,407,092
-            NGG	National Grid Transco, PLC National Grid PLC (NEW) American Depositary Shares	$65.70	0.29	0.443%	242,313,299,330
-            BAC	Bank of America Corporation Common Stock	$29.53	-0.03	-0.101%	233,692,506,373
-            PEP	PepsiCo, Inc. Common Stock	$168.86	0.54	0.321%	232,159,528,454
-            ACN	Accenture plc Class A Ordinary Shares (Ireland)	$332.56	0.13	0.039%	221,189,668,336
-            CRM	Salesforce, Inc. Common Stock	$224.92	0.13	0.058%	218,847,160,000
-            NFLX	Netflix, Inc. Common Stock	$479.00	-0.17	-0.035%	209,648,561,451
-            NVS	Novartis AG Common Stock	$97.00	-0.74	-0.757%	205,602,078,529
-            MCD	McDonald's Corporation Common Stock	$282.09	0.25	0.089%	204,611,733,243
-            LIN	Linde plc Ordinary Shares	$410.73	-2.07	-0.501%	199,159,069,315
-            AMD	Advanced Micro Devices, Inc. Common Stock	$122.01	-0.64	-0.522%	197,107,019,691
-            BABA	Alibaba Group Holding Limited American Depositary Shares each representing eight Ordinary share	$76.74	-0.79	-1.019%	196,895,824,902
-            CSCO	Cisco Systems, Inc. Common Stock (DE)	$47.85	-0.08	-0.167%	194,437,311,097
-            SAP	SAP SE ADS	$156.30	1.36	0.878%	192,015,211,462
-            TMO	Thermo Fisher Scientific Inc Common Stock	$485.92	-4.21	-0.859%	187,746,038,220
-            INTC	Intel Corporation Common Stock	$44.23	0.15	0.34%	186,473,680,000
+            Stock stock5 = new Stock(5L, "NVDA",	"NVIDIA Corporation", 	478.21,	-4.21);
+            Stock stock6 = new Stock(6L, "META",	"Meta Platforms, Inc", 338.99,	4.29);
+            Stock stock7 = new Stock(7L, "HSBC",	"HSBC Holdings, plc",	38.59,	-0.02);
+            Stock stock8 = new Stock(8L, "LLY",	"Eli Lilly and Company", 591.60,	0.07);
+            Stock stock9 = new Stock(9L, "TSM",	"Taiwan Semiconductor Manufacturing", 97.98,	0.77);
+            Stock stock10 = new Stock(10L,"UNH",	"UnitedHealth Group Incorporated", 540.53,	-3.06);
+            Stock stock11 = new Stock(11L,"V",	"Visa Inc.",	252.94,	-1.20);
+            Stock stock12 = new Stock(12L,"NVO",	"Novo Nordisk", 101.43,	-2.44);
+            Stock stock13 = new Stock(13L,"JPM",	"JP Morgan Chase & Co", 153.54,	0.35);
+            Stock stock14 = new Stock(14L,"SHEL",	"Shell PLC", 66.00,	0.19);
+            Stock stock15 = new Stock(15L,"WMT",	"Walmart Inc", 158.64,	1.87);
+            Stock stock16 = new Stock(16L,"XOM",	"Exxon Mobil Corporation", 103.90,	-0.06);
+            Stock stock17 = new Stock(17L,"AVGO",	"Broadcom Inc", 946.35,	-3.89);
+            Stock stock18 = new Stock(18L,"MA",	"Mastercard Incorporated", 409.01,	0.04);
+            Stock stock19 = new Stock(19L,"JNJ",	"Johnson & Johnson", 151.63,	0.35);
+            Stock stock20 = new Stock(20L,"PG",	"Procter & Gamble Company", 152.29,	1.05);
+            Stock stock21 = new Stock(21L,"ORCL",	"Oracle Corporation", 116.24,	-0.23);
+            Stock stock22 = new Stock(22L,"BHP",	"BHP Group", 61.64,	0.33);
+            Stock stock23 = new Stock(23L,"HD",	"Home Depot, Inc", 313.34,	2.42);
+            Stock stock24 = new Stock(24L,"ADBE",	"Adobe Inc.",	623.32,	4.05);
+            Stock stock25 = new Stock(25L,"CVX",	"Chevron Corporation", 145.51,	1.15);
+            Stock stock26 = new Stock(26L,"ASML",	"ASML Holding N.V.",	675.99,	-12.39);
+            Stock stock27 = new Stock(27L,"COST",	"Costco Wholesale Corporation", 	594.00,	-0.90);
+            Stock stock28 = new Stock(28L,"TM",	"Toyota Motor Corporation", 187.16,	0.55);
+            Stock stock29 = new Stock(29L,"MRK",	"Merck & Company, Inc.", 	100.18,	-1.25);
+            Stock stock30 = new Stock(30L,"KO",	"Coca-Cola Company",	58.58,	0.12);
+            Stock stock31 = new Stock(31L,"ABBV",	"AbbVie Inc", 138.08,	-1.01);
+            Stock stock32 = new Stock(32L,"NGG",	"National Grid Transco",	65.70,	0.29);
+            Stock stock33 = new Stock(33L,"BAC",	"Bank of America Corporation", 29.53,	-0.03);
+            Stock stock34 = new Stock(34L,"PEP",	"PepsiCo, Inc.", 	168.86,	0.54);
+            Stock stock35 = new Stock(35L,"ACN",	"Accenture plc",	332.56,	0.13);
+            Stock stock36 = new Stock(36L,"CRM",	"Salesforce, Inc.", 	224.92,	0.13);
+            Stock stock37 = new Stock(37L,"NFLX",	"Netflix, Inc. ",	479.00,	-0.17);
+            Stock stock38 = new Stock(38L,"NVS",	"Novartis AG", 	97.00,	-0.74);
+            Stock stock39 = new Stock(39L,"MCD",	"McDonald's Corporation", 	282.09,	0.25);
+            Stock stock40 = new Stock(40L,"LIN",	"Linde plc", 	410.73,	-2.07);
+            Stock stock41 = new Stock(41L,"AMD",	"Advanced Micro Devices, Inc", 122.01,	-0.64);
+            Stock stock42 = new Stock (42L,"BABA",	"Alibaba Group", 	76.74,	-0.79);
+            Stock stock43 = new Stock(43L,"CSCO",	"Cisco Systems, Inc", 77.85,	-0.08);
+            Stock stock44 = new Stock(44L,"SAP",	"SAP SE ADS",	156.30,	1.36);
+            Stock stock45 = new Stock(45L,"TMO",	"Thermo Fisher Scientific Inc", 	485.92,	-4.21);
+            Stock stock46 = new Stock(46L, "INTC", "Intel Corporation", 	74.23,	0.15);
 
             userRepository.save(user1);
             userRepository.save(user2);
@@ -104,6 +100,51 @@ public class Main {
             stockRepository.save(stock2);
             stockRepository.save(stock3);
             stockRepository.save(stock4);
+            stockRepository.save(stock5);
+            stockRepository.save(stock6);
+            stockRepository.save(stock7);
+            stockRepository.save(stock8);
+            stockRepository.save(stock9);
+            stockRepository.save(stock10);
+            stockRepository.save(stock11);
+            stockRepository.save(stock12);
+            stockRepository.save(stock13);
+            stockRepository.save(stock14);
+            stockRepository.save(stock15);
+            stockRepository.save(stock16);
+            stockRepository.save(stock17);
+            stockRepository.save(stock18);
+            stockRepository.save(stock19);
+            stockRepository.save(stock20);
+            stockRepository.save(stock21);
+            stockRepository.save(stock22);
+            stockRepository.save(stock23);
+            stockRepository.save(stock24);
+            stockRepository.save(stock25);
+            stockRepository.save(stock26);
+            stockRepository.save(stock27);
+            stockRepository.save(stock28);
+            stockRepository.save(stock29);
+            stockRepository.save(stock30);
+            stockRepository.save(stock31);
+            stockRepository.save(stock32);
+            stockRepository.save(stock33);
+            stockRepository.save(stock34);
+            stockRepository.save(stock35);
+            stockRepository.save(stock36);
+            stockRepository.save(stock37);
+            stockRepository.save(stock38);
+            stockRepository.save(stock39);
+            stockRepository.save(stock40);
+            stockRepository.save(stock41);
+            stockRepository.save(stock42);
+            stockRepository.save(stock43);
+            stockRepository.save(stock44);
+            stockRepository.save(stock45);
+            stockRepository.save(stock46);
+
+
+
 
             user1.setStock(stock1, 2, stock1.getId());
             stock1.setUser(user1, 2, stock1.getId());
