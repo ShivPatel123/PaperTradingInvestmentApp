@@ -1,0 +1,146 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > GroupLeader</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">coms309.Users</a>
+</div>
+
+<h1>Coverage Summary for Class: GroupLeader (coms309.Users)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">GroupLeader</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">GroupLeader$HibernateProxy$iIkOWFjB</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/9)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package coms309.Users;
+&nbsp;
+&nbsp;import javax.persistence.*;
+&nbsp;
+&nbsp;import coms309.Stocks.Stock;
+&nbsp;import coms309.Stocks.StockPurchased;
+&nbsp;import coms309.Stocks.StockPurchasedRepository;
+&nbsp;import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;
+&nbsp;@Entity
+&nbsp;@Table(name = &quot;Group Leader&quot;)
+&nbsp;public class GroupLeader extends User {
+&nbsp;    public GroupLeader(Long id, double money, String name, String email, String dob, String username, String password) {
+<b class="nc">&nbsp;        super(id, money, name, email, dob, username, password);</b>
+<b class="nc">&nbsp;        this.setPrivilege(&#39;g&#39;);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public boolean equals(Object obj){
+<b class="nc">&nbsp;        if(this == obj) return true;</b>
+<b class="nc">&nbsp;        if(obj == null) return false;</b>
+<b class="nc">&nbsp;        if(getClass() != obj.getClass()) return false;</b>
+<b class="nc">&nbsp;        GroupLeader gl = (GroupLeader) obj;</b>
+<b class="nc">&nbsp;        if(this.getId() == null){</b>
+<b class="nc">&nbsp;            return gl.getId() == null;</b>
+&nbsp;        }else{
+<b class="nc">&nbsp;            return this.getPrivilege() == gl.getPrivilege();</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-11-27 15:12</div>
+</div>
+</body>
+</html>
