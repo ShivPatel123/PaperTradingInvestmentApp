@@ -3,10 +3,8 @@ package com.example.as1.screens;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.GetChars;
 import android.util.Log;
 import android.widget.Button;
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,7 +24,8 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GroupAdminPage extends AppCompatActivity {
+public class GroupAdminPage extends AppCompatActivity{
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -156,14 +155,15 @@ public class GroupAdminPage extends AppCompatActivity {
                         try {
                             object = (JSONObject) response.get(i);
 
-                            //parse relevant info
-                          int id = object.getInt("id");
-                          String name = object.getString("name");
-                          List<User> memList = (List<User>) object.get("groupMembers");
-                          int numUsers = memList.size() -1;
+                            //parse relevant inf
+//                          int id = 0;
+//                          //object.getInt("id");
+//                          String name = object.getString("name");
+//                          List<User> memList = (List<User>) object.get("groupMembers");
+//                          int numUsers = memList.size() -1;
 
                           //add to arraylist to be displayed in recycle view
-                            GroupMemCardArrayList2.add(new GroupMemScrollCard(name,"invs", id, 'i', -2, numUsers));
+                            //GroupMemCardArrayList2.add(new GroupMemScrollCard(name,"invs", id, 'i', -2, numUsers));
 
                         } catch (JSONException e) {
                             throw new RuntimeException(e);

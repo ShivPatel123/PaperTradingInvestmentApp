@@ -8,6 +8,7 @@
     android:layout_height="match_parent"
     tools:context=".screens.NavPage"
     android:fitsSystemWindows="true"
+    android:background="@drawable/background_gradient"
     tools:openDrawer="start">
 
     <com.google.android.material.navigation.NavigationView
@@ -479,7 +480,7 @@
                         app:layout_constraintHorizontal_bias="0.088"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.615"></TextView>
+                        app:layout_constraintVertical_bias="0.615"/>
 
                     <TextView
                         android:id="@+id/tut_Display"
