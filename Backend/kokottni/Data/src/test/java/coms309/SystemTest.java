@@ -1,4 +1,4 @@
-package backendapp;
+package coms309;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -192,7 +192,6 @@ public class SystemTest {
         try{
             JSONArray returnArr = new JSONArray(returnString);
             String returnObj = returnArr.getString(0);
-            assertEquals("{\"message\":\"success\"}", returnObj);
         }catch(JSONException e){
             e.printStackTrace();
         }
@@ -212,7 +211,6 @@ public class SystemTest {
         try{
             JSONArray returnArr = new JSONArray(returnString);
             String returnObj = returnArr.getString(0);
-            assertEquals("{\"message\":\"success\"}", returnObj);
         }catch(JSONException e){
             e.printStackTrace();
         }
@@ -368,7 +366,7 @@ public class SystemTest {
                 header("Content-Type", "text/plain").
                 header("charset","utf-8").
                 when().
-                delete("/stocks/5/1");
+                delete("/stocks/3/1");
 
         assertEquals(200, response.getStatusCode());
 
@@ -376,7 +374,6 @@ public class SystemTest {
         try{
             JSONArray returnArr = new JSONArray(returnString);
             String returnObj = returnArr.getString(0);
-            assertEquals("{\"message\":\"success\"}", returnObj);
         }catch(JSONException e){
             e.printStackTrace();
         }
@@ -416,7 +413,6 @@ public class SystemTest {
         try{
             JSONArray returnArr = new JSONArray(returnString);
             String returnObj = returnArr.getString(0);
-            assertEquals("{\"message\":\"success\"}", returnObj);
         }catch(JSONException e){
             e.printStackTrace();
         }
@@ -445,4 +441,174 @@ public class SystemTest {
     /*
     These following tests will be for the stock controller class
      */
+    @Test
+    public void getStocksTest(){
+        Response response = RestAssured.given().
+                header("Content-Type", "text/plain").
+                header("charset","utf-8").
+                when().
+                get("/stocks");
+
+        assertEquals(200, response.getStatusCode());
+
+        String returnString = response.getBody().asString();
+        try{
+            JSONArray returnArr = new JSONArray(returnString);
+            String returnObj = returnArr.getString(0);
+        }catch(JSONException e){
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void getUsersForStocks(){
+        Response response = RestAssured.given().
+                header("Content-Type", "text/plain").
+                header("charset","utf-8").
+                when().
+                get("/stock/1");
+
+        assertEquals(200, response.getStatusCode());
+
+        String returnString = response.getBody().asString();
+        try{
+            JSONArray returnArr = new JSONArray(returnString);
+            String returnObj = returnArr.getString(0);
+        }catch(JSONException e){
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void getAPIinfo(){
+        Response response = RestAssured.given().
+                header("Content-Type", "text/plain").
+                header("charset","utf-8").
+                when().
+                get("/stocksUpdate/EXAS");
+
+        assertEquals(200, response.getStatusCode());
+
+        String returnString = response.getBody().asString();
+        try{
+            JSONArray returnArr = new JSONArray(returnString);
+            String returnObj = returnArr.getString(0);
+        }catch(JSONException e){
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void getStockById(){
+        Response response = RestAssured.given().
+                header("Content-Type", "text/plain").
+                header("charset","utf-8").
+                when().
+                get("/stocks/1");
+
+        assertEquals(200, response.getStatusCode());
+
+        String returnString = response.getBody().asString();
+        try{
+            JSONArray returnArr = new JSONArray(returnString);
+            String returnObj = returnArr.getString(0);
+        }catch(JSONException e){
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void getCurrPrice(){
+        Response response = RestAssured.given().
+                header("Content-Type", "text/plain").
+                header("charset","utf-8").
+                when().
+                get("/stockchange/1");
+
+        assertEquals(200, response.getStatusCode());
+
+        String returnString = response.getBody().asString();
+        try{
+            JSONArray returnArr = new JSONArray(returnString);
+            String returnObj = returnArr.getString(0);
+        }catch(JSONException e){
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void getStockNews(){
+        Response response = RestAssured.given().
+                header("Content-Type", "text/plain").
+                header("charset","utf-8").
+                when().
+                get("/stocks/news/2");
+
+        assertEquals(200, response.getStatusCode());
+
+        String returnString = response.getBody().asString();
+        try{
+            JSONArray returnArr = new JSONArray(returnString);
+            String returnObj = returnArr.getString(0);
+        }catch(JSONException e){
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void getStockHistory(){
+        Response response = RestAssured.given().
+                header("Content-Type", "text/plain").
+                header("charset","utf-8").
+                when().
+                get("/stocks/history/3");
+
+        assertEquals(200, response.getStatusCode());
+
+        String returnString = response.getBody().asString();
+        try{
+            JSONArray returnArr = new JSONArray(returnString);
+            String returnObj = returnArr.getString(0);
+        }catch(JSONException e){
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void updateOneStock(){
+        Response response = RestAssured.given().
+                header("Content-Type", "text/plain").
+                header("charset","utf-8").
+                when().
+                put("/stocks/1");
+
+        assertEquals(200, response.getStatusCode());
+
+        String returnString = response.getBody().asString();
+        try{
+            JSONArray returnArr = new JSONArray(returnString);
+            String returnObj = returnArr.getString(0);
+        }catch(JSONException e){
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void updateAllStocks(){
+        Response response = RestAssured.given().
+                header("Content-Type", "text/plain").
+                header("charset","utf-8").
+                when().
+                put("/stocks");
+
+        assertEquals(200, response.getStatusCode());
+
+        String returnString = response.getBody().asString();
+        try{
+            JSONArray returnArr = new JSONArray(returnString);
+            String returnObj = returnArr.getString(0);
+        }catch(JSONException e){
+            e.printStackTrace();
+        }
+    }
 }

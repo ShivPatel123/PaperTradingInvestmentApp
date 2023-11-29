@@ -1,7 +1,6 @@
 package coms309;
 
 import coms309.Stocks.StockPurchasedRepository;
-import coms309.Users.Administrator;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
