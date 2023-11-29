@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/background_gradient">
-
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/groupUser_scroll"
@@ -58,13 +57,12 @@
 
     <TextView
         android:id="@+id/group_Admin_dash_title"
-        android:layout_width="411dp"
+        android:layout_width="match_parent"
         android:layout_height="65dp"
         android:background="@color/darkBack"
-        android:ems="10"
         android:gravity="right|center_vertical"
         android:inputType="text"
-        android:text="  Group Admin Dashboard    "
+        android:text="Group Admin Dashboard"
         android:textColor="@color/txtclr"
         android:textSize="26sp"
         android:textStyle="bold"
@@ -120,8 +118,9 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/group_Admin_dash_title"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.034"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.382" />
+        app:layout_constraintVertical_bias="0.0" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
