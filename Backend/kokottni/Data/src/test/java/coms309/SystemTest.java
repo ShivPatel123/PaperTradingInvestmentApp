@@ -170,11 +170,10 @@ public class SystemTest {
     }
 
     @Test
-    public void createUserTest(){
-        Response response = RestAssured.given().
-                header("Content-Type", "text/plain").
-                header("charset","utf-8").
-                body("{\n" +
+    public void createUserTest() {
+        Response response = RestAssured.given()
+                .header("Content-Type", "application/json")
+                .body("{\n" +
                         "    \"dob\": \"08/21/2003\",\n" +
                         "    \"email\": \"sharif@iastate.edu\",\n" +
                         "    \"money\": 98765654,\n" +
@@ -182,20 +181,51 @@ public class SystemTest {
                         "    \"id\": 5,\n" +
                         "    \"username\": \"UsErname\",\n" +
                         "    \"password\": \"password\"\n" +
-                        "}").
-                when().
-                post("/users");
+                        "}")
+                .when()
+                .post("/users/5");
 
         assertEquals(200, response.getStatusCode());
 
         String returnString = response.getBody().asString();
-        try{
-            JSONArray returnArr = new JSONArray(returnString);
-            String returnObj = returnArr.getString(0);
-        }catch(JSONException e){
+        try {
+            // Assuming the response is a JSON object, not an array
+            JSONObject returnObj = new JSONObject(returnString);
+
+            // Optionally, check if the response contains expected fields
+            assertEquals("Sharif Mahdi", returnObj.getString("name"));
+            assertEquals("UsErname", returnObj.getString("username"));
+            // Add more assertions based on your response structure
+
+        } catch (JSONException e) {
             e.printStackTrace();
         }
     }
+
+
+    @Test
+    public void loginTest() {
+        Response response = RestAssured.given()
+                .header("Content-Type", "application/json") // Update content type
+                .body("{\n" +
+                        "    \"username\": \"user\",\n" +
+                        "    \"password\": \"Password\"\n" +
+                        "}")
+                .when()
+                .post("/login");
+
+        assertEquals(200, response.getStatusCode());
+
+        String returnString = response.getBody().asString();
+        try {
+            // Assuming the response is a JSON object, not an array
+            JSONObject returnObj = new JSONObject(returnString);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     @Test
     public void createFriendGroupTest(){
@@ -473,7 +503,8 @@ public class SystemTest {
         String returnString = response.getBody().asString();
         try{
             JSONArray returnArr = new JSONArray(returnString);
-            String returnObj = returnArr.getString(0);
+            assertEquals(0, returnArr.length());
+//            String returnObj = returnArr.getString(0);
         }catch(JSONException e){
             e.printStackTrace();
         }
