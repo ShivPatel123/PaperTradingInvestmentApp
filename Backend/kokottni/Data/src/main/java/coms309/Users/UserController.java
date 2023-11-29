@@ -349,7 +349,9 @@ public class UserController {
         if(admin.getPrivilege() != 'a') return failure;
         User user = userRepository.findById(uid);
         user.setPrivilege('b');
-        removeStocks(uid);
+        if(!user.getStocks().isEmpty()){
+            removeStocks(uid);
+        }
         userRepository.save(user);
         return success;
     }
