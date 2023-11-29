@@ -396,9 +396,9 @@ public class SystemTest {
                 header("Content-Type", "text/plain").
                 header("charset","utf-8").
                 when().
-                delete("/stocks/3/1");
+                delete("/stocksc/3");
 
-        assertEquals(200, response.getStatusCode());
+       assertEquals(200, response.getStatusCode());
 
         String returnString = response.getBody().asString();
         try{
