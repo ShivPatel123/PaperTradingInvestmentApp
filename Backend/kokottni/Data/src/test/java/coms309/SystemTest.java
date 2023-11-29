@@ -366,7 +366,7 @@ public class SystemTest {
                 header("Content-Type", "text/plain").
                 header("charset","utf-8").
                 when().
-                delete("/stocks/5/1");
+                delete("/stocks/3/1");
 
         assertEquals(200, response.getStatusCode());
 
