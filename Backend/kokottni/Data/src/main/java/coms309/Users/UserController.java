@@ -182,7 +182,7 @@ public class UserController {
             friendGroup.setGroupName(groupName);
             friendGroup.setGroupLeader(groupLeader);
             groupLeader.setFriendGroup(friendGroup);
-            userRepository.save(groupLeader);
+            //userRepository.save(groupLeader);
             friendGroupRepository.save(friendGroup);
             return success;
         }
