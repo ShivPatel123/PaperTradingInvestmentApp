@@ -356,7 +356,7 @@ public class UserController {
 
     private void removeStocks(long uid){
         for(long i = 1; i < stockPurchasedRepository.count(); ++i){
-            for(int j = 0; j < userRepository.findById(uid).getStocks().size(); ++j){
+            for(int j = 0; j < userRepository.getOne(uid).getStocks().size(); ++j){
                 if(stockPurchasedRepository.findById(i).getUser().getId().equals(userRepository.findById(uid).getId())){
                     stockPurchasedRepository.deleteById(i);
                     userRepository.findById(uid).getStocks().remove(j);
