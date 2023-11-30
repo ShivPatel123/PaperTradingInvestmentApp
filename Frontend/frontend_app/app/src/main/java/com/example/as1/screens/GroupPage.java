@@ -94,7 +94,7 @@ public class GroupPage extends AppCompatActivity implements NavigationView.OnNav
         //Create new Group
         Button createGroup = findViewById(R.id.createGroup_Adminbtn);
         createGroup.setOnClickListener(view -> {
-            Intent intent = new Intent(GroupPage.this, CreateStock.class);
+            Intent intent = new Intent(GroupPage.this, CreateGroup.class);
             startActivity(intent);
         });
 

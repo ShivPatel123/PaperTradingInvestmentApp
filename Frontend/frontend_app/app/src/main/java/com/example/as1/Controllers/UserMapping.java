@@ -45,7 +45,7 @@ public interface UserMapping {
     Call<StockPurchased> purchaseStock(@Path("id") long id, @Path("uid") long uid, @Path("amount") int amount);
 
     @GET("/sell/{id}/user/{uid}/{numStocks}")
-    Call<User> sellStock(@Path("id") long id, @Path("uid") long uid, @Path("numStocks") int numStocks);
+    Call<Double> sellStock(@Path("id") long id, @Path("uid") long uid, @Path("numStocks") int numStocks);
 
     @PUT("/users/{userId}/stocks/{stockId}/{numPurchasing}")
     Call<String> assignStockToUser(@Path("userID") Long userId, @Path("stockID") Long stockId, @Path("numPurchasing") int numPurchasing);
