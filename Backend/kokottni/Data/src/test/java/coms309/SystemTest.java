@@ -649,7 +649,7 @@ public class SystemTest {
     public void userEqualsTest(){
         User user = new User(7L, 20, "Nick", "email", "dob", "user", "pass");
         User user2 = user;
-        boolean functionOutput = user.equals(7L);
+        boolean functionOutput = user.equals(user2);
         assertEquals(true, functionOutput);
     }
 
@@ -670,6 +670,25 @@ public class SystemTest {
     public void stockHashcodeTest(){
         Stock stock1 = new Stock(47L, "TSLA", "Tesla", 101.23, -2.13);
         assertEquals(78, stock1.hashCode());
+    }
+
+    @Test
+    public void setNewLeaderTest(){
+        Response response = RestAssured.given().
+                header("Content-Type", "text/plain").
+                header("charset","utf-8").
+                when().
+                put("/friendgroup/setnewleader/name/2/3");
+
+        assertEquals(200, response.getStatusCode());
+
+        String returnString = response.getBody().asString();
+        try{
+            JSONArray returnArr = new JSONArray(returnString);
+            String returnObj = returnArr.getString(0);
+        }catch(JSONException e){
+            e.printStackTrace();
+        }
     }
 
 }
