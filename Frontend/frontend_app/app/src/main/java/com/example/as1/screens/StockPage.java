@@ -45,7 +45,7 @@ import java.util.ArrayList;
 
 public class StockPage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    protected Button newStock_btn, pageLeft, pageRight, buy_btn, sell_btn, delete_btn;
+    protected Button newStock_btn, pageLeft, pageRight, buy_btn, sell_btn, delete_btn, toNews_btn;
     protected TextView stockName, stockSymbol, serverNotes;
     protected EditText curr_display;
 
@@ -110,6 +110,14 @@ public class StockPage extends AppCompatActivity implements NavigationView.OnNav
                 Intent intent = new Intent(StockPage.this, CreateStock.class);
                 startActivity(intent);
             }
+        });
+
+        //View News Button
+        toNews_btn = findViewById(R.id.toNews_btn);
+        newStock_btn.setOnClickListener(view -> {
+                Intent newsIntent = new Intent(StockPage.this, NewsPage.class);
+                newsIntent.putExtra("index", index[0]);
+                startActivity(newsIntent);
         });
 
         //Buy Button
