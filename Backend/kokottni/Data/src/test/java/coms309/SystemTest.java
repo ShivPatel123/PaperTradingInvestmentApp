@@ -2,6 +2,8 @@ package coms309;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import coms309.Stocks.Stock;
+import coms309.Users.User;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -642,4 +644,32 @@ public class SystemTest {
             e.printStackTrace();
         }
     }
+
+    @Test
+    public void userEqualsTest(){
+        User user = new User(7L, 20, "Nick", "email", "dob", "user", "pass");
+        User user2 = user;
+        boolean functionOutput = user.equals(7L);
+        assertEquals(true, functionOutput);
+    }
+
+    @Test
+    public void userHashcodeTest(){
+        User user = new User(7L, 20, "Nick", "email", "dob", "user", "pass");
+        int code = user.hashCode();
+        assertEquals(code, 38);
+    }
+
+    @Test
+    public void stockEqualsTest(){
+        Stock stock1 = new Stock(47L, "TSLA", "Tesla", 101.23, -2.13);
+        assertEquals(false, stock1.equals(47L));
+    }
+
+    @Test
+    public void stockHashcodeTest(){
+        Stock stock1 = new Stock(47L, "TSLA", "Tesla", 101.23, -2.13);
+        assertEquals(78, stock1.hashCode());
+    }
+
 }
