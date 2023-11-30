@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     long purchaseNum = 5;
+
+    long userNum = 5;
     long stockNum = 5;
     @Autowired
     UserRepository userRepository;
@@ -145,13 +147,15 @@ public class UserController {
 
     @ApiOperation(value = "create new user based on request body", response = String.class, tags = "user")
     @PostMapping(path = "/users")
-    String createUser(@RequestBody User user, @PathVariable Long id){
+    String createUser(@RequestBody User user){
         //if there is nobody or the username already exists
         if (user == null)
             return "no user input";
-        if (userRepository.getOne(id).getUsername() !=null)
+        user.setId(userNum);
+        if (userRepository.getOne(user.getId()).getUsername() !=null)
             return "username already taken";
         userRepository.save(user);
+        ++userNum;
         return success;
     }
 
@@ -345,14 +349,16 @@ public class UserController {
         if(admin.getPrivilege() != 'a') return failure;
         User user = userRepository.findById(uid);
         user.setPrivilege('b');
-        removeStocks(uid);
+        if(!user.getStocks().isEmpty()){
+            removeStocks(uid);
+        }
         userRepository.save(user);
         return success;
     }
 
     private void removeStocks(long uid){
         for(long i = 1; i < stockPurchasedRepository.count(); ++i){
-            for(int j = 0; j < userRepository.findById(uid).getStocks().size(); ++j){
+            for(int j = 0; j < userRepository.getOne(uid).getStocks().size(); ++j){
                 if(stockPurchasedRepository.findById(i).getUser().getId().equals(userRepository.findById(uid).getId())){
                     stockPurchasedRepository.deleteById(i);
                     userRepository.findById(uid).getStocks().remove(j);
