@@ -25,82 +25,15 @@ public class StockScrollAdapter extends RecyclerView.Adapter<StockScrollAdapter.
     Context context;
     ArrayList<StockScrollCard> scrollCardList;
 
-    public StockScrollAdapter(Context context, ArrayList<StockScrollCard> scrollCardList){
-        this.context=context;
+    public StockScrollAdapter(Context context, ArrayList<StockScrollCard> scrollCardList) {
+        this.context = context;
         this.scrollCardList = scrollCardList;
     }
+
     @NonNull
     @Override
-    public ScrollViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new ScrollViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.stock_scroll_view,parent, false));
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull ScrollViewHolder holder, int position) {
-        StockScrollCard model = scrollCardList.get(position);
-        holder.stockName.setText("" + model.getStockName());
-        holder.stockNum.setText("x" + model.getNumPurchased());
-        holder.stockPrice.setText("$" + model.getStockPrice());
-        holder.stockSymbol.setText("" + model.getSymbol());
-        holder.stockID.setText("" + model.getId());
-
-        User Global = User.getInstance();
-        //Set ID to 1 if its not instantiated yet
-        if(Global.getId() <= 0)        Global.setId(1);
-        int modelID = model.getId();
-
-        //buttons
-        holder.sellStock.setOnClickListener(v -> {
-            int numpur = model.getNumPurchased()-1;
-            holder.stockNum.setText("" + numpur);
-            SellStock(this.context, Global, modelID);
-        });
-
-        holder.buyStock.setOnClickListener(v -> {
-            holder.stockNum.setText("" + model.getNumPurchased()+1);
-            BuyStock(this.context, Global, modelID);
-        });
-    }
-
-    public void SellStock(Context context, User user, int modelID) {
-        String URL_JSON_OBJECT = "http://coms-309-051.class.las.iastate.edu:8080/sell/" + modelID + "/user/" + user.getId() + "/1";
-
-        //Create new request
-        JsonObjectRequest request = new JsonObjectRequest(
-                Request.Method.GET,
-                URL_JSON_OBJECT,
-                null,
-                response -> {
-                    Log.i("Sell Stock response", "response: " + response);
-                    //update user money
-                },
-                error -> Log.i("Sell Stock error", "error: " + error)) { };
-
-        // Adding request to request queue
-        VolleySingleton.getInstance(context.getApplicationContext()).addToRequestQueue(request);
-    }
-
-    public void BuyStock(Context context, User user, int modelID) {
-        String URL_JSON_OBJECT = "http://coms-309-051.class.las.iastate.edu:8080/buy/" + modelID + "/user/" + user.getId() + "amt/1";
-
-        //Create new request
-        JsonObjectRequest request = new JsonObjectRequest(
-                Request.Method.GET,
-                URL_JSON_OBJECT,
-                null,
-                response -> {
-                    Log.i("Buy Stock response", "response: " + response);
-                    //update user money
-                },
-                error -> Log.i("Buy Stock error", "error: " + error)) { };
-
-        // Adding request to request queue
-        VolleySingleton.getInstance(context.getApplicationContext()).addToRequestQueue(request);
-    }
-
-    @Override
-    public int getItemCount() {
-        return scrollCardList.size();
+    public StockScrollAdapter.ScrollViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        return new ScrollViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.stock_scroll_view, parent, false));
     }
 
     public class ScrollViewHolder extends RecyclerView.ViewHolder {
@@ -120,4 +53,81 @@ public class StockScrollAdapter extends RecyclerView.Adapter<StockScrollAdapter.
             buyStock = itemView.findViewById(R.id.buyStock_btn);
         }
     }
-}
+
+    @Override
+    public void onBindViewHolder(@NonNull ScrollViewHolder holder, int position) {
+        StockScrollCard model = scrollCardList.get(position);
+        holder.stockName.setText("" + model.getStockName());
+        holder.stockNum.setText("x" + model.getNumPurchased());
+        holder.stockPrice.setText("$" + model.getStockPrice());
+        holder.stockSymbol.setText("" + model.getSymbol());
+        holder.stockID.setText("ID: " + model.getId());
+
+        User Global = User.getInstance();
+        //Set ID to 1 if its not instantiated yet
+        if (Global.getId() <= 0) Global.setId(1);
+        int modelID = model.getId();
+
+        if (model.getNumPurchased() == -1) {
+            holder.stockNum.setVisibility(View.INVISIBLE);
+
+            //buttons
+            holder.sellStock.setOnClickListener(v -> {
+                int numpur = model.getNumPurchased() - 1;
+                holder.stockNum.setText("x" + numpur);
+                SellStock(this.context, Global, modelID);
+            });
+
+            holder.buyStock.setOnClickListener(v -> {
+                holder.stockNum.setText("" + model.getNumPurchased() + 1);
+                BuyStock(this.context, Global, modelID);
+            });
+        }
+    }
+
+        public void SellStock(Context context, User user,int modelID){
+            String URL_JSON_OBJECT = "http://coms-309-051.class.las.iastate.edu:8080/sell/" + modelID + "/user/" + user.getId() + "/1";
+
+            //Create new request
+            JsonObjectRequest request = new JsonObjectRequest(
+                    Request.Method.GET,
+                    URL_JSON_OBJECT,
+                    null,
+                    response -> {
+                        Log.i("Sell Stock response", "response: " + response);
+                        //update user money
+                    },
+                    error -> Log.i("Sell Stock error", "error: " + error)) {
+            };
+
+            // Adding request to request queue
+            VolleySingleton.getInstance(context.getApplicationContext()).addToRequestQueue(request);
+        }
+
+        public void BuyStock(Context context, User user,int modelID){
+            String URL_JSON_OBJECT = "http://coms-309-051.class.las.iastate.edu:8080/buy/" + modelID + "/user/" + user.getId() + "amt/1";
+
+            //Create new request
+            JsonObjectRequest request = new JsonObjectRequest(
+                    Request.Method.GET,
+                    URL_JSON_OBJECT,
+                    null,
+                    response -> {
+                        Log.i("Buy Stock response", "response: " + response);
+                        //update user money
+                    },
+                    error -> Log.i("Buy Stock error", "error: " + error)) {
+            };
+
+            // Adding request to request queue
+            VolleySingleton.getInstance(context.getApplicationContext()).addToRequestQueue(request);
+        }
+
+        @Override
+        public int getItemCount() {
+            return scrollCardList.size();
+        }
+
+
+    }
+
