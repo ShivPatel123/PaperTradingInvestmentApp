@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_gradient">
+
+    <TextView
+        android:id="@+id/article_title"
+        android:layout_width="383dp"
+        android:layout_height="100dp"
+        android:layout_margin="10dp"
+        android:text="HONGKONG STOCKS SHRINK, CHINDA MANUFACTORUING DOWN, SHIPPING DOWN"
+        android:textAlignment="center"
+        android:textColor="@color/black"
+        android:textSize="24sp"
+        android:textStyle="italic|bold"
+        app:layout_constraintBottom_toTopOf="@+id/notesEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/newsPage_title"
+        app:layout_constraintVertical_bias="0.134" />
+
+    <TextView
+        android:id="@+id/authors_txt"
+        android:layout_width="92dp"
+        android:layout_height="35dp"
+        android:gravity="center"
+        android:text="Authors: "
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.827"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.656" />
+
+    <TextView
+        android:id="@+id/source_txt"
+        android:layout_width="153dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="43dp"
+        android:layout_marginBottom="152dp"
+        android:gravity="center"
+        android:text="Publication Source: "
+        android:textColor="@color/darkBack"
+        android:textSize="17sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.888"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/news_image"
+        app:layout_constraintVertical_bias="0.837" />
+
+    <ImageView
+        android:id="@+id/news_image"
+        android:layout_width="161dp"
+        android:layout_height="187dp"
+        android:layout_marginEnd="16dp"
+        android:background="#FFFDFD"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.461"
+        app:srcCompat="@android:drawable/ic_menu_gallery" />
+
+    <TextView
+        android:id="@+id/newsPage_title"
+        android:layout_width="wrap_content"
+        android:layout_height="65dp"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        android:text="News"
+        android:textColor="@color/txtclr"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.491"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/server_notes"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        android:text="Notes: "
+        android:textSize="12sp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/prev_newsPageBtn"
+        android:layout_width="80dp"
+        android:layout_height="48dp"
+        android:layout_margin="10dp"
+        android:backgroundTint="@color/navy_bg"
+        android:text="Prev"
+        android:textColor="@color/txtclr"
+        app:layout_constraintBottom_toTopOf="@+id/article_title"
+        app:layout_constraintEnd_toStartOf="@+id/next_newsPageBtn"
+        app:layout_constraintHorizontal_bias="0.07"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/back_newsPageBtn"
+        app:layout_constraintVertical_bias="0.6" />
+
+    <Button
+        android:id="@+id/next_newsPageBtn"
+        android:layout_width="80dp"
+        android:layout_height="48dp"
+        android:layout_margin="10dp"
+        android:backgroundTint="@color/navy_bg"
+        android:text="Next"
+        android:textColor="@color/txtclr"
+        app:layout_constraintBottom_toTopOf="@+id/article_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.957"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/back_newsPageBtn"
+        android:layout_width="120dp"
+        android:layout_height="50dp"
+        android:backgroundTint="@color/background"
+        android:text="Back"
+        android:textColor="@color/txtclr"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/newsPage_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.048"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/summary_txt"
+        android:layout_width="199dp"
+        android:layout_height="377dp"
+        android:layout_marginStart="16dp"
+        android:text="Local stocks are headed for a fourth month of drop after an official report shows Chinese manufacturing contracted more than expected, underscoring concerns about the nation's economic recovery momentum."
+        android:textSize="17sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/news_image"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.709" />
+
+    <Button
+        android:id="@+id/url_btn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="140dp"
+        android:layout_marginBottom="16dp"
+        android:text="Full Article"
+        app:layout_constraintBottom_toTopOf="@+id/notesEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.912"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/news_image"
+        app:layout_constraintVertical_bias="0.893" />
+
+    <TextView
+        android:id="@+id/index_txt"
+        android:layout_width="71dp"
+        android:layout_height="37dp"
+        android:layout_marginEnd="72dp"
+        android:layout_marginBottom="32dp"
+        android:text="1/50"
+        android:gravity="center"
+        app:layout_constraintBottom_toTopOf="@+id/article_title"
+        app:layout_constraintEnd_toStartOf="@+id/next_newsPageBtn"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toEndOf="@+id/prev_newsPageBtn"
+        app:layout_constraintTop_toBottomOf="@+id/newsPage_title"
+        app:layout_constraintVertical_bias="1.0" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
