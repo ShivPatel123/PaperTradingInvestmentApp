@@ -91,6 +91,13 @@ public class GroupPage extends AppCompatActivity implements NavigationView.OnNav
             startActivity(intent);
         });
 
+        //Create new Group
+        Button createGroup = findViewById(R.id.createGroup_Adminbtn);
+        createGroup.setOnClickListener(view -> {
+            Intent intent = new Intent(GroupPage.this, CreateGroup.class);
+            startActivity(intent);
+        });
+
 
         //Initialize recycler view (user)
         RecyclerView recyclerView = findViewById(R.id.yourGroup_recyc);

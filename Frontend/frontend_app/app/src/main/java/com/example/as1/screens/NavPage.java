@@ -237,8 +237,8 @@ public class NavPage extends AppCompatActivity implements NavigationView.OnNavig
                     }
 
                     double stockPercentNum = (changeTotal / user.getMoney()) * 100;
-                    String stockPercent = String.format("%.3f", stockPercentNum);
-                    stockChange_txt.setText("" + changeTotal + " || " + stockPercent + "%");
+                    String stockPercent = String.format("%.2f", stockPercentNum);
+                    stockChange_txt.setText("$" + changeTotal + "\n" + stockPercent + "%");
 
                     ImageView fundsImage = findViewById(R.id.stock_ImageView1);
                     if(changeTotal < 0){
