@@ -188,6 +188,9 @@ public class StockPage extends AppCompatActivity implements NavigationView.OnNav
             }
             else {
                 int size = finalStockArrayList2.size()-1;
+                if(size < 0){
+                    size = 0;
+                }
                 if(index[0] == 0){
                     index[0] = size;
                     nextIndex2[0] = size;
