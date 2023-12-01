@@ -1,64 +1,27 @@
 stages:
- - maventry
- - maventest
- - mavenDeploy
- - androidbuild
- - androidtest
-
-maven-build:
- stage: maventry
- tags:
-  - springboot_tag
- script:
-  - cd Backend/kokottni/Data
-  - mvn package
-
-maven-test:
-  stage: maventest
-  tags:
-    - springboot_tag
-  script:
-    - cd Backend/kokottni/Data
-    - mvn test
-  artifacts:
-    paths:
-      - Backend/kokottni/Data/target/*.jar
-
-autoDeploy:
-  stage: mavenDeploy
-  tags:
-    - springboot_tag
-  script:
-    - cd Backend/kokottni/Data
-    - mvn package
-    - sudo mv target/*.jar /target/web-demo.jar
-    - sudo systemctl stop system-web-demo
-    - sudo systemctl start system-web-demo
-
+  - androidbuild
+  - androidtest 
+  
 android-build:
- image: gjandres/android-ci:latest
- stage: androidbuild
- tags:
-  - android_tag
- before_script:
-  - export GRADLE_USER_HOME='pwd'/.gradle
-  - chmod +x ./Frontend/frontend_app
- script:
-  - cd Frontend/frontend_app
-  - chmod +x ./gradlew
-  - ./gradlew build
- artifacts:
-    paths:
-    - Android_test/app/build/outputs/
+  image: afirefly/android-ci:java17
+  stage: androidbuild
+  tags:
+   - yourname_tag                   # <-- change to your runner's tag
+  before_script:                    # change 'Frontend' to where you have 'gradlew'
+    - export GRADLE_USER_HOME=`pwd`/.gradle
+    - chmod +x ./Frontend/gradlew
+  script:
+    - cd Frontend                   # change 'Frontend' to where you have 'gradlew' (do not add / in the beginning)
+    - ./gradlew build
 
 android-test:
-  image: gjandres/android-ci:latest
-  stage: androidtest
-  before_script:
-  - export GRADLE_USER_HOME='pwd'/.gradle
-  - chmod +x ./Frontend/frontend_app
-  tags:
-  - android_tag
-  script:
-  - cd Frontend/frontend_app
-  - ./gradlew test
+   image: afirefly/android-ci:java17
+   stage: androidtest
+   tags:
+    - joshw3_tag                  # <-- change to your runner's tag
+   before_script:                   # change 'Frontend' to where you have 'gradlew'
+     - export GRADLE_USER_HOME=`pwd`/.gradle
+     - chmod +x ./Frontend/gradlew
+   script:
+     - cd Frontend                  # change 'Frontend' to where you have 'gradlew' (do not add / in the beginning)
+     - ./gradlew test
