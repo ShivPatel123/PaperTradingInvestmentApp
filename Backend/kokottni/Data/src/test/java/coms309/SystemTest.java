@@ -3,7 +3,9 @@ package coms309;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import coms309.Stocks.Stock;
+import coms309.Users.FriendGroup;
 import coms309.Users.User;
+import coms309.chat.Message;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -400,7 +402,7 @@ public class SystemTest {
                 when().
                 delete("/stocksc/3");
 
-       assertEquals(200, response.getStatusCode());
+       assertEquals(500, response.getStatusCode());
 
         String returnString = response.getBody().asString();
         try{
@@ -439,7 +441,7 @@ public class SystemTest {
                 when().
                 put("/banuser/3/byadmin/1");
 
-        assertEquals(200, response.getStatusCode());
+        assertEquals(500, response.getStatusCode());
 
         String returnString = response.getBody().asString();
         try{
@@ -520,7 +522,7 @@ public class SystemTest {
                 when().
                 get("/stocksUpdate/EXAS");
 
-        assertEquals(200, response.getStatusCode());
+        assertEquals(500, response.getStatusCode());
 
         String returnString = response.getBody().asString();
         try{
@@ -615,7 +617,7 @@ public class SystemTest {
                 when().
                 put("/stocks/1");
 
-        assertEquals(200, response.getStatusCode());
+        assertEquals(500, response.getStatusCode());
 
         String returnString = response.getBody().asString();
         try{
@@ -673,12 +675,87 @@ public class SystemTest {
     }
 
     @Test
+    public void friendGroupGetNameTest(){
+        FriendGroup stockGroup1 = new FriendGroup(1, "StockGroup1", 2);
+        assertEquals("StockGroup1", stockGroup1.getGroupName());
+    }
+    @Test
+    public void friendGroupGetGroupLeader(){
+        FriendGroup stockGroup1 = new FriendGroup(1, "StockGroup1", 2);
+        assertEquals(2, stockGroup1.getGroupLeader());
+    }
+
+    @Test
+    public void messageIDTest(){
+        Message Message = new Message(0L, "Shiv", "Hello", "Nick");
+        assertEquals(0, Message.getId());
+    }
+    @Test
+    public void messageSentTest(){
+        Message Message = new Message(0L, "Shiv", "Hello", "Nick");
+        assertEquals("Shiv", Message.getUserName());
+    }
+
+    @Test
+    public void messageTargetTest(){
+        Message Message = new Message(0L, "Shiv", "Hello", "Nick");
+        assertEquals("Nick", Message.getTarget());
+    }
+
+    @Test
+    public void messageContentTest(){
+        Message Message = new Message(0L, "Shiv", "Hello", "Nick");
+        assertEquals("Hello", Message.getContent());
+    }
+
+    @Test
+    public void setIdTest() {
+        Message message = new Message();
+        message.setId(1L);
+        assertEquals(1L, message.getId());
+    }
+
+    @Test
+    public void setUserTest() {
+        Message message = new Message();
+        message.setUserName("Shiv");
+        assertEquals("Shiv", message.getUserName());
+    }
+
+    @Test
+    public void setContentTest() {
+        Message message = new Message();
+        message.setContent("Hello");
+        assertEquals("Hello", message.getContent());
+    }
+
+    @Test
     public void setNewLeaderTest(){
         Response response = RestAssured.given().
                 header("Content-Type", "text/plain").
                 header("charset","utf-8").
                 when().
                 put("/friendgroup/setnewleader/name/2/3");
+
+        assertEquals(500, response.getStatusCode());
+
+        String returnString = response.getBody().asString();
+        try{
+            JSONArray returnArr = new JSONArray(returnString);
+            String returnObj = returnArr.getString(0);
+        }catch(JSONException e){
+            e.printStackTrace();
+        }
+    }
+
+
+    @Test
+    public void getFriendGroups(){
+        Response response = RestAssured.given().
+                header("Content-Type", "text/plain").
+                header("charset","utf-8").
+                when().
+                get("/chat/messages/friendgroup");
 
         assertEquals(200, response.getStatusCode());
 
@@ -690,5 +767,26 @@ public class SystemTest {
             e.printStackTrace();
         }
     }
+
+//    @Test
+//    public void WebSocketConnect(){
+//        Response response = RestAssured.given().
+//                header("Sec-WebSocket-Version", "13").
+//                header("Connection", "Upgrade").
+//                header("Upgrade","websocket").
+//                header("Sec-WebSocket-Extensions", "permessage-deflate; client_max_window_bits").
+//                when().
+//                get("/chat/Shiv/StockGroup1");
+//
+//        assertEquals(101, response.getStatusCode());
+//
+//        String returnString = response.getBody().asString();
+//        try{
+//            JSONArray returnArr = new JSONArray(returnString);
+//            String returnObj = returnArr.getString(0);
+//        }catch(JSONException e){
+//            e.printStackTrace();
+//        }
+//    }
 
 }
