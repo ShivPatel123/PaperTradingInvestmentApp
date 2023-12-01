@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_gradient">
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/groupUser_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="223dp"
+        android:layout_below="@+id/group_Admin_dash_title"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:background="@drawable/border"
+        android:foregroundGravity="center_horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.526"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/group_Admin_dash_title"
+        app:layout_constraintVertical_bias="0.104" />
+
+    <Button
+        android:id="@+id/createGroup_Adminbtn"
+        android:layout_width="144dp"
+        android:layout_height="48dp"
+        android:text="Create Group"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.891"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.537" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/groups_scroll"
+        android:layout_width="match_parent"
+        android:layout_height="223dp"
+        android:layout_below="@+id/group_Admin_dash_title"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="10dp"
+        android:background="@drawable/border"
+        android:foregroundGravity="center_horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.842"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/group_Admin_dash_title"
+        app:layout_constraintVertical_bias="0.826" />
+
+    <TextView
+        android:id="@+id/group_Admin_dash_title"
+        android:layout_width="411dp"
+        android:layout_height="65dp"
+        android:background="@color/darkBack"
+        android:ems="10"
+        android:gravity="right|center_vertical"
+        android:inputType="text"
+        android:text="  Group Admin Dashboard    "
+        android:textColor="@color/txtclr"
+        android:textSize="26sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/userTitle_txt"
+        android:layout_width="78dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="12dp"
+        android:background="@color/darkBack"
+        android:gravity="center"
+        android:text="Members"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/txtclr"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/groupUser_scroll"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.087"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/group_Admin_dash_title"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <TextView
+        android:id="@+id/groupTitle_txt"
+        android:layout_width="78dp"
+        android:layout_height="36dp"
+        android:layout_marginTop="37dp"
+        android:background="@color/darkBack"
+        android:gravity="center"
+        android:text="Groups"
+        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+        android:textColor="@color/txtclr"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/groups_scroll"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.087"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/groupUser_scroll"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/back_groupAdminBtn"
+        android:layout_width="77dp"
+        android:layout_height="50dp"
+        android:backgroundTint="@color/background"
+        android:text="Back"
+        android:textColor="@color/txtclr"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/group_Admin_dash_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.034"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.382" />
+</androidx.constraintlayout.widget.ConstraintLayout>
