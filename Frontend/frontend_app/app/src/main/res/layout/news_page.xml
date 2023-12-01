@@ -11,13 +11,15 @@
         android:layout_width="383dp"
         android:layout_height="100dp"
         android:layout_margin="10dp"
+        android:layout_marginTop="72dp"
         android:text="HONGKONG STOCKS SHRINK, CHINDA MANUFACTORUING DOWN, SHIPPING DOWN"
         android:textAlignment="center"
         android:textColor="@color/black"
         android:textSize="24sp"
         android:textStyle="italic|bold"
-        app:layout_constraintBottom_toTopOf="@+id/notesEditText"
+        app:layout_constraintBottom_toTopOf="@+id/server_notes"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.571"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/newsPage_title"
         app:layout_constraintVertical_bias="0.134" />
@@ -100,6 +102,7 @@
         android:layout_width="80dp"
         android:layout_height="48dp"
         android:layout_margin="10dp"
+        android:layout_marginBottom="93dp"
         android:backgroundTint="@color/navy_bg"
         android:text="Prev"
         android:textColor="@color/txtclr"
@@ -107,8 +110,8 @@
         app:layout_constraintEnd_toStartOf="@+id/next_newsPageBtn"
         app:layout_constraintHorizontal_bias="0.07"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/back_newsPageBtn"
-        app:layout_constraintVertical_bias="0.6" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <Button
         android:id="@+id/next_newsPageBtn"
@@ -153,7 +156,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.709" />
+        app:layout_constraintVertical_bias="0.768" />
 
     <Button
         android:id="@+id/url_btn"
@@ -162,7 +165,7 @@
         android:layout_marginTop="140dp"
         android:layout_marginBottom="16dp"
         android:text="Full Article"
-        app:layout_constraintBottom_toTopOf="@+id/notesEditText"
+        app:layout_constraintBottom_toTopOf="@+id/server_notes"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.912"
         app:layout_constraintStart_toStartOf="parent"
