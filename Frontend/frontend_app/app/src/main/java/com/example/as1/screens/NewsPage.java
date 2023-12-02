@@ -2,7 +2,11 @@ package com.example.as1.screens;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -21,12 +25,16 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
 public class NewsPage extends AppCompatActivity {
 
-    Button back_btn, prev_btn, next_btn, fullArticle_btn;
+    Button back_btn, prev_btn, next_btn;
     ImageView imageView;
     TextView index_display, news_title,news_summary, authors_display, src_display, server_notes;
 
@@ -35,6 +43,16 @@ public class NewsPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.news_page);
         final int[] news_index = {0};
+
+        //Set thread permissions to access image url over network
+        int SDK_INT = android.os.Build.VERSION.SDK_INT;
+        if (SDK_INT > 8)
+        {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                    .permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+
+        }
 
         //get all news in an array
         ArrayList<NewsArticle> newsArticles;
@@ -90,11 +108,24 @@ public class NewsPage extends AppCompatActivity {
                 }
                 NewsArticle nextArticle;
                 nextArticle = newsArticles1.get(news_nextIndex[0]);
-                index_display.setText(""+ news_index[0] + "/50");
+                index_display.setText(""+ (news_index[0] + 1) + "/50");
                 news_summary.setText(nextArticle.getSummary());
                 news_title.setText("" + nextArticle.getTitle());
                 authors_display.setText("" + nextArticle.getAuthors());
                 src_display.setText(nextArticle.getSource());
+
+                //set image
+                String url = nextArticle.getImage();
+                InputStream URLcontent = null;
+                try {
+                    URLcontent = (InputStream) new URL(url).getContent();
+                }catch (MalformedURLException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                    Drawable image = Drawable.createFromStream(URLcontent, "banner_image");
+                imageView.setImageDrawable(image);
             }
         });
 
@@ -118,11 +149,24 @@ public class NewsPage extends AppCompatActivity {
                 }
                 NewsArticle nextArticle;
                 nextArticle = newsArticles2.get(nextIndex[0]);
-                index_display.setText(""+ news_index[0] + "/50");
+                index_display.setText(""+ (news_index[0] + 1) + "/50");
                 news_summary.setText(nextArticle.getSummary());
                 news_title.setText("" + nextArticle.getTitle());
                 authors_display.setText("" + nextArticle.getAuthors());
                 src_display.setText(nextArticle.getSource());
+
+                //set image
+                String url = nextArticle.getImage();
+                InputStream URLcontent = null;
+                try {
+                    URLcontent = (InputStream) new URL(url).getContent();
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();
+                }catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+                Drawable image = Drawable.createFromStream(URLcontent, "banner_image");
+                imageView.setImageDrawable(image);
             }
         });
     }
@@ -157,13 +201,14 @@ public class NewsPage extends AppCompatActivity {
                                 object = (JSONObject) feed.get(i);
                                 newsObject = new NewsArticle("empty", "n", "n","n", "n", authors);
 
+                                //set authors
                                 JSONArray authorsJson = (JSONArray) object.get("authors");
                                 List<String> authorsString = new ArrayList<String>();
                                 for (int j = 0; j < authorsJson.length(); j++) {
                                     authorsString.add(authorsJson.getString(j));
-
                                 }
                                 newsObject.setAuthors(authorsString);
+
                                 newsObject.setImage(object.getString("banner_image"));
                                 newsObject.setSource(object.getString("source"));
                                 newsObject.setTitle(object.getString("title"));
@@ -175,13 +220,26 @@ public class NewsPage extends AppCompatActivity {
                         } catch (JSONException e) {
                             throw new RuntimeException(e);
                         }
-                        //parse first object
+                    //parse first object
                     newsObject = newsArticles.get(0);
                     index_display.setText("1/50");
                     news_summary.setText(newsObject.getSummary());
                     news_title.setText("" + newsObject.getTitle());
                     authors_display.setText("" + newsObject.getAuthors());
                     src_display.setText(newsObject.getSource());
+
+                    //set image
+                    String url = newsObject.getImage();
+                    InputStream URLcontent = null;
+                    try {
+                        URLcontent = (InputStream) new URL(url).getContent();
+                    } catch (MalformedURLException e) {
+                        e.printStackTrace();
+                    }catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
+                    Drawable image = Drawable.createFromStream(URLcontent, "banner_image");
+                    imageView.setImageDrawable(image);
 
                 },
 
