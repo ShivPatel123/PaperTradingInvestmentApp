@@ -66,6 +66,7 @@ public class StockPage extends AppCompatActivity implements NavigationView.OnNav
         //get all stocks in an array
         ArrayList<Stock> stockArrayList = new ArrayList<>();
         stockArrayList = getAllStocks(this.getApplicationContext());
+        Log.i("StockPage getAllStocks after req", "stock array list for screen: " + stockArrayList.toString());
 
         //Side nav bar
         drawerLayout = findViewById(R.id.drawer_layout_stock);
@@ -114,8 +115,10 @@ public class StockPage extends AppCompatActivity implements NavigationView.OnNav
 
         //View News Button
         toNews_btn = findViewById(R.id.toNews_btn);
-        newStock_btn.setOnClickListener(view -> {
+        toNews_btn.setOnClickListener(view -> {
                 Intent newsIntent = new Intent(StockPage.this, NewsPage.class);
+                //+ 1 so index matches stock id
+                index[0] += 1;
                 newsIntent.putExtra("index", index[0]);
                 startActivity(newsIntent);
         });

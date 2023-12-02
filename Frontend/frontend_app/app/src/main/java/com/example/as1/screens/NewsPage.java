@@ -22,6 +22,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class NewsPage extends AppCompatActivity {
 
@@ -36,12 +37,29 @@ public class NewsPage extends AppCompatActivity {
         final int[] news_index = {0};
 
         //get all news in an array
-        ArrayList<NewsArticle> newsArticles = new ArrayList<>();
+        ArrayList<NewsArticle> newsArticles;
         //get index of stock page display
         Intent newsIntent = getIntent();
-        int id = newsIntent.getIntExtra("index", 0);
+        int id = newsIntent.getIntExtra("index", 1);
+        Log.i("get Intent", " id: " + id);
+
         //get news of that index
         newsArticles = getNews(this.getApplicationContext(), id);
+
+        // Put thread to sleep to allow volley to handle the request
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+        }
+        Log.i("after getNews req", "newsArticles[] = " + newsArticles);
+
+        //Back Button
+        back_btn = findViewById(R.id.back_newsPageBtn);
+        back_btn.setOnClickListener(view -> {
+            Intent intent = new Intent(NewsPage.this, StockPage.class);
+            startActivity(intent);
+        });
+
 
         imageView = findViewById(R.id.news_image);
         index_display = findViewById(R.id.index_txt);
@@ -111,7 +129,7 @@ public class NewsPage extends AppCompatActivity {
 
 
     public ArrayList<NewsArticle> getNews(Context context, int id) {
-        String URL_JSON_OBJECT = "http://10.90.75.130:8080/news/" + id;
+        String URL_JSON_OBJECT = "http://10.90.75.130:8080/stocks/news/" + id;
         ArrayList<NewsArticle> newsArticles = new ArrayList<>();
         imageView = findViewById(R.id.news_image);
         index_display = findViewById(R.id.index_txt);
@@ -131,30 +149,39 @@ public class NewsPage extends AppCompatActivity {
 
                     JSONObject object;
                     JSONArray feed;
-                    String[] authors = {};
-                    NewsArticle newsObject = new NewsArticle("empty", "n", "n","n", "n", authors);
+                    List<String> authors = null;
+                    NewsArticle newsObject;
                         try {
                             feed = response.getJSONArray("feed");
-                            for (int i = 0; i < response.length(); i++) {
+                            for (int i = 0; i < feed.length(); i++) {
                                 object = (JSONObject) feed.get(i);
-                                newsObject.setAuthors((String[]) object.get("authors"));
+                                newsObject = new NewsArticle("empty", "n", "n","n", "n", authors);
+
+                                JSONArray authorsJson = (JSONArray) object.get("authors");
+                                List<String> authorsString = new ArrayList<String>();
+                                for (int j = 0; j < authorsJson.length(); j++) {
+                                    authorsString.add(authorsJson.getString(j));
+
+                                }
+                                newsObject.setAuthors(authorsString);
                                 newsObject.setImage(object.getString("banner_image"));
                                 newsObject.setSource(object.getString("source"));
                                 newsObject.setTitle(object.getString("title"));
                                 newsObject.setUrl(object.getString("url"));
                                 newsObject.setSummary(object.getString("summary"));
                                 newsArticles.add(newsObject);
+                                Log.i(" new news object", "newsArticles["+ i + "]: " + newsObject);
                             }
                         } catch (JSONException e) {
                             throw new RuntimeException(e);
                         }
-                    NewsArticle nextArticle;
-                    nextArticle = newsArticles.get(0);
-                    index_display.setText("0/50");
-                    news_summary.setText(nextArticle.getSummary());
-                    news_title.setText("" + nextArticle.getTitle());
-                    authors_display.setText("" + nextArticle.getAuthors());
-                    src_display.setText(nextArticle.getSource());
+                        //parse first object
+                    newsObject = newsArticles.get(0);
+                    index_display.setText("1/50");
+                    news_summary.setText(newsObject.getSummary());
+                    news_title.setText("" + newsObject.getTitle());
+                    authors_display.setText("" + newsObject.getAuthors());
+                    src_display.setText(newsObject.getSource());
 
                 },
 
