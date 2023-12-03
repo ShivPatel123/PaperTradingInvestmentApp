@@ -143,6 +143,16 @@ public class StockPage extends AppCompatActivity implements NavigationView.OnNav
             SellStock(this.getApplicationContext(), getGlobal, (int) id2);
         });
 
+        //History Button
+        Button toHistory_btn = findViewById(R.id.toHistory_btn);
+        toHistory_btn.setOnClickListener(view -> {
+            Intent historyIntent = new Intent(StockPage.this, HistoryPage.class);
+            //+ 1 so index matches stock id
+            index[0] += 1;
+            historyIntent.putExtra("index", index[0]);
+            startActivity(historyIntent);
+        });
+
         //Delete Stock Button
         delete_btn = findViewById(R.id.delete_StockPagebtn);
         serverNotes = findViewById(R.id.notesEditText);
