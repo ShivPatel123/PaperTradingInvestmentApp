@@ -76,8 +76,20 @@ public class LoggedInPage extends AppCompatActivity implements NavigationView.On
         RelativeLayout stocksLayout = findViewById(R.id.stocksRL);
         RelativeLayout profileLayout = findViewById(R.id.profileRL);
         RelativeLayout groupsLayout = findViewById(R.id.groupsRL);
-        RelativeLayout tutorialLayout = findViewById(R.id.tutorialRL);
-        RelativeLayout logoutLayout = findViewById(R.id.logoutRL);
+
+
+//        RelativeLayout tutorialLayout = findViewById(R.id.tutorialRL);
+//        RelativeLayout logoutLayout = findViewById(R.id.logoutRL);
+
+        //temp1RL
+        //temp2RL
+        RelativeLayout portfolioLayout = findViewById(R.id.tutorialRL);
+        RelativeLayout newsLayout = findViewById(R.id.logoutRL);
+
+        RelativeLayout tutorialLayout = findViewById(R.id.temp1RL);
+        RelativeLayout logoutLayout = findViewById(R.id.temp2RL);
+
+
 
 //        RelativeLayout tempLoginLayout = findViewById(R.id.tempLogin);
 
@@ -127,6 +139,24 @@ public class LoggedInPage extends AppCompatActivity implements NavigationView.On
 //                setContentView(R.layout.login_page);
             }
         });
+
+
+
+        portfolioLayout.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                Intent intent = new Intent(LoggedInPage.this, PortfolioPage.class);
+                startActivity(intent);
+            }
+        });
+
+        newsLayout.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                Intent intent = new Intent(LoggedInPage.this, NewsPage.class);
+                startActivity(intent);
+            }
+        });
+
+
 
 //        tempLoginLayout.setOnClickListener(new View.OnClickListener(){
 //            public void onClick(View v) {

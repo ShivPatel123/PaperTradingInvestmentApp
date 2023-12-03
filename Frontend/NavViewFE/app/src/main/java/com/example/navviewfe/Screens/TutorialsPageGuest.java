@@ -33,7 +33,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 
-public class TutorialsPage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class TutorialsPageGuest extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     protected Button newStock_btn, pageLeft, pageRight, buy_btn, sell_btn, delete_btn, toNews_btn;
     protected TextView stockName, stockSymbol, serverNotes;
@@ -50,7 +50,7 @@ public class TutorialsPage extends AppCompatActivity implements NavigationView.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tutorial_page);
+        setContentView(R.layout.tutorial_page_guest);
         final int[] index = {0};
 
 
@@ -89,14 +89,14 @@ public class TutorialsPage extends AppCompatActivity implements NavigationView.O
         pageRight = findViewById(R.id.next_StockPageBtn);
 
         pageRight.setOnClickListener(view -> {
-            Intent intent = new Intent(TutorialsPage.this, StartPage.class);
+            Intent intent = new Intent(TutorialsPageGuest.this, StartPage.class);
             startActivity(intent);
         });
 
         pageLeft = findViewById(R.id.prev_StockPageBtn);
 
         pageLeft.setOnClickListener(view -> {
-            Intent intent = new Intent(TutorialsPage.this, MainActivity.class);
+            Intent intent = new Intent(TutorialsPageGuest.this, MainActivity.class);
             startActivity(intent);
         });
 
@@ -119,16 +119,16 @@ public class TutorialsPage extends AppCompatActivity implements NavigationView.O
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         if (menuItem.getItemId() == R.id.nav_home){
-            Intent intent = new Intent(TutorialsPage.this, MainActivity.class);
+            Intent intent = new Intent(TutorialsPageGuest.this, MainActivity.class);
             startActivity(intent);
         } else if (menuItem.getItemId() == R.id.nav_stock){
-            Intent intent = new Intent(TutorialsPage.this, StockPageGuest.class);
+            Intent intent = new Intent(TutorialsPageGuest.this, StockPageGuest.class);
             startActivity(intent);
         } else if (menuItem.getItemId() == R.id.nav_stock_list) {
-            Intent intent = new Intent(TutorialsPage.this, StockListGuest.class);
+            Intent intent = new Intent(TutorialsPageGuest.this, StockListGuest.class);
             startActivity(intent);
         } else if (menuItem.getItemId() == R.id.nav_login) {
-            Intent intent = new Intent(TutorialsPage.this, StartPage.class);
+            Intent intent = new Intent(TutorialsPageGuest.this, StartPage.class);
             startActivity(intent);
         }
 

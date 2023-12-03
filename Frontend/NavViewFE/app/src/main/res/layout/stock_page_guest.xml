@@ -229,6 +229,7 @@
             android:text="New Stock"
             android:textColor="@color/txtclr"
             android:textStyle="bold"
+            android:visibility="invisible"
             app:layout_constraintBottom_toBottomOf="@+id/stockPage_title"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.944"

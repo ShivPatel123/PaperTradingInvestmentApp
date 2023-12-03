@@ -257,7 +257,7 @@
                             android:layout_below="@id/tutorial"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
-                            android:text="Tutorial"
+                            android:text="Portfolio"
                             android:textSize="24sp"
                             app:fontFamily="@font/adamina" />
 
@@ -267,7 +267,7 @@
                             android:layout_height="75dp"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="15dp"
-                            app:srcCompat="@drawable/tutorial_icon" />
+                            app:srcCompat="@drawable/portfolio_icon" />
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
 
@@ -289,7 +289,7 @@
                             android:layout_below="@id/logout"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="10dp"
-                            android:text="Logout"
+                            android:text="News"
                             android:textSize="24sp"
                             app:fontFamily="@font/adamina" />
 
@@ -299,7 +299,7 @@
                             android:layout_height="75dp"
                             android:layout_centerHorizontal="true"
                             android:layout_marginTop="15dp"
-                            app:srcCompat="@drawable/logout_icon" />
+                            app:srcCompat="@drawable/news_icon" />
                     </RelativeLayout>
                 </androidx.cardview.widget.CardView>
 

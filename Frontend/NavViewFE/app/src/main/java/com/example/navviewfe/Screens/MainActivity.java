@@ -84,13 +84,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         RelativeLayout tempLoginLayout = findViewById(R.id.tempLogin);
 
+        RelativeLayout tempTutorialLayout = findViewById(R.id.tempTutorial);
+
 
 
         stockListLayout.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
 //                setContentView(R.layout.activity_profile);
 //                setContentView(R.layout.stock_list_page);
-                Intent intent = new Intent(MainActivity.this, StockList.class);
+                Intent intent = new Intent(MainActivity.this, StockListGuest.class);
                 startActivity(intent);
 
             }
@@ -98,7 +100,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         stocksLayout.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, StockPage.class);
+                Intent intent = new Intent(MainActivity.this, StockPageGuest.class);
                 startActivity(intent);
 //                setContentView(R.layout.stock_list_page);
 
@@ -119,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         tutorialLayout.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, TutorialsPage.class);
+                Intent intent = new Intent(MainActivity.this, TutorialsPageGuest.class);
                 startActivity(intent);
             }
         });
@@ -135,6 +137,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 //                setContentView(R.layout.login_page);
 
                 Intent intent = new Intent(MainActivity.this, StartPage.class);
+                startActivity(intent);
+            }
+        });
+
+        tempTutorialLayout.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+
+                Intent intent = new Intent(MainActivity.this, TutorialsPageGuest.class);
                 startActivity(intent);
             }
         });
@@ -157,10 +167,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         if (menuItem.getItemId() == R.id.nav_home){
 
         } else if (menuItem.getItemId() == R.id.nav_stock){
-            Intent intent = new Intent(MainActivity.this, StockList.class);
+            Intent intent = new Intent(MainActivity.this, StockPageGuest.class);
             startActivity(intent);
         } else if (menuItem.getItemId() == R.id.nav_stock_list) {
-            Intent intent = new Intent(MainActivity.this, StockList.class);
+            Intent intent = new Intent(MainActivity.this, StockListGuest.class);
             startActivity(intent);
         } else if (menuItem.getItemId() == R.id.nav_login) {
             Intent intent = new Intent(MainActivity.this, StartPage.class);

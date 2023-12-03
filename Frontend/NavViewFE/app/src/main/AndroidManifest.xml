@@ -82,7 +82,21 @@
         <activity
             android:name=".Screens.LoggedInPage"
             android:exported="true" />
-
+        <activity
+            android:name=".Screens.NewsPage"
+            android:exported="true" />
+        <activity
+            android:name=".Screens.StockListGuest"
+            android:exported="true" />
+        <activity
+            android:name=".Screens.StockPageGuest"
+            android:exported="true" />
+        <activity
+            android:name=".Screens.HistoryPage"
+            android:exported="true" />
+        <activity
+            android:name=".Screens.TutorialsPageGuest"
+            android:exported="true" />
 
         <meta-data
             android:name="preloaded_fonts"

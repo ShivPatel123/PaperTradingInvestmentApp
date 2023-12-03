@@ -1,10 +1,12 @@
 package com.example.navviewfe.Controllers;
 
+import java.util.List;
+
 public class NewsArticle {
     String title, url, summary, source, image;
-    public String[] authors = {};
+    public List<String> authors;
 
-    public NewsArticle(String title, String url, String summary, String source, String image, String[] authors) {
+    public NewsArticle(String title, String url, String summary, String source, String image,  List<String> authors) {
         this.title = title;
         this.url = url;
         this.summary = summary;
@@ -53,11 +55,11 @@ public class NewsArticle {
         this.image = image;
     }
 
-    public String[] getAuthors() {
+    public List<String> getAuthors() {
         return authors;
     }
 
-    public void setAuthors(String[] authors) {
+    public void setAuthors(List<String> authors) {
         this.authors = authors;
     }
 

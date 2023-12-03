@@ -1,6 +1,7 @@
 package com.example.navviewfe.Controllers.RecycleViews;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,8 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.navviewfe.Controllers.User;
 import com.example.navviewfe.ExternalControllers.VolleySingleton;
 import com.example.navviewfe.R;
+import com.example.navviewfe.Screens.MainActivity;
+import com.example.navviewfe.Screens.TutorialsPage;
 
 import java.util.ArrayList;
 
@@ -34,6 +37,7 @@ public class StockScrollAdapter extends RecyclerView.Adapter<StockScrollAdapter.
     public ScrollViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         return new ScrollViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.stock_scroll_view,parent, false));
     }
+
 
 
 
@@ -115,6 +119,15 @@ public class StockScrollAdapter extends RecyclerView.Adapter<StockScrollAdapter.
         CardView card;
         Button sellStock, buyStock;
 
+//        public void myMethod(View v) {
+//            Button sellBtn = (Button)v.findViewById(R.id.sellStock_btn);
+//            Button buyBtn = (Button)v.findViewById(R.id.buyStock_btn);
+//        }
+
+
+
+
+
         public ScrollViewHolder(@NonNull View itemView) {
             super(itemView);
             card = itemView.findViewById(R.id.stockCard1);
@@ -125,6 +138,8 @@ public class StockScrollAdapter extends RecyclerView.Adapter<StockScrollAdapter.
             stockSymbol = itemView.findViewById(R.id.stock1_symbol);
             sellStock = itemView.findViewById(R.id.sellStock_btn);
             buyStock = itemView.findViewById(R.id.buyStock_btn);
+
+
         }
     }
 }
