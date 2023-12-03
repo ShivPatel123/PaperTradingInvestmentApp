@@ -17,6 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import java.util.UUID;
 
 import org.springframework.boot.test.context.SpringBootTest;
 //import org.springframework.boot.web.server.LocalServerPort;
@@ -402,7 +403,7 @@ public class SystemTest {
                 when().
                 delete("/stocksc/3");
 
-       assertEquals(500, response.getStatusCode());
+       assertEquals(200, response.getStatusCode());
 
         String returnString = response.getBody().asString();
         try{
@@ -441,7 +442,7 @@ public class SystemTest {
                 when().
                 put("/banuser/3/byadmin/1");
 
-        assertEquals(500, response.getStatusCode());
+        assertEquals(200, response.getStatusCode());
 
         String returnString = response.getBody().asString();
         try{
@@ -617,7 +618,7 @@ public class SystemTest {
                 when().
                 put("/stocks/1");
 
-        assertEquals(500, response.getStatusCode());
+        assertEquals(200, response.getStatusCode());
 
         String returnString = response.getBody().asString();
         try{
@@ -676,12 +677,12 @@ public class SystemTest {
 
     @Test
     public void friendGroupGetNameTest(){
-        FriendGroup stockGroup1 = new FriendGroup(1, "StockGroup1", 2);
+        FriendGroup stockGroup1 = new FriendGroup(new UUID(0,0), "StockGroup1", 2);
         assertEquals("StockGroup1", stockGroup1.getGroupName());
     }
     @Test
     public void friendGroupGetGroupLeader(){
-        FriendGroup stockGroup1 = new FriendGroup(1, "StockGroup1", 2);
+        FriendGroup stockGroup1 = new FriendGroup(new UUID(0,0), "StockGroup1", 2);
         assertEquals(2, stockGroup1.getGroupLeader());
     }
 
@@ -767,6 +768,7 @@ public class SystemTest {
             e.printStackTrace();
         }
     }
+
 
 //    @Test
 //    public void WebSocketConnect(){
