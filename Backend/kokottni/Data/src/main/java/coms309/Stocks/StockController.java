@@ -103,7 +103,7 @@ public class StockController {
 
 
     @ApiOperation(value = "Deletes a stock from the stockRepository based on its id", response = String.class, tags = "stock")
-    @DeleteMapping(path = "/stocks/{id}")
+    @DeleteMapping(path = "/stocksc/{id}")
     String deleteStock(@PathVariable Long id){
         stockRepository.deleteById(id);
         return success;
