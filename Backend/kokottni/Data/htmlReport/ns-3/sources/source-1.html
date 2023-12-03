@@ -5,7 +5,7 @@
 <html id="htmlId">
 <head>
   <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
-  <title>Coverage Report > Administrator</title>
+  <title>Coverage Report > FriendGroup</title>
   <style type="text/css">
     @import "../../css/coverage.css";
     @import "../../css/idea.min.css";
@@ -22,7 +22,7 @@ Current scope:     <a href="../../index.html">all classes</a>
     <a href="../index.html">coms309.Users</a>
 </div>
 
-<h1>Coverage Summary for Class: Administrator (coms309.Users)</h1>
+<h1>Coverage Summary for Class: FriendGroup (coms309.Users)</h1>
 
 <table class="coverageStats">
 
@@ -38,43 +38,43 @@ Current scope:     <a href="../../index.html">all classes</a>
 </th>
 </tr>
 <tr>
-  <td class="name">Administrator</td>
+  <td class="name">FriendGroup</td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    60%
   </span>
   <span class="absValue">
-    (0/2)
+    (6/10)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    75%
   </span>
   <span class="absValue">
-    (0/9)
+    (12/16)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">Administrator$HibernateProxy$w12sriUO</td>
+    <td class="name">FriendGroup$HibernateProxy$lgTE3RHV</td>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    60%
   </span>
   <span class="absValue">
-    (0/2)
+    (6/10)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    0%
+    75%
   </span>
   <span class="absValue">
-    (0/9)
+    (12/16)
   </span>
 </td>
 </tr>
@@ -87,35 +87,84 @@ Current scope:     <a href="../../index.html">all classes</a>
 <pre>
 <code class="sourceCode" id="sourceCode">&nbsp;package coms309.Users;
 &nbsp;
+&nbsp;import java.util.List;
+&nbsp;import java.util.ArrayList;
 &nbsp;import javax.persistence.*;
 &nbsp;
-&nbsp;import coms309.Stocks.Stock;
-&nbsp;import coms309.Stocks.StockPurchased;
-&nbsp;import coms309.Stocks.StockPurchasedRepository;
-&nbsp;import org.springframework.boot.autoconfigure.kafka.KafkaProperties;
-&nbsp;
-&nbsp;import java.util.*;
+&nbsp;import net.bytebuddy.implementation.bind.annotation.IgnoreForBinding;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
 &nbsp;
 &nbsp;@Entity
-&nbsp;@Table(name = &quot;admin&quot;)
-&nbsp;public class Administrator extends User{
-&nbsp;    public Administrator(Long id, double money, String name, String email, String dob, String username, String password){
-<b class="nc">&nbsp;        super(id, money, name, email, dob, username, password);</b>
-<b class="nc">&nbsp;        this.setPrivilege(&#39;a&#39;);</b>
+&nbsp;@Table(name = &quot;friendgroup&quot;)
+&nbsp;public class FriendGroup {
+&nbsp;
+&nbsp;    @Id
+&nbsp;    @GeneratedValue(strategy = GenerationType.IDENTITY)
+&nbsp;    private int id;
+&nbsp;
+&nbsp;    private String groupName;
+&nbsp;
+&nbsp;    @Column(name = &quot;groupLeaderID&quot;)
+&nbsp;    private long groupLeaderID;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;    @OneToMany(cascade = CascadeType.ALL, mappedBy = &quot;friendGroup&quot; )
+&nbsp;    private List&lt;User&gt; groupMembers;
+&nbsp;
+&nbsp;
+<b class="fc">&nbsp;    public FriendGroup(int id, String groupName, long groupLeaderID){</b>
+<b class="fc">&nbsp;        this.id = id;</b>
+<b class="fc">&nbsp;        this.groupName = groupName;</b>
+<b class="fc">&nbsp;        this.groupLeaderID = groupLeaderID;</b>
 &nbsp;    }
 &nbsp;
-&nbsp;    @Override
-&nbsp;    public boolean equals(Object obj){
-<b class="nc">&nbsp;        if(this == obj) return true;</b>
-<b class="nc">&nbsp;        if(obj == null) return false;</b>
-<b class="nc">&nbsp;        if(getClass() != obj.getClass()) return false;</b>
-<b class="nc">&nbsp;        Administrator other = (Administrator) obj;</b>
-<b class="nc">&nbsp;        if(this.getId() == null){</b>
-<b class="nc">&nbsp;            return other.getId() == null;</b>
-&nbsp;        }else{
-<b class="nc">&nbsp;            return this.getPrivilege() == other.getPrivilege();</b>
-&nbsp;        }
+<b class="fc">&nbsp;    public FriendGroup() {</b>
+<b class="fc">&nbsp;        this.id = 0;</b>
+<b class="fc">&nbsp;        this.groupName = &quot;defaultGroup&quot;;</b>
+<b class="fc">&nbsp;        this.groupLeaderID = 0;</b>
 &nbsp;    }
+&nbsp;
+&nbsp;    public String getGroupName(){
+<b class="fc">&nbsp;        return groupName;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public List&lt;User&gt; getGroupMembers() {
+&nbsp;//        List&lt;String&gt; groupMembersNames = new ArrayList&lt;&gt;();
+&nbsp;//        for(User user : groupMembers){
+&nbsp;//            groupMembersNames.add(user.getName());
+&nbsp;//        }
+&nbsp;//
+&nbsp;//        return groupMembersNames;
+<b class="nc">&nbsp;        return groupMembers;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    public void setGroupName(String groupName){
+<b class="fc">&nbsp;        this.groupName = groupName;</b>
+&nbsp;    }
+&nbsp;
+<b class="fc">&nbsp;    public void setGroupLeader(User user){this.groupLeaderID = user.getId();}</b>
+&nbsp;
+<b class="fc">&nbsp;    public long getGroupLeader(){return groupLeaderID;}</b>
+&nbsp;
+&nbsp;    public void addUser(User user){
+<b class="nc">&nbsp;        groupMembers.add(user);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void removeUser(User user){
+<b class="nc">&nbsp;        groupMembers.remove(user);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    //TODO
+&nbsp;    //getAllMessages(){
+&nbsp;    //return message log from repo
+&nbsp;    //}
+&nbsp;
+<b class="nc">&nbsp;    public boolean findUser(User user){return groupMembers.contains(user);}</b>
+&nbsp;
 &nbsp;}
 </code>
 </pre>
@@ -140,7 +189,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-11-27 15:12</div>
+    <div style="float:right;">generated on 2023-12-03 13:40</div>
 </div>
 </body>
 </html>
