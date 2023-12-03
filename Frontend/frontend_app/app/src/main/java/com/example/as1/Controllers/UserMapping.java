@@ -76,8 +76,8 @@ public interface UserMapping {
     Call<String> addUserToGroup(@Path("groupName") String groupName, @Path("userID") int userID);
 
     //removes user userID from FriendGroup groupName
-    @DELETE("/friendgroup/{groupName}/{userID}")
-    Call<String> removeUserFromGroup(@Path("groupName") String groupName, @Path("userID") int userID);
+    @PUT("/friendgroup/remove/{gname}/{gid}/{uid}")
+    Call<String> removeUserFromGroup(@Path("gname") String groupName, @Path("gid") long gid, @Path("uid") long uid);
 
     //Get list of friend groups
     @GET("/friendgroup")
@@ -90,6 +90,11 @@ public interface UserMapping {
     //Get list of users that are group members
     @GET("/friendgroup/getall/{groupName}")
     Call<List<User>> getUsersFromGroup(@Path("groupName") String groupName);
+
+    //Set Group leader
+    @PUT("/friendgroup/setnewleader/{gname}/{gid}/{uid}")
+    Call<String> setNewLeader(@Path("gname") String gname, @Path("gid") long gid, @Path("uid") long uid);
+
 
 
     /*

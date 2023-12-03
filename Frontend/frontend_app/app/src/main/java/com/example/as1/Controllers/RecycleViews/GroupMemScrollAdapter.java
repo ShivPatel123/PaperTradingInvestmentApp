@@ -4,23 +4,21 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.as1.Controllers.User;
 import com.example.as1.R;
 
 import java.util.ArrayList;
-public class GroupScrollAdapter extends RecyclerView.Adapter<GroupScrollAdapter.ScrollViewHolder> {
+public class GroupMemScrollAdapter extends RecyclerView.Adapter<GroupMemScrollAdapter.ScrollViewHolder> {
 
     Context context;
     ArrayList<GroupMemScrollCard> scrollCardList;
 
-    public GroupScrollAdapter(Context context, ArrayList<GroupMemScrollCard> scrollCardList){
+    public GroupMemScrollAdapter(Context context, ArrayList<GroupMemScrollCard> scrollCardList){
         this.context=context;
         this.scrollCardList = scrollCardList;
     }

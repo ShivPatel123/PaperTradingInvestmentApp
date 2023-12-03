@@ -87,9 +87,7 @@ public class UserScrollAdapter extends RecyclerView.Adapter<UserScrollAdapter.Sc
         return scrollCardList.size();
     }
 
-
     public void postBan(Context context, User user, int modelID) {
-        //TODO: make sure aid (admin id) =  user id
         String URL_JSON_OBJECT = "http://coms-309-051.class.las.iastate.edu:8080/banuser/" + modelID + "/byadmin/" + user.getId();
 
         //Create new request
@@ -107,7 +105,6 @@ public class UserScrollAdapter extends RecyclerView.Adapter<UserScrollAdapter.Sc
     }
 
     public void postUnban(Context context, User user, int modelID) {
-        //TODO: make sure aid (admin id) =  user id
         String URL_JSON_OBJECT = "http://coms-309-051.class.las.iastate.edu:8080/unban/" + modelID + "/byadmin/" + user.getId();
 
         //Create new request
@@ -123,5 +120,4 @@ public class UserScrollAdapter extends RecyclerView.Adapter<UserScrollAdapter.Sc
         // Adding request to request queue
         VolleySingleton.getInstance(context.getApplicationContext()).addToRequestQueue(request);
     }
-
 }

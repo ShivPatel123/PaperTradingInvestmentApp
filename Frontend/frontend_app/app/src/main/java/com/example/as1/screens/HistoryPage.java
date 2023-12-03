@@ -62,7 +62,7 @@ public class HistoryPage extends AppCompatActivity {
 
         Button back_Btn = findViewById(R.id.back_Historybtn);
         back_Btn.setOnClickListener(view -> {
-            Intent intent= new Intent(HistoryPage.this, StockPage.class);;
+            Intent intent= new Intent(HistoryPage.this, StockPage.class);
             startActivity(intent);
         });
     }
@@ -85,8 +85,6 @@ public class HistoryPage extends AppCompatActivity {
                         Log.i(" timeSeries", "getHistory: " + timeSeries);
                         Log.i(" timeSeries keys", "getHistory: " +  timeSeries.keys());
                         Iterator<String> iterator = timeSeries.keys();
-                        timeSeries.getJSONObject(iterator.next());
-                        Log.i(" iterator", "getHistory: " + timeSeries.getJSONObject(iterator.next()));
 
                         JSONObject object;
                         while(iterator.hasNext()) {
