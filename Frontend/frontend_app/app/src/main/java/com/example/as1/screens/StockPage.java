@@ -66,7 +66,7 @@ public class StockPage extends AppCompatActivity implements NavigationView.OnNav
         //get all stocks in an array
         ArrayList<Stock> stockArrayList = new ArrayList<>();
         stockArrayList = getAllStocks(this.getApplicationContext());
-        Log.i("StockPage getAllStocks after req", "stock array list for screen: " + stockArrayList.toString());
+        Log.i("getAllStocks req", "stock array list for screen: " + stockArrayList.toString());
 
         //Side nav bar
         drawerLayout = findViewById(R.id.drawer_layout_stock);
