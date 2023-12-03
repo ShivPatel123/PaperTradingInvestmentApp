@@ -41,40 +41,40 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name">Stock</td>
 <td class="coverageStat">
   <span class="percent">
-    31.2%
+    81.2%
   </span>
   <span class="absValue">
-    (5/16)
+    (13/16)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    43.9%
+    78%
   </span>
   <span class="absValue">
-    (18/41)
+    (32/41)
   </span>
 </td>
 </tr>
   <tr>
-    <td class="name">Stock$HibernateProxy$OJ3ZmGwv</td>
+    <td class="name">Stock$HibernateProxy$JOHL7dhj</td>
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
-    31.2%
+    81.2%
   </span>
   <span class="absValue">
-    (5/16)
+    (13/16)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    43.9%
+    78%
   </span>
   <span class="absValue">
-    (18/41)
+    (32/41)
   </span>
 </td>
 </tr>
@@ -133,14 +133,14 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;
 <b class="fc">&nbsp;    public Long getId(){return id;}</b>
 <b class="nc">&nbsp;    public void setId(Long id){this.id = id;}</b>
-<b class="nc">&nbsp;    public String getSymbol(){return  symbol;}</b>
+<b class="fc">&nbsp;    public String getSymbol(){return  symbol;}</b>
 <b class="nc">&nbsp;    public void setSymbol(String symbol){this.symbol = symbol;}</b>
-<b class="nc">&nbsp;    public String getCompany(){return company;}</b>
+<b class="fc">&nbsp;    public String getCompany(){return company;}</b>
 <b class="nc">&nbsp;    public void setCompany(String company){this.company = company;}</b>
 <b class="fc">&nbsp;    public double getCurrValue(){return currValue;}</b>
-<b class="nc">&nbsp;    public void setCurrValue(double currValue){this.currValue = currValue;}</b>
-<b class="nc">&nbsp;    public double getPrevDayChange(){return prevDayChange;}</b>
-<b class="nc">&nbsp;    public void setPrevDayChange(double prevDayChange){this.prevDayChange = prevDayChange;}</b>
+<b class="fc">&nbsp;    public void setCurrValue(double currValue){this.currValue = currValue;}</b>
+<b class="fc">&nbsp;    public double getPrevDayChange(){return prevDayChange;}</b>
+<b class="fc">&nbsp;    public void setPrevDayChange(double prevDayChange){this.prevDayChange = prevDayChange;}</b>
 &nbsp;    public void setUser(User user, int numBuying, Long id){
 <b class="fc">&nbsp;        StockPurchased curr = new StockPurchased();</b>
 <b class="fc">&nbsp;        curr.setId(id);</b>
@@ -152,24 +152,24 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc">&nbsp;        users.add(curr);</b>
 &nbsp;    }
 &nbsp;
-<b class="nc">&nbsp;    public List&lt;StockPurchased&gt; getUsers(){return users;}</b>
+<b class="fc">&nbsp;    public List&lt;StockPurchased&gt; getUsers(){return users;}</b>
 &nbsp;
 &nbsp;    @Override
 &nbsp;    public int hashCode() {
-<b class="nc">&nbsp;        final int prime = 31;</b>
-<b class="nc">&nbsp;        int result = 1;</b>
-<b class="nc">&nbsp;        result = prime * result + ((id == null) ? 0 : id.hashCode());</b>
-<b class="nc">&nbsp;        return result;</b>
+<b class="fc">&nbsp;        final int prime = 31;</b>
+<b class="fc">&nbsp;        int result = 1;</b>
+<b class="fc">&nbsp;        result = prime * result + ((id == null) ? 0 : id.hashCode());</b>
+<b class="fc">&nbsp;        return result;</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    @Override
 &nbsp;    public boolean equals(Object obj) {
-<b class="nc">&nbsp;        if (this == obj)</b>
+<b class="fc">&nbsp;        if (this == obj)</b>
 <b class="nc">&nbsp;            return true;</b>
-<b class="nc">&nbsp;        if (obj == null)</b>
+<b class="fc">&nbsp;        if (obj == null)</b>
 <b class="nc">&nbsp;            return false;</b>
-<b class="nc">&nbsp;        if (getClass() != obj.getClass())</b>
-<b class="nc">&nbsp;            return false;</b>
+<b class="fc">&nbsp;        if (getClass() != obj.getClass())</b>
+<b class="fc">&nbsp;            return false;</b>
 <b class="nc">&nbsp;        Stock other = (Stock) obj;</b>
 <b class="nc">&nbsp;        if (id == null) {</b>
 <b class="nc">&nbsp;            return other.id == null;</b>
@@ -199,7 +199,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-11-27 15:12</div>
+    <div style="float:right;">generated on 2023-12-03 13:40</div>
 </div>
 </body>
 </html>

@@ -92,11 +92,6 @@ public class Main {
             Stock stock45 = new Stock(45L,"TMO",	"Thermo Fisher Scientific Inc", 	485.92,	-4.21);
             Stock stock46 = new Stock(46L, "INTC", "Intel Corporation", 	74.23,	0.15);
 
-            FriendGroup group = new FriendGroup();
-            group.setGroupLeader(user2);
-            user2.setPrivilege('g');
-            group.setGroupName("name");
-            friendGroupRepository.save(group);
             userRepository.save(user1);
             userRepository.save(user2);
             userRepository.save(user3);
@@ -163,6 +158,13 @@ public class Main {
             spRepository.save(user2.getStocks().get(0));
             spRepository.save(user3.getStocks().get(0));
             spRepository.save(user4.getStocks().get(0));
+            FriendGroup group = new FriendGroup();
+            group.setGroupLeader(user2);
+            user2.setPrivilege('g');
+            group.setGroupName("name");
+            user2.setFriendGroup(group);
+            //friendGroupRepository.save(group);
+
         };
     }
 }

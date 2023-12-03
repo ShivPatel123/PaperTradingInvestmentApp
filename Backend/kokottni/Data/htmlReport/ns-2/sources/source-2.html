@@ -52,18 +52,18 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    8.3%
+    91.7%
   </span>
   <span class="absValue">
-    (1/12)
+    (11/12)
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
-    19%
+    76.2%
   </span>
   <span class="absValue">
-    (4/21)
+    (16/21)
   </span>
 </td>
 </tr>
@@ -113,41 +113,41 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;
 &nbsp;    @ApiOperation(value = &quot;Gets a list of all the stocks in the stockRepository&quot;, response = Iterable.class, tags = &quot;stock&quot;)
 &nbsp;    @GetMapping(path = &quot;/stocks&quot;)
-<b class="nc">&nbsp;    List&lt;Stock&gt; getAllStocks(){return stockRepository.findAll();}</b>
+<b class="fc">&nbsp;    List&lt;Stock&gt; getAllStocks(){return stockRepository.findAll();}</b>
 &nbsp;
 &nbsp;    @ApiOperation(value = &quot;Gets all users single stock based on its id value from the stockRepository&quot;, response = Iterable.class, tags = &quot;stock&quot;)
 &nbsp;    @GetMapping(path = &quot;/stock/{id}&quot;)
-<b class="nc">&nbsp;    List&lt;StockPurchased&gt; getAllUsersForStock(@PathVariable long id){return stockRepository.getOne(id).getUsers();}</b>
+<b class="fc">&nbsp;    List&lt;StockPurchased&gt; getAllUsersForStock(@PathVariable long id){return stockRepository.getOne(id).getUsers();}</b>
 &nbsp;
 &nbsp;
 &nbsp;    @ApiOperation(value = &quot;Gets the live stock information from AlphaVantage to apply to one of our stocks so that current information is displayed.&quot;, response = String.class, tags = &quot;stock&quot;)
 &nbsp;    @GetMapping(path = &quot;/stocksUpdate/{symbol}&quot;)
 &nbsp;    String getStockAPIInfo(@PathVariable String symbol){
-<b class="nc">&nbsp;        return stockAPI.getUpdatedStockChange(symbol);</b>
+<b class="fc">&nbsp;        return stockAPI.getUpdatedStockChange(symbol);</b>
 &nbsp;    }
 &nbsp;
 &nbsp;
 &nbsp;    @ApiOperation(value = &quot;Gets a stock to return based on its id&quot;, response = Stock.class, tags = &quot;stock&quot;)
 &nbsp;    @GetMapping(path = &quot;/stocks/{id}&quot;)
-<b class="nc">&nbsp;    Stock getStockById(@PathVariable long id){return stockRepository.findById(id);}</b>
+<b class="fc">&nbsp;    Stock getStockById(@PathVariable long id){return stockRepository.findById(id);}</b>
 &nbsp;
 &nbsp;    @ApiOperation(value = &quot;Gets the current price from a stock based on its id&quot;, response = double.class, tags = &quot;stock&quot;)
 &nbsp;    @GetMapping(path = &quot;/stockchange/{id}&quot;)
-<b class="nc">&nbsp;    double getCurrPrice(@PathVariable long id){return stockRepository.getOne(id).getCurrValue();}</b>
+<b class="fc">&nbsp;    double getCurrPrice(@PathVariable long id){return stockRepository.getOne(id).getCurrValue();}</b>
 &nbsp;
 &nbsp;
 &nbsp;    //retrieves news articles pertaining to stock (id)
 &nbsp;    @ApiOperation(value = &quot;Gets the current news for a stock from AlphaVantage API based on the id of that stock&quot;, response = String.class, tags = &quot;stock&quot;)
 &nbsp;    @GetMapping(path = &quot;/stocks/news/{id}&quot;)
 &nbsp;    String getStockNews(@PathVariable int id){
-<b class="nc">&nbsp;        return stockAPI.getStockNews(stockRepository.findById(id).getSymbol());</b>
+<b class="fc">&nbsp;        return stockAPI.getStockNews(stockRepository.findById(id).getSymbol());</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    //retrieves weekly price history of stock (id)
 &nbsp;    @ApiOperation(value = &quot;Gets the price history of a stock from AlphaVantage API based on the id of the stock&quot;, response = String.class, tags = &quot;stock&quot;)
 &nbsp;    @GetMapping(path = &quot;/stocks/history/{id}&quot;)
 &nbsp;    String getStockHistory(@PathVariable int id){
-<b class="nc">&nbsp;        return stockAPI.getStockHistory(stockRepository.findById(id).getSymbol());</b>
+<b class="fc">&nbsp;        return stockAPI.getStockHistory(stockRepository.findById(id).getSymbol());</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    @ApiOperation(value = &quot;Creates a new stock that gets added to the stockRepository&quot;, response = String.class, tags = &quot;stock&quot;)
@@ -164,8 +164,8 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;    @ApiOperation(value = &quot;Updates a stock from the AlphaVantage API based on the stock id&quot;, response = String.class, tags = &quot;stock&quot;)
 &nbsp;    @PutMapping(path = &quot;/stocks/{id}&quot;)
 &nbsp;    String updateStockById(@PathVariable Long id){
-<b class="nc">&nbsp;        stockAPI.updateStockInfo(id, stockRepository);</b>
-<b class="nc">&nbsp;        return success;</b>
+<b class="fc">&nbsp;        stockAPI.updateStockInfo(id, stockRepository);</b>
+<b class="fc">&nbsp;        return success;</b>
 &nbsp;    }
 &nbsp;
 &nbsp;    //updates stock repo every 15 min
@@ -174,15 +174,15 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;    //@Scheduled(fixedRate = 900000)
 &nbsp;    @PutMapping(path = &quot;/stocks&quot;)
 &nbsp;    String updateAllStocks(){
-<b class="nc">&nbsp;        stockAPI.updateAllStocks(stockRepository);</b>
-<b class="nc">&nbsp;        return success;</b>
+<b class="fc">&nbsp;        stockAPI.updateAllStocks(stockRepository);</b>
+<b class="fc">&nbsp;        return success;</b>
 &nbsp;    }
 &nbsp;
 &nbsp;
 &nbsp;    @ApiOperation(value = &quot;Deletes a stock from the stockRepository based on its id&quot;, response = String.class, tags = &quot;stock&quot;)
-&nbsp;    @DeleteMapping(path = &quot;/stocks/{id}&quot;)
+&nbsp;    @DeleteMapping(path = &quot;/stocksc/{id}&quot;)
 &nbsp;    String deleteStock(@PathVariable Long id){
-<b class="nc">&nbsp;        stockRepository.deleteById(id);</b>
+<b class="fc">&nbsp;        stockRepository.deleteById(id);</b>
 <b class="nc">&nbsp;        return success;</b>
 &nbsp;    }
 &nbsp;}
@@ -209,7 +209,7 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
-    <div style="float:right;">generated on 2023-11-27 15:12</div>
+    <div style="float:right;">generated on 2023-12-03 13:40</div>
 </div>
 </body>
 </html>
