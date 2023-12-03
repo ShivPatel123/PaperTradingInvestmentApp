@@ -5,6 +5,7 @@ import static android.app.PendingIntent.getActivity;
 import static com.example.as1.Controllers.User.getInstance;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -63,8 +64,22 @@ public class StockList extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.stock_list_page);
 
-        //get user stocks from server
+        //get all stocks from server
         getAllStocks(this.getApplicationContext());
+
+        Button back_Btn = findViewById(R.id.back_StockListBtn);
+        back_Btn.setOnClickListener(view -> {
+            User user = getInstance();
+            Intent intent;
+            if(user.getUsername().equals(null)){
+                intent = new Intent(StockList.this, StartPage.class);
+            }
+            else{
+                intent = new Intent(StockList.this, NavPage.class);
+            }
+            startActivity(intent);
+
+        });
     }
 
     public void getAllStocks(Context context) {
@@ -92,13 +107,12 @@ public class StockList extends AppCompatActivity {
 
                             //parse relevant info
                             String name = object.getString("company");
-                            name += " " + object.getString("symbol");
-                            int prevDay = (int) object.getDouble("prevDayChange");
-                            int stockPrice = (int) object.getDouble("currValue");
+                            double stockPrice = object.getDouble("currValue");
+                            int id = object.getInt("id");
+                            String symbol = object.getString("symbol");
 
                             //add to arraylist to be displayed in recycle view
-                            //TODO
-                            stockCardArrayList.add(new StockScrollCard(name, prevDay, stockPrice, 0, "none"));
+                            stockCardArrayList.add(new StockScrollCard(name, -1, stockPrice, id, symbol));
 
                         } catch (JSONException e) {
                             throw new RuntimeException(e);

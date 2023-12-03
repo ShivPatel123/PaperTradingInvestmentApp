@@ -1,16 +1,22 @@
 package com.example.as1.screens;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -26,21 +32,25 @@ import com.example.as1.Controllers.StockPurchased;
 import com.example.as1.R;
 import com.example.as1.Controllers.User;
 import com.example.as1.ExternalControllers.VolleySingleton;
+import com.google.android.material.imageview.ShapeableImageView;
+import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-public class ProfilePage extends AppCompatActivity {
-
+public class ProfilePage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
+    Menu menu;
+    ActionBarDrawerToggle toggle;
     private static final String URL_IMAGE ="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.profile_page);
 
-        Button backHome_btn = findViewById(R.id.backHome_mainBtn);
         Button editProfile_btn = findViewById(R.id.editProfile_btn);
         Button toStock_btn = findViewById(R.id.toStockPage_btn);
         TextView welcomeTxt = findViewById(R.id.welcome_txtView);
@@ -49,6 +59,32 @@ public class ProfilePage extends AppCompatActivity {
         TextView email_display = findViewById(R.id.email_Display);
         TextView dob_display = findViewById(R.id.dob_Display);
         TextView money_display = findViewById(R.id.money_Display);
+        ShapeableImageView defaultPic = findViewById(R.id.picSample);
+
+        //Side nav bar
+        drawerLayout = findViewById(R.id.drawer_layout_profile);
+        navigationView = findViewById(R.id.nav_view_profile);
+        menu = navigationView.getMenu();
+        menu.findItem(R.id.nav_logout).setVisible(false);
+        menu.findItem(R.id.nav_profile).setVisible(false);
+        menu.findItem(R.id.nav_group).setVisible(false);
+        menu.findItem(R.id.nav_group_edit).setVisible(false);
+
+        navigationView.bringToFront();
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("");
+        toolbar.setSubtitle("");
+        setSupportActionBar(toolbar);
+        toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_open, R.string.nav_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+        navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setCheckedItem(R.id.nav_home);
+
+        // to make the Navigation drawer icon always appear on the action bar
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         //Get global user data for get request (just need id for get req)
         User getGlobal = User.getInstance();
@@ -65,13 +101,14 @@ public class ProfilePage extends AppCompatActivity {
         email_display.setText(getGlobal.getEmail());
         dob_display.setText(getGlobal.getDob());
         double money1 = getGlobal.getMoney();
-        money_display.setText(String.valueOf(money1));
+        money_display.setText("$" + String.valueOf(money1));
 
-        //Back to Home page button
-        backHome_btn.setOnClickListener(view -> {
-            Intent intent = new Intent(ProfilePage.this, NavPage.class);
-            startActivity(intent);
-        });
+
+//        //Back to Home page button
+//        backHome_btn.setOnClickListener(view -> {
+//            Intent intent = new Intent(ProfilePage.this, NavPage.class);
+//            startActivity(intent);
+//        });
 
         //Edit Profile button
         editProfile_btn.setOnClickListener(view -> {
@@ -138,7 +175,7 @@ public class ProfilePage extends AppCompatActivity {
                 null,
                 response -> {
                     Log.i(" full response", "getNumStocks: " + response.length());
-                    stock_display.setText("" + response.length());
+                    stock_display.setText("#" + response.length());
                 },
 
                 error -> Log.i("error ", "getNumStocks: "+ error.getMessage())) {};
@@ -199,4 +236,43 @@ public class ProfilePage extends AppCompatActivity {
         // Adding request to request queue
         VolleySingleton.getInstance(getApplicationContext()).addToRequestQueue(imageRequest);
     }
+
+    /*
+     Nav Bar Functions
+  */
+    @Override
+    public void onBackPressed() {
+        if(drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        if (menuItem.getItemId() == R.id.nav_home){
+            Intent intent = new Intent(ProfilePage.this, NavPage.class);
+            startActivity(intent);
+        } else if (menuItem.getItemId() == R.id.nav_stock){
+            Intent intent = new Intent(ProfilePage.this, StockPage.class);
+            startActivity(intent);
+        } else if (menuItem.getItemId() == R.id.nav_stock_list) {
+            Intent intent = new Intent(ProfilePage.this, StockList.class);
+            startActivity(intent);
+        } else if (menuItem.getItemId() == R.id.nav_login) {
+            Intent intent = new Intent(ProfilePage.this, StartPage.class);
+            startActivity(intent);
+        }
+
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+        super.onPointerCaptureChanged(hasCapture);
+    }
+
 }

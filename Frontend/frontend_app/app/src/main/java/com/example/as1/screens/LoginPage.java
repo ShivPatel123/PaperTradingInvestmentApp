@@ -14,6 +14,7 @@ import com.android.volley.Request;
 import com.android.volley.toolbox.JsonObjectRequest;
 
 import com.example.as1.Controllers.LoginAttempt;
+import com.example.as1.Controllers.User;
 import com.example.as1.R;
 import com.example.as1.ExternalControllers.VolleySingleton;
 
@@ -64,6 +65,7 @@ public class LoginPage extends AppCompatActivity {
                //set global user variables for username and passw
                getInstance().setUsername(usernameInput);
                getInstance().setPassword(passwordInput);
+               getUserData(this.getApplicationContext(), usernameInput);
                //go to MainPage
                Intent intent = new Intent(LoginPage.this, NavPage.class);
                startActivity(intent);
@@ -102,6 +104,42 @@ public class LoginPage extends AppCompatActivity {
                     Log.i("Post req response", "makeLoginPostReq: " + response);
                 },
                 error -> Log.i("Login error", "error message: " + error)) { };
+
+        // Adding request to request queue
+        VolleySingleton.getInstance(context.getApplicationContext()).addToRequestQueue(request);
+    }
+
+    public void getUserData(Context context, String username) {
+        String URL_JSON_OBJECT = "http://coms-309-051.class.las.iastate.edu:8080/userByName/" + username;
+
+        //Create new request
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.GET,
+                URL_JSON_OBJECT,
+                null,
+                response -> {
+                    try {
+                        // Parse JSON object data
+                        String name = response.getString("name");
+                        String email = response.getString("email");
+                        String id = response.getString("id");
+                        String dob = response.getString("dob");
+                        String money = response.getString("money");
+
+                        // Populate global user with the parsed data
+                        getInstance().setName(name);
+                        getInstance().setEmail(email);
+                        getInstance().setId(Integer.parseInt(id));
+                        getInstance().setDob(dob);
+                        getInstance().setMoney(Double.parseDouble(money));
+                        Log.i("Login data response", "getUserData: " + getInstance());
+
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                },
+                error -> Log.i("error msg", "getUserData: " + error.getMessage())) {
+        };
 
         // Adding request to request queue
         VolleySingleton.getInstance(context.getApplicationContext()).addToRequestQueue(request);
