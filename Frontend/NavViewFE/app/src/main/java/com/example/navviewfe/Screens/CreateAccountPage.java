@@ -64,7 +64,7 @@ public class CreateAccountPage extends AppCompatActivity {
 
             //If backend returns success, open main page
             if(volleyOutput_txt.getText().toString() == "{\"message\":\"success\"}"){
-                Intent intent = new Intent(CreateAccountPage.this, NavPage.class);
+                Intent intent = new Intent(CreateAccountPage.this, LoggedInPage.class);
                 startActivity(intent);
             }
         });

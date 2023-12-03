@@ -67,7 +67,7 @@ public class LoginPage extends AppCompatActivity {
                 getInstance().setUsername(usernameInput);
                 getInstance().setPassword(passwordInput);
                 //go to MainPage
-                Intent intent = new Intent(LoginPage.this, NavPage.class);
+                Intent intent = new Intent(LoginPage.this, LoggedInPage.class);
                 startActivity(intent);
             }
         });

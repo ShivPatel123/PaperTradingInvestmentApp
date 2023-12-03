@@ -94,6 +94,8 @@
                 android:padding="10dp"
                 android:text="Sell"
                 android:textColor="@color/txtclr"
+
+
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.124"
@@ -114,6 +116,8 @@
                 android:text="Buy"
                 android:textColor="@color/txtclr"
                 android:textSize="12sp"
+
+
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.124"

@@ -6,12 +6,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -20,17 +17,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.example.navviewfe.Controllers.RecycleViews.StockPreviewScrollAdapter;
-import com.example.navviewfe.Controllers.RecycleViews.StockPreviewScrollCard;
 import com.example.navviewfe.Controllers.Stock;
 import com.example.navviewfe.Controllers.User;
 import com.example.navviewfe.ExternalControllers.VolleySingleton;
@@ -43,7 +33,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 
-public class StockPage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class StockPageGuest extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     protected Button newStock_btn, pageLeft, pageRight, buy_btn, sell_btn, delete_btn, toNews_btn;
     protected TextView stockName, stockSymbol, serverNotes;
@@ -60,7 +50,7 @@ public class StockPage extends AppCompatActivity implements NavigationView.OnNav
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.stock_page);
+        setContentView(R.layout.stock_page_guest);
         final int[] index = {0};
 
         //get all stocks in an array
@@ -108,7 +98,7 @@ public class StockPage extends AppCompatActivity implements NavigationView.OnNav
                 serverNotes.setText("Only Admins can create Stocks");
             }
             else {
-                Intent intent = new Intent(StockPage.this, CreateStock.class);
+                Intent intent = new Intent(StockPageGuest.this, CreateStock.class);
                 startActivity(intent);
             }
         });
@@ -116,7 +106,7 @@ public class StockPage extends AppCompatActivity implements NavigationView.OnNav
         //View News Button
         toNews_btn = findViewById(R.id.toNews_btn);
         toNews_btn.setOnClickListener(view -> {
-            Intent newsIntent = new Intent(StockPage.this, NewsPage.class);
+            Intent newsIntent = new Intent(StockPageGuest.this, NewsPage.class);
             //+ 1 so index matches stock id
             index[0] += 1;
             newsIntent.putExtra("index", index[0]);
@@ -127,26 +117,22 @@ public class StockPage extends AppCompatActivity implements NavigationView.OnNav
         buy_btn = findViewById(R.id.buy_StockPagebtn);
         ArrayList<Stock> finalStockArrayList = stockArrayList;
         buy_btn.setOnClickListener(view -> {
-            Stock object;
-            object = finalStockArrayList.get(index[0]);
-            long id = object.getId();
-            BuyStock(this.getApplicationContext(), getGlobal, (int) id);
+            Intent intent = new Intent(StockPageGuest.this, StartPage.class);
+            startActivity(intent);
         });
 
         //Sell Button
         sell_btn = findViewById(R.id.sell_StockPagebtn);
         ArrayList<Stock> finalStockArrayList4 = stockArrayList;
         sell_btn.setOnClickListener(view -> {
-            Stock object;
-            object = finalStockArrayList4.get(index[0]);
-            long id2 = object.getId();
-            SellStock(this.getApplicationContext(), getGlobal, (int) id2);
+            Intent intent = new Intent(StockPageGuest.this, StartPage.class);
+            startActivity(intent);
         });
 
         //History Button
         Button toHistory_btn = findViewById(R.id.toHistory_btn);
         toHistory_btn.setOnClickListener(view -> {
-            Intent historyIntent = new Intent(StockPage.this, HistoryPage.class);
+            Intent historyIntent = new Intent(StockPageGuest.this, HistoryPage.class);
             //+ 1 so index matches stock id
             index[0] += 1;
             historyIntent.putExtra("index", index[0]);
@@ -397,16 +383,16 @@ public class StockPage extends AppCompatActivity implements NavigationView.OnNav
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         if (menuItem.getItemId() == R.id.nav_home){
-            Intent intent = new Intent(StockPage.this, LoggedInPage.class);
+            Intent intent = new Intent(StockPageGuest.this, MainActivity.class);
             startActivity(intent);
         } else if (menuItem.getItemId() == R.id.nav_stock){
-            Intent intent = new Intent(StockPage.this, StockPage.class);
+            Intent intent = new Intent(StockPageGuest.this, StockPageGuest.class);
             startActivity(intent);
         } else if (menuItem.getItemId() == R.id.nav_stock_list) {
-            Intent intent = new Intent(StockPage.this, StockList.class);
+            Intent intent = new Intent(StockPageGuest.this, StockListGuest.class);
             startActivity(intent);
         } else if (menuItem.getItemId() == R.id.nav_login) {
-            Intent intent = new Intent(StockPage.this, StartPage.class);
+            Intent intent = new Intent(StockPageGuest.this, StartPage.class);
             startActivity(intent);
         }
 

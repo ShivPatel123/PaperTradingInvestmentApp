@@ -9,23 +9,23 @@ import retrofit2.http.Path;
 
 public interface StockMapping {
 
-        @GET("/stocks")
-        Call<List<Stock>> getAllStocks();
+    @GET("/stocks")
+    Call<List<Stock>> getAllStocks();
 
-        @GET("/stock/{id}")
-        Call<List<StockPurchased>> getAllUsersForStock(@Path("id") long id);
+    @GET("/stock/{id}")
+    Call<List<StockPurchased>> getAllUsersForStock(@Path("id") long id);
 
-        @GET("/stocksUpdate/{symbol}")
-        Call<Stock> getStockAPIInfo(@Path("symbol") String symbol);
+    @GET("/stocksUpdate/{symbol}")
+    Call<Stock> getStockAPIInfo(@Path("symbol") String symbol);
 
-        @GET("/stocks/{id}")
-        Stock getStockById(@Path("id") Long id);
+    @GET("/stocks/{id}")
+    Stock getStockById(@Path("id") Long id);
 
-        @GET("/stockchange/{id}")
-        Call<Stock> getCurrPrice(@Path("id") Long id);
+    @GET("/stockchange/{id}")
+    Call<Stock> getCurrPrice(@Path("id") Long id);
 
-        @POST("/stocks")
-        Call<Stock> createStock(Stock stock);
+    @POST("/stocks")
+    Call<Stock> createStock(Stock stock);
 
     @POST("/stocks/{id}")
     Call<Stock> updateStockById(@Path("id") int id);
@@ -38,9 +38,11 @@ public interface StockMapping {
     @GET("/stocks/history/{id}")
     Call<String> getStockHistory(@Path("id") int id);
 
-        @DELETE("/stocks/{id}")
-        Call<Stock> deleteStock(@Path("id") Long id);
+    @DELETE("/stocks/{id}")
+    Call<Stock> deleteStock(@Path("id") Long id);
 
 
 
-    }
+
+
+}
