@@ -40,11 +40,11 @@ public class HistoryAdpater extends RecyclerView.Adapter<HistoryAdpater.ScrollVi
         public ScrollViewHolder(@NonNull View itemView) {
             super(itemView);
             card = itemView.findViewById(R.id.historyCard);
-            date = itemView.findViewById(R.id.user1_name);
-            open = itemView.findViewById(R.id.user1_id);
-            close = itemView.findViewById(R.id.user1_perms);
-            high = itemView.findViewById(R.id.banUser_Adminbtn);
-            low = itemView.findViewById(R.id.unbanUser_Adminbtn);
+            date = itemView.findViewById(R.id.history_date);
+            open = itemView.findViewById(R.id.history_open);
+            close = itemView.findViewById(R.id.history_close);
+            high = itemView.findViewById(R.id.history_high);
+            low = itemView.findViewById(R.id.history_low);
             percent = itemView.findViewById(R.id.history_percent);
             imageView = itemView.findViewById(R.id.history_image);
         }

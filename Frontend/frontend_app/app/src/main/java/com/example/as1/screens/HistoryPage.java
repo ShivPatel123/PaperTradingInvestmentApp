@@ -51,7 +51,7 @@ public class HistoryPage extends AppCompatActivity {
         //Initialize recycler view (user)
         RecyclerView recyclerView = findViewById(R.id.history_recyclerView);
         ArrayList<HistoryScrollCard> CardArrayList = new ArrayList<>();
-        CardArrayList.add(new HistoryScrollCard("noname", "none", "none", "none", "none"));
+        CardArrayList.add(new HistoryScrollCard("2012-1-1", "420.00", "430.00", "440.00", "450.00"));
         HistoryAdpater historyAdpater = new HistoryAdpater(this, CardArrayList);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
 
