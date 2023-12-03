@@ -347,14 +347,27 @@ android:layout_height="match_parent">
 
     <Button
         android:id="@+id/toNews_btn"
-        android:layout_width="277dp"
-        android:layout_height="50dp"
-        android:text="See Recent Articles"
+        android:layout_width="161dp"
+        android:layout_height="64dp"
+        android:text="Recent Articles"
         app:layout_constraintBottom_toTopOf="@+id/notesEditText"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.916"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/priceChangeCard" />
+        app:layout_constraintTop_toBottomOf="@+id/priceChangeCard"
+        app:layout_constraintVertical_bias="0.517" />
+
+    <Button
+        android:id="@+id/toHistory_btn"
+        android:layout_width="160dp"
+        android:layout_height="64dp"
+        android:text="Weekly Price History"
+        app:layout_constraintBottom_toTopOf="@+id/notesEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.073"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/priceChangeCard"
+        app:layout_constraintVertical_bias="0.517" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.drawerlayout.widget.DrawerLayout>
