@@ -28,6 +28,18 @@ public class FriendGroup {
     private List<User> groupMembers;
 
 
+    public FriendGroup(int id, String groupName, long groupLeaderID){
+        this.id = id;
+        this.groupName = groupName;
+        this.groupLeaderID = groupLeaderID;
+    }
+
+    public FriendGroup() {
+        this.id = 0;
+        this.groupName = "defaultGroup";
+        this.groupLeaderID = 0;
+    }
+
     public String getGroupName(){
         return groupName;
     }
@@ -54,6 +66,8 @@ public class FriendGroup {
     public void addUser(User user){
         groupMembers.add(user);
     }
+
+    public void setId(int id){this.id = id;}
 
     public void removeUser(User user){
         groupMembers.remove(user);

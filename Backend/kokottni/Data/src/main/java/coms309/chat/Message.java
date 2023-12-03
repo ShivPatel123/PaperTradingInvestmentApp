@@ -39,11 +39,18 @@ public class Message {
 	
 	public Message() {};
 	
-	public Message(String userName, String content, String target) {
+	public Message(Long id, String userName, String content, String target) {
+        this.id = id;
 		this.userName = userName;
 		this.content = content;
         this.target = target;
 	}
+
+    public Message(String userName, String content, String target) {
+        this.userName = userName;
+        this.content = content;
+        this.target = target;
+    }
 
     public Long getId() {
         return id;
@@ -64,6 +71,8 @@ public class Message {
     public String getContent() {
         return content;
     }
+
+    public String getTarget(){return target;}
 
     public void setContent(String content) {
         this.content = content;
