@@ -4,12 +4,12 @@ public class StockScrollCard {
 
     private int imageView;
     private int numPurchased;
-    private int stockPrice;
+    private double stockPrice;
     private String stockName;
     private int id;
     private String symbol;
 
-    public StockScrollCard(String stockName, int numPurchased, int stockPrice, int id, String symbol){
+    public StockScrollCard(String stockName, int numPurchased, double stockPrice, int id, String symbol){
         this.stockName = stockName;
         this.numPurchased = numPurchased;
         this.stockPrice = stockPrice;
@@ -26,7 +26,7 @@ public class StockScrollCard {
         this.numPurchased = numPurchased;
     }
 
-    public int getStockPrice() {
+    public double getStockPrice() {
         return stockPrice;
     }
 

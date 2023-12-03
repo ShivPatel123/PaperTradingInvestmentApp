@@ -24,7 +24,7 @@ public interface StockMapping {
         @GET("/stockchange/{id}")
         Call<Stock> getCurrPrice(@Path("id") Long id);
 
-        @POST("/stocks")
+    @POST("/stocks")
         Call<Stock> createStock(Stock stock);
 
     @POST("/stocks/{id}")
@@ -40,6 +40,8 @@ public interface StockMapping {
 
         @DELETE("/stocks/{id}")
         Call<Stock> deleteStock(@Path("id") Long id);
+
+
 
 
 
