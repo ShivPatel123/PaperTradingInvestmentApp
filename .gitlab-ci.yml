@@ -41,21 +41,21 @@ android-build:
  tags:
   - android_tag
  before_script:
-  - export GRADLE_USER_HOME='pwd'/.gradle
-  - chmod +x ./Frontend/frontend_app
+  - export GRADLE_USER_HOME=`pwd`/.gradle
+  - chmod +x ./Frontend/frontend_app/gradlew
  script:
   - cd Frontend/frontend_app
   - chmod +x ./gradlew
   - ./gradlew build
  artifacts:
     paths:
-    - Android_test/app/build/outputs/
+    - Frontend/frontend_app/app/build/outputs/
 
 android-test:
   image: gjandres/android-ci:latest
   stage: androidtest
   before_script:
-  - export GRADLE_USER_HOME='pwd'/.gradle
+  - export GRADLE_USER_HOME=`pwd`/.gradle
   - chmod +x ./Frontend/frontend_app
   tags:
   - android_tag
