@@ -21,6 +21,8 @@ public class UserController {
 
     long purchaseNum = 5;
 
+    int friendGroupNum = 2;
+
     long userNum = 5;
     long stockNum = 5;
     @Autowired
@@ -183,6 +185,8 @@ public class UserController {
             FriendGroup friendGroup = new FriendGroup();
             User groupLeader = userRepository.getOne(uid);
             groupLeader.setPrivilege('g');
+            friendGroup.setId(friendGroupNum);
+            ++friendGroupNum;
             friendGroup.setGroupName(groupName);
             friendGroup.setGroupLeader(groupLeader);
             groupLeader.setFriendGroup(friendGroup);
