@@ -215,44 +215,44 @@ public class NavPage extends AppCompatActivity implements NavigationView.OnNavig
         VolleySingleton.getInstance(context.getApplicationContext()).addToRequestQueue(request);
         return user;
     }
-//    public void getAllUserStocks(Context context, User user) {
-//        String URL_JSON_OBJECT = "http://10.90.75.130:8080/user/" + user.getId();
-//        TextView stockChange_txt = findViewById(R.id.stockChange_txt);
-//        //Create new request
-//        JsonArrayRequest request = new JsonArrayRequest(
-//                Request.Method.GET,
-//                URL_JSON_OBJECT,
-//                null,
-//                response -> {
-//                    double changeTotal = 0;
-//                    Log.i(" full response", "getAllUserStocks: " + response.toString());
-//                    for(int i = 0; i < response.length(); i++) {
-//                        try {
-//                        JSONObject object = (JSONObject) response.get(i);
-//                        JSONObject stockObj = (JSONObject) object.get("stock");
-//                        changeTotal += stockObj.getDouble("prevDayChange");
-//                        } catch (JSONException e) {
-//                            throw new RuntimeException(e);
-//                        }
-//                    }
-//
-//                    double stockPercentNum = (changeTotal / user.getMoney()) * 100;
-//                    String stockPercent = String.format("%.2f", stockPercentNum);
-//                    stockChange_txt.setText("$" + changeTotal + "\n" + stockPercent + "%");
-//
-//                    ImageView fundsImage = findViewById(R.id.stock_ImageView1);
-//                    if(changeTotal < 0){
-//                        fundsImage.setImageResource(R.drawable.stockredarrow);
-//                    }
-//                    else{
-//                        fundsImage.setImageResource(R.drawable.greenarrow);
-//                    }
-//                },
-//                error -> Log.i("parse error ", "getAllUserStocks: "+ error.getMessage())) {};
-//
-//        // Adding request to request queue
-//        VolleySingleton.getInstance(context.getApplicationContext()).addToRequestQueue(request);
-//    }
+    public void getAllUserStocks(Context context, User user) {
+        String URL_JSON_OBJECT = "http://10.90.75.130:8080/user/" + user.getId();
+        TextView stockChange_txt = findViewById(R.id.stockChange_txt);
+        //Create new request
+        JsonArrayRequest request = new JsonArrayRequest(
+                Request.Method.GET,
+                URL_JSON_OBJECT,
+                null,
+                response -> {
+                    double changeTotal = 0;
+                    Log.i(" full response", "getAllUserStocks: " + response.toString());
+                    for(int i = 0; i < response.length(); i++) {
+                        try {
+                        JSONObject object = (JSONObject) response.get(i);
+                        JSONObject stockObj = (JSONObject) object.get("stock");
+                        changeTotal += stockObj.getDouble("prevDayChange");
+                        } catch (JSONException e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+
+                    double stockPercentNum = (changeTotal / user.getMoney()) * 100;
+                    String stockPercent = String.format("%.2f", stockPercentNum);
+                    stockChange_txt.setText("$" + changeTotal + "\n" + stockPercent + "%");
+
+                    ImageView fundsImage = findViewById(R.id.stock_ImageView1);
+                    if(changeTotal < 0){
+                        fundsImage.setImageResource(R.drawable.stockredarrow);
+                    }
+                    else{
+                        fundsImage.setImageResource(R.drawable.greenarrow);
+                    }
+                },
+                error -> Log.i("parse error ", "getAllUserStocks: "+ error.getMessage())) {};
+
+        // Adding request to request queue
+        VolleySingleton.getInstance(context.getApplicationContext()).addToRequestQueue(request);
+    }
 
     /*
         Nav Bar Functions
