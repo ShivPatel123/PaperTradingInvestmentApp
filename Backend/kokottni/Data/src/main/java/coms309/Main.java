@@ -95,6 +95,7 @@ public class Main {
             Stock stock46 = new Stock(46L, "INTC", "Intel Corporation", 	74.23,	0.15);
 
             FriendGroup group = new FriendGroup("StockGroup1", user2.getId());
+            group.addUser(user2);
             user2.setPrivilege('g');
 
 

@@ -31,7 +31,7 @@ public class FriendGroup {
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "friendGroup" )
-    private List<User> groupMembers;
+    private List<User> groupMembers = new ArrayList<>();
 
 
     public FriendGroup(UUID id, String groupName, long groupLeaderID){
