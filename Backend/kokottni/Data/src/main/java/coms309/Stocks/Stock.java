@@ -29,7 +29,7 @@ public class Stock {
     @Column(name = "previous_day_change")
     private double prevDayChange;
 
-    private String companyWebsite;
+    private String companyWebsite = "investor.gov";
 
     private String companyLogo;
 

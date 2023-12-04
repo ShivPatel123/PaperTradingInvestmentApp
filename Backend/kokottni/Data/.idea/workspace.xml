@@ -139,7 +139,6 @@
         <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.SystemTest.addUserToGroupTest" />
         <item itemvalue="JUnit.coms309 in Data" />
-        <item itemvalue="Spring Boot.Main" />
         <item itemvalue="JUnit.SystemTest.addUserToGroupTest" />
         <item itemvalue="JUnit.SystemTest.getAPIinfo" />
         <item itemvalue="JUnit.SystemTest.loginTest" />
@@ -203,21 +202,22 @@
     </SUITE>
     <SUITE FILE_PATH="coverage/Data$coms309_in_Data.ic" NAME="coms309 in Data Coverage Results" MODIFIED="1701658540955" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/Data$Main.ic" NAME="Main Coverage Results" MODIFIED="1701215974312" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-    <SUITE FILE_PATH="coverage/Data$java_in_Data.ic" NAME="java in Data Coverage Results" MODIFIED="1701119282178" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/Data$All_in_Data.ic" NAME="All in Data Coverage Results" MODIFIED="1701117142758" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/Data$coms309_in_Data.ic" NAME="coms309 in Data Coverage Results" MODIFIED="1701632118573" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/Data$SystemTest_testWebSocketConnection.ic" NAME="SystemTest.testWebSocketConnection Coverage Results" MODIFIED="1701292640247" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>coms309.*</FILTER>
+      <SUITE FILE_PATH="coverage/Data$java_in_Data.ic" NAME="java in Data Coverage Results" MODIFIED="1701119282178" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+      <SUITE FILE_PATH="coverage/Data$All_in_Data.ic" NAME="All in Data Coverage Results" MODIFIED="1701117142758" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+      <SUITE FILE_PATH="coverage/Data$coms309_in_Data.ic" NAME="coms309 in Data Coverage Results" MODIFIED="1701632118573" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+      <SUITE FILE_PATH="coverage/Data$SystemTest_testWebSocketConnection.ic" NAME="SystemTest.testWebSocketConnection Coverage Results" MODIFIED="1701292640247" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+        <FILTER>coms309.*</FILTER>
+      </SUITE>
+      <SUITE FILE_PATH="coverage/Data$SystemTest_loginTest.ic" NAME="SystemTest.loginTest Coverage Results" MODIFIED="1701224871934" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+        <FILTER>coms309.*</FILTER>
+      </SUITE>
+      <SUITE FILE_PATH="coverage/Data$SystemTest_getUsersForStocks.ic" NAME="SystemTest.getUsersForStocks Coverage Results" MODIFIED="1701224382602" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+        <FILTER>coms309.*</FILTER>
+      </SUITE>
+      <SUITE FILE_PATH="coverage/Data$Main.ic" NAME="Main Coverage Results" MODIFIED="1701215974312" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+        <FILTER>coms309.*</FILTER>
+      </SUITE>
+      <SUITE FILE_PATH="coverage/Data$backendapp_in_Data.ic" NAME="backendapp in Data Coverage Results" MODIFIED="1701217366852" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     </SUITE>
-    <SUITE FILE_PATH="coverage/Data$SystemTest_loginTest.ic" NAME="SystemTest.loginTest Coverage Results" MODIFIED="1701224871934" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>coms309.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/Data$SystemTest_getUsersForStocks.ic" NAME="SystemTest.getUsersForStocks Coverage Results" MODIFIED="1701224382602" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>coms309.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/Data$Main.ic" NAME="Main Coverage Results" MODIFIED="1701215974312" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>coms309.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/Data$backendapp_in_Data.ic" NAME="backendapp in Data Coverage Results" MODIFIED="1701217366852" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
