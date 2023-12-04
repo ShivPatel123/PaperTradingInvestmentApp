@@ -29,6 +29,10 @@ public class Stock {
     @Column(name = "previous_day_change")
     private double prevDayChange;
 
+    private String companyWebsite = "investor.gov";
+
+    private String companyLogo;
+
     @JsonIgnore
     @OneToMany(mappedBy = "stock")
     private List<StockPurchased> users = new ArrayList<>();
@@ -42,8 +46,25 @@ public class Stock {
         this.prevDayChange = prevDayChange;
     }
 
+    public Stock(Long id, String symbol, String company, double currValue, double prevDayChange, String companyWebsite){
+        this.id = id;
+        this.companyWebsite = companyWebsite;
+        this.symbol = symbol;
+        this.company = company;
+        this.currValue = currValue;
+        this.prevDayChange = prevDayChange;
+    }
+
     public Stock(){}
 
+
+    public String getCompanyWebsite(){return companyWebsite;}
+
+    public String getCompanyLogo(){return companyLogo;}
+
+    public void setCompanyWebsite(String companyWebsite){this.companyWebsite = companyWebsite;}
+
+    public void setCompanyLogo(String companyLogo){this.companyLogo = companyLogo;}
     public Long getId(){return id;}
     public void setId(Long id){this.id = id;}
     public String getSymbol(){return  symbol;}
