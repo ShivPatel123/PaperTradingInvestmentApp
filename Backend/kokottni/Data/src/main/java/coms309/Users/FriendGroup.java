@@ -6,16 +6,21 @@ import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import net.bytebuddy.implementation.bind.annotation.IgnoreForBinding;
+import org.hibernate.annotations.GenericGenerator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.hibernate.annotations.GenericGenerator;
+import java.util.UUID;
 
 @Entity
 @Table(name = "friendgroup")
 public class FriendGroup {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column(columnDefinition = "BINARY(16)")
+    private UUID id;
 
     private String groupName;
 
@@ -29,22 +34,33 @@ public class FriendGroup {
     private List<User> groupMembers;
 
 
-    public FriendGroup(int id, String groupName, long groupLeaderID){
+    public FriendGroup(UUID id, String groupName, long groupLeaderID){
         this.id = id;
         this.groupName = groupName;
         this.groupLeaderID = groupLeaderID;
     }
 
     public FriendGroup() {
-        this.id = 0;
         this.groupName = "defaultGroup";
         this.groupLeaderID = 0;
+    }
+
+    public FriendGroup(String groupName, long groupLeaderID){
+        this.groupName = groupName;
+        this.groupLeaderID = groupLeaderID;
     }
 
     public String getGroupName(){
         return groupName;
     }
 
+    public void setId(UUID id){
+        this.id = id;
+    }
+
+    public UUID getId(){
+        return id;
+    }
     public List<User> getGroupMembers() {
 //        List<String> groupMembersNames = new ArrayList<>();
 //        for(User user : groupMembers){

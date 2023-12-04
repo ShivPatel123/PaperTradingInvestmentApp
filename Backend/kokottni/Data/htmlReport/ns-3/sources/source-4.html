@@ -4,7 +4,11 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
+<<<<<<< HEAD
   <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+=======
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+>>>>>>> 37788713f101c7e50bf78a985359de9334d5ca1f
   <title>Coverage Report > UserController</title>
   <style type="text/css">
     @import "../../css/coverage.css";
@@ -60,10 +64,17 @@ Current scope:     <a href="../../index.html">all classes</a>
 </td>
 <td class="coverageStat">
   <span class="percent">
+<<<<<<< HEAD
     50.6%
   </span>
   <span class="absValue">
     (78/154)
+=======
+    53.2%
+  </span>
+  <span class="absValue">
+    (82/154)
+>>>>>>> 37788713f101c7e50bf78a985359de9334d5ca1f
   </span>
 </td>
 </tr>
@@ -345,7 +356,11 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="nc">&nbsp;            userRepository.save(pnewLeader);</b>
 <b class="nc">&nbsp;            return success;</b>
 &nbsp;        }else{
+<<<<<<< HEAD
 <b class="fc">&nbsp;            return failure;</b>
+=======
+<b class="nc">&nbsp;            return failure;</b>
+>>>>>>> 37788713f101c7e50bf78a985359de9334d5ca1f
 &nbsp;        }
 &nbsp;    }
 &nbsp;
@@ -429,17 +444,28 @@ Current scope:     <a href="../../index.html">all classes</a>
 <b class="fc">&nbsp;        if(!user.getStocks().isEmpty()){</b>
 <b class="fc">&nbsp;            removeStocks(uid);</b>
 &nbsp;        }
+<<<<<<< HEAD
 <b class="nc">&nbsp;        userRepository.save(user);</b>
 <b class="nc">&nbsp;        return success;</b>
+=======
+<b class="fc">&nbsp;        userRepository.save(user);</b>
+<b class="fc">&nbsp;        return success;</b>
+>>>>>>> 37788713f101c7e50bf78a985359de9334d5ca1f
 &nbsp;    }
 &nbsp;
 &nbsp;    private void removeStocks(long uid){
 <b class="fc">&nbsp;        for(long i = 1; i &lt; stockPurchasedRepository.count(); ++i){</b>
 <b class="fc">&nbsp;            for(int j = 0; j &lt; userRepository.getOne(uid).getStocks().size(); ++j){</b>
 <b class="fc">&nbsp;                if(stockPurchasedRepository.findById(i).getUser().getId().equals(userRepository.findById(uid).getId())){</b>
+<<<<<<< HEAD
 <b class="nc">&nbsp;                    stockPurchasedRepository.deleteById(i);</b>
 <b class="nc">&nbsp;                    userRepository.findById(uid).getStocks().remove(j);</b>
 <b class="nc">&nbsp;                    break;</b>
+=======
+<b class="fc">&nbsp;                    stockPurchasedRepository.deleteById(i);</b>
+<b class="fc">&nbsp;                    userRepository.findById(uid).getStocks().remove(j);</b>
+<b class="fc">&nbsp;                    break;</b>
+>>>>>>> 37788713f101c7e50bf78a985359de9334d5ca1f
 &nbsp;                }
 &nbsp;            }
 &nbsp;        }
@@ -481,7 +507,11 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
+<<<<<<< HEAD
     <div style="float:right;">generated on 2023-12-03 13:40</div>
+=======
+    <div style="float:right;">generated on 2023-12-03 13:37</div>
+>>>>>>> 37788713f101c7e50bf78a985359de9334d5ca1f
 </div>
 </body>
 </html>
