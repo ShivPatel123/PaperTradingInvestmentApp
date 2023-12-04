@@ -107,13 +107,12 @@ public class StockList extends AppCompatActivity {
 
                             //parse relevant info
                             String name = object.getString("company");
-                            name += " " + object.getString("symbol");
-                            int prevDay = (int) object.getDouble("prevDayChange");
-                            int stockPrice = (int) object.getDouble("currValue");
+                            double stockPrice = object.getDouble("currValue");
+                            int id = object.getInt("id");
+                            String symbol = object.getString("symbol");
 
                             //add to arraylist to be displayed in recycle view
-                            //TODO
-                            stockCardArrayList.add(new StockScrollCard(name, prevDay, stockPrice, 0, "none"));
+                            stockCardArrayList.add(new StockScrollCard(name, -1, stockPrice, id, symbol));
 
                         } catch (JSONException e) {
                             throw new RuntimeException(e);

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.navviewfe">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:allowBackup="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:usesCleartextTraffic="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.NavViewFE"
+        tools:targetApi="31">
+        <activity
+            android:name=".Screens.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".Screens.Profile"
+            android:exported="true" />
+        <activity
+            android:name=".Screens.SecondActivity"
+            android:exported="true" />
+        <activity
+            android:name=".Screens.AdminDashboardPage"
+            android:exported="true" />
+        <activity
+            android:name=".Screens.CreateAccountPage"
+            android:exported="true" />
+        <activity
+            android:name=".Screens.CreateGroup"
+            android:exported="true" />
+        <activity
+            android:name=".Screens.CreateStock"
+            android:exported="true" />
+        <activity
+            android:name=".Screens.EditProfilePage"
+            android:exported="true" />
+        <activity
+            android:name=".Screens.GroupAdminPage"
+            android:exported="true" />
+        <activity
+            android:name=".Screens.GroupChatPage"
+            android:exported="true" />
+        <activity
+            android:name=".Screens.GroupPage"
+            android:exported="true" />
+        <activity
+            android:name=".Screens.LoginPage"
+            android:exported="true" />
+        <activity
+            android:name=".Screens.NavPage"
+            android:exported="true" />
+        <activity
+            android:name=".Screens.PortfolioPage"
+            android:exported="true" />
+        <activity
+            android:name=".Screens.ProfilePage"
+            android:exported="true" />
+        <activity
+            android:name=".Screens.StartPage"
+            android:exported="true" />
+        <activity
+            android:name=".Screens.StockList"
+            android:exported="true" />
+        <activity
+            android:name=".Screens.StockPage"
+            android:exported="true" />
+        <activity
+            android:name=".Screens.TutorialsPage"
+            android:exported="true" />
+        <activity
+            android:name=".Screens.LoggedInPage"
+            android:exported="true" />
+        <activity
+            android:name=".Screens.NewsPage"
+            android:exported="true" />
+        <activity
+            android:name=".Screens.StockListGuest"
+            android:exported="true" />
+        <activity
+            android:name=".Screens.StockPageGuest"
+            android:exported="true" />
+        <activity
+            android:name=".Screens.HistoryPage"
+            android:exported="true" />
+        <activity
+            android:name=".Screens.TutorialsPageGuest"
+            android:exported="true" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+    </application>
+
+</manifest>

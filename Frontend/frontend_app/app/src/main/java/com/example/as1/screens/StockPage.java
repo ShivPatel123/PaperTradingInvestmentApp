@@ -4,6 +4,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -12,7 +14,12 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,6 +35,7 @@ import com.example.as1.Controllers.Stock;
 import com.example.as1.Controllers.User;
 import com.example.as1.ExternalControllers.VolleySingleton;
 import com.example.as1.R;
+import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,14 +43,19 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 
-public class StockPage extends AppCompatActivity {
+public class StockPage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    protected Button back_btn, newStock_btn, pageLeft, pageRight, buy_btn, sell_btn, delete_btn;
+    protected Button newStock_btn, pageLeft, pageRight, buy_btn, sell_btn, delete_btn, toNews_btn;
     protected TextView stockName, stockSymbol, serverNotes;
     protected EditText curr_display;
 
    protected TextView id_display, stockChange;
    ImageView stockImage;
+
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
+    Menu menu;
+    ActionBarDrawerToggle toggle;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,13 +66,38 @@ public class StockPage extends AppCompatActivity {
         //get all stocks in an array
         ArrayList<Stock> stockArrayList = new ArrayList<>();
         stockArrayList = getAllStocks(this.getApplicationContext());
+        Log.i("StockPage getAllStocks after req", "stock array list for screen: " + stockArrayList.toString());
 
-        //Back Button
-        back_btn = findViewById(R.id.back_StockPageBtn);
-        back_btn.setOnClickListener(view -> {
-            Intent intent = new Intent(StockPage.this, NavPage.class);
-            startActivity(intent);
-        });
+        //Side nav bar
+        drawerLayout = findViewById(R.id.drawer_layout_stock);
+        navigationView = findViewById(R.id.nav_view_stock);
+        menu = navigationView.getMenu();
+        menu.findItem(R.id.nav_logout).setVisible(false);
+        menu.findItem(R.id.nav_profile).setVisible(false);
+        menu.findItem(R.id.nav_group).setVisible(false);
+        menu.findItem(R.id.nav_group_edit).setVisible(false);
+
+        navigationView.bringToFront();
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("");
+        toolbar.setSubtitle("");
+        setSupportActionBar(toolbar);
+        toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_open, R.string.nav_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+        navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setCheckedItem(R.id.nav_home);
+
+        // to make the Navigation drawer icon always appear on the action bar
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+//        //Back Button
+//        back_btn = findViewById(R.id.back_StockPageBtn);
+//        back_btn.setOnClickListener(view -> {
+//            Intent intent = new Intent(StockPage.this, NavPage.class);
+//            startActivity(intent);
+//        });
 
         //Create Stock Button
         newStock_btn = findViewById(R.id.createStock_StockPageBtn);
@@ -73,6 +111,16 @@ public class StockPage extends AppCompatActivity {
                 Intent intent = new Intent(StockPage.this, CreateStock.class);
                 startActivity(intent);
             }
+        });
+
+        //View News Button
+        toNews_btn = findViewById(R.id.toNews_btn);
+        toNews_btn.setOnClickListener(view -> {
+                Intent newsIntent = new Intent(StockPage.this, NewsPage.class);
+                //+ 1 so index matches stock id
+                index[0] += 1;
+                newsIntent.putExtra("index", index[0]);
+                startActivity(newsIntent);
         });
 
         //Buy Button
@@ -93,6 +141,16 @@ public class StockPage extends AppCompatActivity {
             object = finalStockArrayList4.get(index[0]);
             long id2 = object.getId();
             SellStock(this.getApplicationContext(), getGlobal, (int) id2);
+        });
+
+        //History Button
+        Button toHistory_btn = findViewById(R.id.toHistory_btn);
+        toHistory_btn.setOnClickListener(view -> {
+            Intent historyIntent = new Intent(StockPage.this, HistoryPage.class);
+            //+ 1 so index matches stock id
+            index[0] += 1;
+            historyIntent.putExtra("index", index[0]);
+            startActivity(historyIntent);
         });
 
         //Delete Stock Button
@@ -143,6 +201,9 @@ public class StockPage extends AppCompatActivity {
             }
             else {
                 int size = finalStockArrayList2.size()-1;
+                if(size < 0){
+                    size = 0;
+                }
                 if(index[0] == 0){
                     index[0] = size;
                     nextIndex2[0] = size;
@@ -319,6 +380,44 @@ public class StockPage extends AppCompatActivity {
 
         // Adding request to request queue
         VolleySingleton.getInstance(context.getApplicationContext()).addToRequestQueue(request);
+    }
+
+    /*
+        Nav Bar Functions
+     */
+    @Override
+    public void onBackPressed() {
+        if(drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        if (menuItem.getItemId() == R.id.nav_home){
+            Intent intent = new Intent(StockPage.this, NavPage.class);
+            startActivity(intent);
+        } else if (menuItem.getItemId() == R.id.nav_stock){
+            Intent intent = new Intent(StockPage.this, StockPage.class);
+            startActivity(intent);
+        } else if (menuItem.getItemId() == R.id.nav_stock_list) {
+            Intent intent = new Intent(StockPage.this, StockList.class);
+            startActivity(intent);
+        } else if (menuItem.getItemId() == R.id.nav_login) {
+            Intent intent = new Intent(StockPage.this, StartPage.class);
+            startActivity(intent);
+        }
+
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+        super.onPointerCaptureChanged(hasCapture);
     }
 }
 

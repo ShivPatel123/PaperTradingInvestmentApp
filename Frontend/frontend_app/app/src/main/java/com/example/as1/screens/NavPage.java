@@ -4,13 +4,20 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,34 +26,67 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.as1.Controllers.RecycleViews.StockScrollAdapter;
 import com.example.as1.Controllers.RecycleViews.StockScrollCard;
+import com.example.as1.Controllers.Stock;
 import com.example.as1.Controllers.StockPurchased;
 import com.example.as1.Controllers.User;
 import com.example.as1.ExternalControllers.VolleySingleton;
 import com.example.as1.R;
+import com.google.android.material.navigation.NavigationView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.w3c.dom.Text;
 
-import java.util.ArrayList;
-import java.util.concurrent.atomic.AtomicReference;
-
-public class NavPage extends AppCompatActivity {
+public class NavPage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     ImageButton toStockList_btn, toPortfolio_btn, toSingleStock_btn;
     Button toTutorials_btn;
     ImageButton toProfile_btn,toGroup_btn,toAdminDash_btn;
+    DrawerLayout drawerLayout;
+    NavigationView navigationView;
+    Menu menu;
+    ActionBarDrawerToggle toggle;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.nav_page);
 
+        //Side nav bar
+        drawerLayout = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.nav_view);
+        menu = navigationView.getMenu();
+        menu.findItem(R.id.nav_logout).setVisible(false);
+        menu.findItem(R.id.nav_profile).setVisible(false);
+        menu.findItem(R.id.nav_group).setVisible(false);
+        menu.findItem(R.id.nav_group_edit).setVisible(false);
+
+        navigationView.bringToFront();
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setTitle("");
+        toolbar.setSubtitle("");
+        setSupportActionBar(toolbar);
+        toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.nav_open, R.string.nav_close);
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+        navigationView.setNavigationItemSelectedListener(this);
+        navigationView.setCheckedItem(R.id.nav_home);
+
+        // to make the Navigation drawer icon always appear on the action bar
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         //Get global user data for get request
         User getGlobal = User.getInstance();
         User.updateInstance(getUserData(this.getApplicationContext(), getGlobal));
 
-        getAllUserStocks(this.getApplicationContext(), getGlobal);
+        //getAllUserStocks(this.getApplicationContext(), getGlobal);
         getUserData(this.getApplicationContext(), getGlobal);
+
+        // Put thread to sleep to allow volley to handle the request
+        try {
+            Thread.sleep(500);
+        } catch (InterruptedException e) {
+        }
 
         TextView welcomeTxt = findViewById(R.id.navpage_welcomeTxt);
         welcomeTxt.setText("Welcome, " + getGlobal.getName() + "! Navigate Here");
@@ -197,8 +237,8 @@ public class NavPage extends AppCompatActivity {
                     }
 
                     double stockPercentNum = (changeTotal / user.getMoney()) * 100;
-                    String stockPercent = String.format("%.3f", stockPercentNum);
-                    stockChange_txt.setText("" + changeTotal + " || " + stockPercent + "%");
+                    String stockPercent = String.format("%.2f", stockPercentNum);
+                    stockChange_txt.setText("$" + changeTotal + "\n" + stockPercent + "%");
 
                     ImageView fundsImage = findViewById(R.id.stock_ImageView1);
                     if(changeTotal < 0){
@@ -214,5 +254,42 @@ public class NavPage extends AppCompatActivity {
         VolleySingleton.getInstance(context.getApplicationContext()).addToRequestQueue(request);
     }
 
+    /*
+        Nav Bar Functions
+     */
+    @Override
+    public void onBackPressed() {
+        if(drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START);
+        } else {
+            super.onBackPressed();
+        }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+        if (menuItem.getItemId() == R.id.nav_home){
+            Intent intent = new Intent(NavPage.this, NavPage.class);
+            startActivity(intent);
+        } else if (menuItem.getItemId() == R.id.nav_stock){
+            Intent intent = new Intent(NavPage.this, StockPage.class);
+            startActivity(intent);
+        } else if (menuItem.getItemId() == R.id.nav_stock_list) {
+            Intent intent = new Intent(NavPage.this, StockList.class);
+            startActivity(intent);
+        } else if (menuItem.getItemId() == R.id.nav_login) {
+            Intent intent = new Intent(NavPage.this, StartPage.class);
+            startActivity(intent);
+        }
+
+        drawerLayout.closeDrawer(GravityCompat.START);
+        return true;
+
+    }
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+        super.onPointerCaptureChanged(hasCapture);
+    }
 }
 

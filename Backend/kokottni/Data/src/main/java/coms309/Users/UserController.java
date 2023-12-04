@@ -20,6 +20,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController {
 
     long purchaseNum = 5;
+
+    int friendGroupNum = 2;
+
+    long userNum = 5;
     long stockNum = 5;
     @Autowired
     UserRepository userRepository;
@@ -145,13 +149,15 @@ public class UserController {
 
     @ApiOperation(value = "create new user based on request body", response = String.class, tags = "user")
     @PostMapping(path = "/users")
-    String createUser(@RequestBody User user, @PathVariable Long id){
+    String createUser(@RequestBody User user){
         //if there is nobody or the username already exists
         if (user == null)
             return "no user input";
-        if (userRepository.getOne(id).getUsername() !=null)
+        user.setId(userNum);
+        if (userRepository.getOne(user.getId()).getUsername() !=null)
             return "username already taken";
         userRepository.save(user);
+        ++userNum;
         return success;
     }
 
@@ -179,10 +185,12 @@ public class UserController {
             FriendGroup friendGroup = new FriendGroup();
             User groupLeader = userRepository.getOne(uid);
             groupLeader.setPrivilege('g');
+            friendGroup.setId(friendGroupNum);
+            ++friendGroupNum;
             friendGroup.setGroupName(groupName);
             friendGroup.setGroupLeader(groupLeader);
             groupLeader.setFriendGroup(friendGroup);
-            userRepository.save(groupLeader);
+            //userRepository.save(groupLeader);
             friendGroupRepository.save(friendGroup);
             return success;
         }
@@ -215,15 +223,16 @@ public class UserController {
     }
 
     @ApiOperation(value = "Add User {userId} to friend group {groupName}", response = String.class, tags = "friendgroup")
-    @PutMapping(path = "/friendgroup/{groupName}/{userID}")
+    @PutMapping(path = "/friendgroup/{groupName}/{userID}/{gid}")
     @Transactional
-    String addUserToGroup(@PathVariable String groupName, @PathVariable long userID) {
+    String addUserToGroup(@PathVariable String groupName, @PathVariable long userID, @PathVariable long gid) {
         FriendGroup group = friendGroupRepository.findBygroupName(groupName);
-        User user = userRepository.findById(userID);
+        User user = userRepository.findById(gid);
 
-        if (group != null && user != null && user.getPrivilege() == 'g' && group.getGroupLeader() == userID) {
-            user.setFriendGroup(group);
-            userRepository.save(user);
+        if (group != null && user != null && user.getPrivilege() == 'g' && group.getGroupLeader() == gid) {
+            User addedUser = userRepository.findById(userID);
+            addedUser.setFriendGroup(group);
+            userRepository.save(addedUser);
 
             // Save the friend group to update the user-group relationship
             friendGroupRepository.save(group);
@@ -240,7 +249,7 @@ public class UserController {
         FriendGroup group = friendGroupRepository.findBygroupName(gname);
         User user = userRepository.findById(gid);
 
-        if(group != null && user != null && user.getPrivilege() == 'g' && group.getGroupLeader() == gid && group.findUser(userRepository.getOne(uid))){
+        if(group != null && user != null && user.getPrivilege() == 'g' && group.getGroupLeader() == gid){
             group.removeUser(userRepository.getOne(uid));
             userRepository.getOne(uid).setFriendGroup(null);
             friendGroupRepository.save(group);
@@ -255,7 +264,7 @@ public class UserController {
         FriendGroup group = friendGroupRepository.findBygroupName(gname);
         User currLeader = userRepository.findById(gid);
         User pnewLeader = userRepository.findById(uid);
-        if(currLeader.getPrivilege() == 'g' && group.getGroupLeader() == gid){
+        if(currLeader.getPrivilege() == 'g' && group.getGroupLeader() == gid && pnewLeader.getFriendGroup() != null && pnewLeader.getFriendGroup().getGroupLeader() == gid){
             pnewLeader.setPrivilege('g');
             group.setGroupLeader(pnewLeader);
             currLeader.setPrivilege('u');
@@ -278,18 +287,18 @@ public class UserController {
         return userRepository.findById(id);
     }
 
-    @ApiOperation(value = "Assigns a stock to the user, essentially having them purchase it just a little different", response = String.class, tags = "userbuyandsell")
-    @PutMapping(path = "/users/{userId}/stocks/{stockId}/{numPurchasing}")
-    String assignStockToUser(@PathVariable long userId, @PathVariable long stockId, @PathVariable int numPurchasing){
-        User user = userRepository.findById(userId);
-        if(user.getPrivilege() == 'b') return failure;
-        Stock stock = stockRepository.findById(stockId);
-        stock.setUser(user, numPurchasing, userId);
-        user.setStock(stock, numPurchasing, stockId);
-        userRepository.save(user);
-        stockRepository.save(stock);
-        return success;
-    }
+//    @ApiOperation(value = "Assigns a stock to the user, essentially having them purchase it just a little different", response = String.class, tags = "userbuyandsell")
+//    @PutMapping(path = "/users/{userId}/stocks/{stockId}/{numPurchasing}")
+//    String assignStockToUser(@PathVariable long userId, @PathVariable long stockId, @PathVariable int numPurchasing){
+//        User user = userRepository.findById(userId);
+//        if(user.getPrivilege() == 'b') return failure;
+//        Stock stock = stockRepository.findById(stockId);
+//        stock.setUser(user, numPurchasing, userId);
+//        user.setStock(stock, numPurchasing, stockId);
+//        userRepository.save(user);
+//        stockRepository.save(stock);
+//        return success;
+//    }
 
     @ApiOperation(value = "Remove User {id}", response = String.class, tags = "user")
     @DeleteMapping(path = "/users/{id}")
@@ -345,14 +354,16 @@ public class UserController {
         if(admin.getPrivilege() != 'a') return failure;
         User user = userRepository.findById(uid);
         user.setPrivilege('b');
-        removeStocks(uid);
+        if(!user.getStocks().isEmpty()){
+            removeStocks(uid);
+        }
         userRepository.save(user);
         return success;
     }
 
     private void removeStocks(long uid){
         for(long i = 1; i < stockPurchasedRepository.count(); ++i){
-            for(int j = 0; j < userRepository.findById(uid).getStocks().size(); ++j){
+            for(int j = 0; j < userRepository.getOne(uid).getStocks().size(); ++j){
                 if(stockPurchasedRepository.findById(i).getUser().getId().equals(userRepository.findById(uid).getId())){
                     stockPurchasedRepository.deleteById(i);
                     userRepository.findById(uid).getStocks().remove(j);
