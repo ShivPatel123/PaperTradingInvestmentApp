@@ -84,8 +84,6 @@ public class FriendGroup {
         groupMembers.add(user);
     }
 
-    public void setId(int id){this.id = id;}
-
     public void removeUser(User user){
         groupMembers.remove(user);
     }

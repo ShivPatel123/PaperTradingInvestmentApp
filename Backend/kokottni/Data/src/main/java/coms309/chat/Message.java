@@ -74,8 +74,6 @@ public class Message {
         return content;
     }
 
-    public String getTarget(){return target;}
-
     public void setContent(String content) {
         this.content = content;
     }
