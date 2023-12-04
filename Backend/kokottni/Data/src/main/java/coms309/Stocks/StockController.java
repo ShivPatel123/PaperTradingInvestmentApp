@@ -73,6 +73,16 @@ public class StockController {
         return stockAPI.getStockHistory(stockRepository.findById(id).getSymbol());
     }
 
+    @GetMapping(path = "stocks/{id}/logo")
+    String setStockLogo(@PathVariable int id){
+        return stockAPI.setCompanyLogo(stockRepository, id);
+    }
+
+    @GetMapping(path = "stocks/{id}/website")
+    String setStockSite(@PathVariable int id){
+        return stockAPI.setCompanyWebsite(stockRepository, id);
+    }
+
     @ApiOperation(value = "Creates a new stock that gets added to the stockRepository", response = String.class, tags = "stock")
     @PostMapping(path = "/stocks")
     String createStock(Stock stock){
