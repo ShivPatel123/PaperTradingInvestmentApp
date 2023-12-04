@@ -45,7 +45,7 @@ public interface UserMapping {
     Call<StockPurchased> purchaseStock(@Path("id") long id, @Path("uid") long uid, @Path("amount") int amount);
 
     @GET("/sell/{id}/user/{uid}/{numStocks}")
-    Call<User> sellStock(@Path("id") long id, @Path("uid") long uid, @Path("numStocks") int numStocks);
+    Call<Double> sellStock(@Path("id") long id, @Path("uid") long uid, @Path("numStocks") int numStocks);
 
     @PUT("/users/{userId}/stocks/{stockId}/{numPurchasing}")
     Call<String> assignStockToUser(@Path("userID") Long userId, @Path("stockID") Long stockId, @Path("numPurchasing") int numPurchasing);
@@ -76,8 +76,8 @@ public interface UserMapping {
     Call<String> addUserToGroup(@Path("groupName") String groupName, @Path("userID") int userID);
 
     //removes user userID from FriendGroup groupName
-    @DELETE("/friendgroup/{groupName}/{userID}")
-    Call<String> removeUserFromGroup(@Path("groupName") String groupName, @Path("userID") int userID);
+    @PUT("/friendgroup/remove/{gname}/{gid}/{uid}")
+    Call<String> removeUserFromGroup(@Path("gname") String groupName, @Path("gid") long gid, @Path("uid") long uid);
 
     //Get list of friend groups
     @GET("/friendgroup")
@@ -90,6 +90,11 @@ public interface UserMapping {
     //Get list of users that are group members
     @GET("/friendgroup/getall/{groupName}")
     Call<List<User>> getUsersFromGroup(@Path("groupName") String groupName);
+
+    //Set Group leader
+    @PUT("/friendgroup/setnewleader/{gname}/{gid}/{uid}")
+    Call<String> setNewLeader(@Path("gname") String gname, @Path("gid") long gid, @Path("uid") long uid);
+
 
 
     /*

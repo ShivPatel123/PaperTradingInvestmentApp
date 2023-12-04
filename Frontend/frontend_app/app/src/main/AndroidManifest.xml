@@ -46,10 +46,16 @@
             android:name=".screens.GroupPage"
             android:exported="true" />
         <activity
+            android:name=".screens.HistoryPage"
+            android:exported="true" />
+        <activity
             android:name=".screens.LoginPage"
             android:exported="true" />
         <activity
             android:name=".screens.NavPage"
+            android:exported="true" />
+        <activity
+            android:name=".screens.NewsPage"
             android:exported="true" />
         <activity
             android:name=".screens.PortfolioPage"

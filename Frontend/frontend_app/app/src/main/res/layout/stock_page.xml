@@ -1,12 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout_stock"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background= "@drawable/background_gradient"
-    tools:context=".screens.StockPage">
+    tools:context=".screens.GroupPage"
+    android:fitsSystemWindows="true"
+    android:background="@drawable/background_gradient"
+    tools:openDrawer="start">
 
+<com.google.android.material.navigation.NavigationView
+    android:id="@+id/nav_view_stock"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_gravity="start"
+    app:headerLayout="@layout/header"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    app:menu="@menu/main_menu" />
+
+<androidx.appcompat.widget.Toolbar
+android:id="@+id/toolbar"
+android:layout_width="0dp"
+android:layout_height="wrap_content"
+android:background="#00008577"
+android:minHeight="?attr/actionBarSize"
+android:theme="?attr/actionBarTheme"
+app:layout_constraintEnd_toEndOf="parent"
+app:layout_constraintStart_toStartOf="parent"
+app:layout_constraintTop_toTopOf="parent"
+app:navigationIcon="@drawable/navigation_icon" />
+
+<androidx.constraintlayout.widget.ConstraintLayout
+android:layout_width="match_parent"
+android:layout_height="match_parent">
 
     <TextView
         android:id="@+id/stockID_view"
@@ -25,10 +55,9 @@
 
     <TextView
         android:id="@+id/stockPage_title"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="65dp"
-        android:background="@color/darkBack"
-        android:ems="10"
+        android:background="@android:color/transparent"
         android:gravity="center"
         android:inputType="text"
         android:text="Stocks"
@@ -67,10 +96,10 @@
 
         app:layout_constraintBottom_toTopOf="@+id/priceChangeCard"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.838"
+        app:layout_constraintHorizontal_bias="0.847"
         app:layout_constraintStart_toEndOf="@+id/sell_StockPagebtn"
         app:layout_constraintTop_toBottomOf="@+id/stockImageImageView"
-        app:layout_constraintVertical_bias="0.129" />
+        app:layout_constraintVertical_bias="0.333" />
 
     <ImageView
         android:id="@+id/stockImageImageView"
@@ -176,20 +205,20 @@
         app:layout_constraintTop_toBottomOf="@+id/stockPage_title"
         app:layout_constraintVertical_bias="0.0" />
 
-    <Button
-        android:id="@+id/back_StockPageBtn"
-        android:layout_width="120dp"
-        android:layout_height="50dp"
-        android:backgroundTint="@color/background"
-        android:text="Back"
-        android:textColor="@color/txtclr"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/stockPage_title"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.034"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.382" />
+<!--    <Button-->
+<!--        android:id="@+id/back_StockPageBtn"-->
+<!--        android:layout_width="120dp"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:backgroundTint="@color/background"-->
+<!--        android:text="Back"-->
+<!--        android:textColor="@color/txtclr"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintBottom_toBottomOf="@+id/stockPage_title"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintHorizontal_bias="0.034"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent"-->
+<!--        app:layout_constraintVertical_bias="0.382" />-->
 
     <Button
         android:id="@+id/createStock_StockPageBtn"
@@ -203,7 +232,7 @@
         app:layout_constraintBottom_toBottomOf="@+id/stockPage_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.944"
-        app:layout_constraintStart_toEndOf="@+id/back_StockPageBtn"
+        app:layout_constraintStart_toStartOf="@+id/stockPage_title"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.382" />
 
@@ -228,7 +257,7 @@
         app:layout_constraintHorizontal_bias="0.476"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/stockImageImageView"
-        app:layout_constraintVertical_bias="0.651">
+        app:layout_constraintVertical_bias="0.414">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -316,5 +345,29 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <Button
+        android:id="@+id/toNews_btn"
+        android:layout_width="161dp"
+        android:layout_height="64dp"
+        android:text="Recent Articles"
+        app:layout_constraintBottom_toTopOf="@+id/notesEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.916"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/priceChangeCard"
+        app:layout_constraintVertical_bias="0.517" />
 
+    <Button
+        android:id="@+id/toHistory_btn"
+        android:layout_width="160dp"
+        android:layout_height="64dp"
+        android:text="Weekly Price History"
+        app:layout_constraintBottom_toTopOf="@+id/notesEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.073"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/priceChangeCard"
+        app:layout_constraintVertical_bias="0.517" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.drawerlayout.widget.DrawerLayout>
