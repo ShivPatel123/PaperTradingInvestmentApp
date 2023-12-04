@@ -185,7 +185,6 @@ public class UserController {
             FriendGroup friendGroup = new FriendGroup();
             User groupLeader = userRepository.getOne(uid);
             groupLeader.setPrivilege('g');
-            friendGroup.setId(friendGroupNum);
             ++friendGroupNum;
             friendGroup.setGroupName(groupName);
             friendGroup.setGroupLeader(groupLeader);
@@ -225,7 +224,7 @@ public class UserController {
     @ApiOperation(value = "Add User {userId} to friend group {groupName}", response = String.class, tags = "friendgroup")
     @PutMapping(path = "/friendgroup/{groupName}/{userID}/{gid}")
     @Transactional
-    String addUserToGroup(@PathVariable String groupName, @PathVariable long userID, @PathVariable long gid) {
+    public String addUserToGroup(@PathVariable String groupName, @PathVariable long userID, @PathVariable long gid) {
         FriendGroup group = friendGroupRepository.findBygroupName(groupName);
         User user = userRepository.findById(gid);
 
@@ -245,7 +244,7 @@ public class UserController {
 
     @PutMapping(path = "/friendgroup/remove/{gname}/{gid}/{uid}")
     @Transactional
-    String removeUserFromGroup(@PathVariable String gname, @PathVariable long gid, @PathVariable long uid){
+    public String removeUserFromGroup(@PathVariable String gname, @PathVariable long gid, @PathVariable long uid){
         FriendGroup group = friendGroupRepository.findBygroupName(gname);
         User user = userRepository.findById(gid);
 

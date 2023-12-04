@@ -295,7 +295,7 @@ public class SystemTest {
                 header("Content-Type", "text/plain").
                 header("charset","utf-8").
                 when().
-                put("/friendgroup/balls/2");
+                put("/friendgroup/StockGroup1/1/2");
 
         assertEquals(200, response.getStatusCode());
 
