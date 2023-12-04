@@ -4,7 +4,11 @@
 <!DOCTYPE html>
 <html id="htmlId">
 <head>
+<<<<<<< HEAD
   <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+=======
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"> 
+>>>>>>> 37788713f101c7e50bf78a985359de9334d5ca1f
   <title>Coverage Report > FriendGroup</title>
   <style type="text/css">
     @import "../../css/coverage.css";
@@ -41,40 +45,72 @@ Current scope:     <a href="../../index.html">all classes</a>
   <td class="name">FriendGroup</td>
 <td class="coverageStat">
   <span class="percent">
+<<<<<<< HEAD
     60%
   </span>
   <span class="absValue">
     (6/10)
+=======
+    70%
+  </span>
+  <span class="absValue">
+    (7/10)
+>>>>>>> 37788713f101c7e50bf78a985359de9334d5ca1f
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
+<<<<<<< HEAD
     75%
   </span>
   <span class="absValue">
     (12/16)
+=======
+    81.2%
+  </span>
+  <span class="absValue">
+    (13/16)
+>>>>>>> 37788713f101c7e50bf78a985359de9334d5ca1f
   </span>
 </td>
 </tr>
   <tr>
+<<<<<<< HEAD
     <td class="name">FriendGroup$HibernateProxy$lgTE3RHV</td>
+=======
+    <td class="name">FriendGroup$HibernateProxy$AbI82JQS</td>
+>>>>>>> 37788713f101c7e50bf78a985359de9334d5ca1f
   </tr>
 <tr>
   <td class="name"><strong>Total</strong></td>
 <td class="coverageStat">
   <span class="percent">
+<<<<<<< HEAD
     60%
   </span>
   <span class="absValue">
     (6/10)
+=======
+    70%
+  </span>
+  <span class="absValue">
+    (7/10)
+>>>>>>> 37788713f101c7e50bf78a985359de9334d5ca1f
   </span>
 </td>
 <td class="coverageStat">
   <span class="percent">
+<<<<<<< HEAD
     75%
   </span>
   <span class="absValue">
     (12/16)
+=======
+    81.2%
+  </span>
+  <span class="absValue">
+    (13/16)
+>>>>>>> 37788713f101c7e50bf78a985359de9334d5ca1f
   </span>
 </td>
 </tr>
@@ -92,16 +128,30 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;import javax.persistence.*;
 &nbsp;
 &nbsp;import net.bytebuddy.implementation.bind.annotation.IgnoreForBinding;
+<<<<<<< HEAD
 &nbsp;import org.slf4j.Logger;
 &nbsp;import org.slf4j.LoggerFactory;
+=======
+&nbsp;import org.hibernate.annotations.GenericGenerator;
+&nbsp;import org.slf4j.Logger;
+&nbsp;import org.slf4j.LoggerFactory;
+&nbsp;import org.hibernate.annotations.GenericGenerator;
+&nbsp;import java.util.UUID;
+>>>>>>> 37788713f101c7e50bf78a985359de9334d5ca1f
 &nbsp;
 &nbsp;@Entity
 &nbsp;@Table(name = &quot;friendgroup&quot;)
 &nbsp;public class FriendGroup {
 &nbsp;
 &nbsp;    @Id
+<<<<<<< HEAD
 &nbsp;    @GeneratedValue(strategy = GenerationType.IDENTITY)
 &nbsp;    private int id;
+=======
+&nbsp;    @GeneratedValue(generator = &quot;uuid-hibernate-generator&quot;)
+&nbsp;    @GenericGenerator(name = &quot;uuid-hibernate-generator&quot;, strategy = &quot;org.hibernate.id.UUIDGenerator&quot;)
+&nbsp;    private UUID id;
+>>>>>>> 37788713f101c7e50bf78a985359de9334d5ca1f
 &nbsp;
 &nbsp;    private String groupName;
 &nbsp;
@@ -115,14 +165,22 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;    private List&lt;User&gt; groupMembers;
 &nbsp;
 &nbsp;
+<<<<<<< HEAD
 <b class="fc">&nbsp;    public FriendGroup(int id, String groupName, long groupLeaderID){</b>
+=======
+<b class="fc">&nbsp;    public FriendGroup(UUID id, String groupName, long groupLeaderID){</b>
+>>>>>>> 37788713f101c7e50bf78a985359de9334d5ca1f
 <b class="fc">&nbsp;        this.id = id;</b>
 <b class="fc">&nbsp;        this.groupName = groupName;</b>
 <b class="fc">&nbsp;        this.groupLeaderID = groupLeaderID;</b>
 &nbsp;    }
 &nbsp;
 <b class="fc">&nbsp;    public FriendGroup() {</b>
+<<<<<<< HEAD
 <b class="fc">&nbsp;        this.id = 0;</b>
+=======
+<b class="fc">&nbsp;        this.id = new UUID(0,0);</b>
+>>>>>>> 37788713f101c7e50bf78a985359de9334d5ca1f
 <b class="fc">&nbsp;        this.groupName = &quot;defaultGroup&quot;;</b>
 <b class="fc">&nbsp;        this.groupLeaderID = 0;</b>
 &nbsp;    }
@@ -138,7 +196,11 @@ Current scope:     <a href="../../index.html">all classes</a>
 &nbsp;//        }
 &nbsp;//
 &nbsp;//        return groupMembersNames;
+<<<<<<< HEAD
 <b class="nc">&nbsp;        return groupMembers;</b>
+=======
+<b class="fc">&nbsp;        return groupMembers;</b>
+>>>>>>> 37788713f101c7e50bf78a985359de9334d5ca1f
 &nbsp;    }
 &nbsp;
 &nbsp;
@@ -189,7 +251,11 @@ Current scope:     <a href="../../index.html">all classes</a>
 
 <div class="footer">
     
+<<<<<<< HEAD
     <div style="float:right;">generated on 2023-12-03 13:40</div>
+=======
+    <div style="float:right;">generated on 2023-12-03 13:37</div>
+>>>>>>> 37788713f101c7e50bf78a985359de9334d5ca1f
 </div>
 </body>
 </html>

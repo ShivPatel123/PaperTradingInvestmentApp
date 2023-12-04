@@ -68,6 +68,8 @@ public class Message {
         this.userName = userName;
     }
 
+    public String getTarget(){return target;}
+
     public String getContent() {
         return content;
     }

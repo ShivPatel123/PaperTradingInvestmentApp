@@ -10,4 +10,6 @@ public interface FriendGroupRepository extends JpaRepository<FriendGroup, Intege
 
 
 
+
+
 }
