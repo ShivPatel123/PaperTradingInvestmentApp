@@ -189,6 +189,7 @@ public class UserController {
             friendGroup.setGroupName(groupName);
             friendGroup.setGroupLeader(groupLeader);
             groupLeader.setFriendGroup(friendGroup);
+            friendGroup.addUser(groupLeader);
             //userRepository.save(groupLeader);
             friendGroupRepository.save(friendGroup);
             return success;
@@ -231,6 +232,7 @@ public class UserController {
         if (group != null && user != null && user.getPrivilege() == 'g' && group.getGroupLeader() == gid) {
             User addedUser = userRepository.findById(userID);
             addedUser.setFriendGroup(group);
+            group.addUser(addedUser);
             userRepository.save(addedUser);
 
             // Save the friend group to update the user-group relationship
