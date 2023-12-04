@@ -223,15 +223,16 @@ public class UserController {
     }
 
     @ApiOperation(value = "Add User {userId} to friend group {groupName}", response = String.class, tags = "friendgroup")
-    @PutMapping(path = "/friendgroup/{groupName}/{userID}")
+    @PutMapping(path = "/friendgroup/{groupName}/{userID}/{gid}")
     @Transactional
-    String addUserToGroup(@PathVariable String groupName, @PathVariable long userID) {
+    String addUserToGroup(@PathVariable String groupName, @PathVariable long userID, @PathVariable long gid) {
         FriendGroup group = friendGroupRepository.findBygroupName(groupName);
-        User user = userRepository.findById(userID);
+        User user = userRepository.findById(gid);
 
-        if (group != null && user != null && user.getPrivilege() == 'g' && group.getGroupLeader() == userID) {
-            user.setFriendGroup(group);
-            userRepository.save(user);
+        if (group != null && user != null && user.getPrivilege() == 'g' && group.getGroupLeader() == gid) {
+            User addedUser = userRepository.findById(userID);
+            addedUser.setFriendGroup(group);
+            userRepository.save(addedUser);
 
             // Save the friend group to update the user-group relationship
             friendGroupRepository.save(group);
@@ -248,7 +249,7 @@ public class UserController {
         FriendGroup group = friendGroupRepository.findBygroupName(gname);
         User user = userRepository.findById(gid);
 
-        if(group != null && user != null && user.getPrivilege() == 'g' && group.getGroupLeader() == gid && group.findUser(userRepository.getOne(uid))){
+        if(group != null && user != null && user.getPrivilege() == 'g' && group.getGroupLeader() == gid){
             group.removeUser(userRepository.getOne(uid));
             userRepository.getOne(uid).setFriendGroup(null);
             friendGroupRepository.save(group);
@@ -263,7 +264,7 @@ public class UserController {
         FriendGroup group = friendGroupRepository.findBygroupName(gname);
         User currLeader = userRepository.findById(gid);
         User pnewLeader = userRepository.findById(uid);
-        if(currLeader.getPrivilege() == 'g' && group.getGroupLeader() == gid){
+        if(currLeader.getPrivilege() == 'g' && group.getGroupLeader() == gid && pnewLeader.getFriendGroup() != null && pnewLeader.getFriendGroup().getGroupLeader() == gid){
             pnewLeader.setPrivilege('g');
             group.setGroupLeader(pnewLeader);
             currLeader.setPrivilege('u');

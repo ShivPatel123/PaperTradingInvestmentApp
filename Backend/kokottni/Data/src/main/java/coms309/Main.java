@@ -43,7 +43,7 @@ public class Main {
             User user1 = new User(1L, 1987654, "Nick", "kokottni@iastate.edu", "oldenough", "user", "Password");
             user1.setPrivilege('a');
             User user2 = new User(2L, 34578, "Josh", "jwhit@iastate.edu", "oldenough", "username", "password");
-            user2.setPrivilege('g');
+//            user2.setPrivilege('g');
             User user3 = new User(3L, 6543, "Shiv", "shiv@iastate.edu", "nah", "username2", "password");
             User user4 = new User(4L, 7765, "Skyler", "sky@iastate.edu", "yup", "user3", "passman");
             Stock stock1 = new Stock(1L, "TSLA", "Tesla", 101.23, -2.13);
