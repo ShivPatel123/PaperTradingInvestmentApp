@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import net.bytebuddy.implementation.bind.annotation.IgnoreForBinding;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,7 +24,7 @@ public class FriendGroup {
 
 
 
-
+    @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "friendGroup" )
     private List<User> groupMembers;
 
