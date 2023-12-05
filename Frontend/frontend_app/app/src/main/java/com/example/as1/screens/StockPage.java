@@ -2,7 +2,9 @@ package com.example.as1.screens;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -40,6 +42,10 @@ import com.google.android.material.navigation.NavigationView;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 
@@ -63,10 +69,23 @@ public class StockPage extends AppCompatActivity implements NavigationView.OnNav
         setContentView(R.layout.stock_page);
         final int[] index = {0};
 
+        //Set thread permissions to access image url over network
+        int SDK_INT = android.os.Build.VERSION.SDK_INT;
+        if (SDK_INT > 8)
+        {
+            StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                    .permitAll().build();
+            StrictMode.setThreadPolicy(policy);
+
+        }
+
         //get all stocks in an array
         ArrayList<Stock> stockArrayList = new ArrayList<>();
         stockArrayList = getAllStocks(this.getApplicationContext());
-        Log.i("StockPage getAllStocks after req", "stock array list for screen: " + stockArrayList.toString());
+        Log.i("getAllStocks req", "stocklist array: " + stockArrayList.toString());
+
+        //set first image
+        getStockLogo(this.getApplicationContext(), 1);
 
         //Side nav bar
         drawerLayout = findViewById(R.id.drawer_layout_stock);
@@ -123,25 +142,25 @@ public class StockPage extends AppCompatActivity implements NavigationView.OnNav
                 startActivity(newsIntent);
         });
 
-        //Buy Button
-        buy_btn = findViewById(R.id.buy_StockPagebtn);
-        ArrayList<Stock> finalStockArrayList = stockArrayList;
-        buy_btn.setOnClickListener(view -> {
-            Stock object;
-            object = finalStockArrayList.get(index[0]);
-            long id = object.getId();
-            BuyStock(this.getApplicationContext(), getGlobal, (int) id);
-        });
-
-        //Sell Button
-        sell_btn = findViewById(R.id.sell_StockPagebtn);
-        ArrayList<Stock> finalStockArrayList4 = stockArrayList;
-        sell_btn.setOnClickListener(view -> {
-            Stock object;
-            object = finalStockArrayList4.get(index[0]);
-            long id2 = object.getId();
-            SellStock(this.getApplicationContext(), getGlobal, (int) id2);
-        });
+//        //Buy Button
+//        buy_btn = findViewById(R.id.buy_StockPagebtn);
+//        ArrayList<Stock> finalStockArrayList = stockArrayList;
+//        buy_btn.setOnClickListener(view -> {
+//            Stock object;
+//            object = finalStockArrayList.get(index[0]);
+//            long id = object.getId();
+//            BuyStock(this.getApplicationContext(), getGlobal, (int) id);
+//        });
+//
+//        //Sell Button
+//        sell_btn = findViewById(R.id.sell_StockPagebtn);
+//        ArrayList<Stock> finalStockArrayList4 = stockArrayList;
+//        sell_btn.setOnClickListener(view -> {
+//            Stock object;
+//            object = finalStockArrayList4.get(index[0]);
+//            long id2 = object.getId();
+//            SellStock(this.getApplicationContext(), getGlobal, (int) id2);
+//        });
 
         //History Button
         Button toHistory_btn = findViewById(R.id.toHistory_btn);
@@ -153,43 +172,43 @@ public class StockPage extends AppCompatActivity implements NavigationView.OnNav
             startActivity(historyIntent);
         });
 
-        //Delete Stock Button
-        delete_btn = findViewById(R.id.delete_StockPagebtn);
-        serverNotes = findViewById(R.id.notesEditText);
-        id_display = findViewById(R.id.stockID_view);
-        curr_display  = findViewById(R.id.stockPrice_Display);
-        ArrayList<Stock> finalStockArrayList3 = stockArrayList;
-        newStock_btn.setOnClickListener(view -> {
-            if(getGlobal.getPrivilege() != 'a'){
-                serverNotes.setText("Only Admins can delete Stocks");
-            }
-            else {
-                //delete stock
-                Stock object;
-                object = finalStockArrayList3.get(index[0]);
-                long id3 = object.getId();
-                deleteStock(this.getApplicationContext(), getGlobal, (int) id3);
-                //remove from arraylist
-                finalStockArrayList3.remove(index[0]);
-                index[0] -= 1;
-                //reset view to stock at previous index
-                object = finalStockArrayList3.get(index[0]);
-                stockName.setText(object.getCompany());
-                stockSymbol.setText(object.getSymbol());
-                id_display.setText("ID: " + Math.toIntExact(object.getId()));
-                curr_display.setText("" + (int) object.getCurrValue());
-
-                double stockPercentNum = (object.getPrevDayChange() / object.getCurrValue()) * 100;
-                String stockPercent = String.format("%.3f", stockPercentNum);
-                stockChange.setText("" + object.getPrevDayChange() + " || " + stockPercent + "%");
-                if(object.getPrevDayChange() < 0){
-                    stockImage.setImageResource(R.drawable.stockredarrow);
-                }
-                else{
-                    stockImage.setImageResource(R.drawable.greenarrow);
-                }
-            }
-        });
+//        //Delete Stock Button
+//        delete_btn = findViewById(R.id.delete_StockPagebtn);
+//        serverNotes = findViewById(R.id.notesEditText);
+//        id_display = findViewById(R.id.stockID_view);
+//        curr_display  = findViewById(R.id.stockPrice_Display);
+//        ArrayList<Stock> finalStockArrayList3 = stockArrayList;
+//        newStock_btn.setOnClickListener(view -> {
+//            if(getGlobal.getPrivilege() != 'a'){
+//                serverNotes.setText("Only Admins can delete Stocks");
+//            }
+//            else {
+//                //delete stock
+//                Stock object;
+//                object = finalStockArrayList3.get(index[0]);
+//                long id3 = object.getId();
+//                deleteStock(this.getApplicationContext(), getGlobal, (int) id3);
+//                //remove from arraylist
+//                finalStockArrayList3.remove(index[0]);
+//                index[0] -= 1;
+//                //reset view to stock at previous index
+//                object = finalStockArrayList3.get(index[0]);
+//                stockName.setText(object.getCompany());
+//                stockSymbol.setText(object.getSymbol());
+//                id_display.setText("ID: " + Math.toIntExact(object.getId()));
+//                curr_display.setText("" + (int) object.getCurrValue());
+//
+//                double stockPercentNum = (object.getPrevDayChange() / object.getCurrValue()) * 100;
+//                String stockPercent = String.format("%.3f", stockPercentNum);
+//                stockChange.setText("" + object.getPrevDayChange() + " || " + stockPercent + "%");
+//                if(object.getPrevDayChange() < 0){
+//                    stockImage.setImageResource(R.drawable.stockredarrow);
+//                }
+//                else{
+//                    stockImage.setImageResource(R.drawable.greenarrow);
+//                }
+//            }
+//        });
 
         //Page Left Button
         pageLeft = findViewById(R.id.prev_StockPageBtn);
@@ -218,6 +237,8 @@ public class StockPage extends AppCompatActivity implements NavigationView.OnNav
                 stockSymbol.setText(object.getSymbol());
                 id_display.setText("ID: " + Math.toIntExact(object.getId()));
                 curr_display.setText("" + (int) object.getCurrValue());
+
+                getStockLogo(this.getApplicationContext(), Math.toIntExact(object.getId()));
 
                 double stockPercentNum = (object.getPrevDayChange() / object.getCurrValue()) * 100;
                 String stockPercent = String.format("%.3f", stockPercentNum);
@@ -256,6 +277,8 @@ public class StockPage extends AppCompatActivity implements NavigationView.OnNav
                 id_display.setText("ID: " + Math.toIntExact(object.getId()));
                 curr_display.setText("" + (int) object.getCurrValue());
 
+                getStockLogo(this.getApplicationContext(), Math.toIntExact(object.getId()));
+
                 double stockPercentNum = (object.getPrevDayChange() / object.getCurrValue()) * 100;
                 String stockPercent = String.format("%.3f", stockPercentNum);
                 stockChange.setText("" + object.getPrevDayChange() + " || " + stockPercent + "%");
@@ -268,6 +291,42 @@ public class StockPage extends AppCompatActivity implements NavigationView.OnNav
             }
         });
     }
+    public void getStockLogo(Context context, int id) {
+        String URL_JSON_OBJECT = "http://10.90.75.130:8080/stocks/" + id +"/logo";
+        //Create new request
+        JsonObjectRequest request = new JsonObjectRequest(
+                Request.Method.GET,
+                URL_JSON_OBJECT,
+                null,
+                response -> {
+                    Log.i(" full response", "getStockLogo: " + response);
+                    //set image
+                    try {
+                        String url = response.getString("logo");
+                        InputStream URLcontent = null;
+                        try {
+                            URLcontent = (InputStream) new URL(url).getContent();
+                        }catch (MalformedURLException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            throw new RuntimeException(e);
+                        }
+                        Drawable image = Drawable.createFromStream(URLcontent, "");
+                        stockImage.setImageDrawable(image);
+
+                        
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+                },
+
+                error -> Log.i("Error ", "getStockLogo: " + error.getMessage())) {
+        };
+
+        // Adding request to request queue
+        VolleySingleton.getInstance(context.getApplicationContext()).addToRequestQueue(request);
+    }
+
 
     public ArrayList<Stock> getAllStocks(Context context) {
         String URL_JSON_OBJECT = "http://10.90.75.130:8080/stocks";

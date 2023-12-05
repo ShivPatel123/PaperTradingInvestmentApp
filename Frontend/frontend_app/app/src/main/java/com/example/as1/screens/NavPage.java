@@ -79,7 +79,7 @@ public class NavPage extends AppCompatActivity implements NavigationView.OnNavig
         User getGlobal = User.getInstance();
         User.updateInstance(getUserData(this.getApplicationContext(), getGlobal));
 
-        //getAllUserStocks(this.getApplicationContext(), getGlobal);
+        getAllUserStocks(this.getApplicationContext(), getGlobal);
         getUserData(this.getApplicationContext(), getGlobal);
 
         // Put thread to sleep to allow volley to handle the request
@@ -248,7 +248,7 @@ public class NavPage extends AppCompatActivity implements NavigationView.OnNavig
                         fundsImage.setImageResource(R.drawable.greenarrow);
                     }
                 },
-                error -> Log.i("parse error ", "getAllUserStocks: "+ error.getMessage())) {};
+                error -> Log.i("error ", "getAllUserStocks: "+ error.getMessage())) {};
 
         // Adding request to request queue
         VolleySingleton.getInstance(context.getApplicationContext()).addToRequestQueue(request);

@@ -44,19 +44,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StockList extends AppCompatActivity {
-        private String URL_JSON_OBJECT = "http://coms-309-051.class.las.iastate.edu:8080/stock/";
-        public String adapList[] = {"Please Load Stocks:"};
-        public ArrayList<String> stockListNames = new ArrayList<String>();
-        private ListView replacement;
-        private ListView replacement2;
-        public ArrayList<String> mainStockList = new ArrayList<String>();
-        public ArrayList<Integer> mainStockPrice = new ArrayList<Integer>();
-        public ArrayList<Integer> mainStockID = new ArrayList<Integer>();
-        public ArrayList<String> mainStockSymbol = new ArrayList<String>();
+    private String URL_JSON_OBJECT = "http://coms-309-051.class.las.iastate.edu:8080/stock/";
+    public String adapList[] = {"Please Load Stocks:"};
+    public ArrayList<String> stockListNames = new ArrayList<String>();
+    private ListView replacement;
+    private ListView replacement2;
+    public ArrayList<String> mainStockList = new ArrayList<String>();
+    public ArrayList<Integer> mainStockPrice = new ArrayList<Integer>();
+    public ArrayList<Integer> mainStockID = new ArrayList<Integer>();
+    public ArrayList<String> mainStockSymbol = new ArrayList<String>();
 
-        public View view;
-        public TextView t;
-        public Button allStocks;
+    public View view;
+    public TextView t;
+    public Button allStocks;
 
 
     @Override
@@ -71,17 +71,23 @@ public class StockList extends AppCompatActivity {
         back_Btn.setOnClickListener(view -> {
             User user = getInstance();
             Intent intent;
-            if(user.getUsername().equals(null)){
+            if (user.getUsername().equals(null)) {
                 intent = new Intent(StockList.this, StartPage.class);
-            }
-            else{
+            } else {
                 intent = new Intent(StockList.this, NavPage.class);
             }
             startActivity(intent);
 
         });
-    }
 
+    Button login_btn = findViewById(R.id.login_StockListbtn);
+        login_btn.setOnClickListener(view ->{
+            Intent intent = new Intent(StockList.this, StartPage.class);
+            startActivity(intent);
+         });
+
+
+    }
     public void getAllStocks(Context context) {
         String URL_JSON_OBJECT = "http://10.90.75.130:8080/stocks";
         //http://coms-309-051.class.las.iastate.edu:8080/user/

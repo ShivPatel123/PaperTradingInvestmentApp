@@ -72,11 +72,13 @@ public class HistoryAdpater extends RecyclerView.Adapter<HistoryAdpater.ScrollVi
 
         //set +/-
         double val = closeDouble - openDouble;
+        String stockPercent = String.format("%.2f", val);
+
         if (val > 0){
-            holder.percent.setText("+" + val);
+            holder.percent.setText("+ $" + stockPercent);
         }
         else {
-            holder.percent.setText("-" + val);
+            holder.percent.setText("- $" + stockPercent);
         }
     }
 

@@ -41,8 +41,7 @@ public interface StockMapping {
         @DELETE("/stocks/{id}")
         Call<Stock> deleteStock(@Path("id") Long id);
 
-
-
-
+    @GET("stocks/{id}/logo")
+    Call<String> setStockLogo(@Path("id") int id);
 
     }

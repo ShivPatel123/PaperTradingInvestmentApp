@@ -32,7 +32,7 @@ public class EditProfilePage extends AppCompatActivity {
         //Instantiate Buttons
         Button back_btn = findViewById(R.id.EbackProfile_btn);
         Button saveProfile_btn = findViewById(R.id.saveProfile_btn);
-        Button toPortfolio_btn = findViewById(R.id.toStockPage_btn);
+//        Button toPortfolio_btn = findViewById(R.id.toStockPage_btn);
         EditText welcomeTxt = findViewById(R.id.Ewelcome_txtView);
         EditText username_display = findViewById(R.id.Eusername_Display);
         EditText password_display = findViewById(R.id.Epassword_Display);
@@ -78,11 +78,11 @@ public class EditProfilePage extends AppCompatActivity {
             startActivity(intent);
         });
 
-        //to Portfolio button
-        toPortfolio_btn.setOnClickListener(view -> {
-            Intent intent = new Intent(EditProfilePage.this, PortfolioPage.class);
-            startActivity(intent);
-        });
+//        //to Portfolio button
+//        toPortfolio_btn.setOnClickListener(view -> {
+//            Intent intent = new Intent(EditProfilePage.this, PortfolioPage.class);
+//            startActivity(intent);
+//        });
 
     }
 
