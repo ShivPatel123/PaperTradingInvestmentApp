@@ -96,7 +96,7 @@ public class TutorialsPage extends AppCompatActivity implements NavigationView.O
         pageLeft = findViewById(R.id.prev_StockPageBtn);
 
         pageLeft.setOnClickListener(view -> {
-            Intent intent = new Intent(TutorialsPage.this, MainActivity.class);
+            Intent intent = new Intent(TutorialsPage.this, LoggedInPage.class);
             startActivity(intent);
         });
 
