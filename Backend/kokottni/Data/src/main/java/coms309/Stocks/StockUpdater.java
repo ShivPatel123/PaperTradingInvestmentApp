@@ -25,7 +25,7 @@ public class StockUpdater{
         Stock stock = repo.findById(stockId);
         stock.setCompanyLogo("https://logo.clearbit.com/" + stock.getCompanyWebsite());
         repo.save(stock);
-        return stock.getCompanyLogo();
+        return "{\"logo\":\"" + stock.getCompanyLogo() + "\"}";
     }
     public String setCompanyLogo(StockRepository repo, long stockId) {
         try {
@@ -45,7 +45,7 @@ public class StockUpdater{
                     Stock stock = repo.findById(stockId);
                     stock.setCompanyLogo(jsonResponse.substring(startUrlIndex, endUrlIndex));
                     repo.save(stock);
-                    return jsonResponse.substring(startUrlIndex, endUrlIndex);
+                    return "{\"logo\":\"" + jsonResponse.substring(startUrlIndex, endUrlIndex) + "\"}";
                 }
                 else{
                     return setCompanyWebsite(repo, stockId);

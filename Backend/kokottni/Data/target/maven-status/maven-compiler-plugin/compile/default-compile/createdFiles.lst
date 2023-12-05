@@ -8,6 +8,7 @@ coms309/chat/ChatSocket.class
 coms309/Users/UserRepository.class
 coms309/Main.class
 coms309/Stocks/StockPurchased.class
+coms309/Users/GroupLeader.class
 coms309/Users/LoginAttempt.class
 coms309/Users/UserController.class
 coms309/chat/ChatSocket$MessageController.class
