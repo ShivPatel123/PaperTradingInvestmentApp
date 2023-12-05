@@ -462,7 +462,7 @@ public class StockPage extends AppCompatActivity implements NavigationView.OnNav
             Intent intent = new Intent(StockPage.this, LoggedInPage.class);
             startActivity(intent);
         } else if (menuItem.getItemId() == R.id.nav_stock){
-            Intent intent = new Intent(StockPage.this, StockPageCopyCopyCopy.class);
+            Intent intent = new Intent(StockPage.this, StockPage.class);
             startActivity(intent);
         } else if (menuItem.getItemId() == R.id.nav_stock_list) {
             Intent intent = new Intent(StockPage.this, StockList.class);
