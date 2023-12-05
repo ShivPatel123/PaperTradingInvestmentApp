@@ -97,6 +97,13 @@
         <activity
             android:name=".Screens.TutorialsPageGuest"
             android:exported="true" />
+        <activity
+            android:name=".Screens.NewsPageGuest"
+            android:exported="true" />
+        <activity
+            android:name=".Screens.HistoryPageGuest"
+            android:exported="true" />
+
 
         <meta-data
             android:name="preloaded_fonts"
