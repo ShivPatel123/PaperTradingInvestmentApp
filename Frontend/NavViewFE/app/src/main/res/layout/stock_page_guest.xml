@@ -94,6 +94,7 @@
             android:text="Delete"
             android:textColor="@color/txtclr"
 
+            android:visibility="invisible"
             app:layout_constraintBottom_toTopOf="@+id/priceChangeCard"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.847"

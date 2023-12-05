@@ -42,6 +42,8 @@ public class StockPageGuest extends AppCompatActivity implements NavigationView.
     protected TextView id_display, stockChange;
     ImageView stockImage;
 
+    ImageView stockStock;
+
     DrawerLayout drawerLayout;
     NavigationView navigationView;
     Menu menu;
@@ -106,7 +108,7 @@ public class StockPageGuest extends AppCompatActivity implements NavigationView.
         //View News Button
         toNews_btn = findViewById(R.id.toNews_btn);
         toNews_btn.setOnClickListener(view -> {
-            Intent newsIntent = new Intent(StockPageGuest.this, NewsPage.class);
+            Intent newsIntent = new Intent(StockPageGuest.this, NewsPageGuest.class);
             //+ 1 so index matches stock id
             index[0] += 1;
             newsIntent.putExtra("index", index[0]);
@@ -132,7 +134,7 @@ public class StockPageGuest extends AppCompatActivity implements NavigationView.
         //History Button
         Button toHistory_btn = findViewById(R.id.toHistory_btn);
         toHistory_btn.setOnClickListener(view -> {
-            Intent historyIntent = new Intent(StockPageGuest.this, HistoryPage.class);
+            Intent historyIntent = new Intent(StockPageGuest.this, HistoryPageGuest.class);
             //+ 1 so index matches stock id
             index[0] += 1;
             historyIntent.putExtra("index", index[0]);
@@ -144,6 +146,10 @@ public class StockPageGuest extends AppCompatActivity implements NavigationView.
         serverNotes = findViewById(R.id.notesEditText);
         id_display = findViewById(R.id.stockID_view);
         curr_display  = findViewById(R.id.stockPrice_Display);
+
+        stockStock = findViewById(R.id.stockImageImageView);
+
+
         ArrayList<Stock> finalStockArrayList3 = stockArrayList;
         newStock_btn.setOnClickListener(view -> {
             if(getGlobal.getPrivilege() != 'a'){
@@ -170,9 +176,13 @@ public class StockPageGuest extends AppCompatActivity implements NavigationView.
                 stockChange.setText("" + object.getPrevDayChange() + " || " + stockPercent + "%");
                 if(object.getPrevDayChange() < 0){
                     stockImage.setImageResource(R.drawable.stockredarrow);
+                    stockStock.setImageResource(R.drawable.stockredarrow);
+
                 }
                 else{
                     stockImage.setImageResource(R.drawable.greenarrow);
+                    stockStock.setImageResource(R.drawable.greenarrow);
+
                 }
             }
         });
@@ -210,9 +220,14 @@ public class StockPageGuest extends AppCompatActivity implements NavigationView.
                 stockChange.setText("" + object.getPrevDayChange() + " || " + stockPercent + "%");
                 if(object.getPrevDayChange() < 0){
                     stockImage.setImageResource(R.drawable.stockredarrow);
+                    stockStock.setImageResource(R.drawable.stockredarrow);
+
                 }
                 else{
                     stockImage.setImageResource(R.drawable.greenarrow);
+                    stockStock.setImageResource(R.drawable.greenarrow);
+
+
                 }
             }
         });
@@ -247,9 +262,13 @@ public class StockPageGuest extends AppCompatActivity implements NavigationView.
                 stockChange.setText("" + object.getPrevDayChange() + " || " + stockPercent + "%");
                 if(object.getPrevDayChange() < 0){
                     stockImage.setImageResource(R.drawable.stockredarrow);
+                    stockStock.setImageResource(R.drawable.stockredarrow);
+
                 }
                 else{
                     stockImage.setImageResource(R.drawable.greenarrow);
+                    stockStock.setImageResource(R.drawable.greenarrow);
+
                 }
             }
         });
@@ -264,6 +283,7 @@ public class StockPageGuest extends AppCompatActivity implements NavigationView.
         curr_display  = findViewById(R.id.stockPrice_Display);
         stockChange = findViewById(R.id.stockChange_txt);
         stockImage = findViewById(R.id.stock_ImageView);
+        stockStock = findViewById(R.id.stockImageImageView);
 
         //Create new request
         JsonArrayRequest request = new JsonArrayRequest(
@@ -302,9 +322,13 @@ public class StockPageGuest extends AppCompatActivity implements NavigationView.
                     stockChange.setText("" + stockObject.getPrevDayChange() + " || " +  stockPercent + "%");
                     if(stockObject.getPrevDayChange() < 0){
                         stockImage.setImageResource(R.drawable.stockredarrow);
+                        stockStock.setImageResource(R.drawable.stockredarrow);
+
                     }
                     else{
                         stockImage.setImageResource(R.drawable.greenarrow);
+                        stockStock.setImageResource(R.drawable.greenarrow);
+
                     }
                 },
 
