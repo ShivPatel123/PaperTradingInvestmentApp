@@ -60,7 +60,7 @@ public class GroupAdapter extends RecyclerView.Adapter<GroupAdapter.ScrollViewHo
     public void onBindViewHolder(@NonNull GroupAdapter.ScrollViewHolder holder, int position) {
         GroupScrollCard model = scrollCardList.get(position);
         holder.groupName.setText("" + model.getGroupName());
-        holder.numMembers_txt.setText("# of Members: " + model.getNumMembers());
+        holder.numMembers_txt.setText("Leader ID: " + model.getNumMembers());
 
         User Global = User.getInstance();
         //Set ID to 1 if its not instantiated yet
