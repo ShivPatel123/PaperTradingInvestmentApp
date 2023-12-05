@@ -43,7 +43,7 @@
             </group>
         </menu>
     </item>
-    <item android:title="Support">
+    <item android:title="Tutorial">
         <menu>
             <item
                 android:id="@+id/nav_tutorial"
