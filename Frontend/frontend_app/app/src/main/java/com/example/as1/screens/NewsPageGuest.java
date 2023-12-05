@@ -2,8 +2,6 @@ package com.example.as1.screens;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.StrictMode;
@@ -15,7 +13,6 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.android.volley.Request;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.as1.Controllers.NewsArticle;
 import com.example.as1.ExternalControllers.VolleySingleton;
@@ -32,7 +29,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NewsPage extends AppCompatActivity {
+public class NewsPageGuest extends AppCompatActivity {
 
     Button back_btn, prev_btn, next_btn;
     ImageView imageView;
@@ -41,7 +38,7 @@ public class NewsPage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.news_page);
+        setContentView(R.layout.news_page_guest);
         final int[] news_index = {0};
 
         //Set thread permissions to access image url over network
@@ -74,7 +71,7 @@ public class NewsPage extends AppCompatActivity {
         //Back Button
         back_btn = findViewById(R.id.back_newsPageBtn);
         back_btn.setOnClickListener(view -> {
-            Intent intent = new Intent(NewsPage.this, LoggedInPage.class);
+            Intent intent = new Intent(NewsPageGuest.this, StockPageGuest.class);
             startActivity(intent);
         });
 
@@ -124,7 +121,7 @@ public class NewsPage extends AppCompatActivity {
                 } catch (IOException e) {
                     throw new RuntimeException(e);
                 }
-                    Drawable image = Drawable.createFromStream(URLcontent, "banner_image");
+                Drawable image = Drawable.createFromStream(URLcontent, "banner_image");
                 imageView.setImageDrawable(image);
             }
         });
@@ -195,31 +192,31 @@ public class NewsPage extends AppCompatActivity {
                     JSONArray feed;
                     List<String> authors = null;
                     NewsArticle newsObject;
-                        try {
-                            feed = response.getJSONArray("feed");
-                            for (int i = 0; i < feed.length(); i++) {
-                                object = (JSONObject) feed.get(i);
-                                newsObject = new NewsArticle("empty", "n", "n","n", "n", authors);
+                    try {
+                        feed = response.getJSONArray("feed");
+                        for (int i = 0; i < feed.length(); i++) {
+                            object = (JSONObject) feed.get(i);
+                            newsObject = new NewsArticle("empty", "n", "n","n", "n", authors);
 
-                                //set authors
-                                JSONArray authorsJson = (JSONArray) object.get("authors");
-                                List<String> authorsString = new ArrayList<String>();
-                                for (int j = 0; j < authorsJson.length(); j++) {
-                                    authorsString.add(authorsJson.getString(j));
-                                }
-                                newsObject.setAuthors(authorsString);
-
-                                newsObject.setImage(object.getString("banner_image"));
-                                newsObject.setSource(object.getString("source"));
-                                newsObject.setTitle(object.getString("title"));
-                                newsObject.setUrl(object.getString("url"));
-                                newsObject.setSummary(object.getString("summary"));
-                                newsArticles.add(newsObject);
-                                Log.i(" new news object", "newsArticles["+ i + "]: " + newsObject);
+                            //set authors
+                            JSONArray authorsJson = (JSONArray) object.get("authors");
+                            List<String> authorsString = new ArrayList<String>();
+                            for (int j = 0; j < authorsJson.length(); j++) {
+                                authorsString.add(authorsJson.getString(j));
                             }
-                        } catch (JSONException e) {
-                            throw new RuntimeException(e);
+                            newsObject.setAuthors(authorsString);
+
+                            newsObject.setImage(object.getString("banner_image"));
+                            newsObject.setSource(object.getString("source"));
+                            newsObject.setTitle(object.getString("title"));
+                            newsObject.setUrl(object.getString("url"));
+                            newsObject.setSummary(object.getString("summary"));
+                            newsArticles.add(newsObject);
+                            Log.i(" new news object", "newsArticles["+ i + "]: " + newsObject);
                         }
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
                     //parse first object
                     newsObject = newsArticles.get(0);
                     index_display.setText("1/50");

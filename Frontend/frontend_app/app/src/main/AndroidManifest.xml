@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AS1">
         <activity
-            android:name=".screens.StartPage"
+            android:name=".screens.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -21,6 +21,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".screens.Profile"
+            android:exported="true" />
+        <activity
+            android:name=".screens.SecondActivity"
+            android:exported="true" />
         <activity
             android:name=".screens.AdminDashboardPage"
             android:exported="true" />
@@ -46,22 +52,19 @@
             android:name=".screens.GroupPage"
             android:exported="true" />
         <activity
-            android:name=".screens.HistoryPage"
-            android:exported="true" />
-        <activity
             android:name=".screens.LoginPage"
             android:exported="true" />
         <activity
             android:name=".screens.NavPage"
             android:exported="true" />
         <activity
-            android:name=".screens.NewsPage"
-            android:exported="true" />
-        <activity
             android:name=".screens.PortfolioPage"
             android:exported="true" />
         <activity
             android:name=".screens.ProfilePage"
+            android:exported="true" />
+        <activity
+            android:name=".screens.StartPage"
             android:exported="true" />
         <activity
             android:name=".screens.StockList"
@@ -71,6 +74,30 @@
             android:exported="true" />
         <activity
             android:name=".screens.TutorialsPage"
+            android:exported="true" />
+        <activity
+            android:name=".screens.LoggedInPage"
+            android:exported="true" />
+        <activity
+            android:name=".screens.NewsPage"
+            android:exported="true" />
+        <activity
+            android:name=".screens.StockListGuest"
+            android:exported="true" />
+        <activity
+            android:name=".screens.StockPageGuest"
+            android:exported="true" />
+        <activity
+            android:name=".screens.HistoryPage"
+            android:exported="true" />
+        <activity
+            android:name=".screens.TutorialsPageGuest"
+            android:exported="true" />
+        <activity
+            android:name=".screens.NewsPageGuest"
+            android:exported="true" />
+        <activity
+            android:name=".screens.HistoryPageGuest"
             android:exported="true" />
 
     </application>

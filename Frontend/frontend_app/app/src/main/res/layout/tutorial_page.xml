@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_layout_stock"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".screens.GroupPage"
+    android:fitsSystemWindows="true"
+    android:background="@drawable/background_gradient"
+    tools:openDrawer="start">
+
+    <com.google.android.material.navigation.NavigationView
+        android:id="@+id/nav_view_stock"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:visibility="visible"
+        app:headerLayout="@layout/header"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/main_menu" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="#00008577"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/navigation_icon" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/stockPage_title"
+            android:layout_width="wrap_content"
+            android:layout_height="65dp"
+            android:background="@android:color/transparent"
+            android:gravity="center"
+            android:inputType="text"
+            android:text="Tutorial"
+            android:textColor="@color/txtclr"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
+
+        <TextView
+            android:id="@+id/stockNameTextView"
+            android:layout_width="219dp"
+            android:layout_height="41dp"
+            android:layout_margin="10dp"
+            android:text="Birdie Bucks Tutorial"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/stockPage_title" />
+
+        <TextView
+            android:id="@+id/symbol_StockPage"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="250dp"
+            android:gravity="center"
+            android:text="With BirdieBucks, you can “invest” without the fear of losing real money!  You can track investments over time, and also compete with your friends to see whos investments do best!  The basic interface is user-friendly, but here’s a rundown of all the features you can use.  On the basic home page, there are 4 options you can choose from.  Stock List (See a list of all the current stocks).  Stocks (See in-depth details about an individual stock).  Tutorial (Helpful guide, the page you are on now).  And Login (Where you can login/signup to gain access to more features such as groups and the ability to “buy” stocks)."
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.297"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.186" />
+
+        <Button
+            android:id="@+id/prev_StockPageBtn"
+            android:layout_width="80dp"
+            android:layout_height="48dp"
+            android:layout_margin="10dp"
+            android:backgroundTint="@color/navy_bg"
+            android:text="Back"
+            android:textColor="@color/txtclr"
+            app:layout_constraintEnd_toStartOf="@+id/stockNameTextView"
+            app:layout_constraintHorizontal_bias="0.625"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/stockPage_title" />
+
+        <Button
+            android:id="@+id/next_StockPageBtn"
+            android:layout_width="80dp"
+            android:layout_height="48dp"
+            android:layout_margin="10dp"
+            android:backgroundTint="@color/red"
+            android:text="Logout"
+            android:textColor="@color/txtclr"
+            android:textSize="10dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@+id/stockNameTextView"
+            app:layout_constraintTop_toBottomOf="@+id/stockPage_title" />
+
+        <!--    <Button-->
+        <!--        android:id="@+id/back_StockPageBtn"-->
+        <!--        android:layout_width="120dp"-->
+        <!--        android:layout_height="50dp"-->
+        <!--        android:backgroundTint="@color/background"-->
+        <!--        android:text="Back"-->
+        <!--        android:textColor="@color/txtclr"-->
+        <!--        android:textStyle="bold"-->
+        <!--        app:layout_constraintBottom_toBottomOf="@+id/stockPage_title"-->
+        <!--        app:layout_constraintEnd_toEndOf="parent"-->
+        <!--        app:layout_constraintHorizontal_bias="0.034"-->
+        <!--        app:layout_constraintStart_toStartOf="parent"-->
+        <!--        app:layout_constraintTop_toTopOf="parent"-->
+        <!--        app:layout_constraintVertical_bias="0.382" />-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.drawerlayout.widget.DrawerLayout>
