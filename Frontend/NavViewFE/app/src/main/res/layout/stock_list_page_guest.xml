@@ -8,7 +8,9 @@
     android:background="@drawable/background_gradient"
     tools:context=".Screens.StockListGuest">
 
-    <include layout="@layout/stock_scroll_view" />
+    <include
+        layout="@layout/stock_scroll_view"
+        android:visibility="invisible" />
 
 
     <TextView

@@ -52,10 +52,13 @@ public class GroupPage extends AppCompatActivity implements NavigationView.OnNav
         drawerLayout = findViewById(R.id.drawer_layout_group);
         navigationView = findViewById(R.id.nav_view_group);
         menu = navigationView.getMenu();
-        menu.findItem(R.id.nav_logout).setVisible(false);
-        menu.findItem(R.id.nav_profile).setVisible(false);
-        menu.findItem(R.id.nav_group).setVisible(false);
-        menu.findItem(R.id.nav_group_edit).setVisible(false);
+//        menu.findItem(R.id.nav_logout).setVisible(false);
+//        menu.findItem(R.id.nav_profile).setVisible(false);
+//        menu.findItem(R.id.nav_group).setVisible(false);
+//        menu.findItem(R.id.nav_group_edit).setVisible(false);
+
+        menu.findItem(R.id.nav_login).setVisible(false);
+
 
         navigationView.bringToFront();
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -198,9 +201,7 @@ public class GroupPage extends AppCompatActivity implements NavigationView.OnNav
 
                             //parse relevant info
                             String groupName = object.getString("groupName");
-                            JSONArray members = (JSONArray) object.get("groupMembers");
-                            int numMembers = members.length()+1;
-
+                            int numMembers = 0;
                             GroupCardArrayList.add(new GroupScrollCard(groupName, numMembers));
 
                         } catch (JSONException e) {
@@ -235,6 +236,22 @@ public class GroupPage extends AppCompatActivity implements NavigationView.OnNav
         }
     }
 
+//    @Override
+//    public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+//        if (menuItem.getItemId() == R.id.nav_home){
+//            Intent intent = new Intent(GroupPage.this, LoggedInPage.class);
+//            startActivity(intent);
+//        } else if (menuItem.getItemId() == R.id.nav_stock){
+//            Intent intent = new Intent(GroupPage.this, StockPage.class);
+//            startActivity(intent);
+//        } else if (menuItem.getItemId() == R.id.nav_stock_list) {
+//            Intent intent = new Intent(GroupPage.this, StockList.class);
+//            startActivity(intent);
+//        } else if (menuItem.getItemId() == R.id.nav_login) {
+//            Intent intent = new Intent(GroupPage.this, StartPage.class);
+//            startActivity(intent);
+//        }
+
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         if (menuItem.getItemId() == R.id.nav_home){
@@ -248,6 +265,18 @@ public class GroupPage extends AppCompatActivity implements NavigationView.OnNav
             startActivity(intent);
         } else if (menuItem.getItemId() == R.id.nav_login) {
             Intent intent = new Intent(GroupPage.this, StartPage.class);
+            startActivity(intent);
+        } else if (menuItem.getItemId() == R.id.nav_group_edit) {
+            Intent intent = new Intent(GroupPage.this, AdminDashboardPage.class);
+            startActivity(intent);
+        } else if (menuItem.getItemId() == R.id.nav_group) {
+            Intent intent = new Intent(GroupPage.this, GroupPage.class);
+            startActivity(intent);
+        } else if (menuItem.getItemId() == R.id.nav_logout) {
+            Intent intent = new Intent(GroupPage.this, MainActivity.class);
+            startActivity(intent);
+        } else if (menuItem.getItemId() == R.id.nav_profile) {
+            Intent intent = new Intent(GroupPage.this, ProfilePage.class);
             startActivity(intent);
         }
 
