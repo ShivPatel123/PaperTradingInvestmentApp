@@ -1,9 +1,7 @@
 package com.example.as1.screens;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
@@ -18,22 +16,12 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
-import com.android.volley.Request;
-import com.android.volley.toolbox.JsonArrayRequest;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.example.as1.Controllers.Stock;
 import com.example.as1.Controllers.User;
-import com.example.as1.ExternalControllers.VolleySingleton;
 import com.example.as1.R;
 import com.google.android.material.navigation.NavigationView;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.util.ArrayList;
-
-
-public class TutorialsPage extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class TutorialsPageGuest extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     protected Button newStock_btn, pageLeft, pageRight, buy_btn, sell_btn, delete_btn, toNews_btn;
     protected TextView stockName, stockSymbol, serverNotes;
@@ -50,7 +38,7 @@ public class TutorialsPage extends AppCompatActivity implements NavigationView.O
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.tutorial_page);
+        setContentView(R.layout.tutorial_page_guest);
         final int[] index = {0};
 
 
@@ -89,14 +77,14 @@ public class TutorialsPage extends AppCompatActivity implements NavigationView.O
         pageRight = findViewById(R.id.next_StockPageBtn);
 
         pageRight.setOnClickListener(view -> {
-            Intent intent = new Intent(TutorialsPage.this, StartPage.class);
+            Intent intent = new Intent(TutorialsPageGuest.this, StartPage.class);
             startActivity(intent);
         });
 
         pageLeft = findViewById(R.id.prev_StockPageBtn);
 
         pageLeft.setOnClickListener(view -> {
-            Intent intent = new Intent(TutorialsPage.this, LoggedInPage.class);
+            Intent intent = new Intent(TutorialsPageGuest.this, MainActivity.class);
             startActivity(intent);
         });
 
@@ -119,16 +107,16 @@ public class TutorialsPage extends AppCompatActivity implements NavigationView.O
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
         if (menuItem.getItemId() == R.id.nav_home){
-            Intent intent = new Intent(TutorialsPage.this, MainActivity.class);
+            Intent intent = new Intent(TutorialsPageGuest.this, MainActivity.class);
             startActivity(intent);
         } else if (menuItem.getItemId() == R.id.nav_stock){
-            Intent intent = new Intent(TutorialsPage.this, StockPageGuest.class);
+            Intent intent = new Intent(TutorialsPageGuest.this, StockPageGuest.class);
             startActivity(intent);
         } else if (menuItem.getItemId() == R.id.nav_stock_list) {
-            Intent intent = new Intent(TutorialsPage.this, StockListGuest.class);
+            Intent intent = new Intent(TutorialsPageGuest.this, StockListGuest.class);
             startActivity(intent);
         } else if (menuItem.getItemId() == R.id.nav_login) {
-            Intent intent = new Intent(TutorialsPage.this, StartPage.class);
+            Intent intent = new Intent(TutorialsPageGuest.this, StartPage.class);
             startActivity(intent);
         }
 

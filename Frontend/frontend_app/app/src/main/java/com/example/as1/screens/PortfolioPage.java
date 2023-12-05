@@ -59,7 +59,7 @@ public class PortfolioPage extends AppCompatActivity {
         //back to main button
         Button backHome_btn = findViewById(R.id.backHome_PortfolioBtn);
         backHome_btn.setOnClickListener(view -> {
-            Intent intent = new Intent(PortfolioPage.this, NavPage.class);
+            Intent intent = new Intent(PortfolioPage.this, LoggedInPage.class);
             startActivity(intent);
         });
 
