@@ -72,8 +72,8 @@ public interface UserMapping {
     Call<FriendGroup> createFriendGroup(@Path("groupName") String groupName);
 
     //adds user userID to FriendGroup groupName
-    @PUT("/friendgroup/{groupName}/{userID}")
-    Call<String> addUserToGroup(@Path("groupName") String groupName, @Path("userID") int userID);
+    @PUT("/friendgroup/{groupName}/{userID}/{gid}")
+    Call<String> addUserToGroup(@Path("groupName") String groupName, @Path("userID") long userID, @Path("gid") long gid);
 
     //removes user userID from FriendGroup groupName
     @PUT("/friendgroup/remove/{gname}/{gid}/{uid}")

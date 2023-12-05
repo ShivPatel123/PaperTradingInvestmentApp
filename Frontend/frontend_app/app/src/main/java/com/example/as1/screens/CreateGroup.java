@@ -1,5 +1,7 @@
 package com.example.as1.screens;
 
+import static com.example.as1.Controllers.User.getInstance;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -46,16 +48,17 @@ public class CreateGroup extends AppCompatActivity {
 
         //Add User button
         addUser.setOnClickListener(view -> {
-            userDisplay_response.setVisibility(View.INVISIBLE);
+            userDisplay_response.setVisibility(View.VISIBLE);
             String groupName = String.valueOf(groupName_Display.getText());
             String userInput = users_Display.getText().toString();
             int userID = Integer.parseInt(userInput);
-            addUserToGroup(this.getApplicationContext(), groupName, (long) userID);
+            User global = getInstance();
+            addUserToGroup(this.getApplicationContext(), groupName, (long) userID, global.getId());
         });
 
         //Add Leader button
         addLeader.setOnClickListener(view -> {
-            leaderDisplay_response.setVisibility(View.INVISIBLE);
+            leaderDisplay_response.setVisibility(View.VISIBLE);
             String groupName = groupName_Display.getText().toString();
             String leader = groupLeader_Display.getText().toString();
             int leaderID = Integer.parseInt(leader);
@@ -65,22 +68,31 @@ public class CreateGroup extends AppCompatActivity {
 
         //cancel button
         cancel_btn.setOnClickListener(view -> {
-            Intent intent = new Intent(CreateGroup.this, GroupAdminPage.class);
+            Intent intent = new Intent(CreateGroup.this, GroupPage.class);
             startActivity(intent);
         });
 
         //save button
         save_group.setOnClickListener(view -> {
-            createGroup_confirm.setVisibility(View.INVISIBLE);
-            String groupName = String.valueOf(groupName_Display.getText());
-            User global = User.getInstance();
-            createFriendGroup(this.getApplicationContext() ,groupName, global.getId());
+           String groupName = groupName_Display.getText().toString();
+           User global = getInstance();
+                createFriendGroup(this.getApplicationContext(), groupName, global.getId());
+        });
+
+        //save button
+        Button save2 = findViewById(R.id.save2_btn);
+        save2.setOnClickListener(view -> {
+            if (createGroup_confirm.getText().toString().equals("Group Created Successfully")) {
+                //go to MainPage
+                Intent intent = new Intent(CreateGroup.this, GroupPage.class);
+                startActivity(intent);
+            }
         });
     }
 
     //JSON Request
-    public void addUserToGroup(Context context, String groupName, long id) {
-        String URL_JSON_OBJECT = "http://coms-309-051.class.las.iastate.edu:8080/friendgroup/" + groupName + "/" + id;
+    public void addUserToGroup(Context context, String groupName, long id, long lid) {
+        String URL_JSON_OBJECT = "http://coms-309-051.class.las.iastate.edu:8080/friendgroup/" + groupName + "/" + id + "/" + lid;
         TextView userDisplay_response = findViewById(R.id.userDisplay_response);
         EditText users_Display = findViewById(R.id.users_Display);
         //Create new request
@@ -89,19 +101,15 @@ public class CreateGroup extends AppCompatActivity {
                 URL_JSON_OBJECT,
                 null,
                 response -> {
-                    if(response.equals("{\"message\":\"success\"}")){
-                        userDisplay_response.setVisibility(View.VISIBLE);
-                        userDisplay_response.setText("User ID " + id + " added successfilly");
                         users_Display.setText("");
-                    } else if (response.equals("{\"message\":\"failure\"}")) {
                         userDisplay_response.setVisibility(View.VISIBLE);
-                        userDisplay_response.setText("User ID " + id + " FAILED to add");
-                        users_Display.setText("");
-                    } else{
-                        Log.i("unexpected response", "addUserToGroup: " + response.toString());
-                    }
+                        userDisplay_response.setText("" + response.toString());
+                        Log.i("response", "addUserToGroup: " + response.toString());
                 },
-                error -> Log.i("error msg", "addUserToGroup: " + error.getMessage())) {
+                error -> {
+                    userDisplay_response.setText("error");
+                    Log.i("error msg", "addUserToGroup: " + error.getMessage());
+                }) {
         };
         // Adding request to request queue
         VolleySingleton.getInstance(context.getApplicationContext()).addToRequestQueue(request);
@@ -119,19 +127,15 @@ public class CreateGroup extends AppCompatActivity {
                 URL_JSON_OBJECT,
                 null,
                 response -> {
-                    if(response.equals("{\"message\":\"success\"}")){
-                        leaderDisplay_response.setVisibility(View.VISIBLE);
-                        leaderDisplay_response.setText("Leader ID " + lid + " set successfilly");
-                        groupLeader_Display.setText("");
-                    } else if (response.equals("{\"message\":\"failure\"}")) {
-                        leaderDisplay_response.setVisibility(View.VISIBLE);
-                        leaderDisplay_response.setText("Leader ID " + lid + " FAILED to set");
-                        groupLeader_Display.setText("");
-                    } else{
-                        Log.i("unexpected response", "setLeader: " + response);
-                    }
+                    groupLeader_Display.setText("");
+                    leaderDisplay_response.setVisibility(View.VISIBLE);
+                    leaderDisplay_response.setText("" + response.toString());
+                        Log.i("response", "setLeader: " + response);
                 },
-                error -> Log.i("error msg", "setLeader: " + error.getMessage())) {
+                error -> {
+                    leaderDisplay_response.setText("error");
+                    Log.i("error msg", "setLeader: " + error.getMessage());
+                }) {
         };
         // Adding request to request queue
         VolleySingleton.getInstance(context.getApplicationContext()).addToRequestQueue(request);
@@ -151,7 +155,10 @@ public class CreateGroup extends AppCompatActivity {
                     createGroup_confirm.setText("Group Created Successfully");
 
                 },
-                error -> Log.i("error msg", "createGroup: " + error.getMessage())) {
+                error -> {
+                    createGroup_confirm.setText("error");
+                    Log.i("error msg", "createGroup: " + error.getMessage());
+                }) {
         };
         // Adding request to request queue
         VolleySingleton.getInstance(context.getApplicationContext()).addToRequestQueue(request);

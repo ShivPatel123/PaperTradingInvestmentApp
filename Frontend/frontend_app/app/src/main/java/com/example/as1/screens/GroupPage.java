@@ -198,9 +198,7 @@ public class GroupPage extends AppCompatActivity implements NavigationView.OnNav
 
                             //parse relevant info
                             String groupName = object.getString("groupName");
-                            JSONArray members = (JSONArray) object.get("groupMembers");
-                            int numMembers = members.length()+1;
-
+int numMembers = 0;
                             GroupCardArrayList.add(new GroupScrollCard(groupName, numMembers));
 
                         } catch (JSONException e) {
