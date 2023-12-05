@@ -56,7 +56,7 @@ public class StockPage extends AppCompatActivity implements NavigationView.OnNav
     protected EditText curr_display;
 
    protected TextView id_display, stockChange;
-   ImageView stockImage;
+   ImageView stockImage, stockLogo;
 
     DrawerLayout drawerLayout;
     NavigationView navigationView;
@@ -292,6 +292,7 @@ public class StockPage extends AppCompatActivity implements NavigationView.OnNav
         });
     }
     public void getStockLogo(Context context, int id) {
+        ImageView stockLogo = findViewById(R.id.stockImageImageView);
         String URL_JSON_OBJECT = "http://10.90.75.130:8080/stocks/" + id +"/logo";
         //Create new request
         JsonObjectRequest request = new JsonObjectRequest(
@@ -312,8 +313,7 @@ public class StockPage extends AppCompatActivity implements NavigationView.OnNav
                             throw new RuntimeException(e);
                         }
                         Drawable image = Drawable.createFromStream(URLcontent, "");
-                        stockImage.setImageDrawable(image);
-
+                        stockLogo.setImageDrawable(image);
                         
                     } catch (JSONException e) {
                         throw new RuntimeException(e);
