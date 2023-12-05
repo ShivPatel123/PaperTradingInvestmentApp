@@ -200,8 +200,8 @@ public class GroupPage extends AppCompatActivity implements NavigationView.OnNav
 
                             //parse relevant info
                             String groupName = object.getString("groupName");
-int numMembers = 0;
-                            GroupCardArrayList.add(new GroupScrollCard(groupName, numMembers));
+                            int leaderID = object.getInt("groupLeader");
+                            GroupCardArrayList.add(new GroupScrollCard(groupName, leaderID));
 
                         } catch (JSONException e) {
                             throw new RuntimeException(e);
