@@ -65,7 +65,7 @@ android-build:
  tags:
   - android_tag
  before_script:
-  - export JAVA_HOME=/opt/java/openjdk
+  - export JAVA_HOME=C:\Program Files\Java\jdk-17
   - export PATH=$JAVA_HOME/bin:$PATH
   - export GRADLE_USER_HOME='pwd'/.gradle
   - chmod +x ./Frontend/frontend_app
