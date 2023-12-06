@@ -1,25 +1,41 @@
 stages:
-  - maventry
-  - maventest
-  - mavenDeploy
-  - androidbuild
-  - androidtest
+ - maventry
+ - maventest
+ - mavenDeploy
+ - androidbuild
+ - androidtest
+
+java_install:
+stages:
+  - build
 
 variables:
-  JAVA_VERSION: "11"
+  # Define the Java version
+  JAVA_VERSION: "11" # Change this to your desired Java version
+
+# Define stages
+build:
+  stage: build
+  image: adoptopenjdk:${JAVA_VERSION}-jdk-hotspot
+
+  before_script:
+    # Set JAVA_HOME and update PATH
+    - export JAVA_HOME=/opt/java/openjdk
+    - export PATH=$JAVA_HOME/bin:$PATH
+
+  script:
+    # Your build commands here
+    - ./gradlew build  # Example build command using Gradle
+
+  # Other configurations like artifacts, cache, etc. can be added here
 
 maven-build:
-  stage: maventry
-  tags:
-    - springboot_tag
-  script:
-    - cd Backend/kokottni/Data
-    - |
-      # Install Java
-      apt-get update && apt-get install -y openjdk-${JAVA_VERSION}-jdk
-      export JAVA_HOME=/usr/lib/jvm/java-${JAVA_VERSION}-openjdk-amd64
-      export PATH=$JAVA_HOME/bin:$PATH
-    - mvn package
+ stage: maventry
+ tags:
+  - springboot_tag
+ script:
+  - cd Backend/kokottni/Data
+  - mvn package
 
 maven-test:
   stage: maventest
@@ -44,29 +60,29 @@ autoDeploy:
     - sudo systemctl start system-web-demo
 
 android-build:
-  image: gjandres/android-ci:latest
-  stage: androidbuild
-  tags:
-    - android_tag
-  before_script:
-    - export GRADLE_USER_HOME='pwd'/.gradle
-    - chmod +x ./Frontend/frontend_app
-  script:
-    - cd Frontend/frontend_app
-    - chmod +x ./gradlew
-    - ./gradlew build
-  artifacts:
+ image: gjandres/android-ci:latest
+ stage: androidbuild
+ tags:
+  - android_tag
+ before_script:
+  - export GRADLE_USER_HOME='pwd'/.gradle
+  - chmod +x ./Frontend/frontend_app
+ script:
+  - cd Frontend/frontend_app
+  - chmod +x ./gradlew
+  - ./gradlew build
+ artifacts:
     paths:
-      - Android_test/app/build/outputs/
+    - Android_test/app/build/outputs/
 
 android-test:
   image: gjandres/android-ci:latest
   stage: androidtest
   before_script:
-    - export GRADLE_USER_HOME='pwd'/.gradle
-    - chmod +x ./Frontend/frontend_app
+  - export GRADLE_USER_HOME='pwd'/.gradle
+  - chmod +x ./Frontend/frontend_app
   tags:
-    - android_tag
+  - android_tag
   script:
-    - cd Frontend/frontend_app
-    - ./gradlew test
+  - cd Frontend/frontend_app
+  - ./gradlew test
