@@ -2,6 +2,7 @@ stages:
  - maventry
  - maventest
  - mavenDeploy
+ - build
  - androidbuild
  - androidtest
 
@@ -34,6 +35,28 @@ autoDeploy:
     - sudo mv target/*.jar /target/web-demo.jar
     - sudo systemctl stop system-web-demo
     - sudo systemctl start system-web-demo
+
+variables:
+  # Define the Java version
+  JAVA_VERSION: "11" # Change this to your desired Java version
+
+# Define stages
+build:
+  stage: build
+  image: adoptopenjdk:${JAVA_VERSION}-jdk-hotspot
+
+  before_script:
+    # Set JAVA_HOME and update PATH
+    - export JAVA_HOME=/opt/java/openjdk
+    - export PATH=$JAVA_HOME/bin:$PATH
+
+  script:
+    # Your build commands here
+    - ./gradlew build  # Example build command using Gradle
+
+  # Other configurations like artifacts, cache, etc. can be added here
+
+
 
 android-build:
  image: gjandres/android-ci:latest

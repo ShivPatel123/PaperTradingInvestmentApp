@@ -104,7 +104,7 @@ public class GroupPage extends AppCompatActivity implements NavigationView.OnNav
         //Set recycler view
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(groupMemScrollAdapter);
-        getGroupMembers(this.getApplicationContext(), "group");
+        getGroupMembers(this.getApplicationContext(), "StockGroup1");
 
 
         //Initialize recycler view (groups)
